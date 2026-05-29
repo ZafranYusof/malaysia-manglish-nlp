@@ -1,4 +1,4 @@
-# API Reference
+﻿# API Reference
 
 Complete reference for all public functions in `manglish-nlp`.
 
@@ -14,7 +14,7 @@ Analyze sentiment of Manglish/Malay text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text to analyze |
+| text | `str` |  -  | Input text to analyze |
 
 **Returns:** `dict`
 
@@ -45,7 +45,7 @@ Detect fine-grained emotions in text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -74,7 +74,7 @@ Identify language(s) present in text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -104,10 +104,10 @@ Normalize informal Manglish text to standard form.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | aggressive | `bool` | `False` | Apply aggressive normalization |
 
-**Returns:** `str` — Normalized text.
+**Returns:** `str`  -  Normalized text.
 
 **Example:**
 ```python
@@ -130,12 +130,12 @@ Remove noise from text (URLs, mentions, extra whitespace, special chars).
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | remove_urls | `bool` | `True` | Strip URLs |
 | remove_mentions | `bool` | `True` | Strip @mentions |
 | lowercase | `bool` | `False` | Lowercase output |
 
-**Returns:** `str` — Cleaned text.
+**Returns:** `str`  -  Cleaned text.
 
 **Example:**
 ```python
@@ -155,9 +155,9 @@ Convert casual/colloquial text to formal Malay.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
-**Returns:** `str` — Formal text.
+**Returns:** `str`  -  Formal text.
 
 **Example:**
 ```python
@@ -177,9 +177,9 @@ Tokenize text into words, handling Manglish contractions and particles.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
-**Returns:** `list[str]` — Token list.
+**Returns:** `list[str]`  -  Token list.
 
 **Example:**
 ```python
@@ -199,9 +199,9 @@ Stem a Malay/Manglish word to its root form.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| word | `str` | — | Single word |
+| word | `str` |  -  | Single word |
 
-**Returns:** `str` — Root/stem form.
+**Returns:** `str`  -  Root/stem form.
 
 **Example:**
 ```python
@@ -222,7 +222,7 @@ Named entity recognition for Malay/Manglish text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `list[dict]`
 
@@ -254,9 +254,9 @@ Part-of-speech tagging.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
-**Returns:** `list[tuple[str, str]]` — (word, tag) pairs.
+**Returns:** `list[tuple[str, str]]`  -  (word, tag) pairs.
 
 Tags follow Universal Dependencies: `NOUN`, `VERB`, `ADJ`, `ADV`, `PRON`, `DET`, `ADP`, `CONJ`, `PART`, etc.
 
@@ -278,7 +278,7 @@ Extract top keywords from text using TF-IDF weighting.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | top_n | `int` | `5` | Number of keywords to return |
 
 **Returns:** `list[dict]`
@@ -308,9 +308,9 @@ Segment continuous text into sentences, handling abbreviations common in Manglis
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
-**Returns:** `list[str]` — Sentence list.
+**Returns:** `list[str]`  -  Sentence list.
 
 **Example:**
 ```python
@@ -330,10 +330,10 @@ Compute semantic similarity between two texts.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text_a | `str` | — | First text |
-| text_b | `str` | — | Second text |
+| text_a | `str` |  -  | First text |
+| text_b | `str` |  -  | Second text |
 
-**Returns:** `float` — Similarity score (0–1).
+**Returns:** `float`  -  Similarity score (0–1).
 
 **Example:**
 ```python
@@ -356,11 +356,11 @@ Generate augmented variants of text for data augmentation.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | n | `int` | `3` | Number of variants |
 | method | `str` | `"mixed"` | Strategy: `"synonym"`, `"insert"`, `"swap"`, `"delete"`, `"mixed"` |
 
-**Returns:** `list[str]` — Augmented texts.
+**Returns:** `list[str]`  -  Augmented texts.
 
 **Example:**
 ```python
@@ -380,7 +380,7 @@ Spell-check and correct Manglish/Malay text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -410,7 +410,7 @@ Detect and annotate code-switching boundaries in mixed-language text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -450,7 +450,7 @@ Classify user intent from text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -480,7 +480,7 @@ Classify text into topic categories.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -512,7 +512,7 @@ Detect hate speech and toxicity in text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 
 **Returns:** `dict`
 
@@ -541,7 +541,7 @@ Detect author's stance toward a topic or entity.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | target | `str` or `None` | `None` | Target entity/topic |
 
 **Returns:** `dict`
@@ -571,11 +571,11 @@ Summarize long text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | max_length | `int` | `100` | Max output words |
 | style | `str` | `"extractive"` | `"extractive"` or `"abstractive"` |
 
-**Returns:** `str` — Summary.
+**Returns:** `str`  -  Summary.
 
 **Example:**
 ```python
@@ -595,7 +595,7 @@ Translate between Malay/Manglish and other languages.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `str` | — | Input text |
+| text | `str` |  -  | Input text |
 | target_lang | `str` | `"en"` | Target language code |
 | source_lang | `str` or `None` | `None` | Source language (auto-detect if `None`) |
 
@@ -625,8 +625,8 @@ Extract answer from context given a question.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| question | `str` | — | Question text |
-| context | `str` | — | Context paragraph |
+| question | `str` |  -  | Question text |
+| context | `str` |  -  | Context paragraph |
 
 **Returns:** `dict`
 
@@ -658,11 +658,11 @@ Generate text continuation from a prompt.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| prompt | `str` | — | Input prompt |
+| prompt | `str` |  -  | Input prompt |
 | max_length | `int` | `50` | Max tokens to generate |
 | temperature | `float` | `0.7` | Sampling temperature |
 
-**Returns:** `str` — Generated text.
+**Returns:** `str`  -  Generated text.
 
 **Example:**
 ```python
@@ -684,7 +684,7 @@ Chain multiple NLP operations into a reusable pipeline.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| steps | `list[str]` | — | Ordered list of operation names |
+| steps | `list[str]` |  -  | Ordered list of operation names |
 
 **Returns:** `Pipeline` object with `.run(text)` method.
 

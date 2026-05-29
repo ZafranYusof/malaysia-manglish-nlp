@@ -1,6 +1,6 @@
-# Extraction
+﻿# Extraction
 
-**Pull structured data from Malaysian text — entities, grammar, keywords, and references.**
+**Pull structured data from Malaysian text  -  entities, grammar, keywords, and references.**
 
 ---
 
@@ -249,7 +249,7 @@ mnlp.keywords(article, top_k=3, scores=True)
 
 ## See Also
 
-- [Text Processing](text-processing.md) — preprocess text before extraction
-- [Advanced](advanced.md) — coreference resolution, discourse parsing
-- [spaCy Integration](integrations.md#spacy_integration) — use extraction modules inside a spaCy pipeline
-- [Embeddings](data.md#embeddings) — use sentence embeddings for semantic keyword extraction
+- [Text Processing](text-processing.md)  -  preprocess text before extraction
+- [Advanced](advanced.md)  -  coreference resolution, discourse parsing
+- [spaCy Integration](integrations.md#spacy_integration)  -  use extraction modules inside a spaCy pipeline
+- [Embeddings](data.md#embeddings)  -  use sentence embeddings for semantic keyword extraction

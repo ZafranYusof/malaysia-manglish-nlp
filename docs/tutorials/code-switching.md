@@ -1,6 +1,6 @@
-# Code-Switching Detection
+﻿# Code-Switching Detection
 
-**Detect where languages switch in Malaysian text — switch points, switch ratio, and language segmentation.**
+**Detect where languages switch in Malaysian text  -  switch points, switch ratio, and language segmentation.**
 
 ---
 
@@ -36,7 +36,7 @@ print(result)
 ### Simple detection
 
 ```python
-# No switching — pure BM
+# No switching  -  pure BM
 code_switching.detect("Saya hendak pergi ke pasar")
 # {
 #     'segments': [{'text': 'Saya hendak pergi ke pasar', 'lang': 'ms'}],
@@ -44,7 +44,7 @@ code_switching.detect("Saya hendak pergi ke pasar")
 #     'switch_count': 0,
 # }
 
-# No switching — pure English
+# No switching  -  pure English
 code_switching.detect("I want to go to the market")
 # {
 #     'segments': [{'text': 'I want to go to the market', 'lang': 'en'}],
@@ -159,7 +159,7 @@ for segment in result['segments']:
 ### Reddit r/malaysia
 
 ```python
-post = "Anyone else觉得 the new LRT schedule is terrible? Macam lagi bad from before"
+post = "Anyone else觉� -  the new LRT schedule is terrible? Macam lagi bad from before"
 result = code_switching.detect(post)
 # Detects 3 languages: EN, BM, and possibly ZH
 ```
@@ -207,12 +207,12 @@ $ mnlp analyze "Weh bro jom makan, I lapar gila"
 
 ## How it works
 
-1. **Word-level classification** — each word classified as BM, EN, shared, or other
-2. **Particle detection** — Malaysian particles ("la", "lah", "kan") signal BM segments
-3. **Shortform awareness** — "nk", "brp", "sy" recognized as BM
-4. **Segment merging** — adjacent same-language words merged into segments
-5. **Switch counting** — transitions between language segments counted
-6. **Ratio calculation** — switches normalized by total segments
+1. **Word-level classification**  -  each word classified as BM, EN, shared, or other
+2. **Particle detection**  -  Malaysian particles ("la", "lah", "kan") signal BM segments
+3. **Shortform awareness**  -  "nk", "brp", "sy" recognized as BM
+4. **Segment merging**  -  adjacent same-language words merged into segments
+5. **Switch counting**  -  transitions between language segments counted
+6. **Ratio calculation**  -  switches normalized by total segments
 
 ---
 
@@ -230,8 +230,8 @@ $ mnlp analyze "Weh bro jom makan, I lapar gila"
 
 ## See also
 
-- [Language Detection](language-detection.md) — detect overall language composition
-- [Normalization](normalization.md) — normalize before code-switching analysis
-- [Translation](translation.md) — translate individual language segments
-- [Pipeline](pipeline.md) — include code-switching in pipelines
-- [API Reference](../api-reference.md#code_switching) — full function signature
+- [Language Detection](language-detection.md)  -  detect overall language composition
+- [Normalization](normalization.md)  -  normalize before code-switching analysis
+- [Translation](translation.md)  -  translate individual language segments
+- [Pipeline](pipeline.md)  -  include code-switching in pipelines
+- [API Reference](../api-reference.md#code_switching)  -  full function signature

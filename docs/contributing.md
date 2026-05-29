@@ -1,4 +1,4 @@
-# Contributing
+﻿# Contributing
 
 Thanks for wanting to contribute to `manglish-nlp`. This guide covers everything you need to know.
 
@@ -271,11 +271,11 @@ pytest --cov=manglish_nlp --cov-report=html
 
 ### Before you submit
 
-1. **Run full test suite** — `pytest` must pass
-2. **Run linters** — `ruff check .` and `mypy manglish_nlp/` must be clean
-3. **Format code** — `ruff format .`
-4. **Update docs** — If you changed public API
-5. **Add changelog entry** — Describe your change in `docs/changelog.md` under `[Unreleased]`
+1. **Run full test suite**  -  `pytest` must pass
+2. **Run linters**  -  `ruff check .` and `mypy manglish_nlp/` must be clean
+3. **Format code**  -  `ruff format .`
+4. **Update docs**  -  If you changed public API
+5. **Add changelog entry**  -  Describe your change in `docs/changelog.md` under `[Unreleased]`
 
 ### PR checklist
 

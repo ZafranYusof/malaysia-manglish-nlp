@@ -1,4 +1,4 @@
-# Named Entity Recognition
+﻿# Named Entity Recognition
 
 **Extract persons, organisations, locations, and Malaysian-specific entities from text.**
 
@@ -192,11 +192,11 @@ $ mnlp analyze "Ali pergi Petronas beli RON95 RM50"
 
 ## How it works
 
-1. **Tokenization** — text split into tokens with Malaysian-aware rules
-2. **Pattern matching** — gazetteers for Malaysian names, places, organisations
-3. **Context features** — surrounding words, capitalisation, position
-4. **Rule engine** — regex patterns for MONEY, DATE, TIME, QUANTITY
-5. **Post-processing** — merge adjacent entities, resolve conflicts
+1. **Tokenization**  -  text split into tokens with Malaysian-aware rules
+2. **Pattern matching**  -  gazetteers for Malaysian names, places, organisations
+3. **Context features**  -  surrounding words, capitalisation, position
+4. **Rule engine**  -  regex patterns for MONEY, DATE, TIME, QUANTITY
+5. **Post-processing**  -  merge adjacent entities, resolve conflicts
 
 ---
 
@@ -218,7 +218,7 @@ Benchmarked on 3,000 annotated Malaysian texts. See [Benchmarks](../benchmarks.m
 
 ## See also
 
-- [Sentiment Analysis](sentiment.md) — combine with NER for aspect-based sentiment
-- [Pipeline](pipeline.md) — run NER as part of a multi-step pipeline
-- [REST API](rest-api.md) — serve NER over HTTP
-- [API Reference](../api-reference.md#ner) — full function signature
+- [Sentiment Analysis](sentiment.md)  -  combine with NER for aspect-based sentiment
+- [Pipeline](pipeline.md)  -  run NER as part of a multi-step pipeline
+- [REST API](rest-api.md)  -  serve NER over HTTP
+- [API Reference](../api-reference.md#ner)  -  full function signature

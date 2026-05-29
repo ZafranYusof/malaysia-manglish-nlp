@@ -1,6 +1,6 @@
-# Language Detection
+﻿# Language Detection
 
-**Detect whether text is Bahasa Melayu, English, Manglish, or a mix — including dialect detection.**
+**Detect whether text is Bahasa Melayu, English, Manglish, or a mix  -  including dialect detection.**
 
 ---
 
@@ -105,7 +105,7 @@ See [Code-Switching Detection](code-switching.md) for the full tutorial.
 
 ## Dialect detection
 
-Detect regional Malay dialects — 6 supported:
+Detect regional Malay dialects  -  6 supported:
 
 ```python
 # Kelantan
@@ -214,11 +214,11 @@ $ mnlp language "I nak pergi kedai" --json
 
 ## How it works
 
-1. **Word-level classification** — each word classified as BM, EN, or shared
-2. **Particle detection** — Malaysian particles ("la", "lah", "kan", "weh") signal Manglish
-3. **Shortform recognition** — "nk", "brp", "sy" identified as BM shortforms
-4. **Ratio calculation** — proportion of each language computed
-5. **Dialect matching** — dialect-specific vocabulary and pronouns checked
+1. **Word-level classification**  -  each word classified as BM, EN, or shared
+2. **Particle detection**  -  Malaysian particles ("la", "lah", "kan", "weh") signal Manglish
+3. **Shortform recognition**  -  "nk", "brp", "sy" identified as BM shortforms
+4. **Ratio calculation**  -  proportion of each language computed
+5. **Dialect matching**  -  dialect-specific vocabulary and pronouns checked
 
 ---
 
@@ -236,8 +236,8 @@ $ mnlp language "I nak pergi kedai" --json
 
 ## See also
 
-- [Code-Switching](code-switching.md) — detailed switch point detection
-- [Normalization](normalization.md) — normalize Manglish for downstream processing
-- [Translation](translation.md) — translate detected language pairs
-- [Pipeline](pipeline.md) — include language detection in pipelines
-- [API Reference](../api-reference.md#language) — full function signature
+- [Code-Switching](code-switching.md)  -  detailed switch point detection
+- [Normalization](normalization.md)  -  normalize Manglish for downstream processing
+- [Translation](translation.md)  -  translate detected language pairs
+- [Pipeline](pipeline.md)  -  include language detection in pipelines
+- [API Reference](../api-reference.md#language)  -  full function signature

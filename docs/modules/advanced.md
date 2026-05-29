@@ -1,6 +1,6 @@
-# Advanced NLP
+﻿# Advanced NLP
 
-**Complex linguistic analysis — code-switching, intent, topic, hate speech, stance, and discourse structure.**
+**Complex linguistic analysis  -  code-switching, intent, topic, hate speech, stance, and discourse structure.**
 
 ---
 
@@ -295,7 +295,7 @@ mnlp.discourse(text)
 
 ## See Also
 
-- [Analysis](analysis.md) — sentiment, emotion, and sarcasm detection
-- [Extraction](extraction.md) — NER, POS, and dependency parsing
-- [Intent + Pipeline](tools.md#pipeline) — chain intent detection with slot extraction for chatbots
-- [Evaluate](tools.md#evaluate) — benchmark classification accuracy on your data
+- [Analysis](analysis.md)  -  sentiment, emotion, and sarcasm detection
+- [Extraction](extraction.md)  -  NER, POS, and dependency parsing
+- [Intent + Pipeline](tools.md#pipeline)  -  chain intent detection with slot extraction for chatbots
+- [Evaluate](tools.md#evaluate)  -  benchmark classification accuracy on your data

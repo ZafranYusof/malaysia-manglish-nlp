@@ -1,4 +1,4 @@
-# Acknowledgement
+﻿# Acknowledgement
 
 manglish-nlp stands on the shoulders of many excellent open-source projects and the broader Malaysian NLP community.
 
@@ -9,7 +9,7 @@ manglish-nlp stands on the shoulders of many excellent open-source projects and 
 | Project | Role |
 |---------|------|
 | [spaCy](https://spacy.io) | NLP pipeline architecture inspiration |
-| [Malaya](https://github.com/huseinzol05/Malaya) | Pioneer Malaysian NLP toolkit — primary design reference |
+| [Malaya](https://github.com/huseinzol05/Malaya) | Pioneer Malaysian NLP toolkit  -  primary design reference |
 | [HuggingFace Transformers](https://huggingface.co) | DistilBERT model and fine-tuning framework |
 | [HuggingFace Datasets](https://huggingface.co/datasets) | Dataset loading and management |
 | [Gensim](https://radimrehurek.com/gensim/) | Word2Vec and FastText training |
@@ -48,15 +48,15 @@ manglish-nlp stands on the shoulders of many excellent open-source projects and 
 
 ## Academic Support
 
-- **UMP (Universiti Malaysia Pahang)** — Academic institution and Final Year Project supervision
-- Faculty of Computing, UMP — Infrastructure and guidance
+- **UMP (Universiti Malaysia Pahang)**  -  Academic institution and Final Year Project supervision
+- Faculty of Computing, UMP  -  Infrastructure and guidance
 
 ---
 
 ## Community
 
-- Malaysian NLP community — feedback, dataset contributions, and bug reports
-- Open source contributors on GitHub — pull requests, issues, and suggestions
+- Malaysian NLP community  -  feedback, dataset contributions, and bug reports
+- Open source contributors on GitHub  -  pull requests, issues, and suggestions
 - r/malaysia and Lowyat community members whose public posts (anonymised) form part of the training data
 
 ---

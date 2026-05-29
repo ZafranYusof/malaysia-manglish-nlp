@@ -1,4 +1,4 @@
-# Running on Windows
+﻿# Running on Windows
 
 manglish-nlp works on Windows, but a few things need extra attention.
 
@@ -62,7 +62,7 @@ pip install gensim
 
 ### torch / transformers slow on first import
 
-The first time you import `transformers` or `torch` on Windows, it can take 10–30 seconds. This is normal — PyTorch initialises CUDA and loads DLLs.
+The first time you import `transformers` or `torch` on Windows, it can take 10–30 seconds. This is normal  -  PyTorch initialises CUDA and loads DLLs.
 
 **Fix:** Nothing to fix. Subsequent imports are fast within the same process.
 
@@ -73,7 +73,7 @@ The first time you import `transformers` or `torch` on Windows, it can take 10�
 Windows uses `\` as path separator. Python handles this fine, but if you're writing config files or shell scripts:
 
 ```python
-# Good — works everywhere
+# Good  -  works everywhere
 from pathlib import Path
 data_dir = Path(__file__).parent / "data"
 

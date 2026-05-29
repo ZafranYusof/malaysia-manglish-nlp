@@ -1,4 +1,4 @@
-# Question Answering
+﻿# Question Answering
 
 **Extract answers from Malaysian text passages using context-based retrieval.**
 
@@ -174,10 +174,10 @@ $ mnlp keywords "Harga minyak sawit meningkat ke paras tertinggi"
 
 ## How it works
 
-1. **Sentence retrieval** — TF-IDF to find the most relevant sentence for the question
-2. **Span extraction** — locate the answer within the relevant sentence using pattern matching and POS features
-3. **Question classification** — categorize question type (person, location, quantity, time, etc.) to guide extraction
-4. **Confidence scoring** — estimate answer reliability based on match quality
+1. **Sentence retrieval**  -  TF-IDF to find the most relevant sentence for the question
+2. **Span extraction**  -  locate the answer within the relevant sentence using pattern matching and POS features
+3. **Question classification**  -  categorize question type (person, location, quantity, time, etc.) to guide extraction
+4. **Confidence scoring**  -  estimate answer reliability based on match quality
 
 For generative QA (free-form answers), install `[ml]`:
 ```bash
@@ -201,8 +201,8 @@ pip install manglish-nlp[ml]
 
 ## See also
 
-- [Summarization](summarization.md) — summarize context before QA
-- [Keywords](../modules/extraction.md#keywords) — extract key terms for retrieval
-- [Embeddings](embeddings.md) — semantic similarity for context matching
-- [Pipeline](pipeline.md) — chain QA with normalization
-- [API Reference](../api-reference.md#qa) — full function signature
+- [Summarization](summarization.md)  -  summarize context before QA
+- [Keywords](../modules/extraction.md#keywords)  -  extract key terms for retrieval
+- [Embeddings](embeddings.md)  -  semantic similarity for context matching
+- [Pipeline](pipeline.md)  -  chain QA with normalization
+- [API Reference](../api-reference.md#qa)  -  full function signature

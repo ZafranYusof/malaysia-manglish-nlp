@@ -1,6 +1,6 @@
-# Tutorials
+﻿# Tutorials
 
-**Hands-on guides for every manglish-nlp module — from basic usage to production pipelines.**
+**Hands-on guides for every manglish-nlp module  -  from basic usage to production pipelines.**
 
 ---
 
@@ -94,10 +94,10 @@ Each tutorial walks through a single capability with realistic Manglish examples
 
 ## How to Use These Tutorials
 
-1. **Pick a module** — each page is self-contained
-2. **Copy the code** — all examples are runnable as-is
-3. **Start simple** — each tutorial progresses from basic to advanced
-4. **Check the CLI** — every module works from the terminal too
+1. **Pick a module**  -  each page is self-contained
+2. **Copy the code**  -  all examples are runnable as-is
+3. **Start simple**  -  each tutorial progresses from basic to advanced
+4. **Check the CLI**  -  every module works from the terminal too
 
 !!! tip "Prerequisites"
     ```bash
@@ -118,11 +118,11 @@ Each tutorial walks through a single capability with realistic Manglish examples
 | [Translation](translation.md) | `mnlp.translate()` | `mnlp translate` | Core |
 | [Normalization](normalization.md) | `mnlp.normalize()` | `mnlp normalize` | Core |
 | [Language Detection](language-detection.md) | `mnlp.detect_language()` | `mnlp language` | Core |
-| [Embeddings](embeddings.md) | `mnlp.word_embeddings` | — | Core |
+| [Embeddings](embeddings.md) | `mnlp.word_embeddings` |  -  | Core |
 | [Summarization](summarization.md) | `mnlp.summarize()` | `mnlp summarize` | Core |
-| [QA](qa.md) | `mnlp.qa_answer()` | — | Core |
-| [Emotion](emotion.md) | `mnlp.detect_emotion()` | — | Core |
-| [Hate Speech](hate-speech.md) | `mnlp.detect_hate_speech()` | — | Core |
-| [Code-Switching](code-switching.md) | `mnlp.code_switching` | — | Core |
+| [QA](qa.md) | `mnlp.qa_answer()` |  -  | Core |
+| [Emotion](emotion.md) | `mnlp.detect_emotion()` |  -  | Core |
+| [Hate Speech](hate-speech.md) | `mnlp.detect_hate_speech()` |  -  | Core |
+| [Code-Switching](code-switching.md) | `mnlp.code_switching` |  -  | Core |
 | [Pipeline](pipeline.md) | `mnlp.pipeline()` | `mnlp analyze` | Core |
 | [REST API](rest-api.md) | FastAPI server | `uvicorn` | `[api]` |

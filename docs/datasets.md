@@ -1,4 +1,4 @@
-# Datasets
+﻿# Datasets
 
 manglish-nlp was trained on curated Malaysian text datasets.
 
@@ -14,16 +14,16 @@ manglish-nlp was trained on curated Malaysian text datasets.
 
 ### Data Sources
 
-- Twitter/X — Malaysian users posting in Manglish
+- Twitter/X  -  Malaysian users posting in Manglish
 - Lowyat forum posts
 - Malaysian news portal comments
 - Reddit r/malaysia
 
 ### Labels
 
-- `positive` — praise, approval, happiness
-- `negative` — complaints, anger, disappointment
-- `neutral` — factual statements, questions, mixed sentiment
+- `positive`  -  praise, approval, happiness
+- `negative`  -  complaints, anger, disappointment
+- `neutral`  -  factual statements, questions, mixed sentiment
 
 ### Example entries
 

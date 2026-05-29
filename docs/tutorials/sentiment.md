@@ -1,6 +1,6 @@
-# Sentiment Analysis
+﻿# Sentiment Analysis
 
-**Detect positive, negative, and neutral sentiment in Malaysian text — including Manglish, code-switching, and sarcasm.**
+**Detect positive, negative, and neutral sentiment in Malaysian text  -  including Manglish, code-switching, and sarcasm.**
 
 ---
 
@@ -8,7 +8,7 @@
 
 Social media monitoring, brand reputation tracking, customer feedback analysis, and public opinion mining for Malaysian businesses and researchers. Standard NLP tools fail on Manglish because they don't understand slang like "gila best", "teruk gila", or sarcastic patterns like "Bagus la tu, tunggu 3 jam".
 
-manglish-nlp handles all of this natively — no preprocessing needed.
+manglish-nlp handles all of this natively  -  no preprocessing needed.
 
 ---
 
@@ -112,14 +112,14 @@ mnlp.sentiment("Harga murah, rasa sedap, tapi parking susah", aspect=True)
 
 ## Sarcasm detection
 
-manglish-nlp detects sarcastic sentiment automatically — no separate flag needed. Sarcastic text with positive words but negative context gets correctly classified.
+manglish-nlp detects sarcastic sentiment automatically  -  no separate flag needed. Sarcastic text with positive words but negative context gets correctly classified.
 
 ```python
-# Sarcastic — "bagus" + negative context
+# Sarcastic  -  "bagus" + negative context
 mnlp.sentiment("Bagus la tu, tunggu 3 jam baru sampai")
 # {'label': 'negative', 'score': 0.78}  # Detected as sarcasm
 
-# Sarcastic — double praise pattern
+# Sarcastic  -  double praise pattern
 mnlp.sentiment("Wah pandainya, exam fail pun boleh celebrate")
 # {'label': 'negative', 'score': 0.74}  # Detected as sarcasm
 
@@ -239,11 +239,11 @@ $ mnlp analyze "Weh best gila kedai tu"
 
 manglish-nlp's sentiment module uses a layered approach:
 
-1. **Lexicon matching** — 2,000+ Malaysian sentiment words including slang ("gila best", "syok", "hampeh")
-2. **Intensifier handling** — "gila", "sangat", "betul", "super" modify scores
-3. **Negation detection** — "tak", "tidak", "bukan", "don't" flip polarity
-4. **Sarcasm patterns** — positive opener + negative context = sarcasm flag
-5. **Contrast markers** — "tapi", "but", "cuma" trigger mixed sentiment analysis
+1. **Lexicon matching**  -  2,000+ Malaysian sentiment words including slang ("gila best", "syok", "hampeh")
+2. **Intensifier handling**  -  "gila", "sangat", "betul", "super" modify scores
+3. **Negation detection**  -  "tak", "tidak", "bukan", "don't" flip polarity
+4. **Sarcasm patterns**  -  positive opener + negative context = sarcasm flag
+5. **Contrast markers**  -  "tapi", "but", "cuma" trigger mixed sentiment analysis
 
 No external models needed. The rule-based engine runs at **23,000+ texts/sec**.
 
@@ -284,8 +284,8 @@ result = mnlp.sentiment("Service ok la tapi makanan agak tawar sikit", model="ml
 
 ## See also
 
-- [Emotion Detection](emotion.md) — go beyond positive/negative to 8 emotion categories
-- [Normalization](normalization.md) — clean text before analysis for better results
-- [Pipeline](pipeline.md) — chain sentiment with other modules
-- [REST API](rest-api.md) — serve sentiment over HTTP
-- [API Reference](../api-reference.md#sentiment) — full function signature
+- [Emotion Detection](emotion.md)  -  go beyond positive/negative to 8 emotion categories
+- [Normalization](normalization.md)  -  clean text before analysis for better results
+- [Pipeline](pipeline.md)  -  chain sentiment with other modules
+- [REST API](rest-api.md)  -  serve sentiment over HTTP
+- [API Reference](../api-reference.md#sentiment)  -  full function signature

@@ -1,4 +1,4 @@
-# Getting Started
+﻿# Getting Started
 
 Get up and running with manglish-nlp in under 5 minutes.
 
@@ -90,7 +90,7 @@ print(result)
 # {'label': 'positive', 'score': 0.96, 'aspects': ['nasi lemak']}
 ```
 
-The model correctly identifies this as positive — "sedap gila" (insanely delicious) and "confirm repeat" are strong positive signals in Manglish.
+The model correctly identifies this as positive  -  "sedap gila" (insanely delicious) and "confirm repeat" are strong positive signals in Manglish.
 
 ### Step 2: Normalise Spelling
 
@@ -121,7 +121,7 @@ print(entities)
 # [('Siti', 'PERSON'), ('iPhone', 'PRODUCT'), ('Low Yat Plaza', 'LOCATION')]
 ```
 
-NER works on Malaysian entities — local places, brands, and names.
+NER works on Malaysian entities  -  local places, brands, and names.
 
 ### Step 5: Chain with Pipeline
 
@@ -234,10 +234,10 @@ tweets = [
 
 for tweet in tweets:
     result = mnlp.sentiment(tweet)
-    print(f"{result['label']:>10} ({result['score']:.2f}) — {tweet}")
-#   positive (0.95) — Weh sedap gila burger ni, confirm datang lagi!
-#   negative (0.78) — Aduh mahalnya, baik aku masak sendiri
-#    neutral (0.61) — Ok la, not bad for the price
+    print(f"{result['label']:>10} ({result['score']:.2f})  -  {tweet}")
+#   positive (0.95)  -  Weh sedap gila burger ni, confirm datang lagi!
+#   negative (0.78)  -  Aduh mahalnya, baik aku masak sendiri
+#    neutral (0.61)  -  Ok la, not bad for the price
 ```
 
 ### Recipe: Normalise + NER Pipeline
@@ -321,7 +321,7 @@ export MANGLISH_NLP_BATCH_SIZE=256
 
     ---
 
-    Explore all 51 modules grouped by category — text processing, analysis, extraction, generation, and more.
+    Explore all 51 modules grouped by category  -  text processing, analysis, extraction, generation, and more.
 
     [:octicons-arrow-right-24: Module Overview](modules/index.md)
 

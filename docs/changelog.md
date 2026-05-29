@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to `manglish-nlp`. Format follows [Keep a Changelog](https://keepachangelog.com).
 
@@ -10,24 +10,24 @@ _Nothing yet._
 
 ---
 
-## [3.0.0] — 2026-05-29
+## [3.0.0]  -  2026-05-29
 
 The big one. Major architecture overhaul, new modules, massive speedups.
 
 ### Added
 
 - **51 NLP modules** (up from 28 in v2)
-- `emotion()` — 7-class emotion detection (joy, anger, sadness, fear, surprise, disgust, love)
-- `code_switching.detect_switches()` — token-level code-switch boundary detection
-- `hate_speech.detect_hate_speech()` — toxicity + hate category detection with severity levels
-- `stance.detect_stance()` — for/against/neutral stance detection toward targets
-- `intent.classify_intent()` — 7-class intent classification
-- `topic.classify_topic()` — 10-class topic classification with subtopics
-- `qa.answer()` — extractive question answering
-- `text_generation.generate()` — Malay/Manglish text generation
-- `pipeline()` — chain multiple NLP ops into reusable pipelines
-- `augment()` — data augmentation with synonym/insert/swap/delete strategies
-- `load_word2vec()` / `load_fasttext()` — pre-trained embedding loaders
+- `emotion()`  -  7-class emotion detection (joy, anger, sadness, fear, surprise, disgust, love)
+- `code_switching.detect_switches()`  -  token-level code-switch boundary detection
+- `hate_speech.detect_hate_speech()`  -  toxicity + hate category detection with severity levels
+- `stance.detect_stance()`  -  for/against/neutral stance detection toward targets
+- `intent.classify_intent()`  -  7-class intent classification
+- `topic.classify_topic()`  -  10-class topic classification with subtopics
+- `qa.answer()`  -  extractive question answering
+- `text_generation.generate()`  -  Malay/Manglish text generation
+- `pipeline()`  -  chain multiple NLP ops into reusable pipelines
+- `augment()`  -  data augmentation with synonym/insert/swap/delete strategies
+- `load_word2vec()` / `load_fasttext()`  -  pre-trained embedding loaders
 - Typed exceptions: `ManglishNLPError`, `InputError`, `ModelError`, `LanguageError`, `PipelineError`
 - Full type annotations across entire codebase
 - Batch inference support for all models
@@ -35,9 +35,9 @@ The big one. Major architecture overhaul, new modules, massive speedups.
 
 ### Changed
 
-- **4× faster** sentiment inference (12.4ms → 3.1ms per text)
-- **5× faster** cold import (2.1s → 0.42s) via lazy loading
-- **6× smaller** memory footprint (1.2GB → 180MB)
+- **4� -  faster** sentiment inference (12.4ms → 3.1ms per text)
+- **5� -  faster** cold import (2.1s → 0.42s) via lazy loading
+- **6� -  smaller** memory footprint (1.2GB → 180MB)
 - Sentiment model retrained on 50k+ annotated Manglish samples
 - NER model upgraded to span-based architecture (was token-level)
 - Normalization now handles 2000+ slang mappings (was 400)
@@ -73,28 +73,28 @@ The big one. Major architecture overhaul, new modules, massive speedups.
 
 ---
 
-## [2.0.0] — 2025-08-15
+## [2.0.0]  -  2025-08-15
 
 First stable release with core NLP functionality.
 
 ### Added
 
 - 28 NLP modules covering core text processing
-- `sentiment()` — 3-class sentiment analysis (positive/negative/neutral)
-- `detect_language()` — basic Malay/English detection
-- `normalize()` — informal-to-standard text normalization
-- `clean()` — text cleaning (URLs, mentions, whitespace)
-- `formalize()` — casual to formal Malay conversion
-- `tokenize()` — Manglish-aware tokenization
-- `stem_word()` — Malay morphological stemming
-- `ner_tag()` — basic NER (PER/ORG/LOC)
-- `pos_tag()` — POS tagging (Universal Dependencies)
-- `extract_keywords()` — TF-IDF keyword extraction
-- `segment()` — sentence segmentation
-- `similarity()` — semantic text similarity
-- `correct()` — basic spell checking
-- `summarization.summarize()` — extractive summarization
-- `translation.translate()` — Malay-English translation
+- `sentiment()`  -  3-class sentiment analysis (positive/negative/neutral)
+- `detect_language()`  -  basic Malay/English detection
+- `normalize()`  -  informal-to-standard text normalization
+- `clean()`  -  text cleaning (URLs, mentions, whitespace)
+- `formalize()`  -  casual to formal Malay conversion
+- `tokenize()`  -  Manglish-aware tokenization
+- `stem_word()`  -  Malay morphological stemming
+- `ner_tag()`  -  basic NER (PER/ORG/LOC)
+- `pos_tag()`  -  POS tagging (Universal Dependencies)
+- `extract_keywords()`  -  TF-IDF keyword extraction
+- `segment()`  -  sentence segmentation
+- `similarity()`  -  semantic text similarity
+- `correct()`  -  basic spell checking
+- `summarization.summarize()`  -  extractive summarization
+- `translation.translate()`  -  Malay-English translation
 - Pre-trained models bundled in package
 - Comprehensive test suite (612 tests)
 - Documentation site with API reference
@@ -103,7 +103,7 @@ First stable release with core NLP functionality.
 
 - Migrated from rule-based to neural models for sentiment, NER, POS
 - Tokenizer rewritten to handle Manglish contractions properly
-- 3× speedup across all modules vs v1 (rule-based → neural inference)
+- 3� -  speedup across all modules vs v1 (rule-based → neural inference)
 - Package renamed from `malaysia-nlp` to `manglish-nlp`
 - Minimum Python raised to 3.8
 
@@ -132,7 +132,7 @@ First stable release with core NLP functionality.
 
 ---
 
-## [1.0.0] — 2025-01-10
+## [1.0.0]  -  2025-01-10
 
 Initial release. Rule-based Malay NLP toolkit.
 
@@ -162,9 +162,9 @@ Initial release. Rule-based Malay NLP toolkit.
 
 | Version | Status | End of Life |
 |---------|--------|-------------|
-| v3.x | **Active** — current, receiving features + fixes | — |
-| v2.x | **Maintenance** — security fixes only | 2026-12-31 |
-| v1.x | **EOL** — no longer supported | 2025-08-15 |
+| v3.x | **Active**  -  current, receiving features + fixes |  -  |
+| v2.x | **Maintenance**  -  security fixes only | 2026-12-31 |
+| v1.x | **EOL**  -  no longer supported | 2025-08-15 |
 
 ---
 

@@ -1,12 +1,12 @@
-# Word Embeddings
+﻿# Word Embeddings
 
-**Dense vector representations trained on 10M+ Malaysian texts — Word2Vec and FastText.**
+**Dense vector representations trained on 10M+ Malaysian texts  -  Word2Vec and FastText.**
 
 ---
 
 ## Why word embeddings?
 
-Semantic search, similarity computation, text classification features, and linguistic analysis. Standard embeddings (GloVe, fastText English) don't capture Malaysian word semantics — "sedap" and "lazat" should be close vectors, but they're absent from English-trained models.
+Semantic search, similarity computation, text classification features, and linguistic analysis. Standard embeddings (GloVe, fastText English) don't capture Malaysian word semantics  -  "sedap" and "lazat" should be close vectors, but they're absent from English-trained models.
 
 manglish-nlp provides embeddings trained specifically on Malaysian text including Manglish, social media, and news.
 
@@ -196,10 +196,10 @@ $ mnlp keywords "Nasi lemak sedap gila kat kedai mamak"
 
 ## How it works
 
-1. **Word2Vec** — CBOW architecture, 300 dimensions, trained on 10M+ Malaysian texts
-2. **FastText** — subword model, handles OOV words through character n-grams
-3. **Sentence embeddings** — averaged word vectors (fast) or transformer (accurate)
-4. **Similarity** — cosine distance between vectors
+1. **Word2Vec**  -  CBOW architecture, 300 dimensions, trained on 10M+ Malaysian texts
+2. **FastText**  -  subword model, handles OOV words through character n-grams
+3. **Sentence embeddings**  -  averaged word vectors (fast) or transformer (accurate)
+4. **Similarity**  -  cosine distance between vectors
 
 Training data includes: Malay news, social media posts, Wikipedia BM, forum posts, and Manglish text.
 
@@ -220,7 +220,7 @@ Training data includes: Malay news, social media posts, Wikipedia BM, forum post
 
 ## See also
 
-- [Summarization](summarization.md) — uses embeddings for semantic similarity
-- [Question Answering](qa.md) — uses embeddings for context matching
-- [Code-Switching](code-switching.md) — embeddings help detect language boundaries
-- [API Reference](../api-reference.md#embeddings) — full function signature
+- [Summarization](summarization.md)  -  uses embeddings for semantic similarity
+- [Question Answering](qa.md)  -  uses embeddings for context matching
+- [Code-Switching](code-switching.md)  -  embeddings help detect language boundaries
+- [API Reference](../api-reference.md#embeddings)  -  full function signature

@@ -1,4 +1,4 @@
-# Pretrained Models
+﻿# Pretrained Models
 
 manglish-nlp ships with pretrained models trained on real Malaysian social media data.
 
@@ -36,7 +36,7 @@ Both models were trained on 50,000+ Malaysian tweets collected between 2023–20
 
 ### Limitations
 
-- Vocabulary is small (518 tokens) — reflects curated Manglish lexicon, not full Malay/English
+- Vocabulary is small (518 tokens)  -  reflects curated Manglish lexicon, not full Malay/English
 - Best used for similarity lookups and as input features, not standalone NLU
 
 ---

@@ -1,6 +1,6 @@
-# Analysis
+﻿# Analysis
 
-**Understand what Malaysian text means — sentiment, emotion, language, profanity, and sarcasm.**
+**Understand what Malaysian text means  -  sentiment, emotion, language, profanity, and sarcasm.**
 
 ---
 
@@ -244,6 +244,6 @@ if sarcasm['is_sarcastic']:
 
 ## See Also
 
-- [Text Processing](text-processing.md) — clean text before analysis for better accuracy
-- [Advanced](advanced.md) — hate speech, stance detection, code-switching analysis
-- [Calibration](tools.md#calibration) — calibrate confidence scores for production thresholds
+- [Text Processing](text-processing.md)  -  clean text before analysis for better accuracy
+- [Advanced](advanced.md)  -  hate speech, stance detection, code-switching analysis
+- [Calibration](tools.md#calibration)  -  calibrate confidence scores for production thresholds

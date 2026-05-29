@@ -1,4 +1,4 @@
-# Text Summarization
+﻿# Text Summarization
 
 **Generate concise summaries of Malaysian text using extractive methods.**
 
@@ -6,7 +6,7 @@
 
 ## Why summarization?
 
-News aggregation, document processing, social media thread summaries, and research paper abstracts. Malaysian text presents unique challenges — code-switching, informal grammar, and mixed-language articles all need to be handled gracefully.
+News aggregation, document processing, social media thread summaries, and research paper abstracts. Malaysian text presents unique challenges  -  code-switching, informal grammar, and mixed-language articles all need to be handled gracefully.
 
 ---
 
@@ -182,11 +182,11 @@ $ mnlp summarize --file article.txt --json
 
 manglish-nlp uses **TextRank**, a graph-based extractive summarization algorithm:
 
-1. **Tokenize** — split text into sentences
-2. **Build similarity graph** — compute pairwise sentence similarity (word overlap + semantic)
-3. **PageRank** — rank sentences by importance using graph centrality
-4. **Select top-N** — return highest-scoring sentences in original order
-5. **Post-process** — clean up output, preserve entities
+1. **Tokenize**  -  split text into sentences
+2. **Build similarity graph**  -  compute pairwise sentence similarity (word overlap + semantic)
+3. **PageRank**  -  rank sentences by importance using graph centrality
+4. **Select top-N**  -  return highest-scoring sentences in original order
+5. **Post-process**  -  clean up output, preserve entities
 
 This approach works well for news articles, reports, and structured text. For abstractive summaries (rewriting), install the `[ml]` extra.
 
@@ -206,7 +206,7 @@ This approach works well for news articles, reports, and structured text. For ab
 
 ## See also
 
-- [Keywords](../modules/extraction.md#keywords) — extract key terms instead of full sentences
-- [Pipeline](pipeline.md) — chain summarization with normalization
-- [REST API](rest-api.md) — serve summarization over HTTP
-- [API Reference](../api-reference.md#summarization) — full function signature
+- [Keywords](../modules/extraction.md#keywords)  -  extract key terms instead of full sentences
+- [Pipeline](pipeline.md)  -  chain summarization with normalization
+- [REST API](rest-api.md)  -  serve summarization over HTTP
+- [API Reference](../api-reference.md#summarization)  -  full function signature

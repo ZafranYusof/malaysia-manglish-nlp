@@ -1,4 +1,4 @@
-# Hate Speech Detection
+﻿# Hate Speech Detection
 
 **Detect hate speech across 6 target categories with severity levels and leetspeak evasion handling.**
 
@@ -178,12 +178,12 @@ $ mnlp analyze "text" --json
 
 ## How it works
 
-1. **Normalization** — leetspeak decoding, repeated char reduction
-2. **Lexicon matching** — curated hate speech dictionaries for Malaysian context
-3. **Pattern detection** — known hate speech phrases and structures
-4. **Context analysis** — distinguish insults from hate speech
-5. **Severity classification** — score determines none/low/medium/high
-6. **Category assignment** — which target group(s) are attacked
+1. **Normalization**  -  leetspeak decoding, repeated char reduction
+2. **Lexicon matching**  -  curated hate speech dictionaries for Malaysian context
+3. **Pattern detection**  -  known hate speech phrases and structures
+4. **Context analysis**  -  distinguish insults from hate speech
+5. **Severity classification**  -  score determines none/low/medium/high
+6. **Category assignment**  -  which target group(s) are attacked
 
 ---
 
@@ -205,9 +205,9 @@ $ mnlp analyze "text" --json
 
 ## See also
 
-- [Profanity Detection](../modules/analysis.md#profanity) — filter swear words (separate from hate speech)
-- [Emotion Detection](emotion.md) — detect anger/disgust that may accompany hate speech
-- [Sentiment Analysis](sentiment.md) — general sentiment classification
-- [Pipeline](pipeline.md) — chain hate speech with other modules
-- [REST API](rest-api.md) — serve moderation over HTTP
-- [API Reference](../api-reference.md#hate_speech) — full function signature
+- [Profanity Detection](../modules/analysis.md#profanity)  -  filter swear words (separate from hate speech)
+- [Emotion Detection](emotion.md)  -  detect anger/disgust that may accompany hate speech
+- [Sentiment Analysis](sentiment.md)  -  general sentiment classification
+- [Pipeline](pipeline.md)  -  chain hate speech with other modules
+- [REST API](rest-api.md)  -  serve moderation over HTTP
+- [API Reference](../api-reference.md#hate_speech)  -  full function signature

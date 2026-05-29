@@ -1,4 +1,4 @@
-# Benchmarks
+﻿# Benchmarks
 
 Performance, accuracy, and throughput metrics for `manglish-nlp`.
 
@@ -34,18 +34,18 @@ All models evaluated on held-out test sets (Manglish social media corpus, 10k+ a
 | `pos_tag` | 94.2% | 0.94 | 3.8 | Universal Dependencies tagset |
 | `extract_keywords` | 79.6% | 0.77 | 8.2 | Recall@5 vs human annotations |
 | `segment` | 95.8% | 0.96 | 1.2 | Sentence boundary detection |
-| `similarity` | 82.1% | — | 4.5 | Spearman ρ on STS benchmark (ms) |
-| `augment` | — | — | 12.3 | Preservation rate: 94% |
+| `similarity` | 82.1% |  -  | 4.5 | Spearman ρ on STS benchmark (ms) |
+| `augment` |  -  |  -  | 12.3 | Preservation rate: 94% |
 | `correct` | 86.3% | 0.84 | 7.8 | Error correction rate |
 | `code_switching` | 89.7% | 0.88 | 5.9 | Switch-point detection |
 | `intent` | 90.4% | 0.89 | 3.4 | 7-class intent |
 | `topic` | 88.1% | 0.87 | 3.6 | 10-class topic |
 | `hate_speech` | 92.8% | 0.91 | 3.2 | Binary + severity |
 | `stance` | 83.5% | 0.81 | 4.1 | 3-class stance |
-| `summarization` | — | — | 45.2 | ROUGE-L: 0.41 |
-| `translation` | — | — | 18.7 | BLEU-4: 38.2 (ms→en) |
+| `summarization` |  -  |  -  | 45.2 | ROUGE-L: 0.41 |
+| `translation` |  -  |  -  | 18.7 | BLEU-4: 38.2 (ms→en) |
 | `qa` | 85.9% | 0.84 | 11.3 | Exact match on ms-SQuAD |
-| `text_generation` | — | — | 22.4 | Perplexity: 18.7 |
+| `text_generation` |  -  |  -  | 22.4 | Perplexity: 18.7 |
 
 ---
 
@@ -76,13 +76,13 @@ Fair comparison on identical Manglish test sets. Malaya v5.x tested with same ha
 | Emotion | **84.7%** | 78.3% | +6.4 | Malaya: 6-class vs our 7-class |
 | NER | **87.5%** | 89.1% | -1.6 | Malaya has larger training set |
 | POS tagging | 94.2% | **95.8%** | -1.6 | Malaya uses bigger corpus |
-| Code-switching | **89.7%** | — | — | Malaya lacks this module |
+| Code-switching | **89.7%** |  -  |  -  | Malaya lacks this module |
 | Normalization | **88.4%** | 81.2% | +7.2 | Malaya doesn't handle Manglish slang |
 | Hate speech | **92.8%** | 86.4% | +6.4 | Malaya: formal text only |
-| Translation (ms→en) | — | **BLEU 42.1** | — | Malaya uses larger parallel corpus |
+| Translation (ms→en) |  -  | **BLEU 42.1** |  -  | Malaya uses larger parallel corpus |
 | Import time | **0.42s** | 3.8s | -3.4s | Malaya loads TensorFlow eagerly |
 | Memory | **180 MB** | 1.2 GB | -1 GB | Malaya: full TF runtime |
-| Throughput (sentiment) | **23.4k/s** | 4.1k/s | 5.7× | CPU inference comparison |
+| Throughput (sentiment) | **23.4k/s** | 4.1k/s | 5.7� -  | CPU inference comparison |
 
 ### Where Malaya wins
 
@@ -95,7 +95,7 @@ Fair comparison on identical Manglish test sets. Malaya v5.x tested with same ha
 - **Manglish/informal text**: Purpose-built for code-mixed content
 - **Speed**: Lightweight models, no heavy runtime dependency
 - **Code-switching detection**: Malaya lacks this entirely
-- **Memory**: 6× smaller footprint
+- **Memory**: 6� -  smaller footprint
 - **Hate speech on social media**: Trained on real Malaysian social corpus
 
 ---
@@ -111,9 +111,9 @@ Latency (ms) per text across versions:
 | v3.0.0 | 3.1 | 6.7 | 8.9 | 0.42s |
 
 Improvement from v1 → v3:
-- Sentiment: **4× faster**
-- NER: **4.3× faster**
-- Import: **5× faster**
+- Sentiment: **4� -  faster**
+- NER: **4.3� -  faster**
+- Import: **5� -  faster**
 
 ---
 

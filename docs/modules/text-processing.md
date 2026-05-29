@@ -1,6 +1,6 @@
-# Text Processing
+﻿# Text Processing
 
-**Clean, normalise, tokenise, and stem Malaysian text — the preprocessing foundation.**
+**Clean, normalise, tokenise, and stem Malaysian text  -  the preprocessing foundation.**
 
 ---
 
@@ -74,7 +74,7 @@ print(result)
 
 ### `clean`
 
-Removes noise from text — URLs, mentions, hashtags, emojis, repeated characters, and HTML artefacts.
+Removes noise from text  -  URLs, mentions, hashtags, emojis, repeated characters, and HTML artefacts.
 
 ```python
 import manglish_nlp as mnlp
@@ -280,6 +280,6 @@ result = preprocess("Wehh xpe la bro!! 🔥 bestttt gila")
 
 ## See Also
 
-- [Analysis](analysis.md) — sentiment, emotion, and language detection on cleaned text
-- [Pipeline](tools.md#pipeline) — chain preprocessing steps into reusable workflows
-- [Cache](tools.md#cache) — cache expensive normalisation for repeated inputs
+- [Analysis](analysis.md)  -  sentiment, emotion, and language detection on cleaned text
+- [Pipeline](tools.md#pipeline)  -  chain preprocessing steps into reusable workflows
+- [Cache](tools.md#cache)  -  cache expensive normalisation for repeated inputs

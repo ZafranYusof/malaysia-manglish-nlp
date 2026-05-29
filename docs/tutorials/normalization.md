@@ -1,6 +1,6 @@
-# Text Normalization
+﻿# Text Normalization
 
-**Convert informal Manglish into clean, standard text — shortform expansion, noise removal, and formalization.**
+**Convert informal Manglish into clean, standard text  -  shortform expansion, noise removal, and formalization.**
 
 ---
 
@@ -272,11 +272,11 @@ Saya suka makan nasi
 
 ## How it works
 
-1. **Dictionary lookup** — 638+ shortform mappings (nk→nak, brp→berapa)
-2. **Pattern matching** — elongated chars (3+ repeats reduced), URLs, mentions
-3. **Context rules** — some shortforms depend on position/context
-4. **Preserve particles** — "la", "lah", "kan", "weh" stay intact
-5. **Case handling** — `normalize_preserve_case` keeps original casing
+1. **Dictionary lookup**  -  638+ shortform mappings (nk→nak, brp→berapa)
+2. **Pattern matching**  -  elongated chars (3+ repeats reduced), URLs, mentions
+3. **Context rules**  -  some shortforms depend on position/context
+4. **Preserve particles**  -  "la", "lah", "kan", "weh" stay intact
+5. **Case handling**  -  `normalize_preserve_case` keeps original casing
 
 ---
 
@@ -294,8 +294,8 @@ Saya suka makan nasi
 
 ## See also
 
-- [Sentiment Analysis](sentiment.md) — normalize before sentiment for better accuracy
-- [Translation](translation.md) — normalization is applied automatically during translation
-- [Language Detection](language-detection.md) — clean text improves detection
-- [Pipeline](pipeline.md) — chain normalization with other modules
-- [API Reference](../api-reference.md#normalize) — full function signature
+- [Sentiment Analysis](sentiment.md)  -  normalize before sentiment for better accuracy
+- [Translation](translation.md)  -  normalization is applied automatically during translation
+- [Language Detection](language-detection.md)  -  clean text improves detection
+- [Pipeline](pipeline.md)  -  chain normalization with other modules
+- [API Reference](../api-reference.md#normalize)  -  full function signature

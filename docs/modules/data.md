@@ -1,4 +1,4 @@
-# Data & Embeddings
+﻿# Data & Embeddings
 
 **Vector representations, semantic similarity, data augmentation, and lexical resources for Malaysian text.**
 
@@ -92,7 +92,7 @@ emb.most_similar("sedap")
     Unknown words fall back to subword averaging:
     ```python
     emb["xsedap"]  # approximated from sub-words, not zero vector
-    "lepak" in emb  # True — covered in training data
+    "lepak" in emb  # True  -  covered in training data
     ```
 
 ---
@@ -224,7 +224,7 @@ mnlp.augment("Makanan kat sini memang sedap", n=5)
 | `method` | `str` | `"combined"` | Strategy: see table above |
 
 !!! tip "Training Data Expansion"
-    For Malaysian NLP models, `code_switch` and `spelling` augmentation are the most effective — they mirror real-world input variation. Use `combined` for maximum diversity.
+    For Malaysian NLP models, `code_switch` and `spelling` augmentation are the most effective  -  they mirror real-world input variation. Use `combined` for maximum diversity.
 
 !!! warning "Label Preservation"
     Augmentation preserves meaning for classification tasks but may not suit sequence labelling. For NER, prefer `spelling` method which doesn't alter entity boundaries.
@@ -311,7 +311,7 @@ mnlp.spelling("Aku nk prgi mkn kat keday tu")
 
 ## See Also
 
-- [Text Processing](text-processing.md) — normalise text before embedding
-- [Analysis](analysis.md) — use embeddings as classification features
-- [Cache](tools.md#cache) — cache expensive embedding computations
-- [Similarity + Pipeline](tools.md#pipeline) — build semantic search pipelines
+- [Text Processing](text-processing.md)  -  normalise text before embedding
+- [Analysis](analysis.md)  -  use embeddings as classification features
+- [Cache](tools.md#cache)  -  cache expensive embedding computations
+- [Similarity + Pipeline](tools.md#pipeline)  -  build semantic search pipelines

@@ -1,12 +1,12 @@
-# Translation
+﻿# Translation
 
-**Translate between Bahasa Melayu, English, and Manglish — with entity preservation and formal output.**
+**Translate between Bahasa Melayu, English, and Manglish  -  with entity preservation and formal output.**
 
 ---
 
 ## Why translation?
 
-Cross-language content processing, bilingual chatbot support, document translation for Malaysian businesses, and normalizing Manglish for formal contexts. Google Translate struggles with Manglish because it's not a standard language — "xpe la bro" isn't in any training corpus.
+Cross-language content processing, bilingual chatbot support, document translation for Malaysian businesses, and normalizing Manglish for formal contexts. Google Translate struggles with Manglish because it's not a standard language  -  "xpe la bro" isn't in any training corpus.
 
 manglish-nlp uses a rule-based approach that handles the actual patterns Malaysians use.
 
@@ -198,12 +198,12 @@ I like to eat
 
 manglish-nlp uses a **rule-based translation** pipeline:
 
-1. **Normalization** — expand shortforms (nk→nak, sy→saya)
-2. **Tokenization** — split into tokens with particle awareness
-3. **Dictionary lookup** — 15,000+ BM↔EN word pairs
-4. **Phrase matching** — multi-word expressions ("nasi lemak" stays intact)
-5. **Grammar rules** — word order transformation (BM SVO → EN SVO with modifier placement)
-6. **Entity preservation** — proper nouns pass through unchanged
+1. **Normalization**  -  expand shortforms (nk→nak, sy→saya)
+2. **Tokenization**  -  split into tokens with particle awareness
+3. **Dictionary lookup**  -  15,000+ BM↔EN word pairs
+4. **Phrase matching**  -  multi-word expressions ("nasi lemak" stays intact)
+5. **Grammar rules**  -  word order transformation (BM SVO → EN SVO with modifier placement)
+6. **Entity preservation**  -  proper nouns pass through unchanged
 
 This approach is fast (no model loading), deterministic (same input = same output), and handles Manglish patterns that neural models miss.
 
@@ -227,8 +227,8 @@ This approach is fast (no model loading), deterministic (same input = same outpu
 
 ## See also
 
-- [Normalization](normalization.md) — preprocess text before translation
-- [Language Detection](language-detection.md) — detect input language first
-- [Pipeline](pipeline.md) — chain translation with other modules
-- [REST API](rest-api.md) — serve translation over HTTP
-- [API Reference](../api-reference.md#translation) — full function signature
+- [Normalization](normalization.md)  -  preprocess text before translation
+- [Language Detection](language-detection.md)  -  detect input language first
+- [Pipeline](pipeline.md)  -  chain translation with other modules
+- [REST API](rest-api.md)  -  serve translation over HTTP
+- [API Reference](../api-reference.md#translation)  -  full function signature

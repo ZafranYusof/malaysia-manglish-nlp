@@ -1,4 +1,4 @@
-# Generation
+﻿# Generation
 
 **Translate, summarise, generate, and answer questions in Malaysian text.**
 
@@ -72,9 +72,9 @@ mnlp.translate("Filem itu sangat bagus", target="manglish")
 
 | From \ To | `en` | `ms` | `ms_formal` | `manglish` |
 |-----------|------|------|-------------|------------|
-| BM | ✅ | — | ✅ | ✅ |
-| English | — | ✅ | ✅ | ✅ |
-| Manglish | ✅ | ✅ | ✅ | — |
+| BM | ✅ |  -  | ✅ | ✅ |
+| English |  -  | ✅ | ✅ | ✅ |
+| Manglish | ✅ | ✅ | ✅ |  -  |
 
 #### Parameters
 
@@ -95,7 +95,7 @@ mnlp.translate("Filem itu sangat bagus", target="manglish")
     ```
 
 !!! tip "Manglish Preservation"
-    `target="manglish"` produces text that sounds like natural Malaysian speech — not word-for-word translation. Useful for chatbot responses targeting Malaysian users.
+    `target="manglish"` produces text that sounds like natural Malaysian speech  -  not word-for-word translation. Useful for chatbot responses targeting Malaysian users.
 
 ---
 
@@ -115,7 +115,7 @@ mengumumkan pengurangan cukai untuk PKS selama 6 bulan.
 """
 
 mnlp.summarize(article)
-# "Kerajaan umum pakej rangsangan RM50B — bantuan tunai, moratorium,
+# "Kerajaan umum pakej rangsangan RM50B  -  bantuan tunai, moratorium,
 #  subsidi upah, dan pengurangan cukai PKS 6 bulan."
 ```
 
@@ -142,13 +142,13 @@ mnlp.summarize(article)
 !!! example "Cross-Lingual Summary"
     ```python
     mnlp.summarize(bm_article, lang="en")
-    # "Government announces RM50B stimulus package — cash aid, loan moratorium,
+    # "Government announces RM50B stimulus package  -  cash aid, loan moratorium,
     #  wage subsidies, and 6-month SME tax cuts."
     ```
 
 !!! tip "Extractive vs Abstractive"
-    - **Extractive**: faster, picks exact sentences from source — good for factual accuracy
-    - **Abstractive**: slower, generates new sentences — more concise and readable
+    - **Extractive**: faster, picks exact sentences from source  -  good for factual accuracy
+    - **Abstractive**: slower, generates new sentences  -  more concise and readable
 
 ---
 
@@ -178,11 +178,11 @@ mnlp.generate("Tulis review restoran nasi lemak", max_length=100)
 
 !!! example "Temperature Comparison"
     ```python
-    # Low temperature — predictable, focused
+    # Low temperature  -  predictable, focused
     mnlp.generate("Nasi lemak is", temperature=0.2, max_length=20)
     # "Nasi lemak is a traditional Malaysian dish made with coconut rice."
 
-    # High temperature — creative, varied
+    # High temperature  -  creative, varied
     mnlp.generate("Nasi lemak is", temperature=0.9, max_length=20)
     # "Nasi lemak is basically Malaysia's hug on a plate, no?"
     ```
@@ -246,13 +246,13 @@ mnlp.qa("Bila UMP ditubuhkan?", context=context)
     ```
 
 !!! tip "Language Handling"
-    Questions can be in BM, English, or Manglish regardless of context language. The model handles cross-lingual QA natively — no translation step needed.
+    Questions can be in BM, English, or Manglish regardless of context language. The model handles cross-lingual QA natively  -  no translation step needed.
 
 ---
 
 ## See Also
 
-- [Text Processing](text-processing.md) — preprocess text before translation or QA
-- [Embeddings](data.md#embeddings) — use sentence embeddings for retrieval-augmented QA
-- [Pipeline](tools.md#pipeline) — chain QA with document retrieval
-- [Cache](tools.md#cache) — cache generation results for repeated prompts
+- [Text Processing](text-processing.md)  -  preprocess text before translation or QA
+- [Embeddings](data.md#embeddings)  -  use sentence embeddings for retrieval-augmented QA
+- [Pipeline](tools.md#pipeline)  -  chain QA with document retrieval
+- [Cache](tools.md#cache)  -  cache generation results for repeated prompts

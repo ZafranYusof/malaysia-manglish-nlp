@@ -1,6 +1,6 @@
-# REST API Guide
+﻿# REST API Guide
 
-**Serve all manglish-nlp modules over HTTP with FastAPI — batch processing, rate limiting, and Docker deployment.**
+**Serve all manglish-nlp modules over HTTP with FastAPI  -  batch processing, rate limiting, and Docker deployment.**
 
 ---
 
@@ -469,9 +469,9 @@ $ docker run -p 8000:8000 zafranyusof/manglish-nlp:latest
 
 ## See also
 
-- [Pipeline](pipeline.md) — understand the /analyze endpoint internals
-- [Sentiment Analysis](sentiment.md) — details on sentiment output
-- [NER](ner.md) — entity types and extraction details
-- [Translation](translation.md) — translation target options
-- [API Reference](../api-reference.md) — full function signatures
-- [Docker Hub](https://hub.docker.com/r/zafranyusof/manglish-nlp) — pre-built images
+- [Pipeline](pipeline.md)  -  understand the /analyze endpoint internals
+- [Sentiment Analysis](sentiment.md)  -  details on sentiment output
+- [NER](ner.md)  -  entity types and extraction details
+- [Translation](translation.md)  -  translation target options
+- [API Reference](../api-reference.md)  -  full function signatures
+- [Docker Hub](https://hub.docker.com/r/zafranyusof/manglish-nlp)  -  pre-built images

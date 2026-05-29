@@ -1,6 +1,6 @@
-# Integrations
+﻿# Integrations
 
-**Connect manglish-nlp to spaCy, FastAPI, CLI, and LangChain — deploy anywhere.**
+**Connect manglish-nlp to spaCy, FastAPI, CLI, and LangChain  -  deploy anywhere.**
 
 ---
 
@@ -217,7 +217,7 @@ Deploy manglish-nlp as a FastAPI server with automatic Swagger documentation, CO
 
 ### CLI
 
-Command-line interface for every module. Process files, pipe from stdin, chain operations, and manage configuration — all without writing Python.
+Command-line interface for every module. Process files, pipe from stdin, chain operations, and manage configuration  -  all without writing Python.
 
 #### Core Commands
 
@@ -382,6 +382,6 @@ tool = SentimentTool(
 
 ## See Also
 
-- [Tools](tools.md) — pipeline, caching, and profiling for production deployments
-- [REST API + Cache](tools.md#cache) — cache API responses for repeated queries
-- [Benchmarks](../benchmarks.md) — API throughput and latency numbers
+- [Tools](tools.md)  -  pipeline, caching, and profiling for production deployments
+- [REST API + Cache](tools.md#cache)  -  cache API responses for repeated queries
+- [Benchmarks](../benchmarks.md)  -  API throughput and latency numbers

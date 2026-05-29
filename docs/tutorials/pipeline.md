@@ -1,6 +1,6 @@
-# Pipeline Usage
+﻿# Pipeline Usage
 
-**Chain multiple NLP modules into a single call — custom workflows, batch processing, and serializable pipelines.**
+**Chain multiple NLP modules into a single call  -  custom workflows, batch processing, and serializable pipelines.**
 
 ---
 
@@ -280,7 +280,7 @@ $ mnlp benchmark
 
 ## See also
 
-- [REST API](rest-api.md) — serve pipelines over HTTP
-- [Normalization](normalization.md) — understand the normalize step
-- [Sentiment Analysis](sentiment.md) — understand sentiment output
-- [API Reference](../api-reference.md#pipeline) — full function signature
+- [REST API](rest-api.md)  -  serve pipelines over HTTP
+- [Normalization](normalization.md)  -  understand the normalize step
+- [Sentiment Analysis](sentiment.md)  -  understand sentiment output
+- [API Reference](../api-reference.md#pipeline)  -  full function signature

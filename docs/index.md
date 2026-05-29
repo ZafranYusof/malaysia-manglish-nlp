@@ -1,4 +1,4 @@
-# Welcome to manglish-nlp's documentation!
+﻿# Welcome to manglish-nlp's documentation!
 
 <div align="center" markdown="1">
 
@@ -12,7 +12,7 @@
 
 ---
 
-**manglish-nlp** is a comprehensive Natural-Language-Processing toolkit for Malaysian Manglish — the code-switching mix of Malay, English, and local slang spoken by millions of Malaysians online.
+**manglish-nlp** is a comprehensive Natural-Language-Processing toolkit for Malaysian Manglish  -  the code-switching mix of Malay, English, and local slang spoken by millions of Malaysians online.
 
 It provides 51 modules covering sentiment analysis, named entity recognition, translation, normalisation, text generation, graph analysis, and more. Zero external dependencies for core modules.
 
@@ -130,4 +130,4 @@ Heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Z
 
 ## License
 
-[MIT License](https://github.com/ZafranYusof/manglish-nlp/blob/main/LICENSE) — free for commercial and non-commercial use.
+[MIT License](https://github.com/ZafranYusof/manglish-nlp/blob/main/LICENSE)  -  free for commercial and non-commercial use.

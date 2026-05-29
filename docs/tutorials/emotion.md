@@ -1,12 +1,12 @@
-# Emotion Detection
+﻿# Emotion Detection
 
-**Detect specific emotions beyond positive/negative — 8 emotion categories with intensity scoring.**
+**Detect specific emotions beyond positive/negative  -  8 emotion categories with intensity scoring.**
 
 ---
 
 ## Why emotion detection?
 
-Customer experience analysis, mental health monitoring, social media sentiment deep-dives, and chatbot emotional intelligence. Knowing something is "negative" isn't enough — is the customer *angry* or *sad*? Is the tweet *fearful* or *disgusted*?
+Customer experience analysis, mental health monitoring, social media sentiment deep-dives, and chatbot emotional intelligence. Knowing something is "negative" isn't enough  -  is the customer *angry* or *sad*? Is the tweet *fearful* or *disgusted*?
 
 manglish-nlp detects 8 emotion categories with intensity, handling Manglish and code-switched text.
 
@@ -164,11 +164,11 @@ $ mnlp analyze "Happy gila!" --json
 
 ## How it works
 
-1. **Lexicon matching** — emotion word dictionaries for BM and EN (3,000+ terms)
-2. **Intensifier handling** — "gila", "sangat", "betul" boost scores
-3. **Context analysis** — surrounding words modify emotion classification
-4. **Secondary emotion** — mixed emotions detected (e.g., anger + disgust)
-5. **Code-switching support** — BM and EN words processed together
+1. **Lexicon matching**  -  emotion word dictionaries for BM and EN (3,000+ terms)
+2. **Intensifier handling**  -  "gila", "sangat", "betul" boost scores
+3. **Context analysis**  -  surrounding words modify emotion classification
+4. **Secondary emotion**  -  mixed emotions detected (e.g., anger + disgust)
+5. **Code-switching support**  -  BM and EN words processed together
 
 ---
 
@@ -188,8 +188,8 @@ $ mnlp analyze "Happy gila!" --json
 
 ## See also
 
-- [Sentiment Analysis](sentiment.md) — for positive/negative/neutral classification
-- [Hate Speech Detection](hate-speech.md) — detect toxic content beyond emotion
-- [Sarcasm Detection](../modules/analysis.md#sarcasm) — detect ironic emotional expression
-- [Pipeline](pipeline.md) — chain emotion with other modules
-- [API Reference](../api-reference.md#emotion) — full function signature
+- [Sentiment Analysis](sentiment.md)  -  for positive/negative/neutral classification
+- [Hate Speech Detection](hate-speech.md)  -  detect toxic content beyond emotion
+- [Sarcasm Detection](../modules/analysis.md#sarcasm)  -  detect ironic emotional expression
+- [Pipeline](pipeline.md)  -  chain emotion with other modules
+- [API Reference](../api-reference.md#emotion)  -  full function signature

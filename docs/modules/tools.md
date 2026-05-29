@@ -1,6 +1,6 @@
-# Tools & Utilities
+﻿# Tools & Utilities
 
-**Infrastructure for production NLP — pipelines, caching, profiling, evaluation, and hybrid routing.**
+**Infrastructure for production NLP  -  pipelines, caching, profiling, evaluation, and hybrid routing.**
 
 ---
 
@@ -100,8 +100,8 @@ result = pipe("Weh @ahmad best gila mknn tu!! 🔥🔥")
 |--------|-----------|-------------|
 | `__call__(text)` | `return_all=False` | Process single text |
 | `batch(texts)` | `n_jobs=1` | Parallel batch processing |
-| `save(path)` | — | Serialise to JSON |
-| `Pipeline.load(path)` | — | Load from JSON |
+| `save(path)` |  -  | Serialise to JSON |
+| `Pipeline.load(path)` |  -  | Load from JSON |
 
 !!! example "Custom Config Per Step"
     ```python
@@ -286,7 +286,7 @@ best_config = tuning.optimize(
 
 ### `profiler`
 
-Profile NLP pipeline performance — identify latency bottlenecks, memory usage, and throughput limits.
+Profile NLP pipeline performance  -  identify latency bottlenecks, memory usage, and throughput limits.
 
 ```python
 from manglish_nlp import profiler
@@ -340,7 +340,7 @@ from manglish_nlp import cache
 
 # Built-in cache flag
 mnlp.sentiment("Best gila!", cache=True)    # computes
-mnlp.sentiment("Best gila!", cache=True)    # cached — instant
+mnlp.sentiment("Best gila!", cache=True)    # cached  -  instant
 
 # Decorator for custom functions
 @cache.memoize(ttl=3600)
@@ -380,6 +380,6 @@ def get_embedding(text):
 
 ## See Also
 
-- [Integrations](integrations.md) — deploy pipelines as REST APIs
-- [Analysis](analysis.md) — modules commonly used inside pipelines
-- [Benchmarks](../benchmarks.md) — full performance numbers across modules
+- [Integrations](integrations.md)  -  deploy pipelines as REST APIs
+- [Analysis](analysis.md)  -  modules commonly used inside pipelines
+- [Benchmarks](../benchmarks.md)  -  full performance numbers across modules
