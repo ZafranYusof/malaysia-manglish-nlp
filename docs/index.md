@@ -1,4 +1,4 @@
-﻿# Welcome to manglish-nlp's documentation!
+# Welcome to Manglish documentation!
 
 <div align="center" markdown="1">
 
@@ -60,9 +60,9 @@ manglish-nlp ships with pretrained Malaysian models. See [Pretrained Models](pre
 Training data is bundled with the package. See [Datasets](datasets.md).
 
 - **Sentiment**: 1,139 labeled examples (positive / negative / neutral)
-- **Normalisation**: 259 slang → standard pairs
+- **Normalisation**: 259 slang ? standard pairs
 - **NER**: 2,250 annotated sentences (PER, ORG, LOC, MISC)
-- **Translation**: 600+ EN↔MY parallel pairs
+- **Translation**: 600+ EN?MY parallel pairs
 
 ## Features
 
