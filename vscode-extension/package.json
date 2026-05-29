@@ -1,16 +1,38 @@
 {
   "name": "manglish-nlp-vscode",
   "displayName": "Manglish NLP",
-  "description": "Highlight, normalize, and analyze Manglish text",
-  "version": "0.1.0",
+  "description": "Sentiment analysis, normalization, NER, and translation for Manglish (Malaysian colloquial Malay) text directly in VS Code",
+  "version": "0.2.0",
   "publisher": "ZafranYusof",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zafranyusof/manglish-nlp"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
     "Linters",
-    "Other"
+    "Other",
+    "Machine Learning"
   ],
+  "keywords": [
+    "manglish",
+    "malay",
+    "malaysia",
+    "nlp",
+    "sentiment",
+    "normalization",
+    "ner",
+    "translation",
+    "bm"
+  ],
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1a1a2e",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onLanguage:*"
   ],
@@ -18,16 +40,90 @@
   "contributes": {
     "commands": [
       {
-        "command": "manglish.normalize",
-        "title": "Manglish: Normalize Text"
+        "command": "manglish.analyzeSelection",
+        "title": "Manglish: Analyze Selection",
+        "icon": "$(search)"
       },
       {
-        "command": "manglish.analyze",
-        "title": "Manglish: Analyze Text"
+        "command": "manglish.normalize",
+        "title": "Manglish: Normalize",
+        "icon": "$(replace-all)"
+      },
+      {
+        "command": "manglish.translate",
+        "title": "Manglish: Translate",
+        "icon": "$(globe)"
       },
       {
         "command": "manglish.sentiment",
-        "title": "Manglish: Sentiment Analysis"
+        "title": "Manglish: Sentiment Analysis",
+        "icon": "$(feedback)"
+      },
+      {
+        "command": "manglish.ner",
+        "title": "Manglish: Named Entity Recognition",
+        "icon": "$(tag)"
+      },
+      {
+        "command": "manglish.checkApi",
+        "title": "Manglish: Check API Status",
+        "icon": "$(plug)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "manglish.submenu",
+          "group": "manglish@1"
+        }
+      ],
+      "manglish.submenu": [
+        {
+          "command": "manglish.analyzeSelection",
+          "group": "1_analyze@1"
+        },
+        {
+          "command": "manglish.normalize",
+          "group": "1_analyze@2"
+        },
+        {
+          "command": "manglish.translate",
+          "group": "1_analyze@3"
+        },
+        {
+          "command": "manglish.sentiment",
+          "group": "1_analyze@4"
+        },
+        {
+          "command": "manglish.ner",
+          "group": "1_analyze@5"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "manglish.submenu",
+        "label": "Manglish NLP"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "manglish.analyzeSelection",
+        "key": "ctrl+shift+m",
+        "mac": "cmd+shift+m",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "manglish.normalize",
+        "key": "ctrl+shift+n",
+        "mac": "cmd+shift+n",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "manglish.translate",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorHasSelection"
       }
     ],
     "configuration": {
@@ -42,6 +138,26 @@
           "type": "boolean",
           "default": false,
           "description": "Automatically normalize Manglish shortforms on file save"
+        },
+        "manglish.requestTimeout": {
+          "type": "number",
+          "default": 10000,
+          "description": "API request timeout in milliseconds"
+        },
+        "manglish.enableDiagnostics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Underline Manglish shortforms with hints"
+        },
+        "manglish.enableHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show sentiment info on hover"
+        },
+        "manglish.enableStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show detected language in status bar"
         }
       }
     }
@@ -50,17 +166,18 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "lint": "eslint src --ext ts"
+    "lint": "eslint src --ext ts",
+    "pretest": "npm run compile",
+    "package": "vsce package"
   },
   "devDependencies": {
     "@types/vscode": "^1.80.0",
     "@types/node": "^20.0.0",
-    "typescript": "^5.3.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.50.0"
+    "eslint": "^8.50.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
   },
-  "dependencies": {
-    "node-fetch": "^3.3.0"
-  }
+  "dependencies": {}
 }

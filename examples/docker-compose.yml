@@ -1,0 +1,81 @@
+version: "3.8"
+
+# Docker Compose for Rasa + manglish-nlp API
+#
+# Services:
+#   rasa          - Rasa Open Source bot server
+#   rasa-actions  - Rasa custom actions server (manglish-nlp)
+#   manglish-api  - manglish-nlp REST API (FastAPI)
+#
+# Usage:
+#   1. Train model first:
+#      docker-compose run --rm rasa train
+#   2. Start services:
+#      docker-compose up
+#   3. Chat:
+#      curl -X POST http://localhost:5005/webhooks/rest/webhook \
+#        -H 'Content-Type: application/json' \
+#        -d '{"sender": "user", "message": "wei lapar gila, recommend kedai makan area KL"}'
+
+services:
+  # Rasa bot server
+  rasa:
+    build:
+      context: ./rasa
+      dockerfile: Dockerfile
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./rasa:/app
+    command: >
+      run
+      --enable-api
+      --cors "*"
+      --debug
+    depends_on:
+      - rasa-actions
+      - manglish-api
+    environment:
+      - MANGLISH_API_URL=http://manglish-api:8000
+    networks:
+      - manglish-net
+
+  # Rasa actions server
+  rasa-actions:
+    build:
+      context: ./rasa
+      dockerfile: Dockerfile
+    ports:
+      - "5055:5055"
+    volumes:
+      - ./rasa/actions:/app/actions
+    command: run actions --debug
+    environment:
+      - MANGLISH_API_URL=http://manglish-api:8000
+    depends_on:
+      - manglish-api
+    networks:
+      - manglish-net
+
+  # manglish-nlp REST API
+  manglish-api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    command: >
+      uvicorn manglish_nlp.rest_api:app
+      --host 0.0.0.0
+      --port 8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - manglish-net
+
+networks:
+  manglish-net:
+    driver: bridge

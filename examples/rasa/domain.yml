@@ -1,0 +1,117 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - thankyou
+  - affirm
+  - deny
+  - ask_sentiment
+  - ask_translate
+  - ask_makan
+  - ask_belanja
+  - ask_cuaca
+  - ask_directions
+  - ask_news
+  - ask_harga
+  - complaint
+  - chitchat
+  - inform
+
+entities:
+  - location
+  - food
+  - price
+  - time
+  - person
+  - organisation
+  - sentiment_target
+
+slots:
+  location:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: location
+  food:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: food
+  price:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: price
+  sentiment_result:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  translation_result:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+  detected_sentiment:
+    type: categorical
+    values:
+      - positive
+      - negative
+      - neutral
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Hai wei! Apa boleh aku tolong hari ni?"
+    - text: "Yo! Ada apa-apa aku boleh bantu?"
+    - text: "Salam! Nak tanya apa tu?"
+
+  utter_goodbye:
+    - text: "Ok bye! Jumpa lagi 👋"
+    - text: "Daa! Kalau perlu apa-apa lagi, roger je."
+    - text: "K bye wei, take care!"
+
+  utter_thankyou:
+    - text: "No hal wei, happy to help!"
+    - text: "Same same, jangan segan tanya lagi."
+
+  utter_affirm:
+    - text: "Ok good! Ada apa-apa lagi?"
+
+  utter_deny:
+    - text: "Ok takpe, kalau berubah mind roger je."
+
+  utter_ask_sentiment:
+    - text: "Bagi aku text tu, nanti aku check sentiment dia."
+
+  utter_ask_translate:
+    - text: "Nak translate ke apa? Bagi aku text tu."
+
+  utter_makan_recommendation:
+    - text: "Kalau area {location}, cuba try nasi lemak atau roti canai. Sedap gila!"
+    - text: "Best gila makanan kat {location}! Try la pergi sana."
+
+  utter_cuaca:
+    - text: "Cuaca Malaysia ni memang tak boleh predict wei. Panas kejap hujan kejap."
+
+  utter_complaint_empathy:
+    - text: "Alamak, memang frustrating tu. Nak aku bantu apa?"
+    - text: "Faham wei, memang sakit hati kalau camtu. Cerita lagi?"
+
+  utter_default:
+    - text: "Sorry wei, aku tak berapa faham. Boleh ulang?"
+    - text: "Hmm aku tak catch tu. Cuba cakap lain sikit?"
+
+actions:
+  - action_analyse_sentiment
+  - action_translate
+  - action_extract_entities
+  - action_makan_recommendation
+  - action_sentiment_aware_response
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

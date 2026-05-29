@@ -1,0 +1,138 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hai wei
+      - yo apa khabar
+      - salam bro
+      - hi there
+      - hello
+      - ey what's up
+      - wei lama tak jumpa
+      - assalamualaikum
+
+  - intent: goodbye
+    examples: |
+      - bye wei
+      - ok daa
+      - k bye
+      - jumpa lagi
+      - see ya
+      - ok gotta go
+      - chow dulu ah
+      - aku blah dulu
+
+  - intent: thankyou
+    examples: |
+      - thanks wei
+      - terima kasih
+      - tqvm bro
+      - thx thx
+      - appreciate it
+      - tq byk2
+
+  - intent: affirm
+    examples: |
+      - yes la
+      - betul tu
+      - confirm
+      - ya betul
+      - ok je
+      - sure boleh
+      - onz
+
+  - intent: deny
+    examples: |
+      - tak nak
+      - no la
+      - tak payah
+      - takpe lah
+      - x mau
+      - skip je
+
+  - intent: ask_sentiment
+    examples: |
+      - sentiment apa bagi text ni
+      - check sentiment "gila best makanan dia"
+      - apa mood bagi "aku sedih gila hari ni"
+      - analyse sentiment ni wei
+      - is this positive or negative "menyampah aku tgk dia"
+      - macam mana sentiment "happy gila dapat gaji"
+
+  - intent: ask_translate
+    examples: |
+      - translate "aku nak pergi kedai" to english
+      - apa english bagi "pergi pasar malam"
+      - translate to malay "I want to eat nasi lemak"
+      - bm apa bagi "how much is this"
+      - tukar bahasa "best gila movie tu"
+
+  - intent: ask_makan
+    examples: |
+      - kat mana best makan area [SS15](location)
+      - nak cari makanan sedap area [Bangsar](location)
+      - recommend kedai makan [Subang](location)
+      - lapar wei, mana nak makan area [KL](location)
+      - ada port makan best tak [Shah Alam](location)
+      - nak makan [nasi lemak](food) mana best
+      - [roti canai](food) sedap kat mana
+      - cari [nasi kandar](food) area [Penang](location)
+
+  - intent: ask_belanja
+    examples: |
+      - berapa bajet makan [dinner](time)
+      - mahal tak makan kat situ
+      - ada tak kedai murah area [KL](location)
+      - budget RM20 boleh makan apa
+      - harga makanan kat [SS15](location) macam mana
+
+  - intent: ask_cuaca
+    examples: |
+      - cuaca hari ni macam mana
+      - hujan tak hari ni wei
+      - panas ke luar ni
+      - weather KL today
+      - esok hujan tak
+
+  - intent: ask_directions
+    examples: |
+      - macam mana nak pergi [KLCC](location)
+      - directions to [Hospital Serdang](location)
+      - mana [Subang Parade](location)
+      - route ke [Penang](location) dari KL
+
+  - intent: ask_news
+    examples: |
+      - apa berita hari ni
+      - news apa yang latest
+      - ada apa happening Malaysia
+      - apa isu viral sekarang
+      - cerita news sikit
+
+  - intent: ask_harga
+    examples: |
+      - berapa harga [petrol](sentiment_target) sekarang
+      - harga [minyak](sentiment_target) naik ke
+      - [RON95](sentiment_target) berapa seliter
+      - harga [emas](sentiment_target) hari ni
+      - brapa harga [dollar](sentiment_target) skarang
+
+  - intent: complaint
+    examples: |
+      - servis teruk gila
+      - kenapa lambat sangat ni
+      - mahal nak mampus
+      - tak puas hati langsung
+      - sampah je servis korang ni
+      - wait dah 2 jam still tak siap
+      - bodoh punya customer service
+
+  - intent: chitchat
+    examples: |
+      - kau buat apa
+      - boring wei hari ni
+      - penat gila kerja
+      - best gila movie semalam
+      - aku baru balik office
+      - weekend ni free tak

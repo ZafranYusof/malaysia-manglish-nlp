@@ -1,0 +1,5 @@
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-community>=0.0.20
+pydantic>=2.0
+manglish-nlp>=3.0.0

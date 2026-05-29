@@ -78,6 +78,7 @@ from manglish_nlp.text_generation import (
     generate as text_generate, autocomplete, build_ngram_model,
     load_default_model, generate_sentence, perplexity as text_perplexity,
 )
+from manglish_nlp.jawi import to_jawi, to_rumi, detect_script, is_jawi
 from manglish_nlp.stance import detect_stance, detect_stance_batch, compare_stances, extract_stance_target
 from manglish_nlp.coreference import resolve_coreferences, resolve_in_context, get_entities_and_references, replace_pronouns
 from manglish_nlp.translation import (
