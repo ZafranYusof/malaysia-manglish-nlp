@@ -1,6 +1,6 @@
 # Welcome to manglish-nlp's documentation!
 
-<div align="center">
+<div align="center" markdown="1">
 
 [![PyPI version](https://badge.fury.io/py/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
