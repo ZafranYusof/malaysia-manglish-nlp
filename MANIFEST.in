@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include pyproject.toml
+
+recursive-include manglish_nlp/resources *
+recursive-include datasets *
+recursive-include benchmarks *

@@ -1,0 +1,66 @@
+{
+  "name": "manglish-nlp-vscode",
+  "displayName": "Manglish NLP",
+  "description": "Highlight, normalize, and analyze Manglish text",
+  "version": "0.1.0",
+  "publisher": "ZafranYusof",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "manglish.normalize",
+        "title": "Manglish: Normalize Text"
+      },
+      {
+        "command": "manglish.analyze",
+        "title": "Manglish: Analyze Text"
+      },
+      {
+        "command": "manglish.sentiment",
+        "title": "Manglish: Sentiment Analysis"
+      }
+    ],
+    "configuration": {
+      "title": "Manglish NLP",
+      "properties": {
+        "manglish.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:8000",
+          "description": "URL of the Manglish NLP API server"
+        },
+        "manglish.autoNormalizeOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically normalize Manglish shortforms on file save"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  }
+}
