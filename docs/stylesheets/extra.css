@@ -1,0 +1,158 @@
+/* ============================================
+   manglish-nlp — Custom Styles
+   ============================================ */
+
+/* --- Feature cards grid --- */
+.md-typeset .grid.cards > ul > li {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  padding: 1.2em;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: var(--md-primary-fg-color);
+}
+
+.md-typeset .grid.cards > ul > li > p:first-child {
+  margin-bottom: 0.2em;
+}
+
+.md-typeset .grid.cards > ul > li > hr {
+  margin: 0.5em 0;
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+/* --- Stats row --- */
+.stats-row {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-number {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+  margin-top: 0.25em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Use case cards --- */
+.use-cases > ul > li {
+  border-left: 3px solid var(--md-primary-fg-color) !important;
+}
+
+.use-cases > ul > li:hover {
+  border-left-color: var(--md-accent-fg-color) !important;
+}
+
+/* --- Hero / page header area --- */
+.md-typeset h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h1 + p strong {
+  font-size: 1.15em;
+  color: var(--md-default-fg-color--light);
+}
+
+/* --- Table improvements --- */
+.md-typeset table:not([class]) {
+  border-collapse: collapse;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: color-mix(in srgb, var(--md-default-fg-color) 3%, transparent);
+}
+
+/* --- Code block tweaks --- */
+.md-typeset code {
+  border-radius: 4px;
+}
+
+.md-typeset pre > code {
+  border-radius: 6px;
+}
+
+/* --- Admonition polish --- */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 6px;
+}
+
+/* --- Material icons sizing in grids --- */
+.md-typeset .grid .lg {
+  font-size: 1.6em;
+}
+
+/* --- Announcement banner (if enabled) --- */
+.md-banner {
+  text-align: center;
+  font-size: 0.85em;
+}
+
+.md-banner a {
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+
+/* --- Responsive tweaks --- */
+@media screen and (max-width: 76.1875em) {
+  .stats-row {
+    gap: 1.5rem;
+  }
+  .stat-number {
+    font-size: 1.8em;
+  }
+}
+
+@media screen and (max-width: 44.9375em) {
+  .stats-row {
+    gap: 1rem;
+  }
+  .stat-card {
+    min-width: 80px;
+  }
+  .stat-number {
+    font-size: 1.5em;
+  }
+}
+
+/* --- Footer social icons --- */
+.md-footer .md-social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* --- Smooth transitions for interactive elements --- */
+.md-typeset a {
+  transition: color 0.15s ease;
+}
+
+/* --- Comparison table highlighting --- */
+.md-typeset table td:has(img[alt*="check"]) {
+  background-color: color-mix(in srgb, var(--md-primary-fg-color) 6%, transparent);
+}

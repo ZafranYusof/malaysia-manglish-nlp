@@ -1,97 +1,111 @@
 # Generation
 
-Modules for generating, translating, and transforming Malaysian text.
-
-!!! warning "ML Dependency"
-    Generation modules require the ML extra: `pip install manglish-nlp[ml]`
+**Translate, summarise, generate, and answer questions in Malaysian text.**
 
 ---
 
-## text_generation
+## Overview
 
-Generate Malaysian text with controllable style and language mix.
+Generation modules produce or transform text: translation between languages, summarisation of long documents, controlled text generation, and question answering. All require the `[ml]` extra for transformer-backed models.
+
+```bash
+pip install manglish-nlp[ml]
+```
+
+```python
+import manglish_nlp as mnlp
+```
+
+!!! warning "ML Dependency Required"
+    All generation modules require transformer models. First call downloads the model (~200 MB). Subsequent calls use cached weights.
+
+---
+
+## Quick Start
 
 ```python
 import manglish_nlp as mnlp
 
-result = mnlp.generate("Tulis review restoran nasi lemak", max_length=100)
-print(result)
-# "Nasi lemak kat kedai ni memang power. Sambal dia pedas just nice,
-#  ikan bilis rangup, dan nasi tu wangi gila. Portion pun besar.
-#  Confirm balik lagi next time."
-```
+# Translate Manglish → English
+mnlp.translate("Weh best gila movie tu bro", target="en")
+# "Hey, that movie was really great, bro"
 
-### Options
+# Summarise
+article = "Kerajaan umum pakej RM50B... (long text)"
+mnlp.summarize(article, max_length=30)
+# "Kerajaan umum pakej rangsangan RM50B merangkumi bantuan tunai, moratorium, dan subsidi upah."
 
-```python
-# Control language style
-mnlp.generate(prompt, style="formal")    # Formal BM
-mnlp.generate(prompt, style="manglish")  # Casual Manglish
-mnlp.generate(prompt, style="mixed")     # Code-switched
-
-# Control creativity
-mnlp.generate(prompt, temperature=0.7)
-
-# Specific format
-mnlp.generate(prompt, format="tweet")     # Short, punchy
-mnlp.generate(prompt, format="review")    # Structured review
-mnlp.generate(prompt, format="caption")   # Social media caption
-
-# Continue from text
-mnlp.generate("Hari ni aku pergi...", mode="continue", max_length=50)
+# Question answering
+mnlp.qa("Bila UMP ditubuhkan?", context="UMP ditubuhkan pada tahun 2002 di Gambang.")
+# {'answer': '2002', 'confidence': 0.95}
 ```
 
 ---
 
-## translation
+## Module Details
 
-Translate between Bahasa Melayu, English, and Manglish.
+### `translation`
+
+Translate between Bahasa Melayu, English, and Manglish. Supports entity preservation and register-aware output.
 
 ```python
-# BM to English
-result = mnlp.translate("Aku nak pergi makan", target="en")
-print(result)
-# "I want to go eat"
+import manglish_nlp as mnlp
 
-# English to BM
-result = mnlp.translate("The weather is nice today", target="ms")
-print(result)
-# "Cuaca hari ini cantik"
+# BM → English
+mnlp.translate("Aku nak pergi makan nasi lemak", target="en")
+# "I want to go eat nasi lemak"
 
-# Manglish to formal BM
-result = mnlp.translate("Weh best gila movie tu bro", target="ms_formal")
-print(result)
+# English → BM
+mnlp.translate("The weather is really nice today", target="ms")
+# "Cuaca hari ini sangat cantik"
+
+# Manglish → formal BM
+mnlp.translate("Weh best gila movie tu bro", target="ms_formal")
 # "Filem itu sangat bagus"
+
+# Formal → Manglish (natural Malaysian style)
+mnlp.translate("Filem itu sangat bagus", target="manglish")
+# "Movie tu memang best gila"
 ```
 
-### Options
+#### Translation Directions
 
-```python
-# Preserve names and entities
-mnlp.translate(text, target="en", preserve_entities=True)
+| From \ To | `en` | `ms` | `ms_formal` | `manglish` |
+|-----------|------|------|-------------|------------|
+| BM | ✅ | — | ✅ | ✅ |
+| English | — | ✅ | ✅ | ✅ |
+| Manglish | ✅ | ✅ | ✅ | — |
 
-# Informal translation (keep the vibe)
-mnlp.translate("The food was amazing", target="ms", informal=True)
-# "Makanan dia memang terbaik"
+#### Parameters
 
-# Batch translation
-mnlp.translate(["text1", "text2"], target="en")
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text or batch |
+| `target` | `str` | *required* | Target language code |
+| `preserve_entities` | `bool` | `True` | Keep names and places untranslated |
+| `informal` | `bool` | `False` | Use informal register in output |
+| `alternatives` | `int` | `1` | Number of translation variants to return |
 
-# With alternatives
-mnlp.translate(text, target="en", alternatives=3)
-# ['Translation 1', 'Translation 2', 'Translation 3']
-```
+!!! example "Alternative Translations"
+    ```python
+    mnlp.translate("Cuaca cantik hari ini", target="en", alternatives=3)
+    # ['The weather is beautiful today',
+    #  'It\'s a lovely day today',
+    #  'The weather is nice today']
+    ```
 
 !!! tip "Manglish Preservation"
-    Use `target="manglish"` to translate formal text into natural Manglish that sounds like how Malaysians actually speak.
+    `target="manglish"` produces text that sounds like natural Malaysian speech — not word-for-word translation. Useful for chatbot responses targeting Malaysian users.
 
 ---
 
-## summarization
+### `summarization`
 
-Summarize Malaysian text while preserving key information.
+Summarise Malaysian text while preserving key information. Supports extractive (select key sentences) and abstractive (generate new summary) methods.
 
 ```python
+import manglish_nlp as mnlp
+
 article = """
 Kerajaan Malaysia hari ini mengumumkan pakej rangsangan ekonomi bernilai
 RM50 bilion untuk membantu rakyat dan perniagaan kecil yang terjejas.
@@ -100,42 +114,94 @@ moratorium pinjaman, dan subsidi upah untuk pekerja. Beliau juga
 mengumumkan pengurangan cukai untuk PKS selama 6 bulan.
 """
 
-summary = mnlp.summarize(article)
-print(summary)
+mnlp.summarize(article)
 # "Kerajaan umum pakej rangsangan RM50B — bantuan tunai, moratorium,
 #  subsidi upah, dan pengurangan cukai PKS 6 bulan."
 ```
 
-### Options
+#### Parameters
 
-```python
-# Control length
-mnlp.summarize(text, max_length=50)   # ~50 words
-mnlp.summarize(text, ratio=0.3)       # 30% of original
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input document |
+| `max_length` | `int` | `None` | Target word count for summary |
+| `ratio` | `float` | `0.3` | Summary length as fraction of original |
+| `method` | `str` | `"abstractive"` | `"extractive"` or `"abstractive"` |
+| `format` | `str` | `"text"` | Output format: `"text"` or `"bullets"` |
+| `lang` | `str` | `None` | Force output language (cross-lingual summary) |
 
-# Extractive vs abstractive
-mnlp.summarize(text, method="extractive")   # Pick key sentences
-mnlp.summarize(text, method="abstractive")  # Generate new summary
+!!! example "Bullet Point Summary"
+    ```python
+    mnlp.summarize(article, format="bullets")
+    # • Pakej rangsangan RM50B diumumkan
+    # • Bantuan tunai langsung, moratorium pinjaman
+    # • Subsidi upah untuk pekerja
+    # • Pengurangan cukai PKS 6 bulan
+    ```
 
-# Bullet points
-mnlp.summarize(text, format="bullets")
-# • Pakej rangsangan RM50B diumumkan
-# • Bantuan tunai, moratorium, subsidi upah
-# • Pengurangan cukai PKS 6 bulan
+!!! example "Cross-Lingual Summary"
+    ```python
+    mnlp.summarize(bm_article, lang="en")
+    # "Government announces RM50B stimulus package — cash aid, loan moratorium,
+    #  wage subsidies, and 6-month SME tax cuts."
+    ```
 
-# Target language for summary
-mnlp.summarize(text, lang="en")
-# "Government announces RM50B stimulus — cash aid, loan moratorium,
-#  wage subsidies, and 6-month SME tax cuts."
-```
+!!! tip "Extractive vs Abstractive"
+    - **Extractive**: faster, picks exact sentences from source — good for factual accuracy
+    - **Abstractive**: slower, generates new sentences — more concise and readable
 
 ---
 
-## qa
+### `text_generation`
 
-Question answering over Malaysian text — extractive and generative.
+Generate Malaysian text with controllable style, format, and creativity level.
 
 ```python
+import manglish_nlp as mnlp
+
+mnlp.generate("Tulis review restoran nasi lemak", max_length=100)
+# "Nasi lemak kat kedai ni memang power. Sambal dia pedas just nice,
+#  ikan bilis rangup, dan nasi tu wangi gila. Portion pun besar.
+#  Confirm balik lagi next time."
+```
+
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `prompt` | `str` | *required* | Generation prompt or seed text |
+| `max_length` | `int` | `100` | Maximum output tokens |
+| `style` | `str` | `"manglish"` | Output style: `"formal"`, `"manglish"`, `"mixed"` |
+| `temperature` | `float` | `0.7` | Creativity (0.1 = deterministic, 1.0 = creative) |
+| `format` | `str` | `"text"` | Output format: `"text"`, `"tweet"`, `"review"`, `"caption"` |
+| `mode` | `str` | `"generate"` | `"generate"` or `"continue"` (extend existing text) |
+
+!!! example "Temperature Comparison"
+    ```python
+    # Low temperature — predictable, focused
+    mnlp.generate("Nasi lemak is", temperature=0.2, max_length=20)
+    # "Nasi lemak is a traditional Malaysian dish made with coconut rice."
+
+    # High temperature — creative, varied
+    mnlp.generate("Nasi lemak is", temperature=0.9, max_length=20)
+    # "Nasi lemak is basically Malaysia's hug on a plate, no?"
+    ```
+
+!!! example "Continuation Mode"
+    ```python
+    mnlp.generate("Hari ni aku pergi kedai mamak, order", mode="continue", max_length=30)
+    # "...teh tarik satu, roti canai dua. Pastu lepak sejam sambil scroll phone."
+    ```
+
+---
+
+### `qa`
+
+Question answering over Malaysian text. Supports extractive QA (find answer span in context), open-domain QA (no context), and conversational sessions with pronoun resolution.
+
+```python
+import manglish_nlp as mnlp
+
 context = """
 Universiti Malaysia Pahang (UMP) ditubuhkan pada tahun 2002.
 Kampus utama terletak di Gambang, Pahang. UMP mempunyai lebih
@@ -143,41 +209,50 @@ Kampus utama terletak di Gambang, Pahang. UMP mempunyai lebih
 sains komputer, dan teknologi.
 """
 
-answer = mnlp.qa("Bila UMP ditubuhkan?", context=context)
-print(answer)
+mnlp.qa("Bila UMP ditubuhkan?", context=context)
 # {'answer': '2002', 'confidence': 0.95, 'span': (46, 50)}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Without context (open-domain, uses knowledge base)
-mnlp.qa("Siapa PM Malaysia pertama?")
-# {'answer': 'Tunku Abdul Rahman', 'confidence': 0.92}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `question` | `str` | *required* | Question in BM, EN, or Manglish |
+| `context` | `str` | `None` | Source document (omit for open-domain) |
+| `top_k` | `int` | `1` | Number of answer candidates |
+| `session` | `bool` | `False` | Enable conversational mode with pronoun resolution |
 
-# Multiple answers
-mnlp.qa("Apa program yang ditawarkan UMP?", context=context, top_k=3)
-# [{'answer': 'kejuruteraan', 'score': 0.89},
-#  {'answer': 'sains komputer', 'score': 0.85},
-#  {'answer': 'teknologi', 'score': 0.78}]
+!!! example "Cross-Lingual QA"
+    ```python
+    # Question in English, context in BM
+    mnlp.qa("When was UMP established?", context=bm_context)
+    # {'answer': '2002', 'confidence': 0.93}
+    ```
 
-# Yes/No questions
-mnlp.qa("UMP ada kat Pahang ke?", context=context)
-# {'answer': 'Ya', 'confidence': 0.97, 'evidence': 'Kampus utama terletak di Gambang, Pahang'}
+!!! example "Multi-Answer Extraction"
+    ```python
+    mnlp.qa("Apa program yang ditawarkan UMP?", context=context, top_k=3)
+    # [{'answer': 'kejuruteraan', 'score': 0.89},
+    #  {'answer': 'sains komputer', 'score': 0.85},
+    #  {'answer': 'teknologi', 'score': 0.78}]
+    ```
 
-# Conversational QA (maintains context)
-session = mnlp.qa.session(context=context)
-session.ask("Bila UMP ditubuhkan?")   # 2002
-session.ask("Kat mana?")              # Gambang, Pahang (resolves "kat mana" from context)
-```
+!!! example "Conversational Session"
+    ```python
+    session = mnlp.qa.session(context=context)
+    session.ask("Bila UMP ditubuhkan?")   # {'answer': '2002', ...}
+    session.ask("Kat mana?")              # {'answer': 'Gambang, Pahang', ...}
+    session.ask("Berapa pelajar?")        # {'answer': 'lebih 10,000', ...}
+    ```
 
-!!! info "Language Handling"
-    Questions can be asked in BM, English, or Manglish regardless of the context language. The model handles cross-lingual QA natively.
+!!! tip "Language Handling"
+    Questions can be in BM, English, or Manglish regardless of context language. The model handles cross-lingual QA natively — no translation step needed.
 
 ---
 
 ## See Also
 
-- [Text Processing](text-processing.md) — preprocess before generation
-- [Data & Embeddings](data.md) — word embeddings for similarity
-- [Tools](tools.md) — pipeline and caching for generation workflows
+- [Text Processing](text-processing.md) — preprocess text before translation or QA
+- [Embeddings](data.md#embeddings) — use sentence embeddings for retrieval-augmented QA
+- [Pipeline](tools.md#pipeline) — chain QA with document retrieval
+- [Cache](tools.md#cache) — cache generation results for repeated prompts

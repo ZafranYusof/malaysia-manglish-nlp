@@ -1,251 +1,301 @@
-# Advanced
+# Advanced NLP
 
-Advanced NLP modules for complex linguistic analysis.
+**Complex linguistic analysis — code-switching, intent, topic, hate speech, stance, and discourse structure.**
 
 ---
 
-## code_switching
+## Overview
 
-Detect and analyze code-switching patterns between languages within text.
+Advanced modules handle higher-order linguistic phenomena unique to Malaysian multilingual text. These require the `[ml]` extra and are designed for production chatbots, content moderation systems, and research applications.
+
+```bash
+pip install manglish-nlp[ml]
+```
+
+```python
+import manglish_nlp as mnlp
+```
+
+---
+
+## Quick Start
+
+```python
+import manglish_nlp as mnlp
+
+# Code-switching detection
+mnlp.code_switching("I think kita should go makan first, then baru discuss")
+# {'switches': 4, 'pattern': 'intra-sentential',
+#  'segments': [('I think', 'en'), ('kita', 'ms'), ('should go', 'en'),
+#               ('makan', 'ms'), ('first, then', 'en'), ('baru', 'ms'), ('discuss', 'en')]}
+
+# Intent classification
+mnlp.intent("Nak tanya, kedai tu bukak pukul berapa eh?")
+# {'intent': 'question_info', 'confidence': 0.91,
+#  'slots': {'entity': 'kedai', 'attribute': 'operating_hours'}}
+
+# Hate speech moderation
+mnlp.hate_speech("Semua kaum X memang sampah masyarakat")
+# {'is_hate': True, 'target': 'race', 'severity': 'high', 'confidence': 0.94}
+```
+
+---
+
+## Module Details
+
+### `code_switching`
+
+Detect and analyse code-switching patterns between languages. Identifies switch points, matrix language, and switching type.
 
 ```python
 import manglish_nlp as mnlp
 
 text = "I think kita should go makan first, then baru discuss"
-result = mnlp.code_switching(text)
-print(result)
-# {'switches': 4, 'pattern': 'inter-sentential',
+mnlp.code_switching(text)
+# {'switches': 4, 'pattern': 'intra-sentential',
 #  'segments': [('I think', 'en'), ('kita', 'ms'), ('should go', 'en'),
 #               ('makan', 'ms'), ('first, then', 'en'), ('baru', 'ms'), ('discuss', 'en')]}
 ```
 
-### Options
+#### Switching Types
 
-```python
-# Switch point analysis
-mnlp.code_switching(text, points=True)
-# [{'position': 2, 'from': 'en', 'to': 'ms', 'trigger': 'pronoun_switch'}]
+| Type | Description | Example |
+|------|-------------|---------|
+| `inter-sentential` | Switch between sentences | "Best movie. Tapi ending hampeh." |
+| `intra-sentential` | Switch within a sentence | "I rasa macam nak pergi" |
+| `tag-switching` | Insert particles/tags | "Good la, very nice right?" |
+| `intra-word` | Morpheme mixing | "download-kan", "upload-lah" |
 
-# Matrix language detection
-mnlp.code_switching(text, matrix=True)
-# {'matrix_language': 'en', 'embedded_language': 'ms', 'ratio': 0.57}
+#### Parameters
 
-# Classify switching type
-mnlp.code_switching(text, classify=True)
-# 'inter-word'  (vs 'intra-word', 'tag-switching')
-```
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `points` | `bool` | `False` | Return detailed switch point analysis |
+| `matrix` | `bool` | `False` | Identify matrix vs embedded language |
+| `classify` | `bool` | `False` | Classify switching type |
 
-!!! info "Code-Switching Types"
-    - **Inter-sentential**: switching between sentences
-    - **Intra-sentential**: switching within a sentence
-    - **Tag-switching**: inserting tags/particles from another language (e.g., "la", "right?")
+!!! example "Switch Point Analysis"
+    ```python
+    mnlp.code_switching(text, points=True)
+    # [{'position': 2, 'from': 'en', 'to': 'ms', 'trigger': 'pronoun_switch'},
+    #  {'position': 3, 'from': 'ms', 'to': 'en', 'trigger': 'verb_switch'}]
+    ```
 
----
-
-## intent
-
-Classify user intent from Malaysian text — useful for chatbots and dialog systems.
-
-```python
-text = "Nak tanya, kedai tu bukak pukul berapa eh?"
-result = mnlp.intent(text)
-print(result)
-# {'intent': 'question_info', 'confidence': 0.91,
-#  'slots': {'entity': 'kedai', 'attribute': 'operating_hours'}}
-```
-
-### Supported Intents
-
-| Intent | Example |
-|--------|---------|
-| `question_info` | "Berapa harga tu?" |
-| `request_action` | "Tolong bukak kan pintu" |
-| `complaint` | "Service teruk la kat sini" |
-| `greeting` | "Assalamualaikum, apa khabar?" |
-| `farewell` | "Ok la, jumpa nanti" |
-| `confirmation` | "Ok boleh, set" |
-| `negation` | "Taknak la, mahal sangat" |
-| `opinion` | "Aku rasa best gila movie tu" |
-
-### Options
-
-```python
-# Multi-intent detection
-mnlp.intent(text, multi=True)
-# [{'intent': 'question_info', 'score': 0.91}, {'intent': 'request_action', 'score': 0.12}]
-
-# Custom intent labels
-mnlp.intent(text, labels=["order", "cancel", "track", "support"])
-
-# With slot filling
-mnlp.intent("Nak order 2 nasi lemak extra sambal", slots=True)
-# {'intent': 'order', 'slots': {'item': 'nasi lemak', 'quantity': 2, 'modifier': 'extra sambal'}}
-```
+!!! example "Matrix Language"
+    ```python
+    mnlp.code_switching(text, matrix=True)
+    # {'matrix_language': 'en', 'embedded_language': 'ms', 'ratio': 0.57}
+    ```
 
 ---
 
-## topic
+### `intent`
 
-Topic modeling and classification for Malaysian text.
+Classify user intent for chatbots and dialogue systems. Returns intent label, confidence, and extracted slots.
 
 ```python
-text = "Harga minyak naik lagi, memang susah rakyat nak survive"
-result = mnlp.topic(text)
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.intent("Nak order 2 nasi lemak extra sambal")
+# {'intent': 'request_action', 'confidence': 0.89,
+#  'slots': {'item': 'nasi lemak', 'quantity': 2, 'modifier': 'extra sambal'}}
+```
+
+#### Intent Categories
+
+| Intent | Description | Example |
+|--------|-------------|---------|
+| `question_info` | Asking for information | "Berapa harga tu?" |
+| `request_action` | Requesting an action | "Tolong bukakkan pintu" |
+| `complaint` | Expressing dissatisfaction | "Service teruk la kat sini" |
+| `greeting` | Opening a conversation | "Assalamualaikum, apa khabar?" |
+| `farewell` | Closing a conversation | "Ok la, jumpa nanti" |
+| `confirmation` | Agreeing / confirming | "Ok boleh, set" |
+| `negation` | Declining / rejecting | "Taknak la, mahal sangat" |
+| `opinion` | Expressing a view | "Aku rasa best gila movie tu" |
+
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input utterance |
+| `multi` | `bool` | `False` | Detect multiple intents |
+| `labels` | `list[str]` | `None` | Custom intent labels (override defaults) |
+| `slots` | `bool` | `True` | Extract slot values |
+
+!!! example "Custom Labels for Domain Bots"
+    ```python
+    mnlp.intent("Nak track parcel aku", labels=["order", "cancel", "track", "support"])
+    # {'intent': 'track', 'confidence': 0.93, 'slots': {'item': 'parcel'}}
+    ```
+
+---
+
+### `topic`
+
+Topic classification and unsupervised topic modelling for Malaysian text.
+
+```python
+import manglish_nlp as mnlp
+
+mnlp.topic("Harga minyak naik lagi, memang susah rakyat nak survive")
 # {'topic': 'economy', 'subtopic': 'cost_of_living', 'confidence': 0.87}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Multiple topics
-mnlp.topic(text, top_k=3)
-# [('economy', 0.87), ('politics', 0.45), ('social', 0.23)]
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text or corpus |
+| `top_k` | `int` | `1` | Number of topics to return |
+| `labels` | `list[str]` | `None` | Custom topic labels |
+| `mode` | `str` | `"classify"` | `"classify"` (single text) or `"model"` (corpus clustering) |
+| `n_topics` | `int` | `10` | Number of topics for unsupervised modelling |
 
-# Custom topic labels
-mnlp.topic(text, labels=["sports", "politics", "entertainment", "tech"])
+!!! example "Multi-Topic Classification"
+    ```python
+    mnlp.topic("Harga minyak naik lagi", top_k=3)
+    # [('economy', 0.87), ('politics', 0.45), ('social', 0.23)]
+    ```
 
-# Topic modeling on corpus
-corpus = ["text1", "text2", "text3", ...]
-topics = mnlp.topic(corpus, mode="model", n_topics=10)
-# Returns topic clusters with representative words
-```
+!!! example "Unsupervised Topic Modelling"
+    ```python
+    corpus = [doc1, doc2, doc3, ...]  # hundreds of articles
+    topics = mnlp.topic(corpus, mode="model", n_topics=10)
+    # Returns clusters with representative words per topic
+    ```
 
 ---
 
-## hate_speech
+### `hate_speech`
 
-Detect hate speech and offensive content targeting Malaysian communities.
+Detect hate speech and offensive content targeting Malaysian communities. Understands local slurs, coded language, and dog whistles specific to the Malaysian context.
 
 ```python
-text = "Semua bangsa X memang macam tu, tak boleh dipercayai"
-result = mnlp.hate_speech(text)
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.hate_speech("Semua bangsa X memang macam tu, tak boleh dipercayai")
 # {'is_hate': True, 'target': 'race', 'severity': 'high', 'confidence': 0.92}
 ```
 
-### Target Categories
+#### Severity Levels
+
+| Level | Description | Example |
+|-------|-------------|---------|
+| `low` | Offensive but not dehumanising | Casual slurs among peers |
+| `medium` | Stereotyping, generalisation | "Semua orang X memang pemalas" |
+| `high` | Dehumanising, inciting hatred | Calls for exclusion or violence |
+
+#### Target Categories
 
 `race`, `religion`, `gender`, `nationality`, `disability`, `sexual_orientation`
 
-### Options
+#### Parameters
 
-```python
-# Detailed classification
-mnlp.hate_speech(text, detailed=True)
-# {'is_hate': True, 'type': 'dehumanization', 'target': 'race',
-#  'severity': 'high', 'spans': [(6, 14, 'target_group')]}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `detailed` | `bool` | `False` | Include type classification and entity spans |
+| `granular` | `bool` | `False` | Distinguish `hate` vs `offensive` vs `neither` |
+| `moderate` | `bool` | `False` | Return moderation action recommendation |
 
-# Distinguish hate vs offensive
-mnlp.hate_speech(text, granular=True)
-# 'hate' | 'offensive' | 'neither'
+!!! example "Content Moderation Mode"
+    ```python
+    mnlp.hate_speech(text, moderate=True)
+    # {'action': 'remove', 'reason': 'racial_hatred', 'confidence': 0.92}
+    ```
 
-# Content moderation mode (returns action recommendation)
-mnlp.hate_speech(text, moderate=True)
-# {'action': 'remove', 'reason': 'racial_hatred', 'confidence': 0.92}
-```
-
-!!! warning "Sensitivity"
-    Hate speech detection involves sensitive content. The model is trained on Malaysian social media data and understands local slurs, coded language, and dog whistles specific to the Malaysian context.
+!!! warning "Sensitive Content"
+    This module processes hate speech for detection purposes. It does not generate or endorse such content. Use responsibly for moderation systems.
 
 ---
 
-## stance
+### `stance`
 
-Detect stance (support/oppose/neutral) toward a target topic or claim.
+Detect stance (support / oppose / neutral) toward a target topic or claim.
 
 ```python
-text = "Memang patut la naikkan gaji minimum, dah lama tak naik"
-result = mnlp.stance(text, target="minimum wage increase")
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.stance("Memang patut la naikkan gaji minimum, dah lama tak naik",
+            target="minimum wage increase")
 # {'stance': 'support', 'confidence': 0.88}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Without explicit target (auto-detect)
-mnlp.stance(text)
-# {'stance': 'support', 'target_detected': 'wage increase', 'confidence': 0.85}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `target` | `str` | `None` | Target topic (auto-detected if omitted) |
+| `targets` | `list[str]` | `None` | Check stance against multiple targets |
+| `explain` | `bool` | `False` | Return linguistic cues driving the classification |
 
-# Multi-target stance
-mnlp.stance(text, targets=["wage increase", "government policy", "cost of living"])
-# [{'target': 'wage increase', 'stance': 'support', 'score': 0.88}, ...]
+!!! example "Multi-Target Stance"
+    ```python
+    mnlp.stance(text, targets=["wage increase", "government policy"])
+    # [{'target': 'wage increase', 'stance': 'support', 'score': 0.88},
+    #  {'target': 'government policy', 'stance': 'neutral', 'score': 0.52}]
+    ```
 
-# Stance with reasoning
-mnlp.stance(text, target="minimum wage increase", explain=True)
-# {'stance': 'support', 'confidence': 0.88,
-#  'cues': ['patut', 'dah lama tak naik']}
-```
-
----
-
-## coreference
-
-Resolve coreferences (pronouns, mentions) in Malaysian text.
-
-```python
-text = "Ahmad jumpa Siti kat mall. Dia cakap dia nak balik awal."
-result = mnlp.coreference(text)
-print(result)
-# {'clusters': [
-#   [('Ahmad', 0, 5), ('Dia', 26, 29)],
-#   [('Siti', 12, 16), ('dia', 34, 37)]
-# ]}
-```
-
-### Options
-
-```python
-# Resolve and replace
-mnlp.coreference(text, resolve=True)
-# "Ahmad jumpa Siti kat mall. Ahmad cakap Siti nak balik awal."
-
-# Return mention chains
-mnlp.coreference(text, chains=True)
-# [{'entity': 'Ahmad', 'mentions': ['Ahmad', 'Dia']},
-#  {'entity': 'Siti', 'mentions': ['Siti', 'dia']}]
-```
-
-!!! note "Ambiguity"
-    Malay pronouns (dia, mereka) are gender-neutral, making coreference resolution more challenging. The model uses contextual cues and world knowledge to resolve ambiguous cases.
+!!! example "Stance with Explanation"
+    ```python
+    mnlp.stance(text, target="minimum wage", explain=True)
+    # {'stance': 'support', 'confidence': 0.88,
+    #  'cues': ['patut', 'dah lama tak naik']}
+    ```
 
 ---
 
-## discourse
+### `discourse`
 
-Analyze discourse structure and rhetorical relations in text.
+Analyse discourse structure and rhetorical relations in text using Rhetorical Structure Theory (RST) adapted for Malay.
 
 ```python
+import manglish_nlp as mnlp
+
 text = "Walaupun hujan lebat, Ahmad tetap pergi kerja sebab deadline esok."
-result = mnlp.discourse(text)
-print(result)
+mnlp.discourse(text)
 # {'relations': [
 #   {'type': 'concession', 'arg1': 'hujan lebat', 'arg2': 'Ahmad tetap pergi kerja'},
 #   {'type': 'cause', 'arg1': 'deadline esok', 'arg2': 'pergi kerja'}
 # ]}
 ```
 
-### Supported Relations
+#### Supported Relations
 
-`cause`, `contrast`, `concession`, `elaboration`, `condition`, `temporal`, `purpose`, `result`
+| Relation | Malay Connectives | Example |
+|----------|-------------------|---------|
+| `cause` | sebab, kerana | "Dia marah sebab lambat" |
+| `contrast` | tapi, tetapi | "Mahal tapi berbaloi" |
+| `concession` | walaupun, biar pun | "Walaupun penat, dia teruskan" |
+| `elaboration` | iaitu, misalnya | "Buah tropika, misalnya durian" |
+| `condition` | kalau, jika | "Kalau hujan, bawa payung" |
+| `temporal` | lepas, sebelum, sambil | "Lepas makan, dia tidur" |
+| `purpose` | supaya, untuk | "Belajar rajin supaya lulus" |
+| `result` | maka, jadi | "Hujan lebat, jadi banjir" |
 
-### Options
+#### Parameters
 
-```python
-# Full RST tree
-mnlp.discourse(text, format="tree")
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `format` | `str` | `"list"` | Output format: `"list"`, `"tree"` |
+| `connectives` | `bool` | `False` | Return detected connectives with positions |
 
-# Connective detection
-mnlp.discourse(text, connectives=True)
-# [{'connective': 'walaupun', 'type': 'concession', 'position': 0},
-#  {'connective': 'sebab', 'type': 'cause', 'position': 42}]
-```
+!!! example "Connective Detection"
+    ```python
+    mnlp.discourse(text, connectives=True)
+    # [{'connective': 'walaupun', 'type': 'concession', 'position': 0},
+    #  {'connective': 'sebab', 'type': 'cause', 'position': 42}]
+    ```
 
 ---
 
 ## See Also
 
-- [Analysis modules](analysis.md) — basic sentiment and emotion analysis
-- [Extraction modules](extraction.md) — NER, POS tagging
-- [Generation modules](generation.md) — text generation and summarization
+- [Analysis](analysis.md) — sentiment, emotion, and sarcasm detection
+- [Extraction](extraction.md) — NER, POS, and dependency parsing
+- [Intent + Pipeline](tools.md#pipeline) — chain intent detection with slot extraction for chatbots
+- [Evaluate](tools.md#evaluate) — benchmark classification accuracy on your data

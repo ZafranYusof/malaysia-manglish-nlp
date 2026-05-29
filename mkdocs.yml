@@ -1,6 +1,7 @@
 site_name: manglish-nlp
-site_description: Full NLP toolkit for Malaysian Manglish
+site_description: The complete NLP toolkit for Malaysian Manglish — sentiment, NER, translation, and 48 more modules.
 site_url: https://manglish-nlp.readthedocs.io/en/latest/
+site_author: Zafran Yusof
 repo_url: https://github.com/ZafranYusof/manglish-nlp
 repo_name: ZafranYusof/manglish-nlp
 
@@ -8,30 +9,48 @@ theme:
   name: material
   palette:
     - scheme: slate
-      primary: deep purple
-      accent: amber
+      primary: teal
+      accent: cyan
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
     - scheme: default
-      primary: deep purple
-      accent: amber
+      primary: teal
+      accent: cyan
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
   features:
+    - announce.dismiss
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
     - search.suggest
     - search.highlight
+    - search.share
     - content.code.copy
+    - content.code.annotate
     - content.tabs.link
+    - content.tooltips
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
   language: en
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
-  - search
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - git-revision-date-localized:
+      timezone: Asia/Kuala_Lumpur
 
 markdown_extensions:
   - admonition
@@ -39,14 +58,49 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
+  - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - tables
   - attr_list
   - md_in_html
+  - def_list
   - toc:
       permalink: true
+      toc_depth: 3
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ZafranYusof/manglish-nlp
+      name: GitHub Repository
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/manglish-nlp/
+      name: PyPI Package
+  analytics:
+    provider: custom
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognise your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+copyright: >
+  Copyright &copy; 2026 Zafran Yusof —
+  <a href="https://github.com/ZafranYusof/manglish-nlp/blob/main/LICENSE">MIT License</a>
 
 nav:
   - Home: index.md

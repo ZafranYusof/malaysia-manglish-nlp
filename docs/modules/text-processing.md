@@ -1,12 +1,44 @@
 # Text Processing
 
-Core text processing modules for cleaning, normalizing, and tokenizing Malaysian text.
+**Clean, normalise, tokenise, and stem Malaysian text — the preprocessing foundation.**
 
 ---
 
-## normalize
+## Overview
 
-Converts informal Manglish spelling to standard form. Handles SMS-speak, abbreviations, and common misspellings.
+Text processing modules transform raw, messy Malaysian text into clean, structured input ready for analysis or generation. They handle SMS-speak, mixed scripts, repeated characters, and Malay-specific morphology.
+
+All modules in this group have **zero external dependencies** and run in under 1 ms per sentence.
+
+```python
+import manglish_nlp as mnlp
+```
+
+---
+
+## Quick Start
+
+```python
+import manglish_nlp as mnlp
+
+raw = "Wehh xpe la bro, aku nk g mkn jap lg 🔥🔥🔥 bestttt!!!"
+
+# Chain processing
+cleaned   = mnlp.clean(raw)                        # strip noise
+normalised = mnlp.normalize(cleaned)               # expand shortforms
+tokens    = mnlp.tokenize(normalised)              # split into tokens
+
+print(tokens)
+# ['takpe', 'la', 'bro', 'aku', 'nak', 'pergi', 'makan', 'jap', 'lagi', 'best']
+```
+
+---
+
+## Module Details
+
+### `normalize`
+
+Converts informal Manglish spelling to standard form. Ships with **12,000+ shortform mappings** covering SMS-speak, social media abbreviations, and common misspellings.
 
 ```python
 import manglish_nlp as mnlp
@@ -17,170 +49,237 @@ print(result)
 # "takpe la bro, aku nak pergi makan jap lagi"
 ```
 
-### Options
+#### Parameters
 
-```python
-# Preserve certain slang terms
-mnlp.normalize(text, preserve_slang=True)
-
-# Custom dictionary
-mnlp.normalize(text, custom_dict={"gais": "guys"})
-
-# Aggressive mode (normalize everything including particles)
-mnlp.normalize(text, aggressive=True)
-```
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `preserve_slang` | `bool` | `False` | Keep slang terms (e.g. "gempak") untouched |
+| `custom_dict` | `dict` | `{}` | Additional shortform → standard mappings |
+| `aggressive` | `bool` | `False` | Normalise particles too (la→lah, je→sahaja) |
 
 !!! tip "Custom Dictionaries"
-    You can extend the normalization dictionary with domain-specific terms using `custom_dict`. This is useful for brand names or technical jargon.
+    Extend with domain-specific terms:
+    ```python
+    mnlp.normalize(text, custom_dict={"gais": "guys", "member": "kawan"})
+    ```
+
+!!! example "Aggressive Mode"
+    ```python
+    mnlp.normalize("xpe la je", aggressive=True)
+    # "takpe lah sahaja"
+    ```
 
 ---
 
-## clean
+### `clean`
 
-Removes noise from text — URLs, mentions, hashtags, emojis, repeated characters.
+Removes noise from text — URLs, mentions, hashtags, emojis, repeated characters, and HTML artefacts.
 
 ```python
+import manglish_nlp as mnlp
+
 text = "Weh @ahmad check ni https://t.co/abc 🔥🔥🔥 bestttt"
 result = mnlp.clean(text)
 print(result)
 # "Weh check ni best"
 ```
 
-### Options
+#### Parameters
 
-```python
-# Keep emojis
-mnlp.clean(text, keep_emoji=True)
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `keep_emoji` | `bool` | `False` | Preserve emoji characters |
+| `keep_hashtags` | `bool` | `False` | Keep hashtag text (strip `#` symbol only) |
+| `keep_mentions` | `bool` | `False` | Preserve `@mentions` |
+| `max_repeat` | `int` | `1` | Max allowed consecutive repeated chars |
 
-# Keep hashtags (remove only the # symbol)
-mnlp.clean(text, keep_hashtags=True)
-
-# Keep mentions
-mnlp.clean(text, keep_mentions=True)
-
-# Remove repeated chars but keep doubles
-mnlp.clean(text, max_repeat=2)
-# "Weh check ni bestt"
-```
+!!! example "Preserving Emojis"
+    ```python
+    mnlp.clean("Best gila 🔥🔥🔥", keep_emoji=True)
+    # "Best gila 🔥"
+    ```
 
 ---
 
-## formalize
+### `formalize`
 
-Converts casual Manglish to formal Bahasa Melayu suitable for official documents.
+Converts casual Manglish to formal Bahasa Melayu suitable for official documents, reports, or academic writing.
 
 ```python
+import manglish_nlp as mnlp
+
 text = "Aku rasa mcm nak apply kerja kat situ la"
 result = mnlp.formalize(text)
 print(result)
 # "Saya rasa seperti ingin memohon pekerjaan di situ"
 ```
 
-### Options
+#### Parameters
 
-```python
-# Target formality level (1-5)
-mnlp.formalize(text, level=3)  # Semi-formal
-mnlp.formalize(text, level=5)  # Full formal BM
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `level` | `int` | `5` | Formality level (1 = semi-casual, 5 = full formal BM) |
+| `keep_english` | `bool` | `False` | Preserve English loanwords as-is |
 
-# Preserve English terms
-mnlp.formalize(text, keep_english=True)
-```
-
-!!! warning "Context Sensitivity"
-    Formalization may change meaning in ambiguous cases. Always review output for critical documents.
+!!! warning "Review Critical Output"
+    Formalisation may shift meaning in ambiguous sentences. Always review output for official documents.
 
 ---
 
-## tokenizer
+### `tokenizer`
 
-Malaysian-aware tokenizer that handles mixed scripts, particles, and compound words.
+Malaysian-aware tokeniser that correctly handles mixed scripts, particles (`la`, `je`, `kot`), compound words, and code-switched text.
 
 ```python
+import manglish_nlp as mnlp
+
 text = "Tak boleh la macam tu, it's not fair"
 tokens = mnlp.tokenize(text)
 print(tokens)
 # ['Tak', 'boleh', 'la', 'macam', 'tu', ',', "it's", 'not', 'fair']
 ```
 
-### Options
+#### Parameters
 
-```python
-# Word-level (default)
-mnlp.tokenize(text, level="word")
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `level` | `str` | `"word"` | Tokenisation level: `"word"`, `"sentence"`, `"subword"` |
+| `split_particles` | `bool` | `True` | Separate particles from host words |
 
-# Sentence-level
-mnlp.tokenize(text, level="sentence")
-
-# Subword (BPE)
-mnlp.tokenize(text, level="subword")
-
-# Keep particles attached
-mnlp.tokenize(text, split_particles=False)
-# ['Tak', 'boleh la', 'macam tu', ',', "it's", 'not', 'fair']
-```
+!!! tip "Malaysian Patterns"
+    The tokeniser correctly splits:
+    - Contractions: `"takde"` → `["tak", "ada"]`
+    - Reduplication: `"budak-budak"` kept as one token
+    - Code-switch boundaries: `"I rasa"` split cleanly
 
 ---
 
-## stemmer
+### `stemmer`
 
-Malay-aware stemmer that handles prefixes (me-, ber-, di-, ke-) and suffixes (-kan, -an, -i).
+Rule-based Malay stemmer handling prefixes (`me-`, `ber-`, `di-`, `ke-`, `memper-`) and suffixes (`-kan`, `-an`, `-i`).
 
 ```python
+import manglish_nlp as mnlp
+
 words = ["memakan", "berlari", "ditulis", "permainan"]
 stems = [mnlp.stem(w) for w in words]
 print(stems)
 # ['makan', 'lari', 'tulis', 'main']
 ```
 
-### Options
+#### Parameters
 
-```python
-# Return affix information
-result = mnlp.stem("memperkenalkan", detailed=True)
-print(result)
-# {'stem': 'kenal', 'prefix': 'memper-', 'suffix': '-kan', 'original': 'memperkenalkan'}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `word` | `str` | *required* | Input word |
+| `detailed` | `bool` | `False` | Return affix breakdown dict |
+| `conservative` | `bool` | `False` | Fewer, safer reductions |
 
-# Conservative mode (fewer reductions)
-mnlp.stem("permainan", conservative=True)
-# 'main'
-```
-
-!!! note "Stemmer vs Lemmatizer"
-    The stemmer reduces words to root form using rule-based affix stripping. For context-aware lemmatization, use the `[ml]` extra which provides a neural lemmatizer.
+!!! example "Detailed Affix Analysis"
+    ```python
+    mnlp.stem("memperkenalkan", detailed=True)
+    # {'stem': 'kenal', 'prefix': 'memper-', 'suffix': '-kan', 'original': 'memperkenalkan'}
+    ```
 
 ---
 
-## segment
+### `segment`
 
-Splits unsegmented text into words. Useful for hashtags, URLs, and concatenated text.
+Splits unsegmented text into words. Useful for hashtags, concatenated URLs, and OCR artefacts.
 
 ```python
+import manglish_nlp as mnlp
+
 text = "nakpergimanasatumalam"
 result = mnlp.segment(text)
 print(result)
 # "nak pergi mana satu malam"
 ```
 
-### Options
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Concatenated input |
+| `lang` | `str` | `"ms"` | Language hint for segmentation model |
+| `scores` | `bool` | `False` | Return per-word confidence scores |
+
+!!! example "Hashtag Segmentation"
+    ```python
+    mnlp.segment("#MalaysiaBoleh")
+    # "Malaysia Boleh"
+
+    mnlp.segment("goodmorningmalaysia", lang="en")
+    # "good morning malaysia"
+    ```
+
+---
+
+### `spelling`
+
+Context-aware spelling correction that distinguishes intentional abbreviations (`nk`, `kat`, `mcm`) from actual typos.
 
 ```python
-# Segment hashtags
-mnlp.segment("#MalaysiaBoLeh")
-# "Malaysia Boleh"
+import manglish_nlp as mnlp
 
-# Segment with language hint
-mnlp.segment("goodmorningmalaysia", lang="en")
-# "good morning malaysia"
+text = "Aku nk prgi mkn kat keday tu"
+corrected = mnlp.spelling(text)
+print(corrected)
+# "Aku nak pergi makan kat kedai tu"
+```
 
-# Return confidence scores
-mnlp.segment(text, scores=True)
-# [('nak', 0.98), ('pergi', 0.95), ('mana', 0.91), ...]
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `candidates` | `bool` | `False` | Return top correction candidates with scores |
+| `preserve_informal` | `bool` | `False` | Keep intentional abbreviations, fix only real typos |
+| `context` | `bool` | `False` | Use surrounding words to disambiguate corrections |
+| `whitelist` | `list[str]` | `[]` | Words to never correct |
+
+!!! warning "Informal vs Typo"
+    `preserve_informal=True` keeps `nk`, `kat`, `mcm` intact but still fixes `keday` → `kedai`. Without this flag, all non-standard forms are corrected.
+
+!!! example "Context-Aware Correction"
+    ```python
+    mnlp.spelling("Dia bgi aku bku", context=True)
+    # "Dia bagi aku buku"
+    ```
+
+---
+
+## Chaining Modules
+
+The typical preprocessing pipeline chains modules in order:
+
+```
+raw text → clean → normalize → tokenize → [stem | spell] → ready for analysis
+```
+
+Use the [`pipeline`](tools.md#pipeline) module to make this reusable:
+
+```python
+from manglish_nlp import Pipeline
+
+preprocess = Pipeline([
+    'clean',
+    'normalize',
+    'tokenize'
+])
+
+result = preprocess("Wehh xpe la bro!! 🔥 bestttt gila")
+# ['takpe', 'la', 'bro', 'best', 'gila']
 ```
 
 ---
 
 ## See Also
 
-- [Analysis modules](analysis.md) — use after text processing
-- [Pipeline](tools.md#pipeline) — chain text processing steps together
+- [Analysis](analysis.md) — sentiment, emotion, and language detection on cleaned text
+- [Pipeline](tools.md#pipeline) — chain preprocessing steps into reusable workflows
+- [Cache](tools.md#cache) — cache expensive normalisation for repeated inputs

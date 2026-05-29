@@ -1,168 +1,249 @@
 # Analysis
 
-Modules for understanding text meaning, emotion, and characteristics.
+**Understand what Malaysian text means — sentiment, emotion, language, profanity, and sarcasm.**
 
 ---
 
-## sentiment
+## Overview
 
-Analyze sentiment of Malaysian text with code-switching support.
+Analysis modules extract meaning, tone, and linguistic characteristics from text. They handle code-switched Manglish natively, so you can feed raw Malaysian social media text directly without preprocessing.
+
+Default models are rule-based + statistical (zero dependencies). Install `[ml]` for transformer-backed models with higher accuracy on complex sentences.
+
+```python
+import manglish_nlp as mnlp
+```
+
+---
+
+## Quick Start
 
 ```python
 import manglish_nlp as mnlp
 
-result = mnlp.sentiment("Sedap gila nasi lemak kat kedai tu!")
-print(result)
+text = "Sedap gila nasi lemak kat kedai tu, tapi service lambat sikit"
+
+mnlp.sentiment(text)
+# {'label': 'positive', 'score': 0.78}
+
+mnlp.sentiment(text, aspect=True)
+# [{'aspect': 'nasi lemak', 'label': 'positive', 'score': 0.92},
+#  {'aspect': 'service', 'label': 'negative', 'score': 0.81}]
+
+mnlp.emotion(text)
+# {'primary': 'joy', 'score': 0.71, 'secondary': 'anticipation'}
+```
+
+---
+
+## Module Details
+
+### `sentiment`
+
+Analyse sentiment of Malaysian text with code-switching support. Returns positive, negative, or neutral with confidence score.
+
+```python
+import manglish_nlp as mnlp
+
+mnlp.sentiment("Sedap gila nasi lemak kat kedai tu!")
 # {'label': 'positive', 'score': 0.96}
 
-result = mnlp.sentiment("Teruk la service dia, tunggu 1 jam")
-print(result)
+mnlp.sentiment("Teruk la service dia, tunggu 1 jam")
 # {'label': 'negative', 'score': 0.89}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Detailed output with all class scores
-mnlp.sentiment(text, detailed=True)
-# {'label': 'positive', 'scores': {'positive': 0.96, 'neutral': 0.03, 'negative': 0.01}}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text or list of texts |
+| `detailed` | `bool` | `False` | Return scores for all classes |
+| `aspect` | `bool` | `False` | Aspect-based sentiment (per-entity) |
+| `model` | `str` | `"default"` | `"default"` (rule-based) or `"ml"` (transformer) |
 
-# Aspect-based sentiment
-mnlp.sentiment("Makanan sedap tapi service slow", aspect=True)
-# [{'aspect': 'makanan', 'label': 'positive', 'score': 0.92},
-#  {'aspect': 'service', 'label': 'negative', 'score': 0.85}]
+!!! example "Detailed Output"
+    ```python
+    mnlp.sentiment("Best gila!", detailed=True)
+    # {'label': 'positive',
+    #  'scores': {'positive': 0.96, 'neutral': 0.03, 'negative': 0.01}}
+    ```
 
-# Batch processing
-results = mnlp.sentiment(["Best!", "Teruk la", "Ok je"])
-```
+!!! example "Aspect-Based Sentiment"
+    ```python
+    mnlp.sentiment("Makanan sedap tapi service slow", aspect=True)
+    # [{'aspect': 'makanan', 'label': 'positive', 'score': 0.92},
+    #  {'aspect': 'service', 'label': 'negative', 'score': 0.85}]
+    ```
 
-!!! info "Model Backend"
-    Default uses rule-based + statistical model (zero deps). Install `[ml]` for transformer-based model with higher accuracy on complex sentences.
+!!! tip "Batch Processing"
+    Pass a list for efficient batch inference:
+    ```python
+    mnlp.sentiment(["Best!", "Teruk la", "Ok je"])
+    # [{'label': 'positive', ...}, {'label': 'negative', ...}, {'label': 'neutral', ...}]
+    ```
 
 ---
 
-## emotion
+### `emotion`
 
-Detect emotions in text — goes beyond positive/negative to specific emotional states.
+Detects specific emotional states beyond positive/negative. Supports 8 emotion labels with intensity scoring.
+
+**Supported emotions:** `joy`, `sadness`, `anger`, `fear`, `surprise`, `disgust`, `trust`, `anticipation`
 
 ```python
-result = mnlp.emotion("Geram betul aku dengan dia, dah la lambat pastu buat hal")
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.emotion("Geram betul aku dengan dia, dah la lambat pastu buat hal")
 # {'primary': 'anger', 'score': 0.88, 'secondary': 'frustration'}
 ```
 
-### Supported Emotions
+#### Parameters
 
-`joy`, `sadness`, `anger`, `fear`, `surprise`, `disgust`, `trust`, `anticipation`
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `multi` | `bool` | `False` | Return multiple emotion labels |
+| `intensity` | `bool` | `False` | Include intensity score (1–5) |
 
-```python
-# Multi-label emotions
-mnlp.emotion(text, multi=True)
-# [{'label': 'anger', 'score': 0.88}, {'label': 'frustration', 'score': 0.72}]
+!!! example "Multi-Label Emotions"
+    ```python
+    mnlp.emotion("Takut gila tapi excited jugak", multi=True)
+    # [{'label': 'fear', 'score': 0.82},
+    #  {'label': 'anticipation', 'score': 0.65}]
+    ```
 
-# Emotion intensity (1-5 scale)
-mnlp.emotion(text, intensity=True)
-# {'primary': 'anger', 'score': 0.88, 'intensity': 4}
-```
+!!! example "Intensity Scoring"
+    ```python
+    mnlp.emotion("MARAH GILA AKU!!!", intensity=True)
+    # {'primary': 'anger', 'score': 0.97, 'intensity': 5}
+    ```
 
 ---
 
-## language
+### `language`
 
-Detect language composition in mixed-language text.
+Detect language composition in mixed-language text. Supports per-token detection and regional Malaysian dialect identification.
 
 ```python
-text = "Eh jom la we go makan, I lapar gila already"
-result = mnlp.language(text)
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.language("Eh jom la we go makan, I lapar gila already")
 # {'primary': 'manglish', 'mix': {'ms': 0.45, 'en': 0.55}}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Per-token language detection
-mnlp.language(text, per_token=True)
-# [('Eh', 'ms'), ('jom', 'ms'), ('la', 'ms'), ('we', 'en'), ('go', 'en'),
-#  ('makan', 'ms'), ('I', 'en'), ('lapar', 'ms'), ('gila', 'ms'), ('already', 'en')]
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `per_token` | `bool` | `False` | Language label for each token |
+| `dialect` | `bool` | `False` | Detect regional Malay dialect |
 
-# Detect dialect
-mnlp.language("Ambo nok gi make", dialect=True)
-# {'primary': 'ms', 'dialect': 'kelantan', 'confidence': 0.82}
+**Supported languages:** `ms`, `en`, `zh`, `ta`, `manglish`, `mixed`
 
-# Supported languages
-# ms, en, zh, ta, manglish, mixed
-```
+!!! example "Per-Token Detection"
+    ```python
+    mnlp.language("Eh jom la we go makan", per_token=True)
+    # [('Eh', 'ms'), ('jom', 'ms'), ('la', 'ms'),
+    #  ('we', 'en'), ('go', 'en'), ('makan', 'ms')]
+    ```
 
-!!! tip "Dialect Detection"
-    The `dialect=True` option can identify regional Malaysian dialects including Kelantan, Terengganu, Kedah, Negeri Sembilan, and Sarawak.
+!!! example "Dialect Detection"
+    ```python
+    mnlp.language("Ambo nok gi make", dialect=True)
+    # {'primary': 'ms', 'dialect': 'kelantan', 'confidence': 0.82}
+    ```
+
+!!! tip "Supported Dialects"
+    Kelantan, Terengganu, Kedah, Negeri Sembilan, Sarawak, and Sabah Malay dialects are detectable.
 
 ---
 
-## profanity
+### `profanity`
 
-Detect and filter profanity in Malaysian languages including slang variants.
+Detect and filter profanity in Malaysian languages including slang variants, leetspeak, and euphemisms.
 
 ```python
-text = "Bodoh la kau ni, sial betul"
-result = mnlp.profanity(text)
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.profanity("Bodoh la kau ni, sial betul")
 # {'has_profanity': True, 'words': ['bodoh', 'sial'], 'severity': 'medium'}
 ```
 
-### Options
+#### Parameters
 
-```python
-# Censor text
-mnlp.profanity(text, censor=True)
-# "B***h la kau ni, s**l betul"
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str` | *required* | Input text |
+| `censor` | `bool` | `False` | Return censored version of text |
+| `char` | `str` | `"*"` | Character used for censoring |
+| `min_severity` | `str` | `"low"` | Minimum severity to flag: `"low"`, `"medium"`, `"high"` |
+| `leetspeak` | `bool` | `False` | Detect leetspeak variants (`b0d0h`, etc.) |
+| `context_aware` | `bool` | `False` | Reduce false positives for casual friend-speak |
 
-# Custom censor character
-mnlp.profanity(text, censor=True, char="█")
-# "█████ la kau ni, ████ betul"
+!!! example "Censoring"
+    ```python
+    mnlp.profanity("Bodoh la kau ni", censor=True)
+    # "B***h la kau ni"
 
-# Severity levels: low, medium, high
-mnlp.profanity(text, min_severity="high")
-
-# Include leetspeak variants (b0d0h, etc.)
-mnlp.profanity(text, leetspeak=True)
-```
+    mnlp.profanity("Bodoh la kau ni", censor=True, char="█")
+    # "█████ la kau ni"
+    ```
 
 !!! warning "Cultural Context"
-    Some words are profane in certain contexts but casual in others (e.g., "sial" among friends). Use `context_aware=True` for better accuracy in informal settings.
+    Words like `"sial"` are profane in formal contexts but casual among friends. Enable `context_aware=True` for social media moderation to reduce false positives.
 
 ---
 
-## sarcasm
+### `sarcasm`
 
-Detect sarcasm and irony in Malaysian text.
+Detect sarcasm and irony in Malaysian text. Identifies linguistic cues like exaggerated praise, parenthetical remarks, and tonal contradictions.
 
 ```python
-text = "Wah bagus la tu, memang pandai"
-result = mnlp.sarcasm(text)
-print(result)
+import manglish_nlp as mnlp
+
+mnlp.sarcasm("Wah bagus la tu, memang pandai")
 # {'is_sarcastic': True, 'confidence': 0.78, 'cues': ['wah', 'memang']}
 ```
 
-### Options
+#### Parameters
 
-```python
-# With explanation
-mnlp.sarcasm(text, explain=True)
-# {'is_sarcastic': True, 'confidence': 0.78,
-#  'explanation': 'Exaggerated praise pattern with contradicting context'}
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text |
+| `explain` | `bool` | `False` | Include explanation of why text is flagged |
 
-# Batch detection
-texts = ["Best la kau ni", "Memang terbaik service dia (tunggu 2 jam)"]
-mnlp.sarcasm(texts)
-```
+!!! example "With Explanation"
+    ```python
+    mnlp.sarcasm("Memang terbaik service dia (tunggu 2 jam)", explain=True)
+    # {'is_sarcastic': True, 'confidence': 0.91,
+    #  'cues': ['memang terbaik', '(tunggu 2 jam)'],
+    #  'explanation': 'Exaggerated praise contradicted by parenthetical complaint'}
+    ```
 
 !!! note "Accuracy"
-    Sarcasm detection is inherently challenging. The model achieves ~75% accuracy on Malaysian social media text. Context and tone markers (e.g., parenthetical remarks, excessive praise) improve detection.
+    Sarcasm detection achieves **~75% accuracy** on Malaysian social media benchmarks. Context markers (parenthetical remarks, excessive praise, emoji mismatch) significantly improve detection.
+
+---
+
+## Combining Analysis Modules
+
+```python
+text = "Wah pandai la kau, janji Melayu kan"
+
+sentiment = mnlp.sentiment(text)         # neutral (misses sarcasm)
+sarcasm   = mnlp.sarcasm(text)           # {'is_sarcastic': True, ...}
+emotion   = mnlp.emotion(text)           # {'primary': 'disgust', ...}
+
+# Use sarcasm flag to re-interpret sentiment
+if sarcasm['is_sarcastic']:
+    sentiment['label'] = 'negative'      # correct interpretation
+```
 
 ---
 
 ## See Also
 
-- [Text Processing](text-processing.md) — clean text before analysis
-- [Advanced modules](advanced.md) — hate speech, stance detection
+- [Text Processing](text-processing.md) — clean text before analysis for better accuracy
+- [Advanced](advanced.md) — hate speech, stance detection, code-switching analysis
+- [Calibration](tools.md#calibration) — calibrate confidence scores for production thresholds
