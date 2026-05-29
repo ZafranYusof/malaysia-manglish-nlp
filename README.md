@@ -42,10 +42,10 @@ clean = normalize("xpe la bro, aku ok je")
 print(clean)  # "tidak apa la bro, aku okay sahaja"
 
 # Named Entity Recognition
-entities = ner("Zafran pergi Pavilion KL semalam")
+entities = ner("Ali pergi Pavilion KL semalam")
 print(entities)
-# [{'text': 'Zafran', 'type': 'PERSON', 'start': 0, 'end': 6},
-#  {'text': 'Pavilion KL', 'type': 'LOCATION', 'start': 13, 'end': 24}]
+# [{'text': 'Ali', 'type': 'PERSON', 'start': 0, 'end': 3},
+#  {'text': 'Pavilion KL', 'type': 'LOCATION', 'start': 10, 'end': 21}]
 
 # Language detection
 lang = detect_language("Eh jom makan, I'm hungry gila")
@@ -162,7 +162,7 @@ manglish normalize "xpe la bro aku otw"
 manglish translate "Aku nak pergi makan" --to en
 
 # NER
-manglish ner "Zafran kerja kat Google Malaysia"
+manglish ner "Ahmad kerja kat Google Malaysia"
 
 # Summarize file
 manglish summarize --file article.txt
