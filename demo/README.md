@@ -1,8 +1,8 @@
 ---
 title: Manglish NLP Demo
-emoji: 🇲🇾
-colorFrom: teal
-colorTo: cyan
+emoji: 🌐
+colorFrom: blue
+colorTo: green
 sdk: gradio
 sdk_version: 4.44.1
 app_file: app.py

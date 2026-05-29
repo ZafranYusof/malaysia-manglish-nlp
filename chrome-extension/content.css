@@ -1,0 +1,146 @@
+.manglish-tooltip {
+  position: absolute;
+  z-index: 2147483647;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 320px;
+  min-width: 200px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #212121;
+  line-height: 1.5;
+}
+
+.manglish-tooltip .manglish-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #757575;
+  padding: 0;
+  line-height: 1;
+}
+
+.manglish-tooltip .manglish-close:hover {
+  color: #D32F2F;
+}
+
+.manglish-result-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #757575;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.manglish-sentiment-positive {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #C8E6C9;
+  color: #2E7D32;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.manglish-sentiment-negative {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #FFCDD2;
+  color: #C62828;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.manglish-sentiment-neutral {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #FFF9C4;
+  color: #F57F17;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.manglish-sentiment-unknown {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #E0E0E0;
+  color: #424242;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.manglish-score {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #757575;
+}
+
+.manglish-normalized {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.manglish-entities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.manglish-entity-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  background: #00BCD4;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.manglish-entity-tag small {
+  opacity: 0.8;
+  margin-left: 4px;
+  font-size: 10px;
+}
+
+.manglish-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #757575;
+}
+
+.manglish-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #E0E0E0;
+  border-top-color: #00897B;
+  border-radius: 50%;
+  animation: manglish-spin 0.8s linear infinite;
+}
+
+@keyframes manglish-spin {
+  to { transform: rotate(360deg); }
+}
+
+.manglish-error {
+  color: #D32F2F;
+  font-size: 13px;
+}
+
+mark.manglish-highlight {
+  background: #B2EBF2;
+  border-bottom: 2px solid #00897B;
+  padding: 1px 2px;
+  border-radius: 2px;
+  cursor: help;
+}

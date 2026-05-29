@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manglish NLP</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Manglish NLP</h1>
+      <button id="theme-toggle" class="icon-btn" title="Toggle theme">🌓</button>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="sentiment">Sentiment</button>
+      <button class="tab" data-tab="normalize">Normalize</button>
+      <button class="tab" data-tab="ner">NER</button>
+    </div>
+
+    <div class="input-section">
+      <textarea id="input-text" placeholder="Paste or type Manglish text here..." rows="4"></textarea>
+      <button id="analyze-btn" class="primary-btn">Analyze</button>
+    </div>
+
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <span>Processing...</span>
+    </div>
+
+    <div id="results" class="results hidden"></div>
+
+    <footer>
+      <button id="settings-btn" class="text-btn">⚙️ Settings</button>
+    </footer>
+
+    <div id="settings-panel" class="settings-panel hidden">
+      <h3>Settings</h3>
+      <label for="api-url">API Endpoint:</label>
+      <input type="text" id="api-url" placeholder="http://localhost:8000">
+      <div class="settings-actions">
+        <button id="save-settings" class="primary-btn">Save</button>
+        <button id="close-settings" class="text-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
