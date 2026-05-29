@@ -74,8 +74,8 @@ def formalize(text: str) -> str:
     - Connectors: sbb->kerana, tp->tetapi
     - Auto-capitalizes, adds period if missing
     
-    Parameters:
-        text (str): Informal text.
+    Args:
+        text: Informal text.
     
     Returns:
         str: Formal BM text.

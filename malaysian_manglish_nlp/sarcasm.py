@@ -6,7 +6,7 @@ exaggeration markers, and Malaysian sarcasm idioms.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 import re
 from malaysian_manglish_nlp.sentiment import analyze_sentiment
@@ -77,8 +77,8 @@ def detect_sarcasm(text: str) -> Dict[str, Any]:
     3. Exaggeration patterns
     4. Sentiment mismatch (positive words but negative intent)
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:

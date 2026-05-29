@@ -5,7 +5,7 @@ Reduces boilerplate and enables efficient multi-step processing.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import malaysian_manglish_nlp
 from malaysian_manglish_nlp.emotion import detect_emotion
@@ -31,13 +31,13 @@ _DEFAULT_STEPS = ['normalize', 'sentiment', 'language', 'emotion']
 def pipeline(text: str, steps: Optional[List[str]] = None, normalize_first: bool = True) -> Dict[str, Any]:
     """Run multiple NLP modules on text in one call.
     
-    Parameters:
-        text (str): Input text.
-        steps (list[str]): Pipeline steps to run. Default: normalize, sentiment, language, emotion.
+    Args:
+        text: Input text.
+        steps: Pipeline steps to run. Default: normalize, sentiment, language, emotion.
             Available: normalize, sentiment, language, emotion, profanity, dialect,
             sarcasm, tokenize, stem, pos, ner, segment, formalize, clean,
             keywords, correct, dependency, all.
-        normalize_first (bool): Normalize text before other steps (default True).
+        normalize_first: Normalize text before other steps (default True).
     
     Returns:
         dict: Combined results from all steps.
@@ -117,10 +117,10 @@ def pipeline(text: str, steps: Optional[List[str]] = None, normalize_first: bool
 def batch_pipeline(texts: List[str], steps: Optional[List[str]] = None, normalize_first: bool = True) -> List[Dict[str, Any]]:
     """Run pipeline on multiple texts.
     
-    Parameters:
-        texts (list[str]): Input texts.
-        steps (list[str]): Pipeline steps.
-        normalize_first (bool): Normalize first.
+    Args:
+        texts: Input texts.
+        steps: Pipeline steps.
+        normalize_first: Normalize first.
     
     Returns:
         list[dict]: Results per text.
@@ -135,8 +135,8 @@ def batch_pipeline(texts: List[str], steps: Optional[List[str]] = None, normaliz
 def analyze(text: str) -> Dict[str, Any]:
     """Quick full analysis — shorthand for pipeline(text, steps=['all']).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Full analysis results.

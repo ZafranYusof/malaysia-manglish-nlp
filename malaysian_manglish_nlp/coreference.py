@@ -249,8 +249,8 @@ def _resolve_pronoun(pronoun_info: Any, entities: List[str], pronoun_position: i
 def resolve_coreferences(text: str) -> Dict[str, Any]:
     """Resolve pronouns and references to their antecedents.
 
-    Parameters:
-        text (str): Input text to analyze.
+    Args:
+        text: Input text to analyze.
 
     Returns:
         list[dict]: List of resolved coreferences, each with:
@@ -289,9 +289,9 @@ def resolve_coreferences(text: str) -> Dict[str, Any]:
 def resolve_in_context(text: str, context: Optional[str] = None) -> Dict[str, Any]:
     """Resolve coreferences with prior context for multi-turn conversations.
 
-    Parameters:
-        text (str): Current text to analyze.
-        context (str, optional): Prior context (previous turns/sentences).
+    Args:
+        text: Current text to analyze.
+        context: Prior context (previous turns/sentences).
 
     Returns:
         list[dict]: Same format as resolve_coreferences().
@@ -343,8 +343,8 @@ def resolve_in_context(text: str, context: Optional[str] = None) -> Dict[str, An
 def get_entities_and_references(text: str) -> Dict[str, Any]:
     """Map entities to all their references (pronouns) in text.
 
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
 
     Returns:
         dict: Mapping of entity names to list of references.
@@ -375,8 +375,8 @@ def get_entities_and_references(text: str) -> Dict[str, Any]:
 def replace_pronouns(text: str) -> str:
     """Replace pronouns with their resolved antecedents.
 
-    Parameters:
-        text (str): Input text with pronouns.
+    Args:
+        text: Input text with pronouns.
 
     Returns:
         str: Text with pronouns replaced by antecedent names.

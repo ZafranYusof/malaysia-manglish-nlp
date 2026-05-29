@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms, get_particles
@@ -48,8 +48,8 @@ _EN_WORDS = {
 def segment(text: str) -> List[str]:
     """Segment text into BM/EN spans (alias for segment_text).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Segmentation result.
@@ -60,8 +60,8 @@ def segment(text: str) -> List[str]:
 def segment_text(text: str) -> Dict[str, Any]:
     """Identify BM vs EN segments in code-switched text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:

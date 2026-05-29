@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 import re
 import json
@@ -107,8 +107,8 @@ _MANGLISH_MARKERS = {
 def detect_language(text: str) -> Dict[str, Any]:
     """Detect if text is BM, EN, or Manglish (code-switched).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Detection result with keys:

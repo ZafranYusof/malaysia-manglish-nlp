@@ -245,9 +245,9 @@ def _tfidf_score(query: str, sentences: List[str]) -> float:
     TF = term frequency in sentence (count / total words in sentence)
     IDF = log(total_sentences / sentences_containing_term)
 
-    Parameters:
-        query (str): The query text.
-        sentences (list[str]): List of candidate sentences.
+    Args:
+        query: The query text.
+        sentences: List of candidate sentences.
 
     Returns:
         list[float]: TF-IDF similarity scores for each sentence.
@@ -319,8 +319,8 @@ def _tfidf_score(query: str, sentences: List[str]) -> float:
 def classify_question_type(question: str) -> Dict[str, Any]:
     """Classify the type of question.
 
-    Parameters:
-        question (str): The question text.
+    Args:
+        question: The question text.
 
     Returns:
         str: One of "who", "what", "when", "where", "why", "how", "yes_no", "other".
@@ -351,9 +351,9 @@ def find_relevant_sentence(context: str, question: str) -> Dict[str, Any]:
 
     Uses TF-IDF scoring as primary method, with word overlap as fallback.
 
-    Parameters:
-        context (str): The context paragraph.
-        question (str): The question to answer.
+    Args:
+        context: The context paragraph.
+        question: The question to answer.
 
     Returns:
         str: The most relevant sentence from the context.
@@ -408,9 +408,9 @@ def find_relevant_sentence(context: str, question: str) -> Dict[str, Any]:
 def extract_answer_span(sentence: str, question: str) -> Dict[str, Any]:
     """Extract the specific answer span from a sentence based on question type.
 
-    Parameters:
-        sentence (str): The sentence containing the answer.
-        question (str): The question being answered.
+    Args:
+        sentence: The sentence containing the answer.
+        question: The question being answered.
 
     Returns:
         str: The extracted answer span.
@@ -723,9 +723,9 @@ def answer(context: str, question: str) -> Dict[str, Any]:
     Performs extractive QA by finding the most relevant sentence and
     extracting the appropriate answer span based on question type.
 
-    Parameters:
-        context (str): The context paragraph to search for answers.
-        question (str): The question to answer.
+    Args:
+        context: The context paragraph to search for answers.
+        question: The question to answer.
 
     Returns:
         dict: A dictionary with keys:
@@ -776,9 +776,9 @@ def answer(context: str, question: str) -> Dict[str, Any]:
 def answer_multiple(context: str, questions: str) -> List[Dict[str, Any]]:
     """Answer multiple questions based on the same context.
 
-    Parameters:
-        context (str): The context paragraph.
-        questions (list): List of question strings.
+    Args:
+        context: The context paragraph.
+        questions: List of question strings.
 
     Returns:
         list: List of answer dictionaries (same format as answer()).

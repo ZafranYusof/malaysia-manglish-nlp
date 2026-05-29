@@ -23,8 +23,8 @@ def parse_dependencies(text: str) -> List[Dict[str, Any]]:
     - Modifiers (adjectives, adverbs)
     - Negation
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Parsed structure with 'subject', 'verb', 'object', 'modifiers', 'relations'.
@@ -171,8 +171,8 @@ def _build_tree(subject: Any, verb: Any, obj: Any, modifiers: Any) -> Dict[str, 
 def extract_svo(text: str) -> List[Dict[str, Any]]:
     """Extract Subject-Verb-Object triples from text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[dict]: List of SVO triples found.
@@ -205,8 +205,8 @@ def extract_svo(text: str) -> List[Dict[str, Any]]:
 def get_verb_frame(text: str) -> Dict[str, Any]:
     """Extract verb and its arguments.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Verb frame with agent, action, patient, instrument, location.

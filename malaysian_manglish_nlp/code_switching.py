@@ -8,7 +8,7 @@ identifies switch points, and classifies switching patterns.
 from __future__ import annotations
 
 import re
-from typing import List, Dict, Tuple, Optional
+from typing import Dict, List, Optional, Tuple
 
 
 # === MALAY WORD LIST (500+ common BM words) ===
@@ -566,8 +566,8 @@ def resolve_ambiguous(text: str) -> List[Dict]:
     For words that exist in both BM and EN word lists, uses neighbor context
     and bigram patterns to determine the most likely language.
 
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
 
     Returns:
         List of dicts: [{"token": "...", "language": "en|ms", "position": (start, end), "resolved_by": "..."}]

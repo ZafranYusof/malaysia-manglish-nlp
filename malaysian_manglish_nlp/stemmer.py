@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.cache import cached
@@ -96,8 +96,8 @@ _STOP_WORDS = {
 def stem(text: str) -> Dict[str, Any]:
     """Stem all words in text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with all words stemmed.
@@ -116,8 +116,8 @@ def stem(text: str) -> Dict[str, Any]:
 def stem_word(word: str) -> str:
     """Stem a single Malay word by removing affixes.
     
-    Parameters:
-        word (str): Single word to stem.
+    Args:
+        word: Single word to stem.
     
     Returns:
         str: Stemmed word (root form).
@@ -304,8 +304,8 @@ def _all_prefix_candidates(word: str) -> List[str]:
 def get_root(word: str) -> Dict[str, Any]:
     """Get the root word with full morphological metadata.
     
-    Parameters:
-        word (str): Input word.
+    Args:
+        word: Input word.
     
     Returns:
         dict: Dictionary with 'original', 'root', 'prefix', 'suffix', 'particle'.

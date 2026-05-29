@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms
@@ -91,8 +91,8 @@ def ner_tag(text: str) -> List[Dict[str, Any]]:
     - URL: Web URLs
     - EMAIL: Email addresses
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[dict]: List of entities with 'text', 'type', 'start', 'end'.
@@ -250,8 +250,8 @@ def ner_tag(text: str) -> List[Dict[str, Any]]:
 def extract_entities(text: str) -> List[Dict[str, Any]]:
     """Extract entities grouped by type.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Entities grouped by type.

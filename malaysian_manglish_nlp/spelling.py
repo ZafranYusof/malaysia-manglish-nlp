@@ -6,7 +6,7 @@ with frequency-based ranking.
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms
@@ -148,10 +148,10 @@ def _candidates(word: str, max_distance: int = 2) -> List:
 def correct_word(word: str, max_distance: int = 2, top_n: int = 5) -> Dict[str, Any]:
     """Suggest corrections for a single word.
     
-    Parameters:
-        word (str): Potentially misspelled word.
-        max_distance (int): Maximum edit distance for candidates (default: 2).
-        top_n (int): Maximum number of suggestions (default: 5).
+    Args:
+        word: Potentially misspelled word.
+        max_distance: Maximum edit distance for candidates (default: 2).
+        top_n: Maximum number of suggestions (default: 5).
     
     Returns:
         dict: Result with keys:
@@ -206,9 +206,9 @@ def correct(text: str, max_distance: int = 1) -> str:
     Only corrects words that are not in the dictionary AND have
     a close candidate (distance 1 by default for safety).
     
-    Parameters:
-        text (str): Input text.
-        max_distance (int): Max edit distance (default: 1 for conservative).
+    Args:
+        text: Input text.
+        max_distance: Max edit distance (default: 1 for conservative).
     
     Returns:
         dict: Result with keys:

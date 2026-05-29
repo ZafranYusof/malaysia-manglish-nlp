@@ -5,7 +5,7 @@ Inspired by malaya.dictionary (is_malay, is_english).
 
 from __future__ import annotations
 
-from typing import Dict, Set
+from typing import Any, Dict, Set
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms
@@ -155,8 +155,8 @@ def is_malay(word: str) -> bool:
     
     Uses dictionary lookup + morphological analysis.
     
-    Parameters:
-        word (str): Word to check.
+    Args:
+        word: Word to check.
     
     Returns:
         bool: True if likely a Malay word.
@@ -199,8 +199,8 @@ def is_malay(word: str) -> bool:
 def is_english(word: str) -> bool:
     """Check if a word is an English word.
     
-    Parameters:
-        word (str): Word to check.
+    Args:
+        word: Word to check.
     
     Returns:
         bool: True if likely an English word.
@@ -229,8 +229,8 @@ def is_english(word: str) -> bool:
 def classify_word(word: str) -> Dict[str, Any]:
     """Classify a word as BM, EN, both, or unknown.
     
-    Parameters:
-        word (str): Word to classify.
+    Args:
+        word: Word to classify.
     
     Returns:
         dict: Result with 'word', 'classification', 'is_malay', 'is_english'.
@@ -263,8 +263,8 @@ def classify_word(word: str) -> Dict[str, Any]:
 def get_stopwords(lang: str = 'bm') -> Set[str]:
     """Get stop words list.
     
-    Parameters:
-        lang (str): Language - 'bm', 'en', or 'all'.
+    Args:
+        lang: Language - 'bm', 'en', or 'all'.
     
     Returns:
         set: Stop words.

@@ -41,8 +41,8 @@ class NERModel(TokenClassificationModel):
     def predict(self, text: str) -> Dict[str, Any]:
         """Predict named entities in text.
         
-        Parameters:
-            text (str): Input text.
+        Args:
+            text: Input text.
         
         Returns:
             list[dict]: Entities with 'entity', 'word', 'score', 'start', 'end'.
@@ -65,8 +65,8 @@ class NERModel(TokenClassificationModel):
     def predict_batch(self, texts: List[str]) -> List[Dict[str, Any]]:
         """Predict NER for multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
+        Args:
+            texts: Input texts.
         
         Returns:
             list[list[dict]]: Entities per text.
@@ -77,8 +77,8 @@ class NERModel(TokenClassificationModel):
 def ner_model(model: Any = None) -> Any:
     """Load a transformer NER model.
     
-    Parameters:
-        model (str): HuggingFace model name.
+    Args:
+        model: HuggingFace model name.
     
     Returns:
         NERModel: Model instance.

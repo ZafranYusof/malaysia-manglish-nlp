@@ -429,7 +429,7 @@ def classify_topic(text: str) -> Dict[str, Any]:
     Classify text into the most likely topic.
 
     Args:
-        text (str): Input text to classify.
+        text: Input text to classify.
 
     Returns:
         dict: {
@@ -467,8 +467,8 @@ def classify_topics(text: str, top_n: int = 3) -> Dict[str, Any]:
     Classify text into top N most likely topics.
 
     Args:
-        text (str): Input text to classify.
-        top_n (int): Number of top topics to return (default 3).
+        text: Input text to classify.
+        top_n: Number of top topics to return (default 3).
 
     Returns:
         list[dict]: List of top N topics with scores, sorted by confidence.
@@ -505,7 +505,7 @@ def classify_batch(texts: List[str]) -> List[Dict[str, Any]]:
     Classify a batch of texts into topics.
 
     Args:
-        texts (list[str]): List of texts to classify.
+        texts: List of texts to classify.
 
     Returns:
         list[dict]: List of classification results.
@@ -521,7 +521,7 @@ def extract_topic_keywords(text: str) -> Dict[str, Any]:
     Extract all topic-relevant keywords found in text.
 
     Args:
-        text (str): Input text to analyze.
+        text: Input text to analyze.
 
     Returns:
         list[dict]: List of keywords with their associated topics.
@@ -548,7 +548,7 @@ def topic_distribution(texts: List[str]) -> Dict[str, Any]:
     Compute topic distribution across a corpus of texts.
 
     Args:
-        texts (list[str]): List of texts to analyze.
+        texts: List of texts to analyze.
 
     Returns:
         dict: {

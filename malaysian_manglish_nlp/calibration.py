@@ -6,7 +6,7 @@ word coverage, and agreement between modules.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 from malaysian_manglish_nlp.sentiment import analyze_sentiment
 from malaysian_manglish_nlp.emotion import detect_emotion
@@ -23,8 +23,8 @@ def calibrate_sentiment(text: str) -> Dict[str, Any]:
     - Agreement with emotion module
     - Negation complexity
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Calibrated result with 'sentiment', 'confidence', 'calibration_factors'.
@@ -90,8 +90,8 @@ def calibrate_language(text: str) -> Dict[str, Any]:
     - Marker diversity
     - Text length
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Calibrated result.
@@ -133,8 +133,8 @@ def calibrate_language(text: str) -> Dict[str, Any]:
 def calibrate_all(text: str) -> Dict[str, Any]:
     """Get calibrated confidence for all modules.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Calibrated results for sentiment, language, emotion.

@@ -1,0 +1,54 @@
+{
+  "model_name": "distilbert-base-multilingual-cased",
+  "label_maps": {
+    "sentiment": {
+      "positive": 0,
+      "negative": 1,
+      "neutral": 2
+    },
+    "emotion": {
+      "happy": 0,
+      "sad": 1,
+      "angry": 2,
+      "fear": 3,
+      "surprise": 4,
+      "disgust": 5,
+      "love": 6,
+      "neutral": 7
+    },
+    "intent": {
+      "question": 0,
+      "statement": 1,
+      "request": 2,
+      "complaint": 3,
+      "greeting": 4,
+      "opinion": 5
+    }
+  },
+  "labels": {
+    "sentiment": [
+      "positive",
+      "negative",
+      "neutral"
+    ],
+    "emotion": [
+      "happy",
+      "sad",
+      "angry",
+      "fear",
+      "surprise",
+      "disgust",
+      "love",
+      "neutral"
+    ],
+    "intent": [
+      "question",
+      "statement",
+      "request",
+      "complaint",
+      "greeting",
+      "opinion"
+    ]
+  },
+  "architecture": "ManglishMultiTaskModel"
+}

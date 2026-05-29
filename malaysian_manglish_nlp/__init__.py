@@ -37,7 +37,7 @@ Usage:
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, List, Optional
 
 __version__ = "2.0.0"
 __author__ = "Zafran"
@@ -152,7 +152,21 @@ from malaysian_manglish_nlp.profiler import (
 
 # Lazy import for optional spaCy integration
 def create_manglish_nlp(*args: Any, **kwargs: Any) -> Any:
-    """Create a spaCy nlp object for Manglish. Requires: pip install manglish-nlp[spacy]"""
+    """Create a spaCy nlp object for Manglish.
+
+    Args:
+        *args: Positional arguments forwarded to spacy_integration.
+        **kwargs: Keyword arguments forwarded to spacy_integration.
+
+    Returns:
+        A configured spaCy Language object for Manglish processing.
+
+    Raises:
+        ImportError: If manglish-nlp[spacy] extra is not installed.
+
+    Example:
+        >>> nlp = create_manglish_nlp()
+    """
     from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp as _create
     return _create(*args, **kwargs)
 

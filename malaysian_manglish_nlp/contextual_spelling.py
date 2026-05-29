@@ -6,7 +6,7 @@ Better than pure edit-distance for ambiguous cases.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 import re
 from malaysian_manglish_nlp.spelling import correct_word, _BM_DICTIONARY
@@ -78,9 +78,9 @@ def correct_contextual(text: str, max_distance: int = 2) -> Dict[str, Any]:
     Unlike basic `correct()`, this considers neighboring words to pick
     the best correction when multiple candidates exist.
     
-    Parameters:
-        text (str): Input text.
-        max_distance (int): Max edit distance for candidates.
+    Args:
+        text: Input text.
+        max_distance: Max edit distance for candidates.
     
     Returns:
         dict: Result with 'corrected', 'changes', 'original'.

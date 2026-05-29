@@ -18,10 +18,10 @@ from malaysian_manglish_nlp.normalize import normalize
 def jaccard(text1: str, text2: str, use_stem: bool = False) -> float:
     """Compute Jaccard similarity between two texts.
     
-    Parameters:
-        text1 (str): First text.
-        text2 (str): Second text.
-        use_stem (bool): Stem words before comparison (default: False).
+    Args:
+        text1: First text.
+        text2: Second text.
+        use_stem: Stem words before comparison (default: False).
     
     Returns:
         float: Similarity score 0-1.
@@ -52,10 +52,10 @@ def jaccard(text1: str, text2: str, use_stem: bool = False) -> float:
 def cosine(text1: str, text2: str, use_stem: bool = False) -> float:
     """Compute cosine similarity between two texts (bag-of-words).
     
-    Parameters:
-        text1 (str): First text.
-        text2 (str): Second text.
-        use_stem (bool): Stem words before comparison (default: False).
+    Args:
+        text1: First text.
+        text2: Second text.
+        use_stem: Stem words before comparison (default: False).
     
     Returns:
         float: Similarity score 0-1.
@@ -95,10 +95,10 @@ def overlap(text1: str, text2: str, use_stem: bool = False) -> float:
     Overlap = |intersection| / min(|set1|, |set2|)
     Good for comparing short text against long text.
     
-    Parameters:
-        text1 (str): First text.
-        text2 (str): Second text.
-        use_stem (bool): Stem words before comparison (default: False).
+    Args:
+        text1: First text.
+        text2: Second text.
+        use_stem: Stem words before comparison (default: False).
     
     Returns:
         float: Similarity score 0-1.
@@ -127,9 +127,9 @@ def semantic_similarity(text1: str, text2: str) -> float:
     
     Higher-level similarity that accounts for shortforms and word variants.
     
-    Parameters:
-        text1 (str): First text.
-        text2 (str): Second text.
+    Args:
+        text1: First text.
+        text2: Second text.
     
     Returns:
         dict: Result with keys:
@@ -166,11 +166,11 @@ def semantic_similarity(text1: str, text2: str) -> float:
 def find_most_similar(query: str, candidates: Any, top_n: int = 5, method: str = 'semantic') -> List[Dict[str, Any]]:
     """Find most similar texts from a list of candidates.
     
-    Parameters:
-        query (str): Query text.
-        candidates (list[str]): List of candidate texts.
-        top_n (int): Number of results (default: 5).
-        method (str): 'semantic', 'jaccard', 'cosine', or 'overlap'.
+    Args:
+        query: Query text.
+        candidates: List of candidate texts.
+        top_n: Number of results (default: 5).
+        method: 'semantic', 'jaccard', 'cosine', or 'overlap'.
     
     Returns:
         list[dict]: Ranked results with 'text', 'score', 'index'.

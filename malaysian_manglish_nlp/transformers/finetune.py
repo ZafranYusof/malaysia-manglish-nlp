@@ -103,9 +103,9 @@ class ManglishMultiTaskModel(nn.Module):
     def forward(self, input_ids: Any, attention_mask: Any) -> Any:
         """Forward pass through shared encoder + all task heads.
         
-        Parameters:
-            input_ids (Tensor): Token IDs [batch, seq_len]
-            attention_mask (Tensor): Attention mask [batch, seq_len]
+        Args:
+            input_ids: Token IDs [batch, seq_len]
+            attention_mask: Attention mask [batch, seq_len]
         
         Returns:
             dict: Logits for each task head.
@@ -129,10 +129,10 @@ class ManglishDataset(Dataset):
     Expected JSONL format:
         {"text": "...", "sentiment": "positive", "emotion": "happy", "intent": "statement"}
     
-    Parameters:
-        data_path (str): Path to JSONL file.
+    Args:
+        data_path: Path to JSONL file.
         tokenizer: HuggingFace tokenizer.
-        max_length (int): Max token length.
+        max_length: Max token length.
     """
     
     def __init__(self, data_path: str, tokenizer: Any, max_length: int = 128) -> None:
@@ -212,9 +212,9 @@ class ManglishDataset(Dataset):
 def evaluate(model: Any, dataloader: Any, device: Optional[Any] = None) -> Dict[str, Any]:
     """Evaluate model on a dataloader.
     
-    Parameters:
-        model (ManglishMultiTaskModel): The model.
-        dataloader (DataLoader): Validation dataloader.
+    Args:
+        model: The model.
+        dataloader: Validation dataloader.
         device: torch device.
     
     Returns:
@@ -270,13 +270,13 @@ def train(data_path: str='datasets/manglish_labeled.jsonl', output_dir: str='res
           epochs: Any = 5, batch_size: int=16, lr: float=2e-5, max_length: int=128) -> Dict[str, Any]:
     """Fine-tune the multi-task model.
     
-    Parameters:
-        data_path (str): Path to labeled JSONL data.
-        output_dir (str): Directory to save model, tokenizer, and label mappings.
-        epochs (int): Number of training epochs.
-        batch_size (int): Batch size.
-        lr (float): Learning rate.
-        max_length (int): Max token sequence length.
+    Args:
+        data_path: Path to labeled JSONL data.
+        output_dir: Directory to save model, tokenizer, and label mappings.
+        epochs: Number of training epochs.
+        batch_size: Batch size.
+        lr: Learning rate.
+        max_length: Max token sequence length.
     
     Returns:
         dict: Training results with final metrics.
@@ -297,10 +297,11 @@ def train(data_path: str='datasets/manglish_labeled.jsonl', output_dir: str='res
     dataset = ManglishDataset(data_path, tokenizer, max_length=max_length)
     print(f"Total samples: {len(dataset)}")
     
-    # Train/val split (80/20)
+    # Train/val split (80/20) with fixed seed
+    generator = torch.Generator().manual_seed(42)
     train_size = int(0.8 * len(dataset))
     val_size = len(dataset) - train_size
-    train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+    train_dataset, val_dataset = random_split(dataset, [train_size, val_size], generator=generator)
     
     print(f"Train: {train_size}, Val: {val_size}")
     
@@ -380,7 +381,7 @@ def train(data_path: str='datasets/manglish_labeled.jsonl', output_dir: str='res
         val_results = evaluate(model, val_loader, device)
         avg_val_acc = sum(val_results['accuracy'].values()) / 3
         
-        print(f"Epoch {epoch+1}/{epochs} — "
+        print(f"Epoch {epoch+1}/{epochs} - "
               f"Train Loss: {avg_train_loss:.4f}, "
               f"Val Loss: {val_results['avg_loss']:.4f}, "
               f"Val Acc: sentiment={val_results['accuracy']['sentiment']:.3f}, "
@@ -398,7 +399,7 @@ def train(data_path: str='datasets/manglish_labeled.jsonl', output_dir: str='res
         if avg_val_acc > best_val_acc:
             best_val_acc = avg_val_acc
             _save_model(model, tokenizer, output_dir)
-            print(f"  → Saved best model (avg acc: {best_val_acc:.4f})")
+            print(f"  -> Saved best model (avg acc: {best_val_acc:.4f})")
     
     print(f"\nTraining complete. Best avg accuracy: {best_val_acc:.4f}")
     print(f"Model saved to: {output_dir}")
@@ -413,10 +414,10 @@ def train(data_path: str='datasets/manglish_labeled.jsonl', output_dir: str='res
 def _save_model(model: Any, tokenizer: Any, output_dir: str) -> None:
     """Save model weights, tokenizer, and label mappings.
     
-    Parameters:
-        model (ManglishMultiTaskModel): Trained model.
+    Args:
+        model: Trained model.
         tokenizer: Tokenizer.
-        output_dir (str): Output directory.
+        output_dir: Output directory.
     """
     os.makedirs(output_dir, exist_ok=True)
     

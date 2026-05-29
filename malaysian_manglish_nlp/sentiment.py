@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import re
 from malaysian_manglish_nlp.utils import get_positive_words, get_negative_words, get_intensifiers, get_negators
@@ -14,11 +14,25 @@ _RE_WORDS = re.compile(r'[a-zA-Z0-9]+')
 # === Text Preprocessing ===
 
 def _normalize_elongated_word(word: str) -> str:
-    """Reduce repeated characters (3+) to base form for lookup."""
+    """Reduce repeated characters (3+) to base form for lookup.
+
+    Args:
+        word: Input word possibly containing repeated characters.
+
+    Returns:
+        Word with repeated characters collapsed to single instance.
+    """
     return re.sub(r'(.)\1{2,}', r'\1', word)
 
 def _preprocess_text(text: str) -> str:
-    """Preprocess text before sentiment analysis: strip hashtags."""
+    """Preprocess text before sentiment analysis: strip hashtags.
+
+    Args:
+        text: Raw input text.
+
+    Returns:
+        Text with hashtag symbols removed (content preserved).
+    """
     processed = re.sub(r'#(\w+)', r'\1', text)
     return processed
 
@@ -37,7 +51,15 @@ _SARCASM_NEGATIVE_CONTEXT = {
 }
 
 def _detect_sarcasm_quick(text: str, words: List[str]) -> bool:
-    """Quick sarcasm check for sentiment integration. Returns True if likely sarcastic."""
+    """Quick sarcasm check for sentiment integration.
+
+    Args:
+        text: Original input text.
+        words: Pre-tokenized word list from text.
+
+    Returns:
+        True if text is likely sarcastic, False otherwise.
+    """
     lower = text.lower()
     word_set = set(words)
     
@@ -183,26 +205,25 @@ _ASPECT_NEGATIVE = {
 
 _NEGATORS_SET = {'tak', 'tidak', 'bukan', 'x', 'xde', 'takde', 'no', 'not', "don't", "doesn't", 'never', 'belum'}
 
-def aspect_sentiment(text: str) -> Dict[str, Any]:
+def aspect_sentiment(text: str) -> List[Dict[str, Any]]:
     """Analyze sentiment per aspect detected in text.
 
     Detects aspects (food, service, price, ambiance, quality) and analyzes
     sentiment of surrounding words for each aspect found.
 
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
 
     Returns:
-        list[dict]: List of aspect sentiments, each with keys:
-            - aspect (str): The aspect category
-            - sentiment (str): 'positive', 'negative', or 'neutral'
-            - phrase (str): The relevant phrase around the aspect keyword
-            - score (float): Sentiment score (-1.0 to 1.0)
+        List of aspect sentiment dicts, each containing:
+            - aspect (str): The aspect category.
+            - sentiment (str): 'positive', 'negative', or 'neutral'.
+            - phrase (str): The relevant phrase around the aspect keyword.
+            - score (float): Sentiment score (-1.0 to 1.0).
 
     Example:
         >>> aspect_sentiment("makanan sedap tapi service teruk")
-        [{'aspect': 'food', 'sentiment': 'positive', 'phrase': 'makanan sedap', 'score': 0.8},
-         {'aspect': 'service', 'sentiment': 'negative', 'phrase': 'service teruk', 'score': -0.8}]
+        [{'aspect': 'food', 'sentiment': 'positive', ...}, ...]
     """
     words = _RE_WORDS.findall(text.lower())
     results = []
@@ -260,8 +281,8 @@ def aspect_sentiment(text: str) -> Dict[str, Any]:
 def sentiment(text: str) -> Dict[str, Any]:
     """Analyze sentiment of text (shorthand for analyze_sentiment).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Sentiment result.
@@ -280,8 +301,8 @@ def analyze_sentiment(text: str) -> Dict[str, Any]:
     sarcasm, mixed sentiment, dialect words, elongated text, and
     passive aggressive patterns.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:

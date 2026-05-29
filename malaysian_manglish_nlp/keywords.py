@@ -5,7 +5,7 @@ Supports TF-based, RAKE-inspired, and frequency-based extraction.
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 import math
@@ -47,10 +47,10 @@ _STOP_WORDS = {
 def extract_keywords(text: str, top_n: int = 10, method: str = 'frequency') -> List[Dict[str, Any]]:
     """Extract keywords from text.
     
-    Parameters:
-        text (str): Input text.
-        top_n (int): Number of keywords to return (default: 10).
-        method (str): Extraction method - 'frequency', 'tfidf', or 'rake'.
+    Args:
+        text: Input text.
+        top_n: Number of keywords to return (default: 10).
+        method: Extraction method - 'frequency', 'tfidf', or 'rake'.
     
     Returns:
         list[dict]: Keywords with scores, sorted by relevance.

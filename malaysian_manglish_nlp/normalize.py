@@ -15,9 +15,9 @@ _RE_TRAILING_DIGITS = re.compile(r'\d+$')
 def normalize(text: str, preserve_case: bool = False) -> str:
     """Normalize Manglish shortforms to standard BM/EN.
     
-    Parameters:
-        text (str): Input text containing shortforms.
-        preserve_case (bool): If True, attempt to preserve original casing.
+    Args:
+        text: Input text containing shortforms.
+        preserve_case: If True, attempt to preserve original casing.
     
     Returns:
         str: Text with shortforms expanded.
@@ -58,8 +58,8 @@ def normalize(text: str, preserve_case: bool = False) -> str:
 def normalize_preserve_case(text: str) -> str:
     """Normalize shortforms while preserving original casing.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Normalized text with case preserved.

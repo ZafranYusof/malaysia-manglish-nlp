@@ -40,8 +40,8 @@ class POSModel(TokenClassificationModel):
     def predict(self, text: str) -> Dict[str, Any]:
         """POS tag text using transformer model.
         
-        Parameters:
-            text (str): Input text.
+        Args:
+            text: Input text.
         
         Returns:
             list[dict]: Tokens with 'word', 'tag', 'score'.
@@ -63,8 +63,8 @@ class POSModel(TokenClassificationModel):
     def predict_batch(self, texts: List[str]) -> List[Dict[str, Any]]:
         """POS tag multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
+        Args:
+            texts: Input texts.
         
         Returns:
             list[list[dict]]: Tags per text.
@@ -75,8 +75,8 @@ class POSModel(TokenClassificationModel):
 def pos_model(model: Any = None) -> Any:
     """Load a transformer POS model.
     
-    Parameters:
-        model (str): HuggingFace model name.
+    Args:
+        model: HuggingFace model name.
     
     Returns:
         POSModel: Model instance.

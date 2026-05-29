@@ -31,8 +31,8 @@ _RE_MENTION_HASHTAG = re.compile(r'[@#]\w+')
 def clean(text: str) -> str:
     """Clean noisy Manglish text (alias for clean_text).
     
-    Parameters:
-        text (str): Noisy input text.
+    Args:
+        text: Noisy input text.
     
     Returns:
         str: Cleaned text.
@@ -54,8 +54,8 @@ def clean_text(text: str) -> str:
     5. Fix double-first-letter typos
     6. Normalize laugh patterns
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Cleaned text.
@@ -110,8 +110,8 @@ def clean_for_nlp(text: str) -> str:
     - Remove mentions (@) and hashtags (#)
     - Lowercase
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Aggressively cleaned text.

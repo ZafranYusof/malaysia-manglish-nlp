@@ -33,8 +33,8 @@ def extract_features(text: str) -> List[float]:
     - Caps ratio
     - Language mix ratio
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Feature name -> value mapping.
@@ -129,8 +129,8 @@ def classify_sentiment_ml(text: str) -> Dict[str, Any]:
     Combines rule-based features with a lightweight logistic model
     for more robust classification.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with 'sentiment', 'confidence', 'probabilities', 'features'.
@@ -188,8 +188,8 @@ def classify_sentiment_ml(text: str) -> Dict[str, Any]:
 def classify_batch_ml(texts: List[str]) -> List[Dict[str, Any]]:
     """Classify sentiment for multiple texts.
     
-    Parameters:
-        texts (list[str]): Input texts.
+    Args:
+        texts: Input texts.
     
     Returns:
         list[dict]: Results per text.

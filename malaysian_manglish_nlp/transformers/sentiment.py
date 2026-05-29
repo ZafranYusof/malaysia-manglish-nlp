@@ -58,8 +58,8 @@ class SentimentModel(BaseModel):
     def predict(self, text: str) -> Dict[str, Any]:
         """Predict sentiment for a single text.
         
-        Parameters:
-            text (str): Input text.
+        Args:
+            text: Input text.
         
         Returns:
             dict: {'label': str, 'score': float}
@@ -81,9 +81,9 @@ class SentimentModel(BaseModel):
     def predict_batch(self, texts: List[str], batch_size: int = 16) -> List[Dict[str, Any]]:
         """Predict sentiment for multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
-            batch_size (int): Batch size for inference.
+        Args:
+            texts: Input texts.
+            batch_size: Batch size for inference.
         
         Returns:
             list[dict]: List of predictions.
@@ -108,8 +108,8 @@ class SentimentModel(BaseModel):
 def sentiment_model(model: Any = None) -> Any:
     """Load a transformer sentiment model.
     
-    Parameters:
-        model (str): HuggingFace model name. Default: twitter-roberta-base.
+    Args:
+        model: HuggingFace model name. Default: twitter-roberta-base.
     
     Returns:
         SentimentModel: Model instance.

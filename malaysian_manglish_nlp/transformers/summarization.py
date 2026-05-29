@@ -41,10 +41,10 @@ class SummarizationModel(Seq2SeqModel):
     def summarize(self, text: str, max_length: int = 150, min_length: int = 30) -> Dict[str, Any]:
         """Summarize text.
         
-        Parameters:
-            text (str): Input text (long).
-            max_length (int): Max summary length in tokens.
-            min_length (int): Min summary length in tokens.
+        Args:
+            text: Input text (long).
+            max_length: Max summary length in tokens.
+            min_length: Min summary length in tokens.
         
         Returns:
             str: Summarized text.
@@ -72,8 +72,8 @@ class SummarizationModel(Seq2SeqModel):
     def summarize_batch(self, texts: List[str], max_length: int = 150, min_length: int = 30) -> List[Dict[str, Any]]:
         """Summarize multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
+        Args:
+            texts: Input texts.
         
         Returns:
             list[str]: Summaries.
@@ -84,8 +84,8 @@ class SummarizationModel(Seq2SeqModel):
 def summarization_model(model: Any = None) -> Any:
     """Load a summarization model.
     
-    Parameters:
-        model (str): HuggingFace model name.
+    Args:
+        model: HuggingFace model name.
     
     Returns:
         SummarizationModel: Model instance.

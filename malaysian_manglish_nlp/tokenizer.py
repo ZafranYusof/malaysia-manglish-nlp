@@ -46,8 +46,8 @@ def tokenize(text: str) -> List[str]:
     - Splits punctuation from words
     - Preserves emoji as tokens
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[str]: List of tokens.
@@ -63,8 +63,8 @@ def tokenize(text: str) -> List[str]:
 def word_tokenize(text: str) -> List[str]:
     """Tokenize text into words.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[str]: List of word tokens.
@@ -83,8 +83,8 @@ def sentence_tokenize(text: str) -> List[str]:
     - Malaysian informal patterns (multiple sentences without caps)
     - Preserves emoji within sentences
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[str]: List of sentences.
@@ -109,8 +109,8 @@ def morpheme_tokenize(word: str) -> List[str]:
     
     Basic rule-based morpheme segmentation for BM words.
     
-    Parameters:
-        word (str): Single word.
+    Args:
+        word: Single word.
     
     Returns:
         dict: Dictionary with 'prefix', 'root', 'suffix' keys.

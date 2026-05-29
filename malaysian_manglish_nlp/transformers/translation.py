@@ -45,10 +45,10 @@ class TranslationModel(Seq2SeqModel):
     def translate(self, text: str, target: str = 'en', max_length: int = 256) -> str:
         """Translate text between BM and EN.
         
-        Parameters:
-            text (str): Input text.
-            target (str): Target language - 'en' or 'bm'/'ms' (default: 'en').
-            max_length (int): Max output length.
+        Args:
+            text: Input text.
+            target: Target language - 'en' or 'bm'/'ms' (default: 'en').
+            max_length: Max output length.
         
         Returns:
             str: Translated text.
@@ -66,9 +66,9 @@ class TranslationModel(Seq2SeqModel):
     def translate_batch(self, texts: List[str], target: str = 'en', max_length: int = 256) -> List[str]:
         """Translate multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
-            target (str): Target language.
+        Args:
+            texts: Input texts.
+            target: Target language.
         
         Returns:
             list[str]: Translated texts.
@@ -79,8 +79,8 @@ class TranslationModel(Seq2SeqModel):
 def translation_model(model: Any = None) -> Any:
     """Load a translation model.
     
-    Parameters:
-        model (str): HuggingFace model name.
+    Args:
+        model: HuggingFace model name.
     
     Returns:
         TranslationModel: Model instance.

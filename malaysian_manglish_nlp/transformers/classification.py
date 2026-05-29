@@ -57,9 +57,9 @@ class TextClassificationModel:
     def predict(self, text: str, top_k: int = 1) -> Dict[str, Any]:
         """Classify text.
         
-        Parameters:
-            text (str): Input text.
-            top_k (int): Number of top predictions to return.
+        Args:
+            text: Input text.
+            top_k: Number of top predictions to return.
         
         Returns:
             dict or list[dict]: Prediction(s) with 'label' and 'score'.
@@ -82,10 +82,10 @@ class TextClassificationModel:
     def predict_batch(self, texts: List[str], top_k: int = 1, batch_size: int = 16) -> List[Dict[str, Any]]:
         """Classify multiple texts.
         
-        Parameters:
-            texts (list[str]): Input texts.
-            top_k (int): Top predictions per text.
-            batch_size (int): Batch size.
+        Args:
+            texts: Input texts.
+            top_k: Top predictions per text.
+            batch_size: Batch size.
         
         Returns:
             list: Predictions per text.
@@ -109,8 +109,8 @@ class TextClassificationModel:
 def text_classification_model(model: Any = None) -> Any:
     """Load a text classification model.
     
-    Parameters:
-        model (str): HuggingFace model name.
+    Args:
+        model: HuggingFace model name.
     
     Returns:
         TextClassificationModel: Model instance.

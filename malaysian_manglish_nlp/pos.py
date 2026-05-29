@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms, get_particles
@@ -104,8 +104,8 @@ def pos_tag(text: str) -> List[Dict[str, Any]]:
     MD (modal), NEG (negation), PTL (particle), INT (intensifier),
     NUM (number), PUNCT (punctuation), UNK (unknown).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[tuple]: List of (word, tag) tuples.
@@ -170,8 +170,8 @@ def pos_tag(text: str) -> List[Dict[str, Any]]:
 def pos_tag_detailed(text: str) -> List[Dict[str, Any]]:
     """POS tag with additional metadata.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         list[dict]: List of dicts with 'word', 'tag', 'tag_name', 'confidence'.

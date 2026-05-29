@@ -214,9 +214,9 @@ def generate_corpus(n_sentences: int = 2000, seed: Any = 42) -> List[str]:
     WhatsApp messages, and news comments with code-switching, slang,
     shortforms, and dialect variations.
 
-    Parameters:
-        n_sentences (int): Number of sentences to generate (default 2000).
-        seed (int): Random seed for reproducibility.
+    Args:
+        n_sentences: Number of sentences to generate (default 2000).
+        seed: Random seed for reproducibility.
 
     Returns:
         list[list[str]]: List of tokenized sentences (list of word lists).
@@ -324,12 +324,12 @@ def _tokenize_simple(text: str) -> List[str]:
 def train_word2vec(corpus: Optional[Any] = None, vector_size: int = 100, window: int = 5, min_count: int = 2, sg: int = 0) -> Any:
     """Train a Word2Vec model on Manglish corpus.
 
-    Parameters:
-        corpus (list[list[str]]|None): Tokenized sentences. If None, generates corpus.
-        vector_size (int): Dimensionality of word vectors (default 100).
-        window (int): Context window size (default 5).
-        min_count (int): Minimum word frequency (default 2).
-        sg (int): 0 for CBOW, 1 for Skip-gram (default 0 = CBOW).
+    Args:
+        corpus: Tokenized sentences. If None, generates corpus.
+        vector_size: Dimensionality of word vectors (default 100).
+        window: Context window size (default 5).
+        min_count: Minimum word frequency (default 2).
+        sg: 0 for CBOW, 1 for Skip-gram (default 0 = CBOW).
 
     Returns:
         gensim.models.Word2Vec: Trained model.
@@ -369,11 +369,11 @@ def train_fasttext(corpus: Optional[Any] = None, vector_size: int = 100, window:
     FastText handles OOV words via subword information, making it ideal
     for Manglish with its many shortforms and spelling variants.
 
-    Parameters:
-        corpus (list[list[str]]|None): Tokenized sentences. If None, generates corpus.
-        vector_size (int): Dimensionality of word vectors (default 100).
-        window (int): Context window size (default 5).
-        min_count (int): Minimum word frequency (default 2).
+    Args:
+        corpus: Tokenized sentences. If None, generates corpus.
+        vector_size: Dimensionality of word vectors (default 100).
+        window: Context window size (default 5).
+        min_count: Minimum word frequency (default 2).
 
     Returns:
         gensim.models.FastText: Trained model.
@@ -414,11 +414,11 @@ def train_all(vector_size: int = 50, window: int = 5, min_count: int = 2, n_sent
 
     Convenience function that generates corpus once and trains both models.
 
-    Parameters:
-        vector_size (int): Dimensionality of word vectors (default 50).
-        window (int): Context window size.
-        min_count (int): Minimum word frequency.
-        n_sentences (int): Corpus size (default 2000).
+    Args:
+        vector_size: Dimensionality of word vectors (default 50).
+        window: Context window size.
+        min_count: Minimum word frequency.
+        n_sentences: Corpus size (default 2000).
 
     Returns:
         dict: {'word2vec': Word2Vec model, 'fasttext': FastText model, 'corpus_size': int}
@@ -519,10 +519,10 @@ def _get_model(model_type: str = 'fasttext') -> Any:
 def most_similar(word: str, model_type: str = 'fasttext', topn: int = 10) -> List[Dict[str, Any]]:
     """Find words most similar to the given word.
 
-    Parameters:
-        word (str): Query word.
-        model_type (str): 'fasttext' or 'word2vec' (default 'fasttext').
-        topn (int): Number of similar words to return (default 10).
+    Args:
+        word: Query word.
+        model_type: 'fasttext' or 'word2vec' (default 'fasttext').
+        topn: Number of similar words to return (default 10).
 
     Returns:
         list[tuple[str, float]]: List of (word, similarity_score) pairs.
@@ -544,9 +544,9 @@ def most_similar(word: str, model_type: str = 'fasttext', topn: int = 10) -> Lis
 def word_vector(word: str, model_type: str = 'fasttext') -> List[float]:
     """Get the vector representation of a word.
 
-    Parameters:
-        word (str): Input word.
-        model_type (str): 'fasttext' or 'word2vec' (default 'fasttext').
+    Args:
+        word: Input word.
+        model_type: 'fasttext' or 'word2vec' (default 'fasttext').
 
     Returns:
         numpy.ndarray: Word vector.
@@ -570,9 +570,9 @@ def sentence_vector(text: str, model_type: str = 'fasttext') -> List[float]:
 
     Computes the mean of all word vectors in the text.
 
-    Parameters:
-        text (str): Input text.
-        model_type (str): 'fasttext' or 'word2vec' (default 'fasttext').
+    Args:
+        text: Input text.
+        model_type: 'fasttext' or 'word2vec' (default 'fasttext').
 
     Returns:
         numpy.ndarray: Averaged sentence vector.
@@ -602,11 +602,11 @@ def sentence_vector(text: str, model_type: str = 'fasttext') -> List[float]:
 def analogy(positive: Any, negative: Any, model_type: str = 'fasttext', topn: int = 5) -> List[Dict[str, Any]]:
     """Solve word analogy (e.g., king - man + woman = queen).
 
-    Parameters:
-        positive (list[str]): Words that contribute positively.
-        negative (list[str]): Words that contribute negatively.
-        model_type (str): 'fasttext' or 'word2vec' (default 'fasttext').
-        topn (int): Number of results (default 5).
+    Args:
+        positive: Words that contribute positively.
+        negative: Words that contribute negatively.
+        model_type: 'fasttext' or 'word2vec' (default 'fasttext').
+        topn: Number of results (default 5).
 
     Returns:
         list[tuple[str, float]]: List of (word, score) pairs.

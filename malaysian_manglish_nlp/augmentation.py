@@ -74,9 +74,9 @@ _SYNONYMS = {
 def vowel_alternate(word: str, threshold: float = 0.5) -> str:
     """Remove vowels to create SMS-style abbreviation.
     
-    Parameters:
-        word (str): Input word.
-        threshold (float): Probability of removing each vowel (default: 0.5).
+    Args:
+        word: Input word.
+        threshold: Probability of removing each vowel (default: 0.5).
     
     Returns:
         str: Word with some vowels removed.
@@ -114,8 +114,8 @@ def socialmedia_form(word: str) -> str:
     - Number substitution (satu -> 1)
     - Elongation (gila -> gilaaaa)
     
-    Parameters:
-        word (str): Input word.
+    Args:
+        word: Input word.
     
     Returns:
         list[str]: Possible social media forms.
@@ -152,9 +152,9 @@ def socialmedia_form(word: str) -> str:
 def replace_similar_vowels(word: str, threshold: float = 0.5) -> str:
     """Replace vowels with similar vowels to simulate slang.
     
-    Parameters:
-        word (str): Input word.
-        threshold (float): Probability of replacement (default: 0.5).
+    Args:
+        word: Input word.
+        threshold: Probability of replacement (default: 0.5).
     
     Returns:
         str: Word with replaced vowels.
@@ -176,9 +176,9 @@ def replace_similar_vowels(word: str, threshold: float = 0.5) -> str:
 def replace_similar_consonants(word: str, threshold: float = 0.5) -> str:
     """Replace consonants with similar consonants to simulate typo.
     
-    Parameters:
-        word (str): Input word.
-        threshold (float): Probability of replacement (default: 0.5).
+    Args:
+        word: Input word.
+        threshold: Probability of replacement (default: 0.5).
     
     Returns:
         str: Word with replaced consonants.
@@ -210,8 +210,8 @@ def kelantanese_form(word: str) -> str:
     - Final 'ar' -> 'o' (besar -> beso)
     - Double vowel at end (kakak -> kakok)
     
-    Parameters:
-        word (str): Standard BM word.
+    Args:
+        word: Standard BM word.
     
     Returns:
         list[str]: Possible Kelantanese forms.
@@ -262,9 +262,9 @@ def kelantanese_form(word: str) -> str:
 def synonym(word: str, top_n: int = 3) -> List[str]:
     """Get synonyms for a BM/Manglish word.
     
-    Parameters:
-        word (str): Input word.
-        top_n (int): Max synonyms to return (default: 3).
+    Args:
+        word: Input word.
+        top_n: Max synonyms to return (default: 3).
     
     Returns:
         list[str]: Synonym list (empty if not found).
@@ -291,11 +291,11 @@ def synonym(word: str, top_n: int = 3) -> List[str]:
 def augment(text: str, methods: Optional[str] = None, n: str = 5) -> List[str]:
     """Generate augmented variations of text.
     
-    Parameters:
-        text (str): Input text.
-        methods (list): Methods to use. Default: all.
+    Args:
+        text: Input text.
+        methods: Methods to use. Default: all.
             Options: 'vowel_remove', 'elongate', 'synonym', 'kelantan', 'typo'
-        n (int): Number of variations to generate (default: 5).
+        n: Number of variations to generate (default: 5).
     
     Returns:
         list[str]: Augmented text variations.

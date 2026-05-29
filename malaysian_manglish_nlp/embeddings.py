@@ -20,11 +20,11 @@ from malaysian_manglish_nlp.dictionary import get_stopwords
 def sentence_vector(text: str, method: str = 'tfidf', normalize_text: bool = True, use_stem: bool = True) -> List[float]:
     """Generate a vector representation of text.
     
-    Parameters:
-        text (str): Input text.
-        method (str): 'bow' (bag-of-words), 'tfidf', or 'weighted'.
-        normalize_text (bool): Normalize shortforms first.
-        use_stem (bool): Stem words before vectorizing.
+    Args:
+        text: Input text.
+        method: 'bow' (bag-of-words), 'tfidf', or 'weighted'.
+        normalize_text: Normalize shortforms first.
+        use_stem: Stem words before vectorizing.
     
     Returns:
         dict: Vector representation with 'vector' (word->weight), 'dim', 'method'.
@@ -61,11 +61,11 @@ def sentence_vector(text: str, method: str = 'tfidf', normalize_text: bool = Tru
 def encode_batch(texts: List[str], method: str = 'tfidf', normalize_text: bool = True, use_stem: bool = True) -> List[float]:
     """Encode multiple texts into vectors with shared vocabulary.
     
-    Parameters:
-        texts (list[str]): Input texts.
-        method (str): Vectorization method.
-        normalize_text (bool): Normalize shortforms.
-        use_stem (bool): Stem words.
+    Args:
+        texts: Input texts.
+        method: Vectorization method.
+        normalize_text: Normalize shortforms.
+        use_stem: Stem words.
     
     Returns:
         dict: Result with 'vectors' (list of dicts), 'vocabulary', 'idf_scores'.
@@ -118,9 +118,9 @@ def encode_batch(texts: List[str], method: str = 'tfidf', normalize_text: bool =
 def cosine_similarity(vec1: Any, vec2: Any) -> float:
     """Compute cosine similarity between two sparse vectors.
     
-    Parameters:
-        vec1 (dict): First vector (word->weight).
-        vec2 (dict): Second vector (word->weight).
+    Args:
+        vec1: First vector (word->weight).
+        vec2: Second vector (word->weight).
     
     Returns:
         float: Similarity score 0-1.
@@ -143,11 +143,11 @@ def cosine_similarity(vec1: Any, vec2: Any) -> float:
 def find_nearest(query: str, corpus: Optional[Any], top_n: int = 5, method: str = 'tfidf') -> List[Dict[str, Any]]:
     """Find most similar texts from corpus using embeddings.
     
-    Parameters:
-        query (str): Query text.
-        corpus (list[str]): List of texts to search.
-        top_n (int): Number of results.
-        method (str): Vectorization method.
+    Args:
+        query: Query text.
+        corpus: List of texts to search.
+        top_n: Number of results.
+        method: Vectorization method.
     
     Returns:
         list[dict]: Ranked results with 'text', 'score', 'index'.
@@ -176,10 +176,10 @@ def cluster_texts(texts: List[str], threshold: float = 0.5, method: str = 'tfidf
     
     Groups texts that are above similarity threshold.
     
-    Parameters:
-        texts (list[str]): Input texts.
-        threshold (float): Minimum similarity to group together.
-        method (str): Vectorization method.
+    Args:
+        texts: Input texts.
+        threshold: Minimum similarity to group together.
+        method: Vectorization method.
     
     Returns:
         list[list[int]]: Clusters (lists of text indices).

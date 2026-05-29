@@ -5,7 +5,7 @@ Supports: Standard BM, Kelantanese, Terengganu, Negeri Sembilan, Kedah, Sarawak.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 import re
 
@@ -123,8 +123,8 @@ _DIALECTS = {
 def detect_dialect(text: str) -> Dict[str, Any]:
     """Detect Malaysian dialect in text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:
@@ -186,9 +186,9 @@ def detect_dialect(text: str) -> Dict[str, Any]:
 def normalize_dialect(text: str, source_dialect: Optional[str] = None) -> str:
     """Normalize dialect text to standard BM.
     
-    Parameters:
-        text (str): Dialect text.
-        source_dialect (str): Source dialect (auto-detect if None).
+    Args:
+        text: Dialect text.
+        source_dialect: Source dialect (auto-detect if None).
     
     Returns:
         dict: Result with 'normalized' text and 'dialect' detected.
@@ -234,8 +234,8 @@ def normalize_dialect(text: str, source_dialect: Optional[str] = None) -> str:
 def get_dialect_info(dialect: str) -> Dict[str, Any]:
     """Get information about a dialect.
     
-    Parameters:
-        dialect (str): Dialect name.
+    Args:
+        dialect: Dialect name.
     
     Returns:
         dict: Info about the dialect.

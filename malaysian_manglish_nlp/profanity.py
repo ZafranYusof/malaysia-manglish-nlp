@@ -6,7 +6,7 @@ Supports severity levels and censoring.
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Any, Dict
 
 import re
 
@@ -81,8 +81,8 @@ _EVASION_MAP = {
 def detect_profanity(text: str) -> Dict[str, Any]:
     """Detect profanity and toxic content in text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:
@@ -159,10 +159,10 @@ def detect_profanity(text: str) -> Dict[str, Any]:
 def censor(text: str, replacement: str = '*', level: str = 1) -> str:
     """Censor profanity in text.
     
-    Parameters:
-        text (str): Input text.
-        replacement (str): Character to replace with (default: '*').
-        level (int): Minimum severity to censor (1=all, 2=moderate+, 3=severe only).
+    Args:
+        text: Input text.
+        replacement: Character to replace with (default: '*').
+        level: Minimum severity to censor (1=all, 2=moderate+, 3=severe only).
     
     Returns:
         str: Censored text.
@@ -198,9 +198,9 @@ def censor(text: str, replacement: str = '*', level: str = 1) -> str:
 def is_safe(text: str, threshold: float = 0) -> bool:
     """Quick check if text is safe (no profanity above threshold).
     
-    Parameters:
-        text (str): Input text.
-        threshold (int): Max acceptable severity (0=no profanity, 1=mild ok, 2=moderate ok).
+    Args:
+        text: Input text.
+        threshold: Max acceptable severity (0=no profanity, 1=mild ok, 2=moderate ok).
     
     Returns:
         bool: True if text is safe.

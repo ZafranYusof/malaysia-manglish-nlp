@@ -306,7 +306,7 @@ def detect_hate_speech(text: str) -> Dict[str, Any]:
     Detect hate speech in text with Malaysian context awareness.
 
     Args:
-        text (str): Input text to analyze.
+        text: Input text to analyze.
 
     Returns:
         dict: {
@@ -415,7 +415,7 @@ def detect_batch(texts: List[str]) -> List[Dict[str, Any]]:
     Detect hate speech in a batch of texts.
 
     Args:
-        texts (list[str]): List of texts to analyze.
+        texts: List of texts to analyze.
 
     Returns:
         list[dict]: List of detection results.
@@ -431,7 +431,7 @@ def is_hate_speech(text: str) -> bool:
     Quick boolean check for hate speech.
 
     Args:
-        text (str): Input text to check.
+        text: Input text to check.
 
     Returns:
         bool: True if hate speech is detected.
@@ -445,7 +445,7 @@ def get_severity(text: str) -> Dict[str, Any]:
     Get the severity level of hate speech in text.
 
     Args:
-        text (str): Input text to analyze.
+        text: Input text to analyze.
 
     Returns:
         str: "none" | "low" | "medium" | "high"
@@ -459,7 +459,7 @@ def get_target_groups(text: str) -> Dict[str, Any]:
     Get all groups targeted in the text.
 
     Args:
-        text (str): Input text to analyze.
+        text: Input text to analyze.
 
     Returns:
         list[str]: List of targeted group names.

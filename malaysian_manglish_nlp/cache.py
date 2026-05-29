@@ -19,8 +19,8 @@ _REGISTRY_LOCK = threading.Lock()
 class LRUCache:
     """Thread-safe Least Recently Used (LRU) cache.
     
-    Parameters:
-        maxsize (int): Maximum number of items to store. Default 1024.
+    Args:
+        maxsize: Maximum number of items to store. Default 1024.
     
     Example:
         >>> cache = LRUCache(maxsize=128)
@@ -122,9 +122,9 @@ def cached(func: Any = None, *, maxsize: int = 1024) -> Any:
     Caches based on all positional and keyword arguments.
     Only works with hashable arguments.
     
-    Parameters:
+    Args:
         func: Function to cache (used when decorator is applied without parens).
-        maxsize (int): Maximum cache size. Default 1024.
+        maxsize: Maximum cache size. Default 1024.
     
     Example:
         >>> @cached

@@ -11,7 +11,7 @@ Zero external dependencies.
 from __future__ import annotations
 
 import re
-from typing import List, Dict, Tuple, Optional
+from typing import Dict, List, Optional, Tuple
 
 
 # ============================================================

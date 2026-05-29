@@ -206,9 +206,9 @@ def normalize_ocr(text: str) -> str:
 
     Returns:
         dict with keys:
-            cleaned (str): Corrected text.
-            corrections (list): Each item has 'original', 'corrected', 'type'.
-            confidence (float): 0.0-1.0, higher means fewer corrections needed.
+            cleaned: Corrected text.
+            corrections: Each item has 'original', 'corrected', 'type'.
+            confidence: 0.0-1.0, higher means fewer corrections needed.
     """
     if not text or not text.strip():
         return {"cleaned": text or "", "corrections": [], "confidence": 1.0}

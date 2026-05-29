@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.language import detect_language
@@ -445,10 +445,10 @@ def _compute_confidence(original_words: str, translated_words: str) -> float:
 def translate(text: str, source: str = 'auto', target: str = 'en') -> str:
     """Translate text between BM, EN, and Manglish.
 
-    Parameters:
-        text (str): Input text to translate.
-        source (str): Source language - 'bm', 'en', 'manglish', or 'auto'.
-        target (str): Target language - 'bm', 'en', or 'formal'.
+    Args:
+        text: Input text to translate.
+        source: Source language - 'bm', 'en', 'manglish', or 'auto'.
+        target: Target language - 'bm', 'en', or 'formal'.
 
     Returns:
         dict: {"translated": str, "source_lang": str, "target_lang": str, "confidence": float}
@@ -593,8 +593,8 @@ def _translate_to_formal(text: str) -> str:
 def to_english(text: str) -> str:
     """Translate BM/Manglish text to English.
 
-    Parameters:
-        text (str): BM or Manglish text.
+    Args:
+        text: BM or Manglish text.
 
     Returns:
         str: English translation.
@@ -610,8 +610,8 @@ def to_english(text: str) -> str:
 def to_malay(text: str) -> str:
     """Translate EN/Manglish text to formal BM.
 
-    Parameters:
-        text (str): English or Manglish text.
+    Args:
+        text: English or Manglish text.
 
     Returns:
         str: Formal BM translation.
@@ -629,8 +629,8 @@ def to_formal(text: str) -> str:
 
     Expands shortforms, removes particles, replaces informal with formal words.
 
-    Parameters:
-        text (str): Informal Manglish/BM text.
+    Args:
+        text: Informal Manglish/BM text.
 
     Returns:
         str: Formal BM text.
@@ -646,9 +646,9 @@ def to_formal(text: str) -> str:
 def word_translate(word: str, target: str = 'en') -> str:
     """Translate a single word.
 
-    Parameters:
-        word (str): Single word to translate.
-        target (str): Target language - 'en' or 'bm'.
+    Args:
+        word: Single word to translate.
+        target: Target language - 'en' or 'bm'.
 
     Returns:
         str or None: Translation if found, None otherwise.
@@ -673,8 +673,8 @@ def detect_and_translate(text: str) -> Dict[str, Any]:
     If source is BM/Manglish -> translates to EN.
     If source is EN -> translates to BM.
 
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
 
     Returns:
         dict: {"original": str, "translated": str, "source_lang": str,

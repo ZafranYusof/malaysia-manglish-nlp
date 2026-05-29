@@ -47,8 +47,8 @@ def _check_torch() -> bool:
 def load_model(model_dir: Optional[str] = None) -> Any:
     """Load the fine-tuned multi-task model for inference.
     
-    Parameters:
-        model_dir (str): Path to saved model directory.
+    Args:
+        model_dir: Path to saved model directory.
             Default: resources/manglish_finetuned/
     
     Returns:
@@ -119,9 +119,9 @@ def _get_model(model_dir: Optional[str] = None) -> Any:
 def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
     """Predict sentiment, emotion, and intent for a single text.
     
-    Parameters:
-        text (str): Input Manglish text.
-        model_dir (str): Optional model directory override.
+    Args:
+        text: Input Manglish text.
+        model_dir: Optional model directory override.
     
     Returns:
         dict: Predictions with confidence scores.
@@ -180,10 +180,10 @@ def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
 def predict_batch(texts: List[str], model_dir: Optional[str] = None, batch_size: int = 32) -> List[Dict[str, Any]]:
     """Batch prediction for multiple texts.
     
-    Parameters:
-        texts (list[str]): Input texts.
-        model_dir (str): Optional model directory override.
-        batch_size (int): Batch size for inference.
+    Args:
+        texts: Input texts.
+        model_dir: Optional model directory override.
+        batch_size: Batch size for inference.
     
     Returns:
         list[dict]: List of prediction dicts (same format as predict()).
@@ -244,8 +244,8 @@ def demo_predict(text: str) -> Dict[str, Any]:
     Uses existing malaysian_manglish_nlp sentiment and emotion modules for a
     best-effort prediction without requiring fine-tuned weights.
     
-    Parameters:
-        text (str): Input Manglish text.
+    Args:
+        text: Input Manglish text.
     
     Returns:
         dict: Predictions (same format as predict(), but rule-based).
@@ -266,8 +266,7 @@ def demo_predict(text: str) -> Dict[str, Any]:
             score = sent_result.get('score', sent_result.get('confidence', 0.5))
             if label in SENTIMENT_LABELS:
                 result['sentiment'] = {'label': label, 'confidence': round(float(score), 4)}
-    except (ImportError, Exception):
-        # Fallback: simple keyword-based sentiment
+    except: # Fallback: simple keyword-based sentiment
         result['sentiment'] = _keyword_sentiment(text)
     
     # Try using existing emotion module
@@ -279,8 +278,7 @@ def demo_predict(text: str) -> Dict[str, Any]:
             score = emo_result.get('score', emo_result.get('confidence', 0.5))
             if label in EMOTION_LABELS:
                 result['emotion'] = {'label': label, 'confidence': round(float(score), 4)}
-    except (ImportError, Exception):
-        # Fallback: simple keyword-based emotion
+    except: # Fallback: simple keyword-based emotion
         result['emotion'] = _keyword_emotion(text)
     
     # Intent detection (rule-based)

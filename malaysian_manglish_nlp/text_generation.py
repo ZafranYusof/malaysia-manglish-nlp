@@ -207,9 +207,9 @@ def _generate_synthetic_corpus(n_sentences: int = 3000, seed: Any = 42) -> List[
 def build_ngram_model(texts: List[str], n: str = 3) -> Dict[str, Any]:
     """Build an n-gram language model from tokenized texts.
 
-    Parameters:
-        texts (list): Either list of strings or list of token lists.
-        n (int): N-gram order (default 3 for trigram).
+    Args:
+        texts: Either list of strings or list of token lists.
+        n: N-gram order (default 3 for trigram).
 
     Returns:
         dict: Model containing unigrams, bigrams, trigrams, and metadata.
@@ -335,8 +335,7 @@ def load_default_model() -> None:
     # Save for future use
     try:
         _save_model(model)
-    except (OSError, IOError):
-        pass  # Non-critical if save fails
+    except: pass  # Non-critical if save fails
 
     _cached_model = model
     return model
@@ -360,10 +359,10 @@ def _get_next_word_probs(context: str, model: Any, temperature: Any = 1.0) -> Di
     Uses trigram with backoff to bigram and unigram.
     Applies Laplace smoothing for unseen n-grams.
 
-    Parameters:
-        context (list): Previous tokens (last 2 used for trigram).
-        model (dict): The n-gram model.
-        temperature (float): Sampling temperature.
+    Args:
+        context: Previous tokens (last 2 used for trigram).
+        model: The n-gram model.
+        temperature: Sampling temperature.
 
     Returns:
         dict: Word -> probability mapping.
@@ -495,10 +494,10 @@ def _sample_word(probs: Any, rng: Optional[Any] = None) -> str:
 def generate(prompt: Any = '', max_words: str = 50, temperature: Any = 1.0) -> str:
     """Generate Manglish text continuation from a prompt.
 
-    Parameters:
-        prompt (str): Starting text (can be empty for random generation).
-        max_words (int): Maximum number of words to generate.
-        temperature (float): Controls randomness. <1 = more predictable,
+    Args:
+        prompt: Starting text (can be empty for random generation).
+        max_words: Maximum number of words to generate.
+        temperature: Controls randomness. <1 = more predictable,
                            >1 = more creative/random.
 
     Returns:
@@ -541,9 +540,9 @@ def generate(prompt: Any = '', max_words: str = 50, temperature: Any = 1.0) -> s
 def autocomplete(prefix: str, top_n: int = 5) -> str:
     """Predict next words given a prefix.
 
-    Parameters:
-        prefix (str): Input text to complete.
-        top_n (int): Number of predictions to return.
+    Args:
+        prefix: Input text to complete.
+        top_n: Number of predictions to return.
 
     Returns:
         list[str]: Top predicted next words, ordered by probability.
@@ -574,8 +573,8 @@ def autocomplete(prefix: str, top_n: int = 5) -> str:
 def generate_sentence(style: Any = 'twitter') -> str:
     """Generate a complete sentence in a specific Manglish style.
 
-    Parameters:
-        style (str): One of 'twitter', 'whatsapp', 'reddit', 'news'.
+    Args:
+        style: One of 'twitter', 'whatsapp', 'reddit', 'news'.
 
     Returns:
         str: Generated sentence in the specified style.
@@ -621,8 +620,8 @@ def perplexity(text: str) -> float:
     Lower perplexity = text is more predictable/expected by the model.
     Higher perplexity = text is more surprising/unusual.
 
-    Parameters:
-        text (str): Input text to evaluate.
+    Args:
+        text: Input text to evaluate.
 
     Returns:
         float: Perplexity score (lower = more expected).

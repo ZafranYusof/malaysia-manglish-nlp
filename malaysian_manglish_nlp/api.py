@@ -10,6 +10,8 @@ Requires: pip install fastapi uvicorn
 
 from __future__ import annotations
 
+from typing import Any, Dict, List, Optional
+
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

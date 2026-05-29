@@ -15,9 +15,9 @@ import os
 def profile_all_modules(text: str, iterations: int = 100) -> Dict[str, Any]:
     """Profile all major modules with the given text.
     
-    Parameters:
-        text (str): Sample text to process.
-        iterations (int): Number of iterations per module. Default 100.
+    Args:
+        text: Sample text to process.
+        iterations: Number of iterations per module. Default 100.
     
     Returns:
         dict: Timing results per module (seconds per call).
@@ -62,10 +62,10 @@ def profile_all_modules(text: str, iterations: int = 100) -> Dict[str, Any]:
 def profile_module(module_name: str, text: str, iterations: int = 1000) -> Dict[str, Any]:
     """Profile a specific module in detail.
     
-    Parameters:
-        module_name (str): Module name (e.g., 'sentiment', 'normalize').
-        text (str): Sample text to process.
-        iterations (int): Number of iterations. Default 1000.
+    Args:
+        module_name: Module name (e.g., 'sentiment', 'normalize').
+        text: Sample text to process.
+        iterations: Number of iterations. Default 1000.
     
     Returns:
         dict: Detailed timing with min, max, mean, median, std.
@@ -140,8 +140,7 @@ def memory_usage() -> Dict[str, Any]:
                     if isinstance(obj, (dict, set, list, tuple)):
                         size = _deep_getsizeof(obj)
                     total_size += size
-                except (TypeError, AttributeError):
-                    pass
+                except: pass
         except Exception:
             pass
         
@@ -154,9 +153,9 @@ def memory_usage() -> Dict[str, Any]:
 def benchmark_throughput(texts: List[str], module: str = 'sentiment') -> Dict[str, Any]:
     """Benchmark throughput (texts processed per second).
     
-    Parameters:
-        texts (list): List of text strings to process.
-        module (str): Module to benchmark. Default 'sentiment'.
+    Args:
+        texts: List of text strings to process.
+        module: Module to benchmark. Default 'sentiment'.
     
     Returns:
         dict: Throughput metrics.
@@ -195,8 +194,8 @@ def benchmark_throughput(texts: List[str], module: str = 'sentiment') -> Dict[st
 def find_bottlenecks(text: str) -> Dict[str, Any]:
     """Find the slowest operations when processing text.
     
-    Parameters:
-        text (str): Text to analyze.
+    Args:
+        text: Text to analyze.
     
     Returns:
         list: Sorted list of (module_name, time_ms) tuples, slowest first.
@@ -235,8 +234,8 @@ def find_bottlenecks(text: str) -> Dict[str, Any]:
 def generate_report(output_path: Optional[str] = None) -> str:
     """Generate a comprehensive performance report in markdown.
     
-    Parameters:
-        output_path (str, optional): Path to write the report. If None, returns string.
+    Args:
+        output_path: Path to write the report. If None, returns string.
     
     Returns:
         str: Markdown report content.

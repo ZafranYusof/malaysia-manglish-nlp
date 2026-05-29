@@ -6,7 +6,7 @@ Rule-based with Malaysian slang awareness.
 
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List
 
 import re
 from malaysian_manglish_nlp.utils import get_shortforms
@@ -144,8 +144,8 @@ _INTENSIFIERS = {
 def detect_emotion(text: str) -> Dict[str, Any]:
     """Detect emotion in text.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         dict: Result with keys:
@@ -220,8 +220,8 @@ def detect_emotion(text: str) -> Dict[str, Any]:
 def detect_emotions_batch(texts: List[str]) -> List[Dict[str, Any]]:
     """Detect emotions for multiple texts.
     
-    Parameters:
-        texts (list[str]): Input texts.
+    Args:
+        texts: Input texts.
     
     Returns:
         list[dict]: Emotion results per text.
@@ -232,8 +232,8 @@ def detect_emotions_batch(texts: List[str]) -> List[Dict[str, Any]]:
 def emotion_summary(texts: List[str]) -> Dict[str, Any]:
     """Get emotion distribution summary for a collection of texts.
     
-    Parameters:
-        texts (list[str]): Input texts.
+    Args:
+        texts: Input texts.
     
     Returns:
         dict: Summary with emotion counts and percentages.

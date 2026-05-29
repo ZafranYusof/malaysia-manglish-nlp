@@ -152,9 +152,9 @@ def _is_relevant_to_target(text: str, target: str) -> bool:
 def detect_stance(text: str, target: Optional[str] = None) -> Dict[str, Any]:
     """Detect stance of text toward a target/topic.
 
-    Parameters:
-        text (str): Input text to analyze.
-        target (str, optional): The topic/entity to detect stance toward.
+    Args:
+        text: Input text to analyze.
+        target: The topic/entity to detect stance toward.
             If None, detects general stance of the text.
 
     Returns:
@@ -278,9 +278,9 @@ def detect_stance(text: str, target: Optional[str] = None) -> Dict[str, Any]:
 def detect_stance_batch(texts: List[str], target: Optional[str] = None) -> List[Dict[str, Any]]:
     """Detect stance for multiple texts.
 
-    Parameters:
-        texts (list[str]): List of texts to analyze.
-        target (str, optional): The topic/entity to detect stance toward.
+    Args:
+        texts: List of texts to analyze.
+        target: The topic/entity to detect stance toward.
 
     Returns:
         list[dict]: List of stance results, one per text.
@@ -295,9 +295,9 @@ def detect_stance_batch(texts: List[str], target: Optional[str] = None) -> List[
 def compare_stances(text1: str, text2: str) -> Dict[str, Any]:
     """Compare stances of two texts.
 
-    Parameters:
-        text1 (str): First text.
-        text2 (str): Second text.
+    Args:
+        text1: First text.
+        text2: Second text.
 
     Returns:
         str: "agree" | "disagree" | "unrelated"
@@ -337,8 +337,8 @@ def extract_stance_target(text: str) -> Dict[str, Any]:
 
     Attempts to identify the target/topic of the stance expression.
 
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
 
     Returns:
         str or None: The identified target, or None if unclear.

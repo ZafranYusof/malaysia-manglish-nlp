@@ -14,8 +14,8 @@ import re
 def normalize_elongated(text: str) -> str:
     """Normalize elongated/repeated characters.
     
-    Parameters:
-        text (str): Input text with elongated words.
+    Args:
+        text: Input text with elongated words.
     
     Returns:
         str: Normalized text.
@@ -41,8 +41,8 @@ def normalize_elongated(text: str) -> str:
 def normalize_money(text: str) -> str:
     """Normalize money expressions to standard form.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with normalized money expressions.
@@ -111,8 +111,8 @@ def normalize_money(text: str) -> str:
 def normalize_phone(text: str) -> str:
     """Normalize Malaysian phone numbers to standard format.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with normalized phone numbers.
@@ -158,8 +158,8 @@ def normalize_phone(text: str) -> str:
 def normalize_date(text: str) -> str:
     """Normalize date expressions.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with normalized dates.
@@ -214,8 +214,8 @@ def normalize_date(text: str) -> str:
 def normalize_time(text: str) -> str:
     """Normalize time expressions.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with normalized time.
@@ -274,8 +274,8 @@ def normalize_time(text: str) -> str:
 def normalize_number(text: str) -> str:
     """Normalize number expressions to words (BM).
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with numbers converted to BM words.
@@ -315,8 +315,8 @@ def normalize_number(text: str) -> str:
 def normalize_url(text: str) -> str:
     """Normalize URLs to readable form.
     
-    Parameters:
-        text (str): Input text.
+    Args:
+        text: Input text.
     
     Returns:
         str: Text with URLs simplified.
@@ -349,9 +349,9 @@ def normalize_url(text: str) -> str:
 def normalize_all(text: str, options: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """Apply all normalizations.
     
-    Parameters:
-        text (str): Input text.
-        options (dict): Which normalizations to apply. Default: all True.
+    Args:
+        text: Input text.
+        options: Which normalizations to apply. Default: all True.
             Keys: elongated, money, phone, date, time, number, url
     
     Returns:
