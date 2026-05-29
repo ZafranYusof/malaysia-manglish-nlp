@@ -13,7 +13,7 @@ News aggregation, document processing, social media thread summaries, and resear
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 article = """
 Harga minyak sawit mentah (CPO) Malaysia terus meningkat ke paras tertinggi 
@@ -180,7 +180,7 @@ $ mnlp summarize --file article.txt --json
 
 ## How it works
 
-manglish-nlp uses **TextRank**, a graph-based extractive summarization algorithm:
+malaysian-manglish-nlp uses **TextRank**, a graph-based extractive summarization algorithm:
 
 1. **Tokenize**  -  split text into sentences
 2. **Build similarity graph**  -  compute pairwise sentence similarity (word overlap + semantic)

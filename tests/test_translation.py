@@ -1,7 +1,7 @@
-"""Tests for manglish_nlp.translation module."""
+"""Tests for malaysian_manglish_nlp.translation module."""
 
 import pytest
-from manglish_nlp.translation import (
+from malaysian_manglish_nlp.translation import (
     translate, to_english, to_malay, to_formal,
     word_translate, detect_and_translate,
 )

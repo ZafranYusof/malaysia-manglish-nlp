@@ -1,12 +1,12 @@
 import sys, os
 sys.path.insert(0, '.')
 sys.path.insert(0, os.path.join('.', 'tests'))
-from manglish_nlp import detect_language
-from manglish_nlp.sarcasm import detect_sarcasm
-from manglish_nlp.emotion import detect_emotion
-from manglish_nlp.dialect import detect_dialect
+from malaysian_manglish_nlp import detect_language
+from malaysian_manglish_nlp.sarcasm import detect_sarcasm
+from malaysian_manglish_nlp.emotion import detect_emotion
+from malaysian_manglish_nlp.dialect import detect_dialect
 from benchmark_expanded import LANGUAGE_DATA, SARCASM_DATA, EMOTION_DATA, DIALECT_DATA, SENTIMENT_DATA
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 
 print("=== LANGUAGE FAILS ===")
 for text, expected in LANGUAGE_DATA:

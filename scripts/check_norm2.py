@@ -1,7 +1,7 @@
 import sys, os
 sys.path.insert(0, '.')
 sys.path.insert(0, os.path.join('.', 'tests'))
-from manglish_nlp import normalize
+from malaysian_manglish_nlp import normalize
 from benchmark_expanded import NORM_DATA
 
 for text, expected in NORM_DATA:

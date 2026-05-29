@@ -7,7 +7,7 @@ import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from manglish_nlp import (
+from malaysian_manglish_nlp import (
     normalize, normalize_preserve_case,
     detect_language,
     sentiment, analyze_sentiment,
@@ -26,11 +26,11 @@ from manglish_nlp import (
     available_tasks, load_dictionary,
     similarity, augmentation,
 )
-from manglish_nlp.tokenizer import morpheme_tokenize
-from manglish_nlp.pos import pos_tag_detailed
-from manglish_nlp.ner import extract_entities
-from manglish_nlp.stemmer import get_root
-from manglish_nlp.augmentation import (
+from malaysian_manglish_nlp.tokenizer import morpheme_tokenize
+from malaysian_manglish_nlp.pos import pos_tag_detailed
+from malaysian_manglish_nlp.ner import extract_entities
+from malaysian_manglish_nlp.stemmer import get_root
+from malaysian_manglish_nlp.augmentation import (
     socialmedia_form, kelantanese_form, vowel_alternate,
     replace_similar_vowels, replace_similar_consonants, synonym, augment,
 )

@@ -3,13 +3,14 @@ include LICENSE
 include pyproject.toml
 
 # Include lightweight resources only (JSON configs, dictionaries)
-recursive-include manglish_nlp/resources *.json *.txt *.md
+recursive-include malaysian_manglish_nlp/resources *.json *.txt *.md
 
 # Exclude large model files (downloaded on demand)
 global-exclude *.model
 global-exclude *.npy
 global-exclude *.pt
 global-exclude *.bin
+global-exclude *.pyd
 global-exclude site/*
 
 # Include datasets metadata only

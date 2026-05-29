@@ -11,7 +11,7 @@ Analysis modules extract meaning, tone, and linguistic characteristics from text
 Default models are rule-based + statistical (zero dependencies). Install `[ml]` for transformer-backed models with higher accuracy on complex sentences.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 ---
@@ -19,7 +19,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Sedap gila nasi lemak kat kedai tu, tapi service lambat sikit"
 
@@ -43,7 +43,7 @@ mnlp.emotion(text)
 Analyse sentiment of Malaysian text with code-switching support. Returns positive, negative, or neutral with confidence score.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.sentiment("Sedap gila nasi lemak kat kedai tu!")
 # {'label': 'positive', 'score': 0.96}
@@ -91,7 +91,7 @@ Detects specific emotional states beyond positive/negative. Supports 8 emotion l
 **Supported emotions:** `joy`, `sadness`, `anger`, `fear`, `surprise`, `disgust`, `trust`, `anticipation`
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.emotion("Geram betul aku dengan dia, dah la lambat pastu buat hal")
 # {'primary': 'anger', 'score': 0.88, 'secondary': 'frustration'}
@@ -125,7 +125,7 @@ mnlp.emotion("Geram betul aku dengan dia, dah la lambat pastu buat hal")
 Detect language composition in mixed-language text. Supports per-token detection and regional Malaysian dialect identification.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.language("Eh jom la we go makan, I lapar gila already")
 # {'primary': 'manglish', 'mix': {'ms': 0.45, 'en': 0.55}}
@@ -164,7 +164,7 @@ mnlp.language("Eh jom la we go makan, I lapar gila already")
 Detect and filter profanity in Malaysian languages including slang variants, leetspeak, and euphemisms.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.profanity("Bodoh la kau ni, sial betul")
 # {'has_profanity': True, 'words': ['bodoh', 'sial'], 'severity': 'medium'}
@@ -200,7 +200,7 @@ mnlp.profanity("Bodoh la kau ni, sial betul")
 Detect sarcasm and irony in Malaysian text. Identifies linguistic cues like exaggerated praise, parenthetical remarks, and tonal contradictions.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.sarcasm("Wah bagus la tu, memang pandai")
 # {'is_sarcastic': True, 'confidence': 0.78, 'cues': ['wah', 'memang']}

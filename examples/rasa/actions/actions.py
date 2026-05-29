@@ -1,7 +1,7 @@
 """
-Custom Rasa actions using manglish-nlp.
+Custom Rasa actions using malaysian-manglish-nlp.
 
-These actions leverage manglish-nlp for:
+These actions leverage malaysian-manglish-nlp for:
 - Sentiment-aware responses
 - NER extraction
 - Translation fallback
@@ -21,7 +21,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, FollowupAction
 from rasa_sdk.executor import CollectingDispatcher
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 logger = logging.getLogger(__name__)
 
@@ -41,12 +41,12 @@ class ActionAnalyseSentiment(Action):
         text = tracker.latest_message.get("text", "")
 
         # Run sentiment analysis
-        result = manglish_nlp.sentiment(text)
+        result = malaysian_manglish_nlp.sentiment(text)
         label = result.get("label", "neutral").lower()
         score = result.get("score", 0.5)
 
         # Also detect emotion for richer context
-        emotion = manglish_nlp.detect_emotion(text)
+        emotion = malaysian_manglish_nlp.detect_emotion(text)
 
         # Build response based on sentiment
         if label == "positive":
@@ -75,7 +75,7 @@ class ActionAnalyseSentiment(Action):
 
 
 class ActionTranslate(Action):
-    """Translate user's message using manglish-nlp."""
+    """Translate user's message using malaysian-manglish-nlp."""
 
     def name(self) -> str:
         return "action_translate"
@@ -89,18 +89,18 @@ class ActionTranslate(Action):
         text = tracker.latest_message.get("text", "")
 
         # Detect language first
-        lang = manglish_nlp.detect_language(text)
+        lang = malaysian_manglish_nlp.detect_language(text)
 
         # Translate based on detected language
         if lang.get("language", "") == "en":
-            translated = manglish_nlp.to_malay(text)
+            translated = malaysian_manglish_nlp.to_malay(text)
             direction = "English → BM"
         else:
-            translated = manglish_nlp.to_english(text)
+            translated = malaysian_manglish_nlp.to_english(text)
             direction = "BM/Manglish → English"
 
         # Also get formal version
-        formal = manglish_nlp.to_formal(text)
+        formal = malaysian_manglish_nlp.to_formal(text)
 
         response = (
             f"**{direction}:**\n"
@@ -115,7 +115,7 @@ class ActionTranslate(Action):
 
 
 class ActionExtractEntities(Action):
-    """Extract entities from user message using manglish-nlp NER."""
+    """Extract entities from user message using malaysian-manglish-nlp NER."""
 
     def name(self) -> str:
         return "action_extract_entities"
@@ -128,7 +128,7 @@ class ActionExtractEntities(Action):
     ) -> List[Dict[str, Any]]:
         text = tracker.latest_message.get("text", "")
 
-        entities = manglish_nlp.ner_tag(text)
+        entities = malaysian_manglish_nlp.ner_tag(text)
 
         if not entities:
             dispatcher.utter_message(text="Aku tak jumpa named entities dalam text tu.")
@@ -171,8 +171,8 @@ class ActionMakanRecommendation(Action):
 
         # Normalise user's message for better matching
         text = tracker.latest_message.get("text", "")
-        normalised = manglish_nlp.normalize(text)
-        sentiment = manglish_nlp.sentiment(text)
+        normalised = malaysian_manglish_nlp.normalize(text)
+        sentiment = malaysian_manglish_nlp.sentiment(text)
 
         # Mood-aware response
         if sentiment.get("label") == "positive":
@@ -207,9 +207,9 @@ class ActionSentimentAwareResponse(Action):
         text = tracker.latest_message.get("text", "")
 
         # Full analysis
-        sentiment = manglish_nlp.sentiment(text)
-        emotion = manglish_nlp.detect_emotion(text)
-        normalised = manglish_nlp.normalize(text)
+        sentiment = malaysian_manglish_nlp.sentiment(text)
+        emotion = malaysian_manglish_nlp.detect_emotion(text)
+        normalised = malaysian_manglish_nlp.normalize(text)
 
         label = sentiment.get("label", "neutral")
         emo = emotion.get("emotion", "neutral")

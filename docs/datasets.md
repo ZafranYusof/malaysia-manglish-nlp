@@ -1,6 +1,6 @@
 ﻿# Datasets
 
-manglish-nlp was trained on curated Malaysian text datasets.
+malaysian-manglish-nlp was trained on curated Malaysian text datasets.
 
 ---
 
@@ -95,7 +95,7 @@ Annotated from Malaysian news articles (Bernama, Berita Harian) with NER tags fo
 | EN → MY | 600+ | English → standard Malay |
 | MY → EN | 600+ | Standard Malay → English |
 
-Used as the backbone for `manglish_nlp.translate`. Dictionary entries from DBP (Dewan Bahasa dan Pustaka) supplement the parallel corpus.
+Used as the backbone for `malaysian_manglish_nlp.translate`. Dictionary entries from DBP (Dewan Bahasa dan Pustaka) supplement the parallel corpus.
 
 ---
 
@@ -110,10 +110,10 @@ Used as the backbone for `manglish_nlp.translate`. Dictionary entries from DBP (
 
 ## File Locations
 
-All datasets live in `manglish_nlp/data/`:
+All datasets live in `malaysian_manglish_nlp/data/`:
 
 ```
-manglish_nlp/data/
+malaysian_manglish_nlp/data/
 ├── sentiment/
 │   ├── train.csv
 │   ├── test.csv
@@ -136,7 +136,7 @@ manglish_nlp/data/
 ## Accessing datasets programmatically
 
 ```python
-from manglish_nlp.datasets import (
+from malaysian_manglish_nlp.datasets import (
     load_sentiment,
     load_normalisation,
     load_ner,
@@ -167,11 +167,11 @@ en_my, my_en = load_translation()
 If you use these datasets in your research, please cite:
 
 ```bibtex
-@software{manglish_nlp_2025,
-  title  = {manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
+@software{malaysian_manglish_nlp_2025,
+  title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2025},
-  url    = {https://github.com/ZafranYusof/manglish-nlp}
+  url    = {https://github.com/ZafranYusof/malaysian-manglish-nlp}
 }
 ```
 
@@ -179,4 +179,4 @@ If you use these datasets in your research, please cite:
 
 ## License
 
-All datasets are released under the [MIT License](https://github.com/ZafranYusof/manglish-nlp/blob/main/LICENSE), the same as manglish-nlp itself. Social media text was anonymised where possible before annotation.
+All datasets are released under the [MIT License](https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/LICENSE), the same as malaysian-manglish-nlp itself. Social media text was anonymised where possible before annotation.

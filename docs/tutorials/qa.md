@@ -13,7 +13,7 @@ Customer support automation, knowledge base search, document Q&A, and chatbot in
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 context = """
 Petronas Twin Towers terletak di Kuala Lumpur, Malaysia. Menara berkembar ini 
@@ -181,7 +181,7 @@ $ mnlp keywords "Harga minyak sawit meningkat ke paras tertinggi"
 
 For generative QA (free-form answers), install `[ml]`:
 ```bash
-pip install manglish-nlp[ml]
+pip install malaysian-manglish-nlp[ml]
 ```
 
 ---

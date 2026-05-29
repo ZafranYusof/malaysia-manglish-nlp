@@ -11,7 +11,7 @@ Text processing modules transform raw, messy Malaysian text into clean, structur
 All modules in this group have **zero external dependencies** and run in under 1 ms per sentence.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 ---
@@ -19,7 +19,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 raw = "Wehh xpe la bro, aku nk g mkn jap lg 🔥🔥🔥 bestttt!!!"
 
@@ -41,7 +41,7 @@ print(tokens)
 Converts informal Manglish spelling to standard form. Ships with **12,000+ shortform mappings** covering SMS-speak, social media abbreviations, and common misspellings.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "xpe la bro, aku nk g mkn jap lg"
 result = mnlp.normalize(text)
@@ -77,7 +77,7 @@ print(result)
 Removes noise from text  -  URLs, mentions, hashtags, emojis, repeated characters, and HTML artefacts.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Weh @ahmad check ni https://t.co/abc 🔥🔥🔥 bestttt"
 result = mnlp.clean(text)
@@ -108,7 +108,7 @@ print(result)
 Converts casual Manglish to formal Bahasa Melayu suitable for official documents, reports, or academic writing.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Aku rasa mcm nak apply kerja kat situ la"
 result = mnlp.formalize(text)
@@ -134,7 +134,7 @@ print(result)
 Malaysian-aware tokeniser that correctly handles mixed scripts, particles (`la`, `je`, `kot`), compound words, and code-switched text.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Tak boleh la macam tu, it's not fair"
 tokens = mnlp.tokenize(text)
@@ -163,7 +163,7 @@ print(tokens)
 Rule-based Malay stemmer handling prefixes (`me-`, `ber-`, `di-`, `ke-`, `memper-`) and suffixes (`-kan`, `-an`, `-i`).
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 words = ["memakan", "berlari", "ditulis", "permainan"]
 stems = [mnlp.stem(w) for w in words]
@@ -192,7 +192,7 @@ print(stems)
 Splits unsegmented text into words. Useful for hashtags, concatenated URLs, and OCR artefacts.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "nakpergimanasatumalam"
 result = mnlp.segment(text)
@@ -224,7 +224,7 @@ print(result)
 Context-aware spelling correction that distinguishes intentional abbreviations (`nk`, `kat`, `mcm`) from actual typos.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Aku nk prgi mkn kat keday tu"
 corrected = mnlp.spelling(text)
@@ -264,7 +264,7 @@ raw text → clean → normalize → tokenize → [stem | spell] → ready for a
 Use the [`pipeline`](tools.md#pipeline) module to make this reusable:
 
 ```python
-from manglish_nlp import Pipeline
+from malaysian_manglish_nlp import Pipeline
 
 preprocess = Pipeline([
     'clean',

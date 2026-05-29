@@ -9,7 +9,7 @@
 Extraction modules convert unstructured text into structured representations: named entities, part-of-speech tags, dependency trees, keyword lists, and coreference chains. All modules handle Manglish and code-switched input natively.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 ---
@@ -17,7 +17,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Siti beli iPhone 15 kat Low Yat Plaza semalam, harga RM4,200"
 
@@ -43,7 +43,7 @@ mnlp.keywords(text, top_k=3)
 Named Entity Recognition with 7 entity types trained on Malaysian text. Handles Malay, Chinese, Indian, and mixed names with honorifics (Dato', Tan Sri, Dr.).
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.ner("Dato' Sri Ismail Sabri umum bantuan RM500 di Putrajaya")
 # [('Dato' Sri Ismail Sabri', 'PERSON'), ('RM500', 'MONEY'),
@@ -88,7 +88,7 @@ mnlp.ner("Dato' Sri Ismail Sabri umum bantuan RM500 di Putrajaya")
 Part-of-speech tagging using Universal Dependencies (UD) adapted for Malay grammar. Correctly handles particles, code-switched words, and informal auxiliaries (`nak`, `dah`, `boleh`).
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.pos("Aku nak pergi makan kat kedai tu")
 # [('Aku', 'PRON'), ('nak', 'AUX'), ('pergi', 'VERB'), ('makan', 'VERB'),
@@ -136,7 +136,7 @@ mnlp.pos("Aku nak pergi makan kat kedai tu")
 Dependency parsing for Malay and Manglish sentences. Returns syntactic relations between words in Universal Dependencies format.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.dependency("Ali bagi buku tu kat Siti semalam")
 # [('Ali', 'nsubj', 'bagi'),
@@ -179,7 +179,7 @@ mnlp.dependency("Ali bagi buku tu kat Siti semalam")
 Resolve pronouns and repeated mentions across sentences. Handles gender-neutral Malay pronouns (`dia`, `ia`, `mereka`).
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Ahmad jumpa Siti kat mall. Dia cakap dia nak balik awal."
 mnlp.coreference(text)
@@ -213,7 +213,7 @@ mnlp.coreference(text)
 Extract keywords and key phrases using multiple algorithms. Ships with a Malaysian-specific stopword list that includes particles (`la`, `je`, `kot`) and common code-switch fillers.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 article = """Kerajaan Malaysia umumkan pakej rangsangan ekonomi bernilai
 RM50 bilion untuk membantu rakyat dan perniagaan kecil yang terjejas."""

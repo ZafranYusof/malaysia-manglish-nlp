@@ -1,4 +1,4 @@
-"""Expanded benchmark tests for manglish_nlp.
+"""Expanded benchmark tests for malaysian_manglish_nlp.
 
 Loads datasets/manglish_labeled.jsonl and evaluates each module's accuracy
 against labeled ground truth. Reports per-module accuracy and enforces
@@ -13,7 +13,7 @@ from collections import defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 
 DATASET_PATH = os.path.join(
@@ -60,7 +60,7 @@ class TestSentimentBenchmark:
             text = item["text"]
             expected = normalize_label(item["sentiment"])
             
-            result = manglish_nlp.sentiment(text)
+            result = malaysian_manglish_nlp.sentiment(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("label", result.get("sentiment", ""))
@@ -100,7 +100,7 @@ class TestSentimentBenchmark:
             text = item["text"]
             expected = normalize_label(item["sentiment"])
             
-            result = manglish_nlp.sentiment(text)
+            result = malaysian_manglish_nlp.sentiment(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("label", result.get("sentiment", ""))
@@ -149,7 +149,7 @@ class TestLanguageBenchmark:
             expected = normalize_label(item["language"])
             expected = equiv_map.get(expected, expected)
             
-            result = manglish_nlp.detect_language(text)
+            result = malaysian_manglish_nlp.detect_language(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("language", result.get("lang", ""))
@@ -200,7 +200,7 @@ class TestEmotionBenchmark:
             text = item["text"]
             expected = normalize_label(item["emotion"])
             
-            result = manglish_nlp.detect_emotion(text)
+            result = malaysian_manglish_nlp.detect_emotion(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("emotion", result.get("label", ""))
@@ -247,7 +247,7 @@ class TestIntentBenchmark:
             text = item["text"]
             expected = normalize_label(item["intent"])
             
-            result = manglish_nlp.classify_intent(text)
+            result = malaysian_manglish_nlp.classify_intent(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("intent", result.get("label", ""))
@@ -294,7 +294,7 @@ class TestTopicBenchmark:
             text = item["text"]
             expected = normalize_label(item["topic"])
             
-            result = manglish_nlp.classify_topic(text)
+            result = malaysian_manglish_nlp.classify_topic(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("topic", result.get("label", ""))
@@ -331,7 +331,7 @@ class TestTopicBenchmark:
             text = item["text"]
             expected = normalize_label(item["topic"])
             
-            result = manglish_nlp.classify_topic(text)
+            result = malaysian_manglish_nlp.classify_topic(text)
             if isinstance(result, dict):
                 predicted = normalize_label(
                     result.get("topic", result.get("label", ""))
@@ -363,11 +363,11 @@ class TestOverallSummary:
         data = self.data
         
         modules = {
-            "sentiment": lambda t: manglish_nlp.sentiment(t),
-            "language": lambda t: manglish_nlp.detect_language(t),
-            "emotion": lambda t: manglish_nlp.detect_emotion(t),
-            "intent": lambda t: manglish_nlp.classify_intent(t),
-            "topic": lambda t: manglish_nlp.classify_topic(t),
+            "sentiment": lambda t: malaysian_manglish_nlp.sentiment(t),
+            "language": lambda t: malaysian_manglish_nlp.detect_language(t),
+            "emotion": lambda t: malaysian_manglish_nlp.detect_emotion(t),
+            "intent": lambda t: malaysian_manglish_nlp.classify_intent(t),
+            "topic": lambda t: malaysian_manglish_nlp.classify_topic(t),
         }
         
         equiv_map = {

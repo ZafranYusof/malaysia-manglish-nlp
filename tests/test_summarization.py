@@ -1,10 +1,10 @@
-"""Tests for manglish_nlp.summarization module."""
+"""Tests for malaysian_manglish_nlp.summarization module."""
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.summarization import (
+from malaysian_manglish_nlp.summarization import (
     summarize, summarize_sentences, extract_key_phrases,
     get_sentence_scores, summarize_thread,
 )

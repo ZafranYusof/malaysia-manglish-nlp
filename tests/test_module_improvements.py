@@ -13,10 +13,10 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.sentiment import aspect_sentiment
-from manglish_nlp.qa import find_relevant_sentence, _tfidf_score, _sentence_split
-from manglish_nlp.ner import ner_tag, extract_entities
-from manglish_nlp.code_switching import resolve_ambiguous
+from malaysian_manglish_nlp.sentiment import aspect_sentiment
+from malaysian_manglish_nlp.qa import find_relevant_sentence, _tfidf_score, _sentence_split
+from malaysian_manglish_nlp.ner import ner_tag, extract_entities
+from malaysian_manglish_nlp.code_switching import resolve_ambiguous
 
 
 # ============================================================

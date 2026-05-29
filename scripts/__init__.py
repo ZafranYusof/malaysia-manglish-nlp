@@ -1,5 +1,5 @@
 """
-manglish-nlp: Malaysian Manglish text processing toolkit.
+malaysian-manglish-nlp: Malaysian Manglish text processing toolkit.
 
 Usage:
     from scripts.normalize import normalize

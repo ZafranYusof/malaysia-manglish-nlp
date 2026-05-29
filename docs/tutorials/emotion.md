@@ -8,14 +8,14 @@
 
 Customer experience analysis, mental health monitoring, social media sentiment deep-dives, and chatbot emotional intelligence. Knowing something is "negative" isn't enough  -  is the customer *angry* or *sad*? Is the tweet *fearful* or *disgusted*?
 
-manglish-nlp detects 8 emotion categories with intensity, handling Manglish and code-switched text.
+malaysian-manglish-nlp detects 8 emotion categories with intensity, handling Manglish and code-switched text.
 
 ---
 
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 result = mnlp.detect_emotion("Geram betul aku dengan dia, dah la lambat pastu buat hal")
 print(result)

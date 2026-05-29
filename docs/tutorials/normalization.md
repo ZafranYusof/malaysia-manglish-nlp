@@ -8,14 +8,14 @@
 
 Malaysian social media text is full of shortforms ("nk", "brp", "xpe"), slang, elongated words ("bestttt"), and noise (URLs, mentions, repeated characters). Most NLP tools choke on this. Normalization converts messy input into clean text that downstream modules can process accurately.
 
-manglish-nlp has 638+ shortform mappings and handles Malaysian-specific patterns natively.
+malaysian-manglish-nlp has 638+ shortform mappings and handles Malaysian-specific patterns natively.
 
 ---
 
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Basic normalization
 result = mnlp.normalize("xpe la bro, aku nk g mkn jap lg")
@@ -29,7 +29,7 @@ print(result)
 
 ### Shortform expansion
 
-manglish-nlp knows 638+ Malaysian text shortforms:
+malaysian-manglish-nlp knows 638+ Malaysian text shortforms:
 
 ```python
 mnlp.normalize("nk tnya brp hrga")

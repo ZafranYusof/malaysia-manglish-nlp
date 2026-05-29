@@ -9,11 +9,11 @@ import os
 import time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import manglish_nlp
-from manglish_nlp.emotion import detect_emotion
-from manglish_nlp.profanity import detect_profanity
-from manglish_nlp.dialect import detect_dialect
-from manglish_nlp.sarcasm import detect_sarcasm
+import malaysian_manglish_nlp
+from malaysian_manglish_nlp.emotion import detect_emotion
+from malaysian_manglish_nlp.profanity import detect_profanity
+from malaysian_manglish_nlp.dialect import detect_dialect
+from malaysian_manglish_nlp.sarcasm import detect_sarcasm
 
 # ============================================================
 # SENTIMENT (120 cases)
@@ -483,7 +483,7 @@ def run_benchmark():
     # Sentiment
     passed = 0
     for text, expected in SENTIMENT_DATA:
-        r = manglish_nlp.sentiment(text)
+        r = malaysian_manglish_nlp.sentiment(text)
         if r['sentiment'] == expected:
             passed += 1
     total = len(SENTIMENT_DATA)
@@ -495,7 +495,7 @@ def run_benchmark():
     # Language
     passed = 0
     for text, expected in LANGUAGE_DATA:
-        r = manglish_nlp.detect_language(text)
+        r = malaysian_manglish_nlp.detect_language(text)
         if r['language'] == expected:
             passed += 1
     total = len(LANGUAGE_DATA)
@@ -555,7 +555,7 @@ def run_benchmark():
     # Normalization
     passed = 0
     for text, expected in NORM_DATA:
-        r = manglish_nlp.normalize(text)
+        r = malaysian_manglish_nlp.normalize(text)
         if r == expected:
             passed += 1
     total = len(NORM_DATA)
@@ -567,7 +567,7 @@ def run_benchmark():
     # Stemmer
     passed = 0
     for text, expected in STEMMER_DATA:
-        r = manglish_nlp.stem_word(text)
+        r = malaysian_manglish_nlp.stem_word(text)
         if r == expected:
             passed += 1
     total = len(STEMMER_DATA)

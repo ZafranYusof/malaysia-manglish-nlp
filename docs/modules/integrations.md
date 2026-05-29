@@ -1,15 +1,15 @@
 ﻿# Integrations
 
-**Connect manglish-nlp to spaCy, FastAPI, CLI, and LangChain  -  deploy anywhere.**
+**Connect malaysian-manglish-nlp to spaCy, FastAPI, CLI, and LangChain  -  deploy anywhere.**
 
 ---
 
 ## Overview
 
-Integration modules let you use manglish-nlp inside existing frameworks: as spaCy pipeline components, behind a REST API with auto-generated docs, from the command line, or as LangChain tools for AI agents.
+Integration modules let you use malaysian-manglish-nlp inside existing frameworks: as spaCy pipeline components, behind a REST API with auto-generated docs, from the command line, or as LangChain tools for AI agents.
 
 ```bash
-pip install manglish-nlp[all]  # install all integration extras
+pip install malaysian-manglish-nlp[all]  # install all integration extras
 ```
 
 ---
@@ -18,7 +18,7 @@ pip install manglish-nlp[all]  # install all integration extras
 
 === "Python"
     ```python
-    import manglish_nlp as mnlp
+    import malaysian_manglish_nlp as mnlp
 
     # spaCy pipeline
     nlp = mnlp.spacy_integration.load()
@@ -27,7 +27,7 @@ pip install manglish-nlp[all]  # install all integration extras
     # [('Ahmad', 'PERSON'), ('Pavilion KL', 'LOCATION')]
 
     # LangChain tool
-    from manglish_nlp.langchain_tool import SentimentTool
+    from malaysian_manglish_nlp.langchain_tool import SentimentTool
     tool = SentimentTool()
     tool.run("Best gila makanan sini!")
     # "positive (0.94)"
@@ -49,13 +49,13 @@ pip install manglish-nlp[all]  # install all integration extras
 
 ### `spacy_integration`
 
-Use manglish-nlp modules as native spaCy pipeline components. Access entities, POS tags, and sentiment through the standard spaCy `Doc` API.
+Use malaysian-manglish-nlp modules as native spaCy pipeline components. Access entities, POS tags, and sentiment through the standard spaCy `Doc` API.
 
-**Requires:** `pip install manglish-nlp[spacy]`
+**Requires:** `pip install malaysian-manglish-nlp[spacy]`
 
 ```python
 import spacy
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Load full pipeline
 nlp = mnlp.spacy_integration.load()
@@ -109,13 +109,13 @@ doc._.sentiment
 ```
 
 !!! tip "Mixing Components"
-    Combine manglish-nlp components with standard spaCy components. For example, use `mnlp_tokenizer` + `mnlp_ner` with spaCy's built-in `sentencizer` for sentence boundary detection.
+    Combine malaysian-manglish-nlp components with standard spaCy components. For example, use `mnlp_tokenizer` + `mnlp_ner` with spaCy's built-in `sentencizer` for sentence boundary detection.
 
 ---
 
 ### REST API
 
-Deploy manglish-nlp as a FastAPI server with automatic Swagger documentation, CORS, rate limiting, and batch support.
+Deploy malaysian-manglish-nlp as a FastAPI server with automatic Swagger documentation, CORS, rate limiting, and batch support.
 
 #### Starting the Server
 
@@ -128,12 +128,12 @@ Deploy manglish-nlp as a FastAPI server with automatic Swagger documentation, CO
     mnlp serve --modules sentiment,ner,normalize --port 9000
 
     # Production with workers
-    uvicorn manglish_nlp.api:app --workers 4 --port 8000
+    uvicorn malaysian_manglish_nlp.api:app --workers 4 --port 8000
     ```
 
 === "Python"
     ```python
-    from manglish_nlp.api import create_app
+    from malaysian_manglish_nlp.api import create_app
 
     app = create_app(
         modules=["sentiment", "ner", "normalize", "translate"],
@@ -210,7 +210,7 @@ Deploy manglish-nlp as a FastAPI server with automatic Swagger documentation, CO
 !!! tip "Production Deployment"
     Use gunicorn with uvicorn workers for production:
     ```bash
-    gunicorn manglish_nlp.api:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+    gunicorn malaysian_manglish_nlp.api:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
     ```
 
 ---
@@ -299,14 +299,14 @@ mnlp config show
 
 ### `langchain`
 
-Use manglish-nlp modules as LangChain tools for AI agent workflows. Each module wraps as a standard LangChain `BaseTool` with description and schema.
+Use malaysian-manglish-nlp modules as LangChain tools for AI agent workflows. Each module wraps as a standard LangChain `BaseTool` with description and schema.
 
-**Requires:** `pip install manglish-nlp[langchain]`
+**Requires:** `pip install malaysian-manglish-nlp[langchain]`
 
 ```python
 from langchain.agents import initialize_agent, AgentType
 from langchain.chat_models import ChatOpenAI
-from manglish_nlp.langchain_tool import (
+from malaysian_manglish_nlp.langchain_tool import (
     SentimentTool,
     NerTool,
     TranslateTool,
@@ -328,7 +328,7 @@ agent = initialize_agent(
     verbose=True
 )
 
-# Agent can now use manglish-nlp tools
+# Agent can now use malaysian-manglish-nlp tools
 agent.run("Analyse the sentiment of 'Best gila makanan sini!' and translate it to English")
 # > Using tool: sentiment_analysis
 # > Input: "Best gila makanan sini!"
@@ -357,7 +357,7 @@ agent.run("Analyse the sentiment of 'Best gila makanan sini!' and translate it t
 #### Custom Tool Configuration
 
 ```python
-from manglish_nlp.langchain_tool import SentimentTool
+from malaysian_manglish_nlp.langchain_tool import SentimentTool
 
 # With custom settings
 tool = SentimentTool(
@@ -369,7 +369,7 @@ tool = SentimentTool(
 
 !!! example "Building a Moderation Agent"
     ```python
-    from manglish_nlp.langchain_tool import SentimentTool, HateSpeechTool, ProfanityTool
+    from malaysian_manglish_nlp.langchain_tool import SentimentTool, HateSpeechTool, ProfanityTool
 
     moderation_tools = [SentimentTool(), HateSpeechTool(), ProfanityTool()]
     # Agent can triage content using all three signals

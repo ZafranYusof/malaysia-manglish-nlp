@@ -1,10 +1,10 @@
-"""Tests for manglish_nlp.discourse module."""
+"""Tests for malaysian_manglish_nlp.discourse module."""
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.discourse import (
+from malaysian_manglish_nlp.discourse import (
     analyze_discourse,
     extract_arguments,
     detect_discourse_markers,

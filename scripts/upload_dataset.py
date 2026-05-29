@@ -6,7 +6,7 @@ token = os.environ.get("HF_TOKEN", "YOUR_HF_TOKEN_HERE")
 
 # Create dataset repo under vexccz namespace
 try:
-    create_repo("vexccz/manglish-nlp-dataset", repo_type="dataset", token=token, exist_ok=True)
+    create_repo("vexccz/malaysian-manglish-nlp-dataset", repo_type="dataset", token=token, exist_ok=True)
     print("Created/accessed dataset repo")
 except Exception as e:
     print(f"Repo may already exist: {e}")
@@ -28,7 +28,7 @@ for f in files_to_upload:
             api.upload_file(
                 path_or_fileobj=f,
                 path_in_repo=os.path.basename(f),
-                repo_id="vexccz/manglish-nlp-dataset",
+                repo_id="vexccz/malaysian-manglish-nlp-dataset",
                 repo_type="dataset",
                 token=token,
                 commit_message=f"Upload {os.path.basename(f)}"
@@ -45,7 +45,7 @@ if os.path.exists("datasets/huggingface_card.md"):
         api.upload_file(
             path_or_fileobj="datasets/huggingface_card.md",
             path_in_repo="README.md",
-            repo_id="vexccz/manglish-nlp-dataset",
+            repo_id="vexccz/malaysian-manglish-nlp-dataset",
             repo_type="dataset",
             token=token,
             commit_message="Upload dataset card"
@@ -57,4 +57,4 @@ else:
     print("No huggingface_card.md found")
 
 print("Dataset upload complete!")
-print("View at: https://huggingface.co/datasets/vexccz/manglish-nlp-dataset")
+print("View at: https://huggingface.co/datasets/vexccz/malaysian-manglish-nlp-dataset")

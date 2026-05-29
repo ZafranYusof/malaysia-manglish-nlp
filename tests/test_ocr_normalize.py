@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.ocr_normalize import (
+from malaysian_manglish_nlp.ocr_normalize import (
     normalize_ocr, fix_common_errors, detect_ocr_artifacts,
     reconstruct_words, fix_malay_ocr,
 )

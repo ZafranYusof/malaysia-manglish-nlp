@@ -1,11 +1,11 @@
 """
-Basic LangChain tools for manglish-nlp.
+Basic LangChain tools for malaysian-manglish-nlp.
 
 Registers sentiment, NER, translation, and normalization modules as
 LangChain tools, then demonstrates an agent that uses them together.
 
 Run:
-    pip install langchain langchain-openai manglish-nlp
+    pip install langchain langchain-openai malaysian-manglish-nlp
     export OPENAI_API_KEY="sk-..."
     python basic_tool.py
 """
@@ -19,7 +19,7 @@ from langchain_core.tools import BaseTool
 from langchain_core.callbacks import CallbackManagerForToolRun
 from pydantic import BaseModel, Field
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 # ---------------------------------------------------------------------------
 # Input schemas
@@ -51,7 +51,7 @@ class SentimentTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, Any]:
-        result = manglish_nlp.sentiment(text)
+        result = malaysian_manglish_nlp.sentiment(text)
         return {"text": text, **result}
 
 
@@ -66,7 +66,7 @@ class NERTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> List[Dict[str, str]]:
-        return manglish_nlp.ner_tag(text)
+        return malaysian_manglish_nlp.ner_tag(text)
 
 
 class TranslateTool(BaseTool):
@@ -87,13 +87,13 @@ class TranslateTool(BaseTool):
     ) -> Dict[str, str]:
         t = target.lower()
         if t == "en":
-            translated = manglish_nlp.to_english(text)
+            translated = malaysian_manglish_nlp.to_english(text)
         elif t in ("bm", "ms"):
-            translated = manglish_nlp.to_malay(text)
+            translated = malaysian_manglish_nlp.to_malay(text)
         elif t == "formal":
-            translated = manglish_nlp.to_formal(text)
+            translated = malaysian_manglish_nlp.to_formal(text)
         else:
-            translated = manglish_nlp.translate(text)
+            translated = malaysian_manglish_nlp.translate(text)
         return {"original": text, "translated": translated, "target": target}
 
 
@@ -108,8 +108,8 @@ class NormalizeTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, str]:
-        normalized = manglish_nlp.normalize(text)
-        cleaned = manglish_nlp.clean(text)
+        normalized = malaysian_manglish_nlp.normalize(text)
+        cleaned = malaysian_manglish_nlp.clean(text)
         return {"original": text, "normalized": normalized, "cleaned": cleaned}
 
 
@@ -118,7 +118,7 @@ class NormalizeTool(BaseTool):
 # ---------------------------------------------------------------------------
 
 def build_agent():
-    """Build a LangChain agent with all manglish-nlp tools."""
+    """Build a LangChain agent with all malaysian-manglish-nlp tools."""
     from langchain_openai import ChatOpenAI
     from langchain.agents import AgentExecutor, create_openai_tools_agent
     from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder

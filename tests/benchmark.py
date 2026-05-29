@@ -7,9 +7,9 @@ Tests against 200+ labeled examples across all modules.
 import sys, os, time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import manglish_nlp
-from manglish_nlp.emotion import detect_emotion
-from manglish_nlp.profanity import detect_profanity, is_safe
+import malaysian_manglish_nlp
+from malaysian_manglish_nlp.emotion import detect_emotion
+from malaysian_manglish_nlp.profanity import detect_profanity, is_safe
 
 # ============================================================
 # LABELED TEST DATA
@@ -174,7 +174,7 @@ def run_benchmark():
     print("\n[SENTIMENT]")
     correct = 0
     for text, expected in SENTIMENT_DATA:
-        r = manglish_nlp.sentiment(text)
+        r = malaysian_manglish_nlp.sentiment(text)
         if r['sentiment'] == expected:
             correct += 1
     acc = correct / len(SENTIMENT_DATA) * 100
@@ -187,7 +187,7 @@ def run_benchmark():
     print("\n[LANGUAGE DETECTION]")
     correct = 0
     for text, expected in LANGUAGE_DATA:
-        r = manglish_nlp.detect_language(text)
+        r = malaysian_manglish_nlp.detect_language(text)
         if r['language'] == expected:
             correct += 1
     acc = correct / len(LANGUAGE_DATA) * 100
@@ -228,7 +228,7 @@ def run_benchmark():
     print("\n[NORMALIZATION]")
     correct = 0
     for text, should_contain in NORMALIZE_DATA:
-        r = manglish_nlp.normalize(text)
+        r = malaysian_manglish_nlp.normalize(text)
         if should_contain in r:
             correct += 1
     acc = correct / len(NORMALIZE_DATA) * 100
@@ -241,7 +241,7 @@ def run_benchmark():
     print("\n[STEMMER]")
     correct = 0
     for word, expected in STEMMER_DATA:
-        r = manglish_nlp.stem_word(word)
+        r = malaysian_manglish_nlp.stem_word(word)
         if r == expected:
             correct += 1
     acc = correct / len(STEMMER_DATA) * 100

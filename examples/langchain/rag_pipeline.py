@@ -1,15 +1,15 @@
 """
-RAG pipeline using manglish-nlp for preprocessing.
+RAG pipeline using malaysian-manglish-nlp for preprocessing.
 
 Flow:
 1. User asks question in Manglish
-2. manglish-nlp normalises + translates the query
+2. malaysian-manglish-nlp normalises + translates the query
 3. Normalised query goes to vector store retrieval
 4. Sentiment of user query is detected
 5. LLM generates response using retrieved context + sentiment-aware tone
 
 Run:
-    pip install langchain langchain-openai chromadb manglish-nlp
+    pip install langchain langchain-openai chromadb malaysian-manglish-nlp
     export OPENAI_API_KEY="sk-..."
     python rag_pipeline.py
 """
@@ -23,7 +23,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 # ---------------------------------------------------------------------------
 # Document store (in-memory for demo; swap with ChromaDB / FAISS in prod)
@@ -78,17 +78,17 @@ class SimpleVectorStore:
 
 
 # ---------------------------------------------------------------------------
-# Preprocessing with manglish-nlp
+# Preprocessing with malaysian-manglish-nlp
 # ---------------------------------------------------------------------------
 
 def preprocess_query(raw_query: str) -> Dict[str, Any]:
     """Normalise and enrich the user query before retrieval."""
-    normalised = manglish_nlp.normalize(raw_query)
-    translated = manglish_nlp.to_english(raw_query)
-    sentiment = manglish_nlp.sentiment(raw_query)
-    entities = manglish_nlp.ner_tag(raw_query)
-    keywords = manglish_nlp.extract_keywords(raw_query)
-    language = manglish_nlp.detect_language(raw_query)
+    normalised = malaysian_manglish_nlp.normalize(raw_query)
+    translated = malaysian_manglish_nlp.to_english(raw_query)
+    sentiment = malaysian_manglish_nlp.sentiment(raw_query)
+    entities = malaysian_manglish_nlp.ner_tag(raw_query)
+    keywords = malaysian_manglish_nlp.extract_keywords(raw_query)
+    language = malaysian_manglish_nlp.detect_language(raw_query)
 
     # Build search query: combine normalised + translated for better retrieval
     search_query = f"{normalised} {translated}"
@@ -163,7 +163,7 @@ def generate_response(query_data: Dict[str, Any], context: str) -> str:
 # ---------------------------------------------------------------------------
 
 def rag_query(query: str, store: SimpleVectorStore) -> Dict[str, Any]:
-    """End-to-end RAG with manglish-nlp preprocessing."""
+    """End-to-end RAG with malaysian-manglish-nlp preprocessing."""
 
     # Step 1: Preprocess
     query_data = preprocess_query(query)

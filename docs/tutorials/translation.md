@@ -8,14 +8,14 @@
 
 Cross-language content processing, bilingual chatbot support, document translation for Malaysian businesses, and normalizing Manglish for formal contexts. Google Translate struggles with Manglish because it's not a standard language  -  "xpe la bro" isn't in any training corpus.
 
-manglish-nlp uses a rule-based approach that handles the actual patterns Malaysians use.
+malaysian-manglish-nlp uses a rule-based approach that handles the actual patterns Malaysians use.
 
 ---
 
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # BM to English
 result = mnlp.to_english("Saya nak pergi makan nasi lemak")
@@ -144,13 +144,13 @@ mnlp.to_english("Harga Myvi baru RM50,000")
 ```
 
 !!! warning "Translation limitations"
-    manglish-nlp translation is rule-based, not neural. It excels at common patterns but may struggle with:
+    malaysian-manglish-nlp translation is rule-based, not neural. It excels at common patterns but may struggle with:
     - Very long or complex sentences
     - Domain-specific jargon
     - Idiomatic expressions not in the dictionary
     - Creative/slang wordplay
     
-    For production-grade translation quality, pair with a neural MT system and use manglish-nlp for preprocessing.
+    For production-grade translation quality, pair with a neural MT system and use malaysian-manglish-nlp for preprocessing.
 
 ---
 
@@ -196,7 +196,7 @@ I like to eat
 
 ## How it works
 
-manglish-nlp uses a **rule-based translation** pipeline:
+malaysian-manglish-nlp uses a **rule-based translation** pipeline:
 
 1. **Normalization**  -  expand shortforms (nk→nak, sy→saya)
 2. **Tokenization**  -  split into tokens with particle awareness
@@ -221,7 +221,7 @@ This approach is fast (no model loading), deterministic (same input = same outpu
 | Latency (single) | < 1ms |
 
 !!! note "BLEU scores context"
-    Rule-based BLEU scores are lower than neural MT on standard benchmarks. However, on Manglish text (which neural MT handles poorly), manglish-nlp outperforms Google Translate by a wide margin.
+    Rule-based BLEU scores are lower than neural MT on standard benchmarks. However, on Manglish text (which neural MT handles poorly), malaysian-manglish-nlp outperforms Google Translate by a wide margin.
 
 ---
 

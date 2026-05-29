@@ -9,11 +9,11 @@
 Advanced modules handle higher-order linguistic phenomena unique to Malaysian multilingual text. These require the `[ml]` extra and are designed for production chatbots, content moderation systems, and research applications.
 
 ```bash
-pip install manglish-nlp[ml]
+pip install malaysian-manglish-nlp[ml]
 ```
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 ---
@@ -21,7 +21,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Code-switching detection
 mnlp.code_switching("I think kita should go makan first, then baru discuss")
@@ -48,7 +48,7 @@ mnlp.hate_speech("Semua kaum X memang sampah masyarakat")
 Detect and analyse code-switching patterns between languages. Identifies switch points, matrix language, and switching type.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "I think kita should go makan first, then baru discuss"
 mnlp.code_switching(text)
@@ -95,7 +95,7 @@ mnlp.code_switching(text)
 Classify user intent for chatbots and dialogue systems. Returns intent label, confidence, and extracted slots.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.intent("Nak order 2 nasi lemak extra sambal")
 # {'intent': 'request_action', 'confidence': 0.89,
@@ -137,7 +137,7 @@ mnlp.intent("Nak order 2 nasi lemak extra sambal")
 Topic classification and unsupervised topic modelling for Malaysian text.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.topic("Harga minyak naik lagi, memang susah rakyat nak survive")
 # {'topic': 'economy', 'subtopic': 'cost_of_living', 'confidence': 0.87}
@@ -173,7 +173,7 @@ mnlp.topic("Harga minyak naik lagi, memang susah rakyat nak survive")
 Detect hate speech and offensive content targeting Malaysian communities. Understands local slurs, coded language, and dog whistles specific to the Malaysian context.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.hate_speech("Semua bangsa X memang macam tu, tak boleh dipercayai")
 # {'is_hate': True, 'target': 'race', 'severity': 'high', 'confidence': 0.92}
@@ -216,7 +216,7 @@ mnlp.hate_speech("Semua bangsa X memang macam tu, tak boleh dipercayai")
 Detect stance (support / oppose / neutral) toward a target topic or claim.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.stance("Memang patut la naikkan gaji minimum, dah lama tak naik",
             target="minimum wage increase")
@@ -253,7 +253,7 @@ mnlp.stance("Memang patut la naikkan gaji minimum, dah lama tak naik",
 Analyse discourse structure and rhetorical relations in text using Rhetorical Structure Theory (RST) adapted for Malay.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Walaupun hujan lebat, Ahmad tetap pergi kerja sebab deadline esok."
 mnlp.discourse(text)

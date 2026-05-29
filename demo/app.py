@@ -12,7 +12,7 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 import gradio as gr
-import manglish_nlp
+import malaysian_manglish_nlp
 
 # ──────────────────────────────────────────────
 # CSS
@@ -93,7 +93,7 @@ def analyze_sentiment_tab(text):
         return "⚠️ Enter some text first.", "", ""
 
     # Overall sentiment
-    result = manglish_nlp.sentiment(text)
+    result = malaysian_manglish_nlp.sentiment(text)
     label = result.get("label", result.get("sentiment", "unknown"))
     score = result.get("score", result.get("confidence", 0))
     if isinstance(score, float):
@@ -104,7 +104,7 @@ def analyze_sentiment_tab(text):
     summary_md = f"### 🎭 Sentiment\n**Label:** `{label}`  \n**Score:** `{score_str}`"
 
     # Aspect sentiment
-    aspects = manglish_nlp.aspect_sentiment(text)
+    aspects = malaysian_manglish_nlp.aspect_sentiment(text)
     aspect_md = "### 🔍 Aspect Breakdown\n"
     if isinstance(aspects, dict) and aspects:
         for aspect, data in aspects.items():
@@ -143,8 +143,8 @@ def normalize_tab(text):
     if not text.strip():
         return "⚠️ Enter some text first.", ""
 
-    normalized = manglish_nlp.normalize(text)
-    formal = manglish_nlp.formalize(text)
+    normalized = malaysian_manglish_nlp.normalize(text)
+    formal = malaysian_manglish_nlp.formalize(text)
 
     # Build side-by-side table
     original_words = text.split()
@@ -197,7 +197,7 @@ def ner_tab(text):
     if not text.strip():
         return "⚠️ Enter some text first.", "", ""
 
-    entities = manglish_nlp.ner_tag(text)
+    entities = malaysian_manglish_nlp.ner_tag(text)
 
     # Build highlighted text
     highlighted = ""
@@ -252,12 +252,12 @@ def translate_tab(text, direction):
         return "⚠️ Enter some text first.", "", ""
 
     if direction == "BM → EN":
-        translated = manglish_nlp.to_english(text)
+        translated = malaysian_manglish_nlp.to_english(text)
     elif direction == "EN → BM":
-        translated = manglish_nlp.to_malay(text)
+        translated = malaysian_manglish_nlp.to_malay(text)
     else:
         # Auto detect
-        translated = manglish_nlp.detect_and_translate(text)
+        translated = malaysian_manglish_nlp.detect_and_translate(text)
 
     # Word-level alignment
     src_words = text.split()
@@ -268,7 +268,7 @@ def translate_tab(text, direction):
     alignment_rows = []
     for w in src_words:
         try:
-            wt = manglish_nlp.word_translate(w)
+            wt = malaysian_manglish_nlp.word_translate(w)
             if isinstance(wt, dict):
                 tgt_word = wt.get("translation", wt.get("target", str(wt)))
             elif isinstance(wt, str):
@@ -315,7 +315,7 @@ def detect_lang_tab(text):
     if not text.strip():
         return "⚠️ Enter some text first.", ""
 
-    result = manglish_nlp.detect_language(text)
+    result = malaysian_manglish_nlp.detect_language(text)
 
     if isinstance(result, dict):
         lang = result.get("language", result.get("label", "unknown"))
@@ -334,7 +334,7 @@ def detect_lang_tab(text):
     # Dialect detection
     dialect_info = ""
     try:
-        dialect = manglish_nlp.detect_dialect(text)
+        dialect = malaysian_manglish_nlp.detect_dialect(text)
         if isinstance(dialect, dict) and dialect:
             dialect_info = "### 🗣️ Dialect\n"
             for k, v in dialect.items():
@@ -375,7 +375,7 @@ def code_switch_tab(text):
     if not text.strip():
         return "⚠️ Enter some text first.", "", ""
 
-    result = manglish_nlp.segment_text(text)
+    result = malaysian_manglish_nlp.segment_text(text)
 
     # Build highlighted output
     highlighted = ""
@@ -416,7 +416,7 @@ def code_switch_tab(text):
 
     # Segment with segment module
     try:
-        segment_detail = manglish_nlp.segment(text)
+        segment_detail = malaysian_manglish_nlp.segment(text)
         if isinstance(segment_detail, list):
             detail_rows = []
             for item in segment_detail:
@@ -460,7 +460,7 @@ def full_pipeline_tab(text):
 
     # 1. Language detection
     try:
-        lang = manglish_nlp.detect_language(text)
+        lang = malaysian_manglish_nlp.detect_language(text)
         if isinstance(lang, dict):
             lang_str = f"**{lang.get('language', '?')}** (confidence: {lang.get('confidence', '?')})"
         else:
@@ -471,7 +471,7 @@ def full_pipeline_tab(text):
 
     # 2. Sentiment
     try:
-        sent = manglish_nlp.sentiment(text)
+        sent = malaysian_manglish_nlp.sentiment(text)
         if isinstance(sent, dict):
             sent_str = f"**{sent.get('label', sent.get('sentiment', '?'))}** (score: {sent.get('score', sent.get('confidence', '?'))})"
         else:
@@ -482,7 +482,7 @@ def full_pipeline_tab(text):
 
     # 3. Emotion
     try:
-        emo = manglish_nlp.detect_emotion(text)
+        emo = malaysian_manglish_nlp.detect_emotion(text)
         if isinstance(emo, dict):
             emo_str = f"**{emo.get('emotion', emo.get('label', '?'))}** (confidence: {emo.get('confidence', emo.get('score', '?'))})"
         else:
@@ -493,21 +493,21 @@ def full_pipeline_tab(text):
 
     # 4. Normalization
     try:
-        norm = manglish_nlp.normalize(text)
+        norm = malaysian_manglish_nlp.normalize(text)
         results.append(f"### 📝 Normalized\n`{norm}`")
     except Exception as e:
         results.append(f"### 📝 Normalized\n⚠️ {e}")
 
     # 5. Formalize
     try:
-        form = manglish_nlp.formalize(text)
+        form = malaysian_manglish_nlp.formalize(text)
         results.append(f"### 🎩 Formal\n`{form}`")
     except Exception as e:
         results.append(f"### 🎩 Formal\n⚠️ {e}")
 
     # 6. NER
     try:
-        ner = manglish_nlp.ner_tag(text)
+        ner = malaysian_manglish_nlp.ner_tag(text)
         if isinstance(ner, list) and ner:
             entities = []
             for item in ner:
@@ -531,7 +531,7 @@ def full_pipeline_tab(text):
 
     # 7. Keywords
     try:
-        kw = manglish_nlp.extract_keywords(text)
+        kw = malaysian_manglish_nlp.extract_keywords(text)
         if isinstance(kw, list):
             kw_str = ", ".join([f"`{k}`" for k in kw[:10]])
         else:
@@ -542,14 +542,14 @@ def full_pipeline_tab(text):
 
     # 8. Translation
     try:
-        trans = manglish_nlp.detect_and_translate(text)
+        trans = malaysian_manglish_nlp.detect_and_translate(text)
         results.append(f"### 🔄 Translation\n`{trans}`")
     except Exception as e:
         results.append(f"### 🔄 Translation\n⚠️ {e}")
 
     # 9. Sarcasm
     try:
-        sarc = manglish_nlp.detect_sarcasm(text)
+        sarc = malaysian_manglish_nlp.detect_sarcasm(text)
         if isinstance(sarc, dict):
             sarc_str = f"**{sarc.get('label', sarc.get('sarcastic', '?'))}** (score: {sarc.get('score', sarc.get('confidence', '?'))})"
         elif isinstance(sarc, bool):
@@ -562,7 +562,7 @@ def full_pipeline_tab(text):
 
     # 10. Topic
     try:
-        topic = manglish_nlp.classify_topic(text)
+        topic = malaysian_manglish_nlp.classify_topic(text)
         if isinstance(topic, dict):
             topic_str = f"**{topic.get('topic', topic.get('label', '?'))}** (confidence: {topic.get('confidence', topic.get('score', '?'))})"
         else:
@@ -785,11 +785,11 @@ with gr.Blocks(
     gr.HTML("""
     <div class="footer-links">
         <p>
-            <a href="https://github.com/zafra/manglish-nlp" target="_blank">GitHub</a> |
-            <a href="https://manglish-nlp.readthedocs.io" target="_blank">Docs</a> |
-            <a href="https://pypi.org/project/manglish-nlp/" target="_blank">PyPI</a>
+            <a href="https://github.com/zafra/malaysian-manglish-nlp" target="_blank">GitHub</a> |
+            <a href="https://malaysian-manglish-nlp.readthedocs.io" target="_blank">Docs</a> |
+            <a href="https://pypi.org/project/malaysian-manglish-nlp/" target="_blank">PyPI</a>
         </p>
-        <p>Powered by <strong>manglish-nlp</strong> v""" + manglish_nlp.__version__ + """ — Built with ❤️ for Malaysia</p>
+        <p>Powered by <strong>malaysian-manglish-nlp</strong> v""" + malaysian_manglish_nlp.__version__ + """ — Built with ❤️ for Malaysia</p>
     </div>
     """)
 

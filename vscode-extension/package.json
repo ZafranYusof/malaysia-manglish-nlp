@@ -1,13 +1,13 @@
 {
-  "name": "manglish-nlp-vscode",
-  "displayName": "Manglish NLP",
+  "name": "malaysian-manglish-nlp-vscode",
+  "displayName": "Malaysian Manglish NLP",
   "description": "Sentiment analysis, normalization, NER, and translation for Manglish (Malaysian colloquial Malay) text directly in VS Code",
   "version": "0.2.0",
   "publisher": "ZafranYusof",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zafranyusof/manglish-nlp"
+    "url": "https://github.com/zafranyusof/malaysian-manglish-nlp"
   },
   "engines": {
     "vscode": "^1.80.0"

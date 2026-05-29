@@ -13,28 +13,28 @@ spacy = pytest.importorskip("spacy", minversion="3.0")
 @pytest.fixture
 def nlp():
     """Create a Manglish spaCy nlp object."""
-    from manglish_nlp.spacy_integration import create_manglish_nlp
+    from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
     return create_manglish_nlp()
 
 
 @pytest.fixture
 def nlp_minimal():
     """Create a minimal nlp with only normalizer."""
-    from manglish_nlp.spacy_integration import create_manglish_nlp
+    from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
     return create_manglish_nlp(components=["manglish_normalizer"])
 
 
 @pytest.fixture
 def nlp_pos_only():
     """Create nlp with only POS tagging."""
-    from manglish_nlp.spacy_integration import create_manglish_nlp
+    from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
     return create_manglish_nlp(components=["manglish_pos"])
 
 
 @pytest.fixture
 def nlp_ner_only():
     """Create nlp with only NER."""
-    from manglish_nlp.spacy_integration import create_manglish_nlp
+    from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
     return create_manglish_nlp(components=["manglish_ner"])
 
 
@@ -47,14 +47,14 @@ class TestCreateNLP:
 
     def test_create_default_nlp(self):
         """Test creating nlp with default components."""
-        from manglish_nlp.spacy_integration import create_manglish_nlp
+        from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
         nlp = create_manglish_nlp()
         assert nlp is not None
         assert nlp.lang == "ms_manglish"
 
     def test_create_with_specific_components(self):
         """Test creating nlp with specific components only."""
-        from manglish_nlp.spacy_integration import create_manglish_nlp
+        from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
         nlp = create_manglish_nlp(components=["manglish_pos", "manglish_ner"])
         pipe_names = nlp.pipe_names
         assert "manglish_pos" in pipe_names
@@ -63,7 +63,7 @@ class TestCreateNLP:
 
     def test_nlp_has_custom_tokenizer(self, nlp):
         """Test that the nlp uses ManglishTokenizer."""
-        from manglish_nlp.spacy_integration import ManglishTokenizer
+        from malaysian_manglish_nlp.spacy_integration import ManglishTokenizer
         assert isinstance(nlp.tokenizer, ManglishTokenizer)
 
     def test_nlp_pipeline_order(self, nlp):
@@ -161,7 +161,7 @@ class TestNER:
         """Test that NER finds entities in text with known entities."""
         doc = nlp("Kuala Lumpur adalah ibu negara Malaysia")
         # Should find at least some entities (location/country names)
-        # Note: depends on manglish_nlp NER implementation
+        # Note: depends on malaysian_manglish_nlp NER implementation
         # Just verify it doesn't crash and returns valid structure
         assert doc.ents is not None
 
@@ -299,7 +299,7 @@ class TestPipelineOrdering:
 
     def test_custom_component_subset(self):
         """Test creating pipeline with subset of components."""
-        from manglish_nlp.spacy_integration import create_manglish_nlp
+        from malaysian_manglish_nlp.spacy_integration import create_manglish_nlp
         nlp = create_manglish_nlp(components=["manglish_normalizer", "manglish_pos"])
         assert "manglish_normalizer" in nlp.pipe_names
         assert "manglish_pos" in nlp.pipe_names
@@ -345,12 +345,12 @@ class TestManglishLanguage:
 
     def test_language_code(self):
         """Test that language code is set correctly."""
-        from manglish_nlp.spacy_integration import ManglishLanguage
+        from malaysian_manglish_nlp.spacy_integration import ManglishLanguage
         nlp = ManglishLanguage()
         assert nlp.lang == "ms_manglish"
 
     def test_vocab_initialized(self):
         """Test that vocab is properly initialized."""
-        from manglish_nlp.spacy_integration import ManglishLanguage
+        from malaysian_manglish_nlp.spacy_integration import ManglishLanguage
         nlp = ManglishLanguage()
         assert nlp.vocab is not None

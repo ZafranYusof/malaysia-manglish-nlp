@@ -5,7 +5,7 @@ Comprehensive tests for the Jawi (Rumi ↔ Jawi) conversion module.
 import time
 import unittest
 
-from manglish_nlp.jawi import (
+from malaysian_manglish_nlp.jawi import (
     ALIF, BA, CA, DAL, FA, GA, HA, JIM, KAF, LAM, MIM,
     NGA, NUN, NYA, PA, QA, RA, SIN, TA, VA, WAW, YA, YE,
     batch_to_jawi, batch_to_rumi,

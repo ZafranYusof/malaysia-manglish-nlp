@@ -1,6 +1,6 @@
 ﻿# Running on Windows
 
-manglish-nlp works on Windows, but a few things need extra attention.
+malaysian-manglish-nlp works on Windows, but a few things need extra attention.
 
 ---
 
@@ -91,7 +91,7 @@ data_dir = os.path.join(os.path.dirname(__file__), "data")
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-pip install manglish-nlp
+pip install malaysian-manglish-nlp
 ```
 
 ### 2. PowerShell execution policy
@@ -106,22 +106,22 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ```bash
 # Core only (no ML models)
-pip install manglish-nlp
+pip install malaysian-manglish-nlp
 
 # With sentiment classifier
-pip install manglish-nlp[transformers]
+pip install malaysian-manglish-nlp[transformers]
 
 # With word embeddings
-pip install manglish-nlp[embeddings]
+pip install malaysian-manglish-nlp[embeddings]
 
 # Everything
-pip install manglish-nlp[all]
+pip install malaysian-manglish-nlp[all]
 ```
 
 ### 4. Test the install
 
 ```python
-python -c "import manglish_nlp; print(manglish_nlp.__version__)"
+python -c "import malaysian_manglish_nlp; print(malaysian_manglish_nlp.__version__)"
 ```
 
 ---
@@ -144,6 +144,6 @@ python -c "import manglish_nlp; print(manglish_nlp.__version__)"
 
 If you hit a Windows-specific bug:
 
-1. Check the [GitHub Issues](https://github.com/ZafranYusof/manglish-nlp/issues)
+1. Check the [GitHub Issues](https://github.com/ZafranYusof/malaysian-manglish-nlp/issues)
 2. Include your Python version, Windows version, and full traceback
-3. Run `python -m manglish_nlp.debug` to collect system info
+3. Run `python -m malaysian_manglish_nlp.debug` to collect system info

@@ -12,7 +12,7 @@ license: mit
 
 # Manglish NLP Demo
 
-Interactive demo for [manglish-nlp](https://github.com/zafra/manglish-nlp) — an NLP toolkit for Malaysian Manglish.
+Interactive demo for [malaysian-manglish-nlp](https://github.com/zafra/malaysian-manglish-nlp) — an NLP toolkit for Malaysian Manglish.
 
 ## Features
 

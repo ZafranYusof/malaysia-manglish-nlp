@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '.')
-from manglish_nlp import detect_language
+from malaysian_manglish_nlp import detect_language
 
 LANGUAGE_DATA = [
     ("aku nak pergi makan nasi", "bm"),

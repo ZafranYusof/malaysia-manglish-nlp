@@ -1,4 +1,4 @@
-"""Stress tests for manglish_nlp.
+"""Stress tests for malaysian_manglish_nlp.
 
 Generates 10,000 random Manglish sentences and runs them through core modules.
 Verifies no exceptions, measures performance, and checks for memory leaks.
@@ -13,7 +13,7 @@ import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 
 # === Random sentence generation ===
@@ -115,7 +115,7 @@ class TestStressNoExceptions:
         errors = []
         for i, text in enumerate(self.corpus):
             try:
-                manglish_nlp.sentiment(text)
+                malaysian_manglish_nlp.sentiment(text)
             except Exception as e:
                 errors.append((i, text[:50], str(e)))
         assert len(errors) == 0, f"{len(errors)} errors: {errors[:5]}"
@@ -125,7 +125,7 @@ class TestStressNoExceptions:
         errors = []
         for i, text in enumerate(self.corpus):
             try:
-                manglish_nlp.detect_language(text)
+                malaysian_manglish_nlp.detect_language(text)
             except Exception as e:
                 errors.append((i, text[:50], str(e)))
         assert len(errors) == 0, f"{len(errors)} errors: {errors[:5]}"
@@ -135,7 +135,7 @@ class TestStressNoExceptions:
         errors = []
         for i, text in enumerate(self.corpus):
             try:
-                manglish_nlp.normalize(text)
+                malaysian_manglish_nlp.normalize(text)
             except Exception as e:
                 errors.append((i, text[:50], str(e)))
         assert len(errors) == 0, f"{len(errors)} errors: {errors[:5]}"
@@ -145,7 +145,7 @@ class TestStressNoExceptions:
         errors = []
         for i, text in enumerate(self.corpus):
             try:
-                manglish_nlp.tokenize(text)
+                malaysian_manglish_nlp.tokenize(text)
             except Exception as e:
                 errors.append((i, text[:50], str(e)))
         assert len(errors) == 0, f"{len(errors)} errors: {errors[:5]}"
@@ -162,7 +162,7 @@ class TestStressPerformance:
         """Sentiment on 10k inputs should complete in < 30 seconds."""
         start = time.time()
         for text in self.corpus:
-            manglish_nlp.sentiment(text)
+            malaysian_manglish_nlp.sentiment(text)
         elapsed = time.time() - start
         print(f"\nSentiment 10k: {elapsed:.2f}s ({10000/elapsed:.0f} texts/sec)")
         assert elapsed < 30, f"Too slow: {elapsed:.2f}s"
@@ -171,7 +171,7 @@ class TestStressPerformance:
         """Language detection on 10k inputs should complete in < 30 seconds."""
         start = time.time()
         for text in self.corpus:
-            manglish_nlp.detect_language(text)
+            malaysian_manglish_nlp.detect_language(text)
         elapsed = time.time() - start
         print(f"\nLanguage 10k: {elapsed:.2f}s ({10000/elapsed:.0f} texts/sec)")
         assert elapsed < 30, f"Too slow: {elapsed:.2f}s"
@@ -180,7 +180,7 @@ class TestStressPerformance:
         """Normalize on 10k inputs should complete in < 30 seconds."""
         start = time.time()
         for text in self.corpus:
-            manglish_nlp.normalize(text)
+            malaysian_manglish_nlp.normalize(text)
         elapsed = time.time() - start
         print(f"\nNormalize 10k: {elapsed:.2f}s ({10000/elapsed:.0f} texts/sec)")
         assert elapsed < 30, f"Too slow: {elapsed:.2f}s"
@@ -189,7 +189,7 @@ class TestStressPerformance:
         """Tokenize on 10k inputs should complete in < 30 seconds."""
         start = time.time()
         for text in self.corpus:
-            manglish_nlp.tokenize(text)
+            malaysian_manglish_nlp.tokenize(text)
         elapsed = time.time() - start
         print(f"\nTokenize 10k: {elapsed:.2f}s ({10000/elapsed:.0f} texts/sec)")
         assert elapsed < 30, f"Too slow: {elapsed:.2f}s"
@@ -198,10 +198,10 @@ class TestStressPerformance:
         """All 4 modules on 10k inputs should complete in < 120 seconds total."""
         start = time.time()
         for text in self.corpus:
-            manglish_nlp.sentiment(text)
-            manglish_nlp.detect_language(text)
-            manglish_nlp.normalize(text)
-            manglish_nlp.tokenize(text)
+            malaysian_manglish_nlp.sentiment(text)
+            malaysian_manglish_nlp.detect_language(text)
+            malaysian_manglish_nlp.normalize(text)
+            malaysian_manglish_nlp.tokenize(text)
         elapsed = time.time() - start
         print(f"\nCombined pipeline 10k: {elapsed:.2f}s ({10000/elapsed:.0f} texts/sec)")
         assert elapsed < 120, f"Too slow: {elapsed:.2f}s"
@@ -232,7 +232,7 @@ class TestStressMemory:
         for batch_start in range(0, len(corpus), batch_size):
             batch = corpus[batch_start:batch_start + batch_size]
             for text in batch:
-                manglish_nlp.sentiment(text)
+                malaysian_manglish_nlp.sentiment(text)
             gc.collect()
         
         final_objects = len(gc.get_objects())
@@ -252,7 +252,7 @@ class TestStressMemory:
         for batch_start in range(0, len(corpus), batch_size):
             batch = corpus[batch_start:batch_start + batch_size]
             for text in batch:
-                manglish_nlp.normalize(text)
+                malaysian_manglish_nlp.normalize(text)
             gc.collect()
         
         final_objects = len(gc.get_objects())

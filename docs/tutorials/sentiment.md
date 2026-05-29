@@ -8,14 +8,14 @@
 
 Social media monitoring, brand reputation tracking, customer feedback analysis, and public opinion mining for Malaysian businesses and researchers. Standard NLP tools fail on Manglish because they don't understand slang like "gila best", "teruk gila", or sarcastic patterns like "Bagus la tu, tunggu 3 jam".
 
-manglish-nlp handles all of this natively  -  no preprocessing needed.
+malaysian-manglish-nlp handles all of this natively  -  no preprocessing needed.
 
 ---
 
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Basic sentiment
 result = mnlp.sentiment("Weh best gila makanan kat sini!")
@@ -112,7 +112,7 @@ mnlp.sentiment("Harga murah, rasa sedap, tapi parking susah", aspect=True)
 
 ## Sarcasm detection
 
-manglish-nlp detects sarcastic sentiment automatically  -  no separate flag needed. Sarcastic text with positive words but negative context gets correctly classified.
+malaysian-manglish-nlp detects sarcastic sentiment automatically  -  no separate flag needed. Sarcastic text with positive words but negative context gets correctly classified.
 
 ```python
 # Sarcastic  -  "bagus" + negative context
@@ -181,7 +181,7 @@ mnlp.sentiment("Makanan best tapi harga mahal", detailed=True)
 
 ## Working with raw social media text
 
-manglish-nlp handles noisy text directly. No need to clean first:
+malaysian-manglish-nlp handles noisy text directly. No need to clean first:
 
 ```python
 # With hashtags
@@ -237,7 +237,7 @@ $ mnlp analyze "Weh best gila kedai tu"
 
 ## How it works
 
-manglish-nlp's sentiment module uses a layered approach:
+malaysian-manglish-nlp's sentiment module uses a layered approach:
 
 1. **Lexicon matching**  -  2,000+ Malaysian sentiment words including slang ("gila best", "syok", "hampeh")
 2. **Intensifier handling**  -  "gila", "sangat", "betul", "super" modify scores
@@ -269,7 +269,7 @@ Benchmarked on 5,000 annotated Malaysian social media texts. See [Benchmarks](..
 For higher accuracy on complex sentences, use the transformer model:
 
 ```bash
-pip install manglish-nlp[ml]
+pip install malaysian-manglish-nlp[ml]
 ```
 
 ```python

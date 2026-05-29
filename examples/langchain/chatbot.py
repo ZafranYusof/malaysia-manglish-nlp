@@ -1,5 +1,5 @@
 """
-LangChain conversational agent with manglish-nlp tools.
+LangChain conversational agent with malaysian-manglish-nlp tools.
 
 A chatbot that understands Manglish queries, uses NLP tools to process
 them, and responds naturally in the user's preferred style.
@@ -11,7 +11,7 @@ Features:
 - Translation fallback for mixed-language queries
 
 Run:
-    pip install langchain langchain-openai manglish-nlp
+    pip install langchain langchain-openai malaysian-manglish-nlp
     export OPENAI_API_KEY="sk-..."
     python chatbot.py
 """
@@ -26,7 +26,7 @@ from langchain_core.callbacks import CallbackManagerForToolRun
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 # ---------------------------------------------------------------------------
 # Tools
@@ -42,7 +42,7 @@ class SentimentTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, Any]:
-        return manglish_nlp.sentiment(text)
+        return malaysian_manglish_nlp.sentiment(text)
 
 
 class EmotionTool(BaseTool):
@@ -54,7 +54,7 @@ class EmotionTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, Any]:
-        return manglish_nlp.detect_emotion(text)
+        return malaysian_manglish_nlp.detect_emotion(text)
 
 
 class NERTool(BaseTool):
@@ -63,7 +63,7 @@ class NERTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> List[Dict[str, str]]:
-        return manglish_nlp.ner_tag(text)
+        return malaysian_manglish_nlp.ner_tag(text)
 
 
 class TranslateTool(BaseTool):
@@ -76,8 +76,8 @@ class TranslateTool(BaseTool):
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, str]:
         return {
-            "to_english": manglish_nlp.to_english(text),
-            "to_formal": manglish_nlp.to_formal(text),
+            "to_english": malaysian_manglish_nlp.to_english(text),
+            "to_formal": malaysian_manglish_nlp.to_formal(text),
         }
 
 
@@ -90,7 +90,7 @@ class NormalizeTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, str]:
-        return {"normalized": manglish_nlp.normalize(text)}
+        return {"normalized": malaysian_manglish_nlp.normalize(text)}
 
 
 class IntentTool(BaseTool):
@@ -102,11 +102,11 @@ class IntentTool(BaseTool):
     args_schema: Type[BaseModel] = TextInput
 
     def _run(self, text: str, run_manager: Optional[CallbackManagerForToolRun] = None) -> Dict[str, Any]:
-        intent = manglish_nlp.classify_intent(text)
+        intent = malaysian_manglish_nlp.classify_intent(text)
         return {
             "intent": intent,
-            "is_question": manglish_nlp.is_question(text),
-            "is_complaint": manglish_nlp.is_complaint(text),
+            "is_question": malaysian_manglish_nlp.is_question(text),
+            "is_complaint": malaysian_manglish_nlp.is_complaint(text),
         }
 
 

@@ -1,7 +1,7 @@
-"""Tests for manglish_nlp.coreference module."""
+"""Tests for malaysian_manglish_nlp.coreference module."""
 
 import pytest
-from manglish_nlp.coreference import (
+from malaysian_manglish_nlp.coreference import (
     resolve_coreferences,
     resolve_in_context,
     get_entities_and_references,

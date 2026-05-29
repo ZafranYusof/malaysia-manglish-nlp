@@ -13,7 +13,7 @@ Malaysians naturally switch between BM, English, Chinese, and Tamil within a sin
 ## Load module
 
 ```python
-from manglish_nlp import code_switching
+from malaysian_manglish_nlp import code_switching
 
 result = code_switching.detect("I nak pergi kedai sebab I lapar gila")
 print(result)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Batch processor for manglish-nlp.
+Batch processor for malaysian-manglish-nlp.
 Process multiple texts from file or stdin.
 Usage:
   python batch.py --input texts.txt --output results.json --tasks normalize,sentiment,lang

@@ -1,7 +1,7 @@
-"""Tests for manglish_nlp.stance module."""
+"""Tests for malaysian_manglish_nlp.stance module."""
 
 import pytest
-from manglish_nlp.stance import (
+from malaysian_manglish_nlp.stance import (
     detect_stance,
     detect_stance_batch,
     compare_stances,

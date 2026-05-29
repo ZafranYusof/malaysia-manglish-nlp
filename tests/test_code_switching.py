@@ -3,7 +3,7 @@ Tests for code_switching module.
 """
 
 import pytest
-from manglish_nlp.code_switching import (
+from malaysian_manglish_nlp.code_switching import (
     detect_switches,
     switch_points,
     switch_ratio,

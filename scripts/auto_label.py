@@ -23,7 +23,7 @@ DATASETS_DIR = PROJECT_ROOT / "datasets"
 RAW_DIR = DATASETS_DIR / "raw_scraped"
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 
-# Add project root to path so we can import manglish_nlp
+# Add project root to path so we can import malaysian_manglish_nlp
 sys.path.insert(0, str(PROJECT_ROOT))
 
 
@@ -45,17 +45,17 @@ def save_jsonl(data: list[dict], filepath: Path):
 
 
 # ---------------------------------------------------------------------------
-# Sentiment analysis (try manglish_nlp first, fallback to keyword-based)
+# Sentiment analysis (try malaysian_manglish_nlp first, fallback to keyword-based)
 # ---------------------------------------------------------------------------
 
-_manglish_nlp_available = False
+_malaysian_manglish_nlp_available = False
 try:
-    from manglish_nlp.sentiment import analyze_sentiment
-    from manglish_nlp.language import detect_language
-    from manglish_nlp.emotion import analyze_emotion
-    _manglish_nlp_available = True
+    from malaysian_manglish_nlp.sentiment import analyze_sentiment
+    from malaysian_manglish_nlp.language import detect_language
+    from malaysian_manglish_nlp.emotion import analyze_emotion
+    _malaysian_manglish_nlp_available = True
 except ImportError:
-    print("[Warning] manglish_nlp not importable, using keyword-based fallback")
+    print("[Warning] malaysian_manglish_nlp not importable, using keyword-based fallback")
 
 
 # Keyword-based fallback
@@ -237,8 +237,8 @@ def analyze_text(text: str) -> dict:
     """Run full analysis on a text, returning all labels + confidence."""
     result = {}
 
-    if _manglish_nlp_available:
-        # Use manglish_nlp sentiment
+    if _malaysian_manglish_nlp_available:
+        # Use malaysian_manglish_nlp sentiment
         sent_result = analyze_sentiment(text)
         if isinstance(sent_result, dict):
             result["sentiment"] = sent_result.get("sentiment", "neutral")

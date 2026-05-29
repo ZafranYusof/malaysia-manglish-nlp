@@ -1,7 +1,7 @@
 """Tests for intent classification module."""
 
 import pytest
-from manglish_nlp.intent import (
+from malaysian_manglish_nlp.intent import (
     classify_intent,
     classify_intents_batch,
     get_intent_features,

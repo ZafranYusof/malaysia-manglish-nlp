@@ -8,14 +8,14 @@
 
 Information extraction, knowledge graph construction, content tagging, and search indexing for Malaysian text. Standard NER models trained on news corpora miss Malaysian-specific entities like "Petronas", "UMNO", "nasi lemak", or informal place names like "KL", "Penang".
 
-manglish-nlp recognises entities in Manglish, social media text, and informal writing.
+malaysian-manglish-nlp recognises entities in Manglish, social media text, and informal writing.
 
 ---
 
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 entities = mnlp.ner_tag("Ahmad kerja kat Petronas Tower KL")
 print(entities)
@@ -56,7 +56,7 @@ for text, label in entities:
 
 ## Entity types
 
-manglish-nlp recognises these entity categories:
+malaysian-manglish-nlp recognises these entity categories:
 
 | Type | Description | Examples |
 |------|-------------|----------|

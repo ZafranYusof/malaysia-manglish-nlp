@@ -1,4 +1,4 @@
-"""Regression tests for manglish_nlp edge cases.
+"""Regression tests for malaysian_manglish_nlp edge cases.
 
 Tests specific bugs and edge cases that could cause crashes or incorrect behavior.
 Each test targets a specific problematic input pattern.
@@ -10,7 +10,7 @@ import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 
 # === Edge case inputs ===
@@ -51,73 +51,73 @@ def run_all_modules(text):
     
     # Sentiment
     try:
-        results["sentiment"] = manglish_nlp.sentiment(text)
+        results["sentiment"] = malaysian_manglish_nlp.sentiment(text)
     except Exception as e:
         results["sentiment_error"] = str(e)
     
     # Language detection
     try:
-        results["language"] = manglish_nlp.detect_language(text)
+        results["language"] = malaysian_manglish_nlp.detect_language(text)
     except Exception as e:
         results["language_error"] = str(e)
     
     # Emotion
     try:
-        results["emotion"] = manglish_nlp.detect_emotion(text)
+        results["emotion"] = malaysian_manglish_nlp.detect_emotion(text)
     except Exception as e:
         results["emotion_error"] = str(e)
     
     # Intent
     try:
-        results["intent"] = manglish_nlp.classify_intent(text)
+        results["intent"] = malaysian_manglish_nlp.classify_intent(text)
     except Exception as e:
         results["intent_error"] = str(e)
     
     # Topic
     try:
-        results["topic"] = manglish_nlp.classify_topic(text)
+        results["topic"] = malaysian_manglish_nlp.classify_topic(text)
     except Exception as e:
         results["topic_error"] = str(e)
     
     # Normalize
     try:
-        results["normalize"] = manglish_nlp.normalize(text)
+        results["normalize"] = malaysian_manglish_nlp.normalize(text)
     except Exception as e:
         results["normalize_error"] = str(e)
     
     # Tokenize
     try:
-        results["tokenize"] = manglish_nlp.tokenize(text)
+        results["tokenize"] = malaysian_manglish_nlp.tokenize(text)
     except Exception as e:
         results["tokenize_error"] = str(e)
     
     # Clean
     try:
-        results["clean"] = manglish_nlp.clean(text)
+        results["clean"] = malaysian_manglish_nlp.clean(text)
     except Exception as e:
         results["clean_error"] = str(e)
     
     # POS tag
     try:
-        results["pos"] = manglish_nlp.pos_tag(text)
+        results["pos"] = malaysian_manglish_nlp.pos_tag(text)
     except Exception as e:
         results["pos_error"] = str(e)
     
     # NER
     try:
-        results["ner"] = manglish_nlp.ner_tag(text)
+        results["ner"] = malaysian_manglish_nlp.ner_tag(text)
     except Exception as e:
         results["ner_error"] = str(e)
     
     # Stem
     try:
-        results["stem"] = manglish_nlp.stem(text)
+        results["stem"] = malaysian_manglish_nlp.stem(text)
     except Exception as e:
         results["stem_error"] = str(e)
     
     # Hate speech
     try:
-        results["hate_speech"] = manglish_nlp.detect_hate_speech(text)
+        results["hate_speech"] = malaysian_manglish_nlp.detect_hate_speech(text)
     except Exception as e:
         results["hate_speech_error"] = str(e)
     
@@ -128,52 +128,52 @@ class TestEmptyString:
     """Test all modules with empty string input."""
 
     def test_sentiment_empty(self):
-        result = manglish_nlp.sentiment("")
+        result = malaysian_manglish_nlp.sentiment("")
         assert result is not None
 
     def test_language_empty(self):
-        result = manglish_nlp.detect_language("")
+        result = malaysian_manglish_nlp.detect_language("")
         assert result is not None
 
     def test_emotion_empty(self):
-        result = manglish_nlp.detect_emotion("")
+        result = malaysian_manglish_nlp.detect_emotion("")
         assert result is not None
 
     def test_intent_empty(self):
-        result = manglish_nlp.classify_intent("")
+        result = malaysian_manglish_nlp.classify_intent("")
         assert result is not None
 
     def test_topic_empty(self):
-        result = manglish_nlp.classify_topic("")
+        result = malaysian_manglish_nlp.classify_topic("")
         assert result is not None
 
     def test_normalize_empty(self):
-        result = manglish_nlp.normalize("")
+        result = malaysian_manglish_nlp.normalize("")
         assert result is not None
         assert isinstance(result, str)
 
     def test_tokenize_empty(self):
-        result = manglish_nlp.tokenize("")
+        result = malaysian_manglish_nlp.tokenize("")
         assert result is not None
 
     def test_clean_empty(self):
-        result = manglish_nlp.clean("")
+        result = malaysian_manglish_nlp.clean("")
         assert result is not None
 
     def test_pos_tag_empty(self):
-        result = manglish_nlp.pos_tag("")
+        result = malaysian_manglish_nlp.pos_tag("")
         assert result is not None
 
     def test_ner_empty(self):
-        result = manglish_nlp.ner_tag("")
+        result = malaysian_manglish_nlp.ner_tag("")
         assert result is not None
 
     def test_stem_empty(self):
-        result = manglish_nlp.stem("")
+        result = malaysian_manglish_nlp.stem("")
         assert result is not None
 
     def test_hate_speech_empty(self):
-        result = manglish_nlp.detect_hate_speech("")
+        result = malaysian_manglish_nlp.detect_hate_speech("")
         assert result is not None
 
 
@@ -182,62 +182,62 @@ class TestNoneInput:
 
     def test_sentiment_none(self):
         try:
-            result = manglish_nlp.sentiment(None)
+            result = malaysian_manglish_nlp.sentiment(None)
             # If it doesn't crash, that's fine
         except (TypeError, AttributeError, ValueError):
             pass  # Expected - None is not valid input
 
     def test_language_none(self):
         try:
-            result = manglish_nlp.detect_language(None)
+            result = malaysian_manglish_nlp.detect_language(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_emotion_none(self):
         try:
-            result = manglish_nlp.detect_emotion(None)
+            result = malaysian_manglish_nlp.detect_emotion(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_intent_none(self):
         try:
-            result = manglish_nlp.classify_intent(None)
+            result = malaysian_manglish_nlp.classify_intent(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_topic_none(self):
         try:
-            result = manglish_nlp.classify_topic(None)
+            result = malaysian_manglish_nlp.classify_topic(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_normalize_none(self):
         try:
-            result = manglish_nlp.normalize(None)
+            result = malaysian_manglish_nlp.normalize(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_tokenize_none(self):
         try:
-            result = manglish_nlp.tokenize(None)
+            result = malaysian_manglish_nlp.tokenize(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_clean_none(self):
         try:
-            result = manglish_nlp.clean(None)
+            result = malaysian_manglish_nlp.clean(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_pos_tag_none(self):
         try:
-            result = manglish_nlp.pos_tag(None)
+            result = malaysian_manglish_nlp.pos_tag(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
     def test_stem_none(self):
         try:
-            result = manglish_nlp.stem(None)
+            result = malaysian_manglish_nlp.stem(None)
         except (TypeError, AttributeError, ValueError):
             pass
 
@@ -246,23 +246,23 @@ class TestVeryLongText:
     """Test modules with very long text (1000+ words)."""
 
     def test_sentiment_long(self):
-        result = manglish_nlp.sentiment(VERY_LONG_TEXT)
+        result = malaysian_manglish_nlp.sentiment(VERY_LONG_TEXT)
         assert result is not None
 
     def test_language_long(self):
-        result = manglish_nlp.detect_language(VERY_LONG_TEXT)
+        result = malaysian_manglish_nlp.detect_language(VERY_LONG_TEXT)
         assert result is not None
 
     def test_emotion_long(self):
-        result = manglish_nlp.detect_emotion(VERY_LONG_TEXT)
+        result = malaysian_manglish_nlp.detect_emotion(VERY_LONG_TEXT)
         assert result is not None
 
     def test_normalize_long(self):
-        result = manglish_nlp.normalize(VERY_LONG_TEXT)
+        result = malaysian_manglish_nlp.normalize(VERY_LONG_TEXT)
         assert result is not None
 
     def test_tokenize_long(self):
-        result = manglish_nlp.tokenize(VERY_LONG_TEXT)
+        result = malaysian_manglish_nlp.tokenize(VERY_LONG_TEXT)
         assert result is not None
         assert len(result) > 100
 
@@ -380,7 +380,7 @@ class TestAllCaps:
 
     def test_sentiment_detects_positive(self):
         """All caps positive text should still be detected."""
-        result = manglish_nlp.sentiment(ALL_CAPS)
+        result = malaysian_manglish_nlp.sentiment(ALL_CAPS)
         # Should detect some sentiment (positive in this case)
         assert result is not None
 
@@ -437,32 +437,32 @@ class TestSpecificBugs:
 
     def test_double_negation(self):
         """Double negation should not crash."""
-        result = manglish_nlp.sentiment("tak tak sedap pun")
+        result = malaysian_manglish_nlp.sentiment("tak tak sedap pun")
         assert result is not None
 
     def test_mixed_language_sentiment(self):
         """Mixed BM/EN sentiment should work."""
-        result = manglish_nlp.sentiment("this is damn good la bro sedap gila")
+        result = malaysian_manglish_nlp.sentiment("this is damn good la bro sedap gila")
         assert result is not None
 
     def test_elongated_words(self):
         """Elongated words should not crash."""
-        result = manglish_nlp.normalize("bestttttt gilaaaa sedapppp")
+        result = malaysian_manglish_nlp.normalize("bestttttt gilaaaa sedapppp")
         assert result is not None
 
     def test_repeated_punctuation(self):
         """Repeated punctuation should not crash."""
-        result = manglish_nlp.sentiment("best!!!!!!!! sedap??????")
+        result = malaysian_manglish_nlp.sentiment("best!!!!!!!! sedap??????")
         assert result is not None
 
     def test_hashtags(self):
         """Hashtags should not crash."""
-        result = manglish_nlp.sentiment("#MalaysiaFood #NasiLemak best gila")
+        result = malaysian_manglish_nlp.sentiment("#MalaysiaFood #NasiLemak best gila")
         assert result is not None
 
     def test_mentions(self):
         """@ mentions should not crash."""
-        result = manglish_nlp.sentiment("@ahmad weh jom makan")
+        result = malaysian_manglish_nlp.sentiment("@ahmad weh jom makan")
         assert result is not None
 
     def test_code_in_text(self):

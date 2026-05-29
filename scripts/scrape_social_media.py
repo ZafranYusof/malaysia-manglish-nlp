@@ -116,7 +116,7 @@ def scrape_reddit(client_id=None, client_secret=None, limit=500) -> list[dict]:
             reddit = praw.Reddit(
                 client_id=client_id,
                 client_secret=client_secret,
-                user_agent="manglish-nlp-scraper/1.0",
+                user_agent="malaysian-manglish-nlp-scraper/1.0",
             )
             print("[Reddit] Using PRAW with API credentials")
             for sub_name in subreddits:
@@ -164,7 +164,7 @@ def scrape_reddit(client_id=None, client_secret=None, limit=500) -> list[dict]:
         for sort in ["hot", "top"]:
             url = f"https://www.reddit.com/r/{sub_name}/{sort}.json?limit=100"
             try:
-                req = urllib.request.Request(url, headers={"User-Agent": "manglish-nlp/1.0"})
+                req = urllib.request.Request(url, headers={"User-Agent": "malaysian-manglish-nlp/1.0"})
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = json.loads(resp.read().decode("utf-8"))
                     posts = data.get("data", {}).get("children", [])
@@ -223,7 +223,7 @@ def scrape_twitter(bearer_token=None, limit=500) -> list[dict]:
             try:
                 req = urllib.request.Request(url, headers={
                     "Authorization": f"Bearer {bearer_token}",
-                    "User-Agent": "manglish-nlp/1.0",
+                    "User-Agent": "malaysian-manglish-nlp/1.0",
                 })
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = json.loads(resp.read().decode("utf-8"))
@@ -269,7 +269,7 @@ def _scrape_twitter_nitter(limit=500) -> list[dict]:
             url = f"{instance}/search?f=tweets&q={term}"
             try:
                 req = urllib.request.Request(url, headers={
-                    "User-Agent": "Mozilla/5.0 (compatible; manglish-nlp/1.0)",
+                    "User-Agent": "Mozilla/5.0 (compatible; malaysian-manglish-nlp/1.0)",
                 })
                 with urllib.request.urlopen(req, timeout=10) as resp:
                     html = resp.read().decode("utf-8", errors="replace")
@@ -315,7 +315,7 @@ def scrape_lowyat(limit=300) -> list[dict]:
         print(f"  Scraping {forum_url}...")
         try:
             req = urllib.request.Request(forum_url, headers={
-                "User-Agent": "Mozilla/5.0 (compatible; manglish-nlp/1.0)",
+                "User-Agent": "Mozilla/5.0 (compatible; malaysian-manglish-nlp/1.0)",
             })
             with urllib.request.urlopen(req, timeout=15) as resp:
                 html = resp.read().decode("utf-8", errors="replace")
@@ -329,7 +329,7 @@ def scrape_lowyat(limit=300) -> list[dict]:
                 for topic_url in topic_links:
                     try:
                         req2 = urllib.request.Request(topic_url, headers={
-                            "User-Agent": "Mozilla/5.0 (compatible; manglish-nlp/1.0)",
+                            "User-Agent": "Mozilla/5.0 (compatible; malaysian-manglish-nlp/1.0)",
                         })
                         with urllib.request.urlopen(req2, timeout=10) as resp2:
                             topic_html = resp2.read().decode("utf-8", errors="replace")

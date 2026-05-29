@@ -3,7 +3,7 @@ import os
 
 api = HfApi()
 token = "YOUR_HF_TOKEN_HERE"
-repo_id = "vexccz/manglish-nlp-demo"
+repo_id = "vexccz/malaysian-manglish-nlp-demo"
 repo_type = "space"
 
 # Upload demo files

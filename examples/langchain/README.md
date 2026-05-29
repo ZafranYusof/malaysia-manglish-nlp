@@ -1,4 +1,4 @@
-# LangChain + manglish-nlp Examples
+# LangChain + malaysian-manglish-nlp Examples
 
 Integrate Malaysian Manglish NLP capabilities into LangChain agents, chatbots,
 and RAG pipelines.
@@ -14,7 +14,7 @@ export OPENAI_API_KEY="sk-..."   # or use any LangChain-supported LLM
 
 ### 1. Basic Tools (`basic_tool.py`)
 
-Register manglish-nlp modules as LangChain tools:
+Register malaysian-manglish-nlp modules as LangChain tools:
 
 | Tool | Function |
 |------|----------|
@@ -48,7 +48,7 @@ Bot: Kedai mamak naik harga memang sakit hati wei. Kat area mana tu?
 
 ### 3. RAG Pipeline (`rag_pipeline.py`)
 
-Retrieval-Augmented Generation with manglish-nlp preprocessing:
+Retrieval-Augmented Generation with malaysian-manglish-nlp preprocessing:
 
 1. **Normalise** Manglish query (expand slang/shortforms)
 2. **Translate** to English for broader document matching
@@ -62,7 +62,7 @@ python rag_pipeline.py
 
 **Note:** The demo uses a naive keyword-overlap store. For production,
 swap `SimpleVectorStore` with ChromaDB, FAISS, or Pinecone using
-manglish-nlp embeddings (`manglish_nlp.embeddings`).
+malaysian-manglish-nlp embeddings (`malaysian_manglish_nlp.embeddings`).
 
 ## Customisation
 
@@ -78,7 +78,7 @@ llm = ChatAnthropic(model="claude-3-haiku-20240307")
 ### Adding more tools
 
 ```python
-from manglish_nlp.langchain_tool import get_tools
+from malaysian_manglish_nlp.langchain_tool import get_tools
 all_tools = get_tools()  # returns all built-in tools
 ```
 
@@ -96,7 +96,7 @@ User (Manglish)
     │
     ▼
 ┌─────────────────────┐
-│  manglish-nlp tools  │  sentiment, NER, translate, normalize
+│  malaysian-manglish-nlp tools  │  sentiment, NER, translate, normalize
 └─────────┬───────────┘
           │
     ▼              ▼

@@ -1,6 +1,6 @@
 ﻿# Pretrained Models
 
-manglish-nlp ships with pretrained models trained on real Malaysian social media data.
+malaysian-manglish-nlp ships with pretrained models trained on real Malaysian social media data.
 
 ---
 
@@ -14,7 +14,7 @@ manglish-nlp ships with pretrained models trained on real Malaysian social media
 ### Loading word embeddings
 
 ```python
-from manglish_nlp import word_embeddings
+from malaysian_manglish_nlp import word_embeddings
 
 # Load Word2Vec
 w2v = word_embeddings.load_word2vec()
@@ -29,7 +29,7 @@ ft.most_similar("best")
 
 ### How they were trained
 
-Both models were trained on 50,000+ Malaysian tweets collected between 2023–2025. Text was preprocessed using manglish-nlp's normalisation pipeline (slang → standard Malay/English) before training.
+Both models were trained on 50,000+ Malaysian tweets collected between 2023–2025. Text was preprocessed using malaysian-manglish-nlp's normalisation pipeline (slang → standard Malay/English) before training.
 
 - **Word2Vec**: Gensim CBOW, window=5, min_count=2, epochs=50
 - **FastText**: Gensim skip-gram, window=5, min_count=2, epochs=50
@@ -50,14 +50,14 @@ Both models were trained on 50,000+ Malaysian tweets collected between 2023–20
 ### Usage
 
 ```python
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 
 # Rule-based (no model needed)
 result = sentiment.analyse("Best lah movie ni, memang power!")
 # SentimentResult(label='positive', score=0.78)
 
 # Fine-tuned model (requires transformers extra)
-from manglish_nlp.advanced import FinetunedSentimentClassifier
+from malaysian_manglish_nlp.advanced import FinetunedSentimentClassifier
 classifier = FinetunedSentimentClassifier()
 classifier.predict("Best lah movie ni, memang power!")
 # 'positive'
@@ -87,7 +87,7 @@ classifier.predict("Best lah movie ni, memang power!")
 Models are bundled with the package or downloaded on first use:
 
 ```
-~/.manglish_nlp/models/
+~/.malaysian_manglish_nlp/models/
 ├── word2vec/
 │   └── manglish-word2vec.model
 ├── fasttext/
@@ -119,10 +119,10 @@ All models were trained using scripts in `scripts/train/`:
 If you use these models in your research:
 
 ```bibtex
-@software{manglish_nlp_2025,
-  title  = {manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
+@software{malaysian_manglish_nlp_2025,
+  title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2025},
-  url    = {https://github.com/ZafranYusof/manglish-nlp}
+  url    = {https://github.com/ZafranYusof/malaysian-manglish-nlp}
 }
 ```

@@ -9,7 +9,7 @@
 Data modules provide the numerical backbone for NLP: word vectors, sentence embeddings, similarity metrics, augmentation strategies, and a comprehensive Malaysian dictionary. Use these for semantic search, clustering, classification features, and training data expansion.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 ---
@@ -17,7 +17,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Word similarity
 emb = mnlp.word_embeddings()
@@ -44,7 +44,7 @@ mnlp.augment("Makanan kat sini memang sedap", n=3)
 Pre-trained Word2Vec embeddings for Malaysian vocabulary. Trained on **10M+ Malaysian social media posts, news articles, and forum discussions**. Covers formal BM, informal Manglish, and code-switched terms.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 emb = mnlp.word_embeddings()
 
@@ -102,7 +102,7 @@ emb.most_similar("sedap")
 Sentence and document-level embeddings for semantic representation. Two model tiers available: fast (lightweight, ~5 ms/text) and accurate (transformer-based, ~50 ms/text).
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Single sentence
 vec = mnlp.embeddings("Aku nak pergi makan nasi lemak")
@@ -142,7 +142,7 @@ vecs.shape
 Compute semantic similarity between texts. Cross-lingual (BM ↔ EN ↔ Manglish) by default.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.similarity("Aku lapar gila", "I'm so hungry right now")
 # 0.91
@@ -194,7 +194,7 @@ mnlp.similarity("Cuaca panas hari ni", "Hari ni memang hot gila")
 Data augmentation strategies tailored for Malaysian text. Generates synthetic variants for training data expansion.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.augment("Makanan kat sini memang sedap", n=5)
 # ['Makanan dekat sini memang sedap',        # synonym
@@ -236,7 +236,7 @@ mnlp.augment("Makanan kat sini memang sedap", n=5)
 Malaysian lexical dictionary with definitions, examples, synonyms, register information, and word frequency data.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.dictionary("lepak")
 # {'word': 'lepak', 'pos': 'verb',
@@ -282,7 +282,7 @@ mnlp.dictionary("lepak")
 Context-aware spelling correction that distinguishes intentional Malaysian abbreviations from actual typos.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.spelling("Aku nk prgi mkn kat keday tu")
 # "Aku nak pergi makan kat kedai tu"

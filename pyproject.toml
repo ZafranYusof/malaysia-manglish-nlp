@@ -3,9 +3,9 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "manglish-nlp"
+name = "malaysian-manglish-nlp"
 version = "3.0.0"
-description = "Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core"
+description = "Full NLP toolkit for Malaysian Manglish - 51 modules, zero dependencies for core"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
@@ -29,14 +29,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ZafranYusof/manglish-nlp"
-Documentation = "https://manglish-nlp.readthedocs.io"
-Repository = "https://github.com/ZafranYusof/manglish-nlp"
-Issues = "https://github.com/ZafranYusof/manglish-nlp/issues"
-Changelog = "https://github.com/ZafranYusof/manglish-nlp/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/ZafranYusof/malaysian-manglish-nlp"
+Documentation = "https://malaysian-manglish-nlp.readthedocs.io"
+Repository = "https://github.com/ZafranYusof/malaysian-manglish-nlp"
+Issues = "https://github.com/ZafranYusof/malaysian-manglish-nlp/issues"
+Changelog = "https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/CHANGELOG.md"
 
 [project.scripts]
-manglish = "manglish_nlp.__main__:main"
+manglish = "malaysian_manglish_nlp.__main__:main"
 
 [project.optional-dependencies]
 transformers = ["transformers>=4.20.0", "torch>=1.12.0"]
@@ -55,10 +55,10 @@ all = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["manglish_nlp*"]
+include = ["malaysian_manglish_nlp*"]
 
 [tool.setuptools.package-data]
-manglish_nlp = ["resources/*.json", "resources/*.txt", "resources/*.md"]
+malaysian_manglish_nlp = ["resources/*.json", "resources/*.txt", "resources/*.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

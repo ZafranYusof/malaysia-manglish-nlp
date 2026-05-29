@@ -6,12 +6,12 @@
 
 ## Overview
 
-manglish-nlp organises every module into eight functional groups. All follow a consistent API: `mnlp.<module>(text, **options)`. Core modules run with zero external dependencies; advanced/generation modules need the optional `[ml]` extra.
+malaysian-manglish-nlp organises every module into eight functional groups. All follow a consistent API: `mnlp.<module>(text, **options)`. Core modules run with zero external dependencies; advanced/generation modules need the optional `[ml]` extra.
 
 ```
-pip install manglish-nlp        # core only (text processing, analysis, extraction)
-pip install manglish-nlp[ml]    # + transformer models (generation, advanced)
-pip install manglish-nlp[all]   # everything including spaCy & LangChain
+pip install malaysian-manglish-nlp        # core only (text processing, analysis, extraction)
+pip install malaysian-manglish-nlp[ml]    # + transformer models (generation, advanced)
+pip install malaysian-manglish-nlp[all]   # everything including spaCy & LangChain
 ```
 
 ---
@@ -127,7 +127,7 @@ pip install manglish-nlp[all]   # everything including spaCy & LangChain
 Every module follows the same call convention:
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Single text
 result = mnlp.<module>(text)
@@ -165,8 +165,8 @@ results = mnlp.<module>(["text1", "text2", "text3"])
 !!! info "Optional Dependencies"
     Core modules have **zero** external dependencies. Install extras only when needed:
     ```
-    pip install manglish-nlp[ml]       # Tier 2-3
-    pip install manglish-nlp[spacy]    # spaCy integration
-    pip install manglish-nlp[langchain]# LangChain tools
-    pip install manglish-nlp[all]      # Everything
+    pip install malaysian-manglish-nlp[ml]       # Tier 2-3
+    pip install malaysian-manglish-nlp[spacy]    # spaCy integration
+    pip install malaysian-manglish-nlp[langchain]# LangChain tools
+    pip install malaysian-manglish-nlp[all]      # Everything
     ```

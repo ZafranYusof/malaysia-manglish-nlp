@@ -8,14 +8,14 @@
 
 Semantic search, similarity computation, text classification features, and linguistic analysis. Standard embeddings (GloVe, fastText English) don't capture Malaysian word semantics  -  "sedap" and "lazat" should be close vectors, but they're absent from English-trained models.
 
-manglish-nlp provides embeddings trained specifically on Malaysian text including Manglish, social media, and news.
+malaysian-manglish-nlp provides embeddings trained specifically on Malaysian text including Manglish, social media, and news.
 
 ---
 
 ## Load module
 
 ```python
-from manglish_nlp import word_embeddings
+from malaysian_manglish_nlp import word_embeddings
 
 # Load Word2Vec model
 model = word_embeddings.load_word2vec()
@@ -117,7 +117,7 @@ model.most_similar_vector(vec, topn=3)
 For sentence-level embeddings, use the embeddings module:
 
 ```python
-from manglish_nlp import embeddings
+from malaysian_manglish_nlp import embeddings
 
 # Fast mode (averaged word vectors)
 vec = embeddings.encode("Saya suka makan nasi lemak")
@@ -131,7 +131,7 @@ vec = embeddings.encode("Saya suka makan nasi lemak", mode="accurate")
 ### Sentence similarity
 
 ```python
-from manglish_nlp import similarity
+from malaysian_manglish_nlp import similarity
 
 similarity.cosine(
     "Saya suka makan nasi lemak",

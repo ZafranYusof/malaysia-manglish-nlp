@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Manglish NLP",
+  "name": "Malaysian Manglish NLP",
   "version": "1.0.0",
   "description": "Analyze Malaysian Manglish text on any webpage - sentiment, NER, normalization",
   "permissions": ["contextMenus", "activeTab", "storage"],

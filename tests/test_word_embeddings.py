@@ -8,7 +8,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.word_embeddings import (
+from malaysian_manglish_nlp.word_embeddings import (
     generate_corpus,
     _tokenize_simple,
 )
@@ -136,19 +136,19 @@ class TestGensimImportError:
     def test_train_word2vec_import_error(self):
         """train_word2vec raises ImportError without gensim."""
         with patch.dict(sys.modules, {'gensim': None}):
-            from manglish_nlp.word_embeddings import _check_gensim
+            from malaysian_manglish_nlp.word_embeddings import _check_gensim
             # Force reimport to pick up the mock
-            with patch('manglish_nlp.word_embeddings._check_gensim',
+            with patch('malaysian_manglish_nlp.word_embeddings._check_gensim',
                        side_effect=ImportError("gensim is required")):
-                from manglish_nlp.word_embeddings import train_word2vec
+                from malaysian_manglish_nlp.word_embeddings import train_word2vec
                 with pytest.raises(ImportError, match="gensim"):
                     train_word2vec()
 
     def test_train_fasttext_import_error(self):
         """train_fasttext raises ImportError without gensim."""
-        with patch('manglish_nlp.word_embeddings._check_gensim',
+        with patch('malaysian_manglish_nlp.word_embeddings._check_gensim',
                    side_effect=ImportError("gensim is required")):
-            from manglish_nlp.word_embeddings import train_fasttext
+            from malaysian_manglish_nlp.word_embeddings import train_fasttext
             with pytest.raises(ImportError, match="gensim"):
                 train_fasttext()
 
@@ -169,9 +169,9 @@ class TestTrainingWithGensim:
         """Train Word2Vec model successfully."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._W2V_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH',
                    str(tmp_path / 'w2v.model')):
-            from manglish_nlp.word_embeddings import train_word2vec
+            from malaysian_manglish_nlp.word_embeddings import train_word2vec
             model = train_word2vec(corpus=small_corpus, vector_size=50,
                                    min_count=1)
             assert model is not None
@@ -181,9 +181,9 @@ class TestTrainingWithGensim:
         """Train FastText model successfully."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._FT_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._FT_PATH',
                    str(tmp_path / 'ft.model')):
-            from manglish_nlp.word_embeddings import train_fasttext
+            from malaysian_manglish_nlp.word_embeddings import train_fasttext
             model = train_fasttext(corpus=small_corpus, vector_size=50,
                                    min_count=1)
             assert model is not None
@@ -193,11 +193,11 @@ class TestTrainingWithGensim:
         """train_all returns both models."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._W2V_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH',
                    str(tmp_path / 'w2v.model')), \
-             patch('manglish_nlp.word_embeddings._FT_PATH',
+             patch('malaysian_manglish_nlp.word_embeddings._FT_PATH',
                    str(tmp_path / 'ft.model')):
-            from manglish_nlp.word_embeddings import train_all
+            from malaysian_manglish_nlp.word_embeddings import train_all
             result = train_all(vector_size=50, n_sentences=200, min_count=1)
             assert 'word2vec' in result
             assert 'fasttext' in result
@@ -207,9 +207,9 @@ class TestTrainingWithGensim:
         """Train Word2Vec with Skip-gram."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._W2V_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH',
                    str(tmp_path / 'w2v_sg.model')):
-            from manglish_nlp.word_embeddings import train_word2vec
+            from malaysian_manglish_nlp.word_embeddings import train_word2vec
             model = train_word2vec(corpus=small_corpus, vector_size=50,
                                    sg=1, min_count=1)
             assert model is not None
@@ -226,9 +226,9 @@ class TestModelLoading:
         """Raises FileNotFoundError when no model exists."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._W2V_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH',
                    str(tmp_path / 'nonexistent.model')):
-            from manglish_nlp.word_embeddings import load_word2vec
+            from malaysian_manglish_nlp.word_embeddings import load_word2vec
             with pytest.raises(FileNotFoundError):
                 load_word2vec()
 
@@ -236,9 +236,9 @@ class TestModelLoading:
         """Raises FileNotFoundError when no model exists."""
         gensim = pytest.importorskip("gensim")
 
-        with patch('manglish_nlp.word_embeddings._FT_PATH',
+        with patch('malaysian_manglish_nlp.word_embeddings._FT_PATH',
                    str(tmp_path / 'nonexistent.model')):
-            from manglish_nlp.word_embeddings import load_fasttext
+            from malaysian_manglish_nlp.word_embeddings import load_fasttext
             with pytest.raises(FileNotFoundError):
                 load_fasttext()
 
@@ -249,8 +249,8 @@ class TestModelLoading:
         model_path = str(tmp_path / 'w2v_load.model')
         corpus = generate_corpus(n_sentences=200, seed=42)
 
-        with patch('manglish_nlp.word_embeddings._W2V_PATH', model_path):
-            from manglish_nlp.word_embeddings import train_word2vec, load_word2vec
+        with patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH', model_path):
+            from malaysian_manglish_nlp.word_embeddings import train_word2vec, load_word2vec
             train_word2vec(corpus=corpus, vector_size=50, min_count=1)
             loaded = load_word2vec()
             assert loaded.wv.vector_size == 50
@@ -273,13 +273,13 @@ class TestQueryFunctions:
         ft_path = str(tmp_path / 'ft_query.model')
 
         self._patches = [
-            patch('manglish_nlp.word_embeddings._W2V_PATH', w2v_path),
-            patch('manglish_nlp.word_embeddings._FT_PATH', ft_path),
+            patch('malaysian_manglish_nlp.word_embeddings._W2V_PATH', w2v_path),
+            patch('malaysian_manglish_nlp.word_embeddings._FT_PATH', ft_path),
         ]
         for p in self._patches:
             p.start()
 
-        from manglish_nlp.word_embeddings import train_word2vec, train_fasttext
+        from malaysian_manglish_nlp.word_embeddings import train_word2vec, train_fasttext
         train_word2vec(corpus=corpus, vector_size=50, min_count=1)
         train_fasttext(corpus=corpus, vector_size=50, min_count=1)
 
@@ -290,7 +290,7 @@ class TestQueryFunctions:
 
     def test_most_similar_fasttext(self):
         """most_similar returns results for FastText."""
-        from manglish_nlp.word_embeddings import most_similar
+        from malaysian_manglish_nlp.word_embeddings import most_similar
         results = most_similar('makan', model_type='fasttext', topn=5)
         assert isinstance(results, list)
         assert len(results) <= 5
@@ -300,27 +300,27 @@ class TestQueryFunctions:
 
     def test_most_similar_word2vec(self):
         """most_similar returns results for Word2Vec."""
-        from manglish_nlp.word_embeddings import most_similar
+        from malaysian_manglish_nlp.word_embeddings import most_similar
         results = most_similar('aku', model_type='word2vec', topn=5)
         assert isinstance(results, list)
 
     def test_most_similar_unknown_word(self):
         """most_similar handles unknown words gracefully."""
-        from manglish_nlp.word_embeddings import most_similar
+        from malaysian_manglish_nlp.word_embeddings import most_similar
         # Word2Vec can't handle OOV
         results = most_similar('xyznonexistent123', model_type='word2vec', topn=5)
         assert results == []
 
     def test_word_vector_fasttext(self):
         """word_vector returns numpy array."""
-        from manglish_nlp.word_embeddings import word_vector
+        from malaysian_manglish_nlp.word_embeddings import word_vector
         vec = word_vector('makan', model_type='fasttext')
         assert isinstance(vec, np.ndarray)
         assert vec.shape == (50,)
 
     def test_word_vector_oov_fasttext(self):
         """FastText handles OOV words via subwords."""
-        from manglish_nlp.word_embeddings import word_vector
+        from malaysian_manglish_nlp.word_embeddings import word_vector
         # FastText should handle this via subword info
         vec = word_vector('makannnn', model_type='fasttext')
         assert isinstance(vec, np.ndarray)
@@ -328,28 +328,28 @@ class TestQueryFunctions:
 
     def test_sentence_vector(self):
         """sentence_vector returns averaged vector."""
-        from manglish_nlp.word_embeddings import sentence_vector
+        from malaysian_manglish_nlp.word_embeddings import sentence_vector
         vec = sentence_vector('aku nak makan nasi lemak', model_type='fasttext')
         assert isinstance(vec, np.ndarray)
         assert vec.shape == (50,)
 
     def test_sentence_vector_empty(self):
         """sentence_vector handles empty/unknown text."""
-        from manglish_nlp.word_embeddings import sentence_vector
+        from malaysian_manglish_nlp.word_embeddings import sentence_vector
         vec = sentence_vector('', model_type='fasttext')
         assert isinstance(vec, np.ndarray)
         assert np.all(vec == 0)
 
     def test_analogy(self):
         """analogy returns results."""
-        from manglish_nlp.word_embeddings import analogy
+        from malaysian_manglish_nlp.word_embeddings import analogy
         results = analogy(['makan', 'kedai'], ['rumah'],
                          model_type='fasttext', topn=3)
         assert isinstance(results, list)
 
     def test_analogy_unknown_word(self):
         """analogy handles unknown words."""
-        from manglish_nlp.word_embeddings import analogy
+        from malaysian_manglish_nlp.word_embeddings import analogy
         results = analogy(['xyznonexistent'], ['abcnonexistent'],
                          model_type='word2vec', topn=3)
         assert results == []
@@ -366,6 +366,6 @@ class TestModelTypeValidation:
         """Raises ValueError for unknown model type."""
         gensim = pytest.importorskip("gensim")
 
-        from manglish_nlp.word_embeddings import _get_model
+        from malaysian_manglish_nlp.word_embeddings import _get_model
         with pytest.raises(ValueError, match="Unknown model_type"):
             _get_model('invalid_type')

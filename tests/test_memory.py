@@ -1,4 +1,4 @@
-"""Tests for manglish_nlp.memory - Memory optimization utilities.
+"""Tests for malaysian_manglish_nlp.memory - Memory optimization utilities.
 
 Tests cover:
     - LazyModule: deferred import, attribute proxy, is_loaded, repr
@@ -17,7 +17,7 @@ import pytest
 # Ensure the project root is importable
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.memory import (
+from malaysian_manglish_nlp.memory import (
     LazyModule,
     ModuleRegistry,
     optimize_memory,
@@ -34,54 +34,54 @@ class TestLazyModule:
     """Tests for LazyModule deferred import proxy."""
 
     def test_lazy_not_loaded_initially(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         assert mod.is_loaded is False
 
     def test_lazy_loads_on_access(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         # Access an attribute -> triggers import
         func = mod.analyze_sentiment
         assert mod.is_loaded is True
         assert callable(func)
 
     def test_lazy_returns_correct_results(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         result = mod.analyze_sentiment("best gila")
         assert isinstance(result, dict)
 
     def test_lazy_caches_module(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         _ = mod.analyze_sentiment  # first access
         cached = mod._module
         _ = mod.sentiment  # second access
         assert mod._module is cached  # same object
 
     def test_lazy_repr_before_load(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         r = repr(mod)
         assert 'lazy' in r
         assert 'sentiment' in r
 
     def test_lazy_repr_after_load(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         _ = mod.analyze_sentiment
         r = repr(mod)
         assert 'loaded' in r
 
     def test_lazy_dir(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         attrs = dir(mod)
         assert isinstance(attrs, list)
         assert 'analyze_sentiment' in attrs
         assert mod.is_loaded is True  # dir triggers load
 
     def test_lazy_unknown_attribute(self):
-        mod = LazyModule('manglish_nlp.sentiment')
+        mod = LazyModule('malaysian_manglish_nlp.sentiment')
         with pytest.raises(AttributeError):
             _ = mod.nonexistent_function_xyz
 
     def test_lazy_invalid_module(self):
-        mod = LazyModule('manglish_nlp.totally_fake_module_12345')
+        mod = LazyModule('malaysian_manglish_nlp.totally_fake_module_12345')
         with pytest.raises(ModuleNotFoundError):
             _ = mod.something
 
@@ -251,7 +251,7 @@ class TestOptimizeMemory:
 
     def test_optimize_modules_list(self):
         # Import something first
-        import manglish_nlp.sentiment
+        import malaysian_manglish_nlp.sentiment
         result = optimize_memory()
         assert isinstance(result['manglish_modules'], list)
         assert result['manglish_modules_loaded'] > 0
@@ -265,19 +265,19 @@ class TestModuleSizeEstimate:
     """Tests for module_size_estimate function."""
 
     def test_loaded_module(self):
-        import manglish_nlp.sentiment
-        result = module_size_estimate('manglish_nlp.sentiment')
+        import malaysian_manglish_nlp.sentiment
+        result = module_size_estimate('malaysian_manglish_nlp.sentiment')
         assert result['loaded'] is True
         assert result['estimated_bytes'] > 0
         assert result['attribute_count'] > 0
 
     def test_unloaded_module(self):
-        result = module_size_estimate('manglish_nlp.totally_fake_xyz_123')
+        result = module_size_estimate('malaysian_manglish_nlp.totally_fake_xyz_123')
         assert result['loaded'] is False
         assert result['estimated_bytes'] == 0
 
     def test_result_keys(self):
-        result = module_size_estimate('manglish_nlp.sentiment')
+        result = module_size_estimate('malaysian_manglish_nlp.sentiment')
         assert 'module' in result
         assert 'estimated_bytes' in result
         assert 'attribute_count' in result
@@ -292,14 +292,14 @@ class TestGetAllModuleSizes:
     """Tests for get_all_module_sizes function."""
 
     def test_returns_list(self):
-        import manglish_nlp.sentiment
+        import malaysian_manglish_nlp.sentiment
         results = get_all_module_sizes()
         assert isinstance(results, list)
         assert len(results) > 0
 
     def test_sorted_by_size(self):
-        import manglish_nlp.sentiment
-        import manglish_nlp.ner
+        import malaysian_manglish_nlp.sentiment
+        import malaysian_manglish_nlp.ner
         results = get_all_module_sizes()
         sizes = [r['estimated_bytes'] for r in results]
         assert sizes == sorted(sizes, reverse=True)
@@ -307,4 +307,4 @@ class TestGetAllModuleSizes:
     def test_all_manglish(self):
         results = get_all_module_sizes()
         for r in results:
-            assert r['module'].startswith('manglish_nlp')
+            assert r['module'].startswith('malaysian_manglish_nlp')

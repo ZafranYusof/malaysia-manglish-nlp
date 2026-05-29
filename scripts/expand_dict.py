@@ -2,7 +2,7 @@
 import json
 import os
 
-DICT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'manglish_nlp', 'resources', 'dictionary.json')
+DICT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'malaysian_manglish_nlp', 'resources', 'dictionary.json')
 
 with open(DICT_PATH, 'r', encoding='utf-8') as f:
     data = json.load(f)

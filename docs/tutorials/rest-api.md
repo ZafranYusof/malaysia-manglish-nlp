@@ -1,6 +1,6 @@
 ﻿# REST API Guide
 
-**Serve all manglish-nlp modules over HTTP with FastAPI  -  batch processing, rate limiting, and Docker deployment.**
+**Serve all malaysian-manglish-nlp modules over HTTP with FastAPI  -  batch processing, rate limiting, and Docker deployment.**
 
 ---
 
@@ -13,7 +13,7 @@ Microservice integration, frontend consumption, mobile app backends, and team-wi
 ## Installation
 
 ```bash
-pip install manglish-nlp[api]
+pip install malaysian-manglish-nlp[api]
 ```
 
 This installs FastAPI and uvicorn.
@@ -25,19 +25,19 @@ This installs FastAPI and uvicorn.
 ### Option 1: Python command
 
 ```bash
-python -m manglish_nlp.rest_api
+python -m malaysian_manglish_nlp.rest_api
 ```
 
 ### Option 2: Uvicorn directly
 
 ```bash
-uvicorn manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000
+uvicorn malaysian_manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000
 ```
 
 ### Option 3: With auto-reload (development)
 
 ```bash
-uvicorn manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000 --reload
+uvicorn malaysian_manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 Server starts at `http://localhost:8000`.
@@ -341,10 +341,10 @@ rate_limiter = RateLimiter(max_requests=200, window_seconds=60)  # 200/min
 
 ```bash
 # Build
-docker build -t manglish-nlp-api .
+docker build -t malaysian-manglish-nlp-api .
 
 # Run
-docker run -p 8000:8000 manglish-nlp-api
+docker run -p 8000:8000 malaysian-manglish-nlp-api
 ```
 
 ### Using docker-compose
@@ -360,10 +360,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 COPY . .
-RUN pip install --no-cache-dir manglish-nlp[api]
+RUN pip install --no-cache-dir malaysian-manglish-nlp[api]
 
 EXPOSE 8000
-CMD ["uvicorn", "manglish_nlp.rest_api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "malaysian_manglish_nlp.rest_api:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ### docker-compose.yml
@@ -372,7 +372,7 @@ CMD ["uvicorn", "manglish_nlp.rest_api:app", "--host", "0.0.0.0", "--port", "800
 version: '3.8'
 services:
   api:
-    image: manglish-nlp-api
+    image: malaysian-manglish-nlp-api
     ports:
       - "8000:8000"
     environment:
@@ -437,13 +437,13 @@ const batch = await fetch(`${API}/batch`, {
 
 ```bash
 # Start server
-$ uvicorn manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000
+$ uvicorn malaysian_manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000
 
 # Or use python
-$ python -m manglish_nlp.rest_api
+$ python -m malaysian_manglish_nlp.rest_api
 
 # Docker
-$ docker run -p 8000:8000 zafranyusof/manglish-nlp:latest
+$ docker run -p 8000:8000 zafranyusof/malaysian-manglish-nlp:latest
 ```
 
 ---
@@ -462,7 +462,7 @@ $ docker run -p 8000:8000 zafranyusof/manglish-nlp:latest
 !!! note "Production deployment"
     For production, use multiple uvicorn workers behind a reverse proxy (nginx/traefik):
     ```bash
-    uvicorn manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000 --workers 4
+    uvicorn malaysian_manglish_nlp.rest_api:app --host 0.0.0.0 --port 8000 --workers 4
     ```
 
 ---
@@ -474,4 +474,4 @@ $ docker run -p 8000:8000 zafranyusof/manglish-nlp:latest
 - [NER](ner.md)  -  entity types and extraction details
 - [Translation](translation.md)  -  translation target options
 - [API Reference](../api-reference.md)  -  full function signatures
-- [Docker Hub](https://hub.docker.com/r/zafranyusof/manglish-nlp)  -  pre-built images
+- [Docker Hub](https://hub.docker.com/r/zafranyusof/malaysian-manglish-nlp)  -  pre-built images

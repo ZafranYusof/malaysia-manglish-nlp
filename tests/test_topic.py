@@ -1,7 +1,7 @@
-"""Tests for manglish_nlp.topic module."""
+"""Tests for malaysian_manglish_nlp.topic module."""
 
 import pytest
-from manglish_nlp.topic import (
+from malaysian_manglish_nlp.topic import (
     classify_topic,
     classify_topics,
     classify_batch,

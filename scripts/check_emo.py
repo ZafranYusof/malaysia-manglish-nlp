@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '.')
-from manglish_nlp.emotion import detect_emotion
+from malaysian_manglish_nlp.emotion import detect_emotion
 
 EMOTION_DATA = [
     ("gila happy aku dapat result bagus", "happy"),

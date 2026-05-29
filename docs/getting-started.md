@@ -1,6 +1,6 @@
 ﻿# Getting Started
 
-Get up and running with manglish-nlp in under 5 minutes.
+Get up and running with malaysian-manglish-nlp in under 5 minutes.
 
 ---
 
@@ -9,7 +9,7 @@ Get up and running with manglish-nlp in under 5 minutes.
 === "pip (recommended)"
 
     ```bash
-    pip install manglish-nlp
+    pip install malaysian-manglish-nlp
     ```
 
     Core install has **zero external dependencies**. Lightweight, fast, works everywhere.
@@ -18,23 +18,23 @@ Get up and running with manglish-nlp in under 5 minutes.
 
     ```bash
     # ML model backend (transformers)
-    pip install manglish-nlp[ml]
+    pip install malaysian-manglish-nlp[ml]
 
     # spaCy integration
-    pip install manglish-nlp[spacy]
+    pip install malaysian-manglish-nlp[spacy]
 
     # FastAPI REST server
-    pip install manglish-nlp[api]
+    pip install malaysian-manglish-nlp[api]
 
     # Everything
-    pip install manglish-nlp[all]
+    pip install malaysian-manglish-nlp[all]
     ```
 
 === "From source"
 
     ```bash
-    git clone https://github.com/ZafranYusof/manglish-nlp.git
-    cd manglish-nlp
+    git clone https://github.com/ZafranYusof/malaysian-manglish-nlp.git
+    cd malaysian-manglish-nlp
     pip install -e .
     ```
 
@@ -43,14 +43,14 @@ Get up and running with manglish-nlp in under 5 minutes.
 === "Docker"
 
     ```bash
-    docker pull zafranyusof/manglish-nlp:latest
-    docker run -it manglish-nlp mnlp --help
+    docker pull zafranyusof/malaysian-manglish-nlp:latest
+    docker run -it malaysian-manglish-nlp mnlp --help
     ```
 
     Pre-built image with all extras included.
 
 !!! note "Python Version"
-    manglish-nlp requires **Python 3.9+**. Verify with:
+    malaysian-manglish-nlp requires **Python 3.9+**. Verify with:
     ```bash
     python --version
     ```
@@ -61,7 +61,7 @@ Get up and running with manglish-nlp in under 5 minutes.
 
 ```bash
 mnlp --version
-# manglish-nlp 1.0.0
+# malaysian-manglish-nlp 1.0.0
 
 mnlp doctor
 # ✓ Python 3.11.4
@@ -77,7 +77,7 @@ mnlp doctor
 Let's analyse a real Manglish sentence step by step.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 text = "Sedap gila nasi lemak kat kedai tu! Confirm repeat lagi."
 ```
@@ -126,7 +126,7 @@ NER works on Malaysian entities  -  local places, brands, and names.
 ### Step 5: Chain with Pipeline
 
 ```python
-from manglish_nlp import Pipeline
+from malaysian_manglish_nlp import Pipeline
 
 pipe = Pipeline([
     'normalize',    # Clean up informal spelling
@@ -224,7 +224,7 @@ $ cat data/raw.txt | mnlp normalize | mnlp ner --json
 ### Recipe: Social Media Sentiment Dashboard
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 tweets = [
     "Weh sedap gila burger ni, confirm datang lagi!",
@@ -243,7 +243,7 @@ for tweet in tweets:
 ### Recipe: Normalise + NER Pipeline
 
 ```python
-from manglish_nlp import Pipeline
+from malaysian_manglish_nlp import Pipeline
 
 pipe = Pipeline(['normalize', 'ner'])
 result = pipe("ali keje kat mcd ss15 subang")
@@ -257,7 +257,7 @@ print(result)
 ### Recipe: Batch Process with Progress
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 from pathlib import Path
 
 files = Path("data/tweets").glob("*.txt")
@@ -288,10 +288,10 @@ $ curl http://localhost:8000/sentiment -d '{"text": "best gila la"}'
 
 ## Configuration
 
-manglish-nlp works out of the box with sensible defaults. For fine-tuning:
+malaysian-manglish-nlp works out of the box with sensible defaults. For fine-tuning:
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Set default model variant
 mnlp.configure(backend="fast")      # fastest, lower accuracy
@@ -337,7 +337,7 @@ export MANGLISH_NLP_BATCH_SIZE=256
 
     ---
 
-    Performance numbers on standard hardware. See how manglish-nlp compares to alternatives.
+    Performance numbers on standard hardware. See how malaysian-manglish-nlp compares to alternatives.
 
     [:octicons-arrow-right-24: Benchmarks](benchmarks.md)
 
@@ -345,11 +345,11 @@ export MANGLISH_NLP_BATCH_SIZE=256
 
     ---
 
-    Found a bug? Want a new module? Learn how to contribute to manglish-nlp.
+    Found a bug? Want a new module? Learn how to contribute to malaysian-manglish-nlp.
 
     [:octicons-arrow-right-24: Contributing Guide](contributing.md)
 
 </div>
 
 !!! tip "Need help?"
-    Open an issue on [GitHub](https://github.com/ZafranYusof/manglish-nlp/issues) or start a discussion.
+    Open an issue on [GitHub](https://github.com/ZafranYusof/malaysian-manglish-nlp/issues) or start a discussion.

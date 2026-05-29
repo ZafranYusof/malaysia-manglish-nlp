@@ -1,6 +1,6 @@
 ﻿# Tutorials
 
-**Hands-on guides for every manglish-nlp module  -  from basic usage to production pipelines.**
+**Hands-on guides for every malaysian-manglish-nlp module  -  from basic usage to production pipelines.**
 
 ---
 
@@ -101,10 +101,10 @@ Each tutorial walks through a single capability with realistic Manglish examples
 
 !!! tip "Prerequisites"
     ```bash
-    pip install manglish-nlp           # core modules
-    pip install manglish-nlp[ml]       # + transformer models
-    pip install manglish-nlp[api]      # + REST API server
-    pip install manglish-nlp[all]      # everything
+    pip install malaysian-manglish-nlp           # core modules
+    pip install malaysian-manglish-nlp[ml]       # + transformer models
+    pip install malaysian-manglish-nlp[api]      # + REST API server
+    pip install malaysian-manglish-nlp[all]      # everything
     ```
 
 ---

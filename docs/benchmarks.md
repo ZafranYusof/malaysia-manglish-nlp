@@ -1,6 +1,6 @@
 ﻿# Benchmarks
 
-Performance, accuracy, and throughput metrics for `manglish-nlp`.
+Performance, accuracy, and throughput metrics for `malaysian-manglish-nlp`.
 
 ---
 
@@ -66,11 +66,11 @@ Texts processed per second (single thread, batch=1).
 
 ---
 
-## Comparison: manglish-nlp vs Malaya
+## Comparison: malaysian-manglish-nlp vs Malaya
 
 Fair comparison on identical Manglish test sets. Malaya v5.x tested with same hardware.
 
-| Task | manglish-nlp | Malaya | Δ | Notes |
+| Task | malaysian-manglish-nlp | Malaya | Δ | Notes |
 |------|-------------|--------|---|-------|
 | Sentiment (3-class) | **91.2%** | 84.7% | +6.5 | Malaya trained on formal Malay |
 | Emotion | **84.7%** | 78.3% | +6.4 | Malaya: 6-class vs our 7-class |
@@ -88,9 +88,9 @@ Fair comparison on identical Manglish test sets. Malaya v5.x tested with same ha
 
 - **NER & POS**: Larger annotated corpora for formal Malay
 - **Translation**: More parallel data, better BLEU scores
-- **Speech**: Malaya has TTS/STT; manglish-nlp does not (yet)
+- **Speech**: Malaya has TTS/STT; malaysian-manglish-nlp does not (yet)
 
-### Where manglish-nlp wins
+### Where malaysian-manglish-nlp wins
 
 - **Manglish/informal text**: Purpose-built for code-mixed content
 - **Speed**: Lightweight models, no heavy runtime dependency
@@ -179,19 +179,19 @@ GPU benchmarks (where applicable):
 
 ```bash
 # Install benchmark dependencies
-pip install manglish-nlp[bench]
+pip install malaysian-manglish-nlp[bench]
 
 # Quick smoke test (< 1 minute)
-python -m manglish_nlp.benchmarks --quick
+python -m malaysian_manglish_nlp.benchmarks --quick
 
 # Full suite (~15 minutes)
-python -m manglish_nlp.benchmarks --full
+python -m malaysian_manglish_nlp.benchmarks --full
 
 # Custom corpus
-python -m manglish_nlp.benchmarks --data path/to/your/corpus.jsonl
+python -m malaysian_manglish_nlp.benchmarks --data path/to/your/corpus.jsonl
 
 # Export results
-python -m manglish_nlp.benchmarks --full --output results.json
+python -m malaysian_manglish_nlp.benchmarks --full --output results.json
 ```
 
 ### Interpreting Results

@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-All notable changes to `manglish-nlp`. Format follows [Keep a Changelog](https://keepachangelog.com).
+All notable changes to `malaysian-manglish-nlp`. Format follows [Keep a Changelog](https://keepachangelog.com).
 
 ---
 
@@ -104,7 +104,7 @@ First stable release with core NLP functionality.
 - Migrated from rule-based to neural models for sentiment, NER, POS
 - Tokenizer rewritten to handle Manglish contractions properly
 - 3� -  speedup across all modules vs v1 (rule-based → neural inference)
-- Package renamed from `malaysia-nlp` to `manglish-nlp`
+- Package renamed from `malaysia-nlp` to `malaysian-manglish-nlp`
 - Minimum Python raised to 3.8
 
 ### Fixed
@@ -119,13 +119,13 @@ First stable release with core NLP functionality.
 
 - Rule-based fallback models (neural models are now default)
 - `sentiment_batch()` function (use list comprehension)
-- Bundled training data (moved to separate `manglish-nlp-data` package)
+- Bundled training data (moved to separate `malaysian-manglish-nlp-data` package)
 
 ### Breaking Changes
 
 | Before (v1) | After (v2) | Migration |
 |-------------|------------|-----------|
-| `from malaysia_nlp import ...` | `from manglish_nlp import ...` | Update imports |
+| `from malaysia_nlp import ...` | `from malaysian_manglish_nlp import ...` | Update imports |
 | `sentiment("text")` → `float` | `sentiment("text")` → `str` | Returns label now |
 | `ner("text")` → `list[str]` | `ner_tag("text")` → `list[dict]` | Function renamed, returns dicts |
 | Python 3.7+ | Python 3.8+ | Upgrade Python |
@@ -179,7 +179,7 @@ python --version  # Must be 3.10+
 ### Step 2: Update package
 
 ```bash
-pip install --upgrade manglish-nlp
+pip install --upgrade malaysian-manglish-nlp
 ```
 
 ### Step 3: Update sentiment calls
@@ -199,12 +199,12 @@ print(result["score"])      # 0.94
 
 ```python
 # Before (v2)
-from manglish_nlp import load_model, sentiment
+from malaysian_manglish_nlp import load_model, sentiment
 model = load_model("sentiment")
 result = model.predict("text")
 
 # After (v3)
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 result = sentiment("text")  # Auto-loads model
 ```
 
@@ -212,12 +212,12 @@ result = sentiment("text")  # Auto-loads model
 
 ```python
 # Before
-from manglish_nlp import detect_lang, ner
+from malaysian_manglish_nlp import detect_lang, ner
 lang = detect_lang("text")
 entities = ner("text")
 
 # After
-from manglish_nlp import detect_language, ner_tag
+from malaysian_manglish_nlp import detect_language, ner_tag
 lang = detect_language("text")
 entities = ner_tag("text")
 ```

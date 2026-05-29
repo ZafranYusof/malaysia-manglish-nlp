@@ -57,7 +57,7 @@ def save_jsonl(data: list[dict], filepath: Path):
 # Dictionaries / lookup tables
 # ---------------------------------------------------------------------------
 
-# Shortforms -> full forms (from manglish_nlp dictionary + extras)
+# Shortforms -> full forms (from malaysian_manglish_nlp dictionary + extras)
 SHORTFORMS = {
     "nk": "nak", "mcm": "macam", "mcam": "macam", "brp": "berapa",
     "dkt": "dekat", "utk": "untuk", "dgn": "dengan", "yg": "yang",

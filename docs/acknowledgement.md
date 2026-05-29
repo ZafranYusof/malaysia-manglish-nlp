@@ -1,6 +1,6 @@
 ﻿# Acknowledgement
 
-manglish-nlp stands on the shoulders of many excellent open-source projects and the broader Malaysian NLP community.
+malaysian-manglish-nlp stands on the shoulders of many excellent open-source projects and the broader Malaysian NLP community.
 
 ---
 
@@ -63,7 +63,7 @@ manglish-nlp stands on the shoulders of many excellent open-source projects and 
 
 ## Inspiration
 
-manglish-nlp was heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Zolkepli. Malaya pioneered the Malaysian NLP toolkit space and set the standard for API design, documentation quality, and model coverage. This project aims to complement Malaya by focusing specifically on the Manglish code-switching register.
+malaysian-manglish-nlp was heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Zolkepli. Malaya pioneered the Malaysian NLP toolkit space and set the standard for API design, documentation quality, and model coverage. This project aims to complement Malaya by focusing specifically on the Manglish code-switching register.
 
 ---
 

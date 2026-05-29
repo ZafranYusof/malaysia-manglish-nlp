@@ -15,7 +15,7 @@ class TestSentimentPerformance:
     
     def test_sentiment_1000_texts_under_2_seconds(self):
         """Sentiment analysis should handle 1000 texts in < 2 seconds."""
-        from manglish_nlp.sentiment import analyze_sentiment
+        from malaysian_manglish_nlp.sentiment import analyze_sentiment
         
         texts = [
             "gila best makanan dia",
@@ -39,7 +39,7 @@ class TestSentimentPerformance:
     
     def test_sentiment_cached_speedup(self):
         """Cached sentiment calls should be significantly faster."""
-        from manglish_nlp.sentiment import analyze_sentiment
+        from malaysian_manglish_nlp.sentiment import analyze_sentiment
         
         text = "gila best makanan dia memang terbaik"
         
@@ -61,7 +61,7 @@ class TestNormalizePerformance:
     
     def test_normalize_1000_texts_under_1_second(self):
         """Normalize should handle 1000 texts in < 1 second."""
-        from manglish_nlp.normalize import normalize
+        from malaysian_manglish_nlp.normalize import normalize
         
         texts = [
             "nk tnya brapa sem utk grad",
@@ -85,7 +85,7 @@ class TestNormalizePerformance:
     
     def test_normalize_cached_speedup(self):
         """Cached normalize calls should be significantly faster."""
-        from manglish_nlp.normalize import normalize
+        from malaysian_manglish_nlp.normalize import normalize
         
         text = "nk tnya brapa sem utk grad"
         
@@ -105,14 +105,14 @@ class TestImportPerformance:
     """Test import time."""
     
     def test_import_time_under_500ms(self):
-        """Importing manglish_nlp should take < 0.5 seconds."""
+        """Importing malaysian_manglish_nlp should take < 0.5 seconds."""
         import subprocess
         
         # Run import in a fresh subprocess to get accurate timing
         code = (
             "import time; "
             "start = time.perf_counter(); "
-            "import manglish_nlp; "
+            "import malaysian_manglish_nlp; "
             "elapsed = time.perf_counter() - start; "
             "print(f'{elapsed:.4f}')"
         )
@@ -136,8 +136,8 @@ class TestMemoryUsage:
     
     def test_memory_under_50mb(self):
         """Core modules should use < 50MB of memory."""
-        import manglish_nlp
-        from manglish_nlp.profiler import memory_usage
+        import malaysian_manglish_nlp
+        from malaysian_manglish_nlp.profiler import memory_usage
         
         mem = memory_usage()
         total_bytes = sum(mem.values())
@@ -151,7 +151,7 @@ class TestCacheModule:
     
     def test_lru_cache_basic(self):
         """LRU cache should store and retrieve values."""
-        from manglish_nlp.cache import LRUCache
+        from malaysian_manglish_nlp.cache import LRUCache
         
         cache = LRUCache(maxsize=3)
         cache.put("a", 1)
@@ -164,7 +164,7 @@ class TestCacheModule:
     
     def test_lru_cache_eviction(self):
         """LRU cache should evict least recently used items."""
-        from manglish_nlp.cache import LRUCache
+        from malaysian_manglish_nlp.cache import LRUCache
         
         cache = LRUCache(maxsize=3)
         cache.put("a", 1)
@@ -178,7 +178,7 @@ class TestCacheModule:
     
     def test_lru_cache_stats(self):
         """LRU cache should track hit/miss stats."""
-        from manglish_nlp.cache import LRUCache
+        from malaysian_manglish_nlp.cache import LRUCache
         
         cache = LRUCache(maxsize=10)
         cache.put("a", 1)
@@ -193,7 +193,7 @@ class TestCacheModule:
     
     def test_cached_decorator(self):
         """@cached decorator should memoize function results."""
-        from manglish_nlp.cache import cached
+        from malaysian_manglish_nlp.cache import cached
         
         call_count = 0
         
@@ -210,10 +210,10 @@ class TestCacheModule:
     
     def test_clear_all_caches(self):
         """clear_all_caches should reset all registered caches."""
-        from manglish_nlp.cache import clear_all_caches, cache_stats
+        from malaysian_manglish_nlp.cache import clear_all_caches, cache_stats
         
         # Trigger some cached calls
-        from manglish_nlp.normalize import normalize
+        from malaysian_manglish_nlp.normalize import normalize
         normalize("test text")
         
         # Clear
@@ -230,7 +230,7 @@ class TestStemmerCaching:
     
     def test_stemmer_cached(self):
         """Stemmer should return same results when cached."""
-        from manglish_nlp.stemmer import stem_word
+        from malaysian_manglish_nlp.stemmer import stem_word
         
         # First call
         result1 = stem_word("berlari")
@@ -241,7 +241,7 @@ class TestStemmerCaching:
     
     def test_stemmer_throughput(self):
         """Stemmer should handle many words quickly with caching."""
-        from manglish_nlp.stemmer import stem_word
+        from malaysian_manglish_nlp.stemmer import stem_word
         
         words = [
             "berlari", "memakan", "menulis", "pelajaran", "menyapu",
@@ -262,7 +262,7 @@ class TestProfiler:
     
     def test_profile_all_modules(self):
         """profile_all_modules should return timing dict."""
-        from manglish_nlp.profiler import profile_all_modules
+        from malaysian_manglish_nlp.profiler import profile_all_modules
         
         results = profile_all_modules("aku nak pergi makan", iterations=10)
         
@@ -273,7 +273,7 @@ class TestProfiler:
     
     def test_profile_module(self):
         """profile_module should return detailed timing."""
-        from manglish_nlp.profiler import profile_module
+        from malaysian_manglish_nlp.profiler import profile_module
         
         result = profile_module('sentiment', "best gila", iterations=50)
         
@@ -284,7 +284,7 @@ class TestProfiler:
     
     def test_find_bottlenecks(self):
         """find_bottlenecks should return sorted list."""
-        from manglish_nlp.profiler import find_bottlenecks
+        from malaysian_manglish_nlp.profiler import find_bottlenecks
         
         results = find_bottlenecks("aku nak pergi")
         
@@ -296,7 +296,7 @@ class TestProfiler:
     
     def test_benchmark_throughput(self):
         """benchmark_throughput should return metrics dict."""
-        from manglish_nlp.profiler import benchmark_throughput
+        from malaysian_manglish_nlp.profiler import benchmark_throughput
         
         texts = ["best gila makanan"] * 50
         result = benchmark_throughput(texts, module='sentiment')
@@ -307,7 +307,7 @@ class TestProfiler:
     
     def test_generate_report(self):
         """generate_report should return markdown string."""
-        from manglish_nlp.profiler import generate_report
+        from malaysian_manglish_nlp.profiler import generate_report
         
         report = generate_report()
         

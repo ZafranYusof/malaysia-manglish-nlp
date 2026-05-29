@@ -13,7 +13,7 @@ Running 5 separate modules on the same text means 5 function calls, 5 result dic
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Default pipeline (normalize + sentiment + language + emotion)
 result = mnlp.pipeline("gila best mkn dia")

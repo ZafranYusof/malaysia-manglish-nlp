@@ -1,6 +1,6 @@
 # Manglish NLP Chrome Extension
 
-Chrome extension for analyzing Malaysian Manglish text on any webpage. Connects to the manglish-nlp REST API.
+Chrome extension for analyzing Malaysian Manglish text on any webpage. Connects to the malaysian-manglish-nlp REST API.
 
 ## Features
 
@@ -9,11 +9,11 @@ Chrome extension for analyzing Malaysian Manglish text on any webpage. Connects 
 - **In-page Tooltips** - Results appear near your selection
 - **Entity Highlighting** - NER results highlight entities in the page
 - **Dark/Light Theme** - Toggle in popup
-- **Configurable API** - Point to any manglish-nlp server
+- **Configurable API** - Point to any malaysian-manglish-nlp server
 
 ## Installation
 
-1. Make sure the manglish-nlp API server is running (default: `http://localhost:8000`)
+1. Make sure the malaysian-manglish-nlp API server is running (default: `http://localhost:8000`)
 2. Open Chrome, go to `chrome://extensions/`
 3. Enable **Developer mode** (toggle top-right)
 4. Click **Load unpacked**
@@ -69,4 +69,4 @@ No build step needed. Edit files, reload extension in `chrome://extensions/`.
 
 ## License
 
-Same as manglish-nlp project.
+Same as malaysian-manglish-nlp project.

@@ -1,7 +1,7 @@
-# Rasa + manglish-nlp Examples
+# Rasa + malaysian-manglish-nlp Examples
 
 Build a Rasa chatbot that understands Malaysian Manglish with custom NLU
-components and actions powered by manglish-nlp.
+components and actions powered by malaysian-manglish-nlp.
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ docker-compose up
 
 ### ManglishNLPFeaturizer
 
-Preprocesses text with manglish-nlp before DIET classification:
+Preprocesses text with malaysian-manglish-nlp before DIET classification:
 - **Normalisation**: Expands shortforms (nk→nak, x→tak, brp→berapa)
 - **Language detection**: Tags text as BM/EN/Manglish
 - **Sentiment**: Adds sentiment score as feature
@@ -65,7 +65,7 @@ Preprocesses text with manglish-nlp before DIET classification:
 
 ### ManglishNERExtractor
 
-Extracts entities using manglish-nlp NER:
+Extracts entities using malaysian-manglish-nlp NER:
 - 9 entity types: PERSON, LOCATION, ORGANIZATION, MONEY, DATE, TIME, PHONE, EMAIL, URL
 - Handles Malaysian names, RM currency, local date/time formats
 - Configurable confidence threshold and entity type filtering

@@ -9,8 +9,8 @@
 Tools modules handle the engineering side: chaining modules into reusable pipelines, caching expensive operations, profiling latency and memory, evaluating model accuracy, tuning hyperparameters, and combining rule-based and ML approaches.
 
 ```python
-import manglish_nlp as mnlp
-from manglish_nlp import Pipeline, cache, profiler, evaluate
+import malaysian_manglish_nlp as mnlp
+from malaysian_manglish_nlp import Pipeline, cache, profiler, evaluate
 ```
 
 ---
@@ -18,7 +18,7 @@ from manglish_nlp import Pipeline, cache, profiler, evaluate
 ## Quick Start
 
 ```python
-from manglish_nlp import Pipeline
+from malaysian_manglish_nlp import Pipeline
 
 # Build a reusable pipeline
 pipe = Pipeline([
@@ -47,7 +47,7 @@ pipe.save("sentiment_pipeline.json")
 Post-process OCR output from Malaysian documents. Fixes common OCR artefacts: character substitutions (`1`→`l`, `0`→`o`, `rn`→`m`), broken line breaks, and Malay-specific patterns.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 ocr_text = "Kerajaan Ma1aysia te1ah mengumumkan po1isi baru"
 mnlp.ocr_normalize(ocr_text)
@@ -74,7 +74,7 @@ mnlp.ocr_normalize(ocr_text)
 Chain multiple modules into a reusable, serialisable processing pipeline. Supports custom config per step, conditional steps, and batch parallelism.
 
 ```python
-from manglish_nlp import Pipeline
+from malaysian_manglish_nlp import Pipeline
 
 pipe = Pipeline([
     'clean',
@@ -137,7 +137,7 @@ result = pipe("Weh @ahmad best gila mknn tu!! 🔥🔥")
 Calibrate model confidence scores to produce reliable probability estimates. Essential for production systems that use confidence thresholds for routing or escalation.
 
 ```python
-from manglish_nlp import calibration
+from malaysian_manglish_nlp import calibration
 
 calibrator = calibration("sentiment", method="platt")
 
@@ -178,7 +178,7 @@ calibrator.calibrate(mnlp.sentiment("Best gila!"))
 Evaluate NLP model performance with Malaysian-specific metrics. Covers classification, NER, and cross-validation with error analysis.
 
 ```python
-from manglish_nlp import evaluate
+from malaysian_manglish_nlp import evaluate
 
 results = evaluate.sentiment(
     texts=test_texts,
@@ -213,7 +213,7 @@ results = evaluate.sentiment(
 Combine rule-based and ML approaches. Routes clear cases to fast rules, ambiguous cases to ML models. Ideal for latency-sensitive production systems.
 
 ```python
-from manglish_nlp import hybrid_ml
+from malaysian_manglish_nlp import hybrid_ml
 
 model = hybrid_ml.create(
     task="sentiment",
@@ -254,7 +254,7 @@ model("Hmm ok la tu...")
 Hyperparameter tuning for Malaysian NLP tasks. Supports grid search, random search, and Bayesian optimisation.
 
 ```python
-from manglish_nlp import tuning
+from malaysian_manglish_nlp import tuning
 
 best_config = tuning.optimize(
     task="sentiment",
@@ -289,7 +289,7 @@ best_config = tuning.optimize(
 Profile NLP pipeline performance  -  identify latency bottlenecks, memory usage, and throughput limits.
 
 ```python
-from manglish_nlp import profiler
+from malaysian_manglish_nlp import profiler
 
 with profiler.trace() as p:
     for text in texts[:100]:
@@ -336,7 +336,7 @@ p.report()
 Cache expensive NLP operations. Supports memory, disk, and Redis backends with TTL, warm-up, and per-module clearing.
 
 ```python
-from manglish_nlp import cache
+from malaysian_manglish_nlp import cache
 
 # Built-in cache flag
 mnlp.sentiment("Best gila!", cache=True)    # computes

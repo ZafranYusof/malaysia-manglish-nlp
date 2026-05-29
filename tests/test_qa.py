@@ -1,10 +1,10 @@
-"""Tests for manglish_nlp.qa - Extractive Question Answering."""
+"""Tests for malaysian_manglish_nlp.qa - Extractive Question Answering."""
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.qa import (
+from malaysian_manglish_nlp.qa import (
     answer, answer_multiple, find_relevant_sentence,
     extract_answer_span, classify_question_type,
 )

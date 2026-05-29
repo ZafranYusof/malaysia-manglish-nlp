@@ -29,8 +29,8 @@ except ImportError:
 
 
 # Configuration
-DATASET_REPO = "ZafranYusof/manglish-nlp-dataset"
-MODEL_REPO = "ZafranYusof/manglish-nlp-model"
+DATASET_REPO = "ZafranYusof/malaysian-manglish-nlp-dataset"
+MODEL_REPO = "ZafranYusof/malaysian-manglish-nlp-model"
 PROJECT_ROOT = Path(__file__).parent.parent
 
 
@@ -151,7 +151,7 @@ def upload_model(token):
     model_dir = PROJECT_ROOT / "models"
     if not model_dir.exists():
         # Try alternative locations
-        model_dir = PROJECT_ROOT / "manglish_nlp" / "models"
+        model_dir = PROJECT_ROOT / "malaysian_manglish_nlp" / "models"
 
     if not model_dir.exists():
         print(f"  Error: Model directory not found at {model_dir}")
@@ -180,7 +180,7 @@ def upload_model(token):
         print(f"    Uploaded: {relative_path}")
 
     # Upload model card
-    model_card_path = PROJECT_ROOT / "manglish_nlp" / "resources" / "model_card.md"
+    model_card_path = PROJECT_ROOT / "malaysian_manglish_nlp" / "resources" / "model_card.md"
     if model_card_path.exists():
         api.upload_file(
             path_or_fileobj=str(model_card_path),

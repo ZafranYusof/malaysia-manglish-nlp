@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unit tests for manglish-nlp scripts.
+Unit tests for malaysian-manglish-nlp scripts.
 Run: python -m pytest scripts/test_manglish.py -v
 Or:  python scripts/test_manglish.py
 """

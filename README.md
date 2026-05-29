@@ -1,8 +1,8 @@
-# manglish-nlp
+# malaysian-manglish-nlp
 
-[![PyPI version](https://img.shields.io/pypi/v/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
-[![Python versions](https://img.shields.io/pypi/pyversions/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
-[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://manglish-nlp.readthedocs.io)
+[![PyPI version](https://img.shields.io/pypi/v/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
+[![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
+[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://malaysian-manglish-nlp.readthedocs.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
@@ -12,24 +12,24 @@ Built for real-world Malaysian text: social media, news, chat messages, code-swi
 ## Installation
 
 ```bash
-pip install manglish-nlp
+pip install malaysian-manglish-nlp
 ```
 
 ### Extras
 
 ```bash
-pip install manglish-nlp[transformers]   # HuggingFace transformer models
-pip install manglish-nlp[embeddings]     # Word2Vec/FastText embeddings
-pip install manglish-nlp[spacy]          # spaCy integration
-pip install manglish-nlp[api]            # FastAPI REST API
-pip install manglish-nlp[langchain]      # LangChain tools
-pip install manglish-nlp[all]            # Everything
+pip install malaysian-manglish-nlp[transformers]   # HuggingFace transformer models
+pip install malaysian-manglish-nlp[embeddings]     # Word2Vec/FastText embeddings
+pip install malaysian-manglish-nlp[spacy]          # spaCy integration
+pip install malaysian-manglish-nlp[api]            # FastAPI REST API
+pip install malaysian-manglish-nlp[langchain]      # LangChain tools
+pip install malaysian-manglish-nlp[all]            # Everything
 ```
 
 ## Quick Start
 
 ```python
-from manglish_nlp import sentiment, normalize, ner, detect_language
+from malaysian_manglish_nlp import sentiment, normalize, ner, detect_language
 
 # Sentiment analysis
 result = sentiment("Weh best gila makanan dia!")
@@ -127,7 +127,7 @@ print(lang)
 
 ## Comparison with Malaya
 
-| Feature | manglish-nlp | Malaya |
+| Feature | malaysian-manglish-nlp | Malaya |
 |---------|-------------|--------|
 | Core dependencies | None | TensorFlow/PyTorch required |
 | Import time | <0.5s | 10-30s |
@@ -143,7 +143,7 @@ print(lang)
 | Translation (rule-based) | ✅ | ❌ |
 | Text generation | ✅ | ❌ |
 
-Both are solid choices. Malaya excels at formal Bahasa Melayu with deep learning models. manglish-nlp is optimized for informal, code-switched Malaysian text with minimal overhead and advanced NLP features.
+Both are solid choices. Malaya excels at formal Bahasa Melayu with deep learning models. malaysian-manglish-nlp is optimized for informal, code-switched Malaysian text with minimal overhead and advanced NLP features.
 
 ## CLI Usage
 
@@ -177,7 +177,7 @@ manglish profile "Sample text here"
 
 ```bash
 # Start API server
-uvicorn manglish_nlp.rest_api:app --port 8000
+uvicorn malaysian_manglish_nlp.rest_api:app --port 8000
 
 # Or with Docker
 docker-compose up -d
@@ -205,7 +205,7 @@ python -m pytest tests/ -q
 python -m pytest tests/test_sentiment.py -v
 
 # Run with coverage
-python -m pytest tests/ --cov=manglish_nlp
+python -m pytest tests/ --cov=malaysian_manglish_nlp
 
 # Run heavy tests (requires gensim)
 RUN_HEAVY_TESTS=1 python -m pytest tests/test_word_embeddings.py -v
@@ -213,7 +213,7 @@ RUN_HEAVY_TESTS=1 python -m pytest tests/test_word_embeddings.py -v
 
 ## Documentation
 
-Full documentation available at [manglish-nlp.readthedocs.io](https://manglish-nlp.readthedocs.io)
+Full documentation available at [malaysian-manglish-nlp.readthedocs.io](https://malaysian-manglish-nlp.readthedocs.io)
 
 Includes:
 - Module reference for all 51 modules
@@ -233,8 +233,8 @@ Contributions welcome! Areas where help is needed:
 4. **Documentation** — More usage examples and tutorials
 
 ```bash
-git clone https://github.com/ZafranYusof/manglish-nlp.git
-cd manglish-nlp
+git clone https://github.com/ZafranYusof/malaysian-manglish-nlp.git
+cd malaysian-manglish-nlp
 pip install -e ".[all]"
 python -m pytest tests/ -q
 ```
@@ -245,14 +245,14 @@ MIT — see [LICENSE](LICENSE) for details.
 
 ## Citation
 
-If you use manglish-nlp in your research, please cite:
+If you use malaysian-manglish-nlp in your research, please cite:
 
 ```bibtex
-@software{manglish_nlp,
+@software{malaysian_manglish_nlp,
   author = {Zafran},
-  title = {manglish-nlp: Full NLP toolkit for Malaysian Manglish},
+  title = {malaysian-manglish-nlp: Full NLP toolkit for Malaysian Manglish},
   year = {2026},
-  url = {https://github.com/ZafranYusof/manglish-nlp},
+  url = {https://github.com/ZafranYusof/malaysian-manglish-nlp},
   version = {3.0.0}
 }
 ```

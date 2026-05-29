@@ -34,10 +34,10 @@ The extension requires the **Manglish NLP API server** running locally or on a r
 
 ```bash
 # Install the Python package
-pip install manglish-nlp
+pip install malaysian-manglish-nlp
 
 # Start the API server
-python -m manglish_nlp.api
+python -m malaysian_manglish_nlp.api
 # Server starts at http://localhost:8000
 ```
 

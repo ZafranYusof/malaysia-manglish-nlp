@@ -1,6 +1,6 @@
 ﻿# API Reference
 
-Complete reference for all public functions in `manglish-nlp`.
+Complete reference for all public functions in `malaysian-manglish-nlp`.
 
 ---
 
@@ -26,7 +26,7 @@ Analyze sentiment of Manglish/Malay text.
 
 **Example:**
 ```python
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 
 result = sentiment("Best gila makanan kat sini!")
 # {'sentiment': 'positive', 'score': 0.94, 'raw_score': 2.5}
@@ -58,7 +58,7 @@ Supported emotions: `joy`, `anger`, `sadness`, `fear`, `surprise`, `disgust`, `l
 
 **Example:**
 ```python
-from manglish_nlp import emotion
+from malaysian_manglish_nlp import emotion
 
 result = emotion("Sumpah marah gila aku kat dia!")
 # {'emotion': 'anger', 'scores': {'anger': 0.82, 'disgust': 0.09, ...}}
@@ -86,7 +86,7 @@ Identify language(s) present in text.
 
 **Example:**
 ```python
-from manglish_nlp import detect_language
+from malaysian_manglish_nlp import detect_language
 
 result = detect_language("I pergi kedai beli nasi lemak")
 # {'primary': 'ms', 'languages': [{'lang': 'ms', 'conf': 0.72}, {'lang': 'en', 'conf': 0.28}], 'is_mixed': True}
@@ -111,7 +111,7 @@ Normalize informal Manglish text to standard form.
 
 **Example:**
 ```python
-from manglish_nlp import normalize
+from malaysian_manglish_nlp import normalize
 
 normalize("xpe la, sy ok je")
 # 'tidak apa lah, saya okay sahaja'
@@ -139,7 +139,7 @@ Remove noise from text (URLs, mentions, extra whitespace, special chars).
 
 **Example:**
 ```python
-from manglish_nlp import clean
+from malaysian_manglish_nlp import clean
 
 clean("@user check this out https://example.com  !!!")
 # 'check this out !!!'
@@ -161,7 +161,7 @@ Convert casual/colloquial text to formal Malay.
 
 **Example:**
 ```python
-from manglish_nlp import formalize
+from malaysian_manglish_nlp import formalize
 
 formalize("aku nak pi kedai jap, nak beli rokok")
 # 'saya hendak pergi ke kedai sebentar, hendak membeli rokok'
@@ -183,7 +183,7 @@ Tokenize text into words, handling Manglish contractions and particles.
 
 **Example:**
 ```python
-from manglish_nlp import tokenize
+from malaysian_manglish_nlp import tokenize
 
 tokenize("taknak lah pergi sana")
 # ['tak', 'nak', 'lah', 'pergi', 'sana']
@@ -205,7 +205,7 @@ Stem a Malay/Manglish word to its root form.
 
 **Example:**
 ```python
-from manglish_nlp import stem_word
+from malaysian_manglish_nlp import stem_word
 
 stem_word("berlari")   # 'lari'
 stem_word("memasak")   # 'masak'
@@ -235,7 +235,7 @@ Named entity recognition for Malay/Manglish text.
 
 **Example:**
 ```python
-from manglish_nlp import ner_tag
+from malaysian_manglish_nlp import ner_tag
 
 ner_tag("Mahathir pergi Kuala Lumpur semalam")
 # [
@@ -262,7 +262,7 @@ Tags follow Universal Dependencies: `NOUN`, `VERB`, `ADJ`, `ADV`, `PRON`, `DET`,
 
 **Example:**
 ```python
-from manglish_nlp import pos_tag
+from malaysian_manglish_nlp import pos_tag
 
 pos_tag("Aku suka makan nasi lemak")
 # [('Aku', 'PRON'), ('suka', 'VERB'), ('makan', 'VERB'), ('nasi', 'NOUN'), ('lemak', 'ADJ')]
@@ -290,7 +290,7 @@ Extract top keywords from text using TF-IDF weighting.
 
 **Example:**
 ```python
-from manglish_nlp import extract_keywords
+from malaysian_manglish_nlp import extract_keywords
 
 extract_keywords("Harga minyak naik lagi, rakyat suffer gila", top_n=3)
 # [{'keyword': 'minyak', 'score': 0.42}, {'keyword': 'harga', 'score': 0.38}, {'keyword': 'rakyat', 'score': 0.31}]
@@ -314,7 +314,7 @@ Segment continuous text into sentences, handling abbreviations common in Manglis
 
 **Example:**
 ```python
-from manglish_nlp import segment
+from malaysian_manglish_nlp import segment
 
 segment("Eh btw kau tau tak. Semalam aku jumpa dia. Best gila")
 # ['Eh btw kau tau tak.', 'Semalam aku jumpa dia.', 'Best gila']
@@ -337,7 +337,7 @@ Compute semantic similarity between two texts.
 
 **Example:**
 ```python
-from manglish_nlp import similarity
+from malaysian_manglish_nlp import similarity
 
 similarity("Aku lapar", "Perut dah kosong ni")
 # 0.78
@@ -364,7 +364,7 @@ Generate augmented variants of text for data augmentation.
 
 **Example:**
 ```python
-from manglish_nlp import augment
+from malaysian_manglish_nlp import augment
 
 augment("Makanan sedap gila kat kedai tu", n=2)
 # ['Makanan lazat gila kat kedai tu', 'Makanan sedap gila dekat kedai itu']
@@ -391,7 +391,7 @@ Spell-check and correct Manglish/Malay text.
 
 **Example:**
 ```python
-from manglish_nlp import correct
+from malaysian_manglish_nlp import correct
 
 result = correct("Saya mau mkan nsi grng")
 # {'corrected': 'saya mahu makan nasi goreng',
@@ -422,7 +422,7 @@ Detect and annotate code-switching boundaries in mixed-language text.
 
 **Example:**
 ```python
-from manglish_nlp import code_switching
+from malaysian_manglish_nlp import code_switching
 
 result = code_switching.detect_switches("I nak pergi market beli fish")
 # {
@@ -464,7 +464,7 @@ Supported intents: `query`, `command`, `complaint`, `greeting`, `request`, `feed
 
 **Example:**
 ```python
-from manglish_nlp import intent
+from malaysian_manglish_nlp import intent
 
 result = intent.classify_intent("Macam mana nak refund barang ni?")
 # {'intent': 'query', 'confidence': 0.91, 'all_intents': [...]}
@@ -494,7 +494,7 @@ Topics: `politics`, `sports`, `entertainment`, `business`, `technology`, `health
 
 **Example:**
 ```python
-from manglish_nlp import topic
+from malaysian_manglish_nlp import topic
 
 topic.classify_topic("Harga saham FGV naik mendadak hari ni")
 # {'topic': 'business', 'confidence': 0.88, 'subtopic': 'finance'}
@@ -525,7 +525,7 @@ Detect hate speech and toxicity in text.
 
 **Example:**
 ```python
-from manglish_nlp import hate_speech
+from malaysian_manglish_nlp import hate_speech
 
 hate_speech.detect_hate_speech("Kau ni memang [slur]")
 # {'is_hate_speech': True, 'severity': 'severe', 'categories': ['ethnic'], 'score': 0.93}
@@ -553,7 +553,7 @@ Detect author's stance toward a topic or entity.
 
 **Example:**
 ```python
-from manglish_nlp import stance
+from malaysian_manglish_nlp import stance
 
 stance.detect_stance("Dasar kerajaan ni teruk, menyusahkan rakyat je", target="kerajaan")
 # {'stance': 'against', 'confidence': 0.89}
@@ -579,7 +579,7 @@ Summarize long text.
 
 **Example:**
 ```python
-from manglish_nlp import summarization
+from malaysian_manglish_nlp import summarization
 
 summarization.summarize(long_article, max_length=50)
 # 'Perdana Menteri mengumumkan pakej rangsangan ekonomi...'
@@ -609,7 +609,7 @@ Translate between Malay/Manglish and other languages.
 
 **Example:**
 ```python
-from manglish_nlp import translation
+from malaysian_manglish_nlp import translation
 
 translation.translate("Aku dah sampai rumah", target_lang="en")
 # {'translated': "I've arrived home", 'source_lang': 'ms', 'confidence': 0.91}
@@ -639,7 +639,7 @@ Extract answer from context given a question.
 
 **Example:**
 ```python
-from manglish_nlp import qa
+from malaysian_manglish_nlp import qa
 
 qa.answer(
     "Siapa PM Malaysia?",
@@ -666,7 +666,7 @@ Generate text continuation from a prompt.
 
 **Example:**
 ```python
-from manglish_nlp import text_generation
+from malaysian_manglish_nlp import text_generation
 
 text_generation.generate("Cuaca hari ni memang", max_length=20)
 # 'panas gila, rasa macam nak duduk dalam fridge je'
@@ -692,7 +692,7 @@ Available steps: `"clean"`, `"normalize"`, `"tokenize"`, `"sentiment"`, `"ner"`,
 
 **Example:**
 ```python
-from manglish_nlp import pipeline
+from malaysian_manglish_nlp import pipeline
 
 pipe = pipeline(["clean", "normalize", "sentiment"])
 result = pipe.run("@user sumpah best gila movie ni!!!")
@@ -723,7 +723,7 @@ Load pre-trained Word2Vec embeddings for Malay/Manglish.
 
 **Example:**
 ```python
-from manglish_nlp import load_word2vec
+from malaysian_manglish_nlp import load_word2vec
 
 w2v = load_word2vec()
 w2v.most_similar("makan", n=5)
@@ -752,7 +752,7 @@ Load pre-trained FastText embeddings with subword support.
 
 **Example:**
 ```python
-from manglish_nlp import load_fasttext
+from malaysian_manglish_nlp import load_fasttext
 
 ft = load_fasttext()
 ft.get_vector("lah")  # Works even for particles
@@ -775,7 +775,7 @@ All functions raise typed exceptions:
 
 **Example:**
 ```python
-from manglish_nlp import sentiment, ManglishNLPError, InputError
+from malaysian_manglish_nlp import sentiment, ManglishNLPError, InputError
 
 try:
     sentiment("")

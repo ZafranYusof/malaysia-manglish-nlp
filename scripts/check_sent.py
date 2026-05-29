@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '.')
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 
 SENTIMENT_DATA = [
     ("best gila makanan dia", "positive"),

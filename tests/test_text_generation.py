@@ -1,4 +1,4 @@
-"""Tests for manglish_nlp.text_generation module."""
+"""Tests for malaysian_manglish_nlp.text_generation module."""
 
 import math
 import sys
@@ -7,8 +7,8 @@ import os
 # Add project root to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp import text_generation
-from manglish_nlp.text_generation import (
+from malaysian_manglish_nlp import text_generation
+from malaysian_manglish_nlp.text_generation import (
     generate, autocomplete, build_ngram_model, load_default_model,
     generate_sentence, perplexity, reset_model, _tokenize,
     _generate_synthetic_corpus, _get_next_word_probs, _sample_word,
@@ -368,8 +368,8 @@ class TestIntegration:
         model = build_ngram_model(texts)
 
         # Use the model directly via internal function
-        from manglish_nlp.text_generation import _cached_model
-        import manglish_nlp.text_generation as tg
+        from malaysian_manglish_nlp.text_generation import _cached_model
+        import malaysian_manglish_nlp.text_generation as tg
         old_model = tg._cached_model
         tg._cached_model = model
 
@@ -390,7 +390,7 @@ class TestIntegration:
 
         model = build_ngram_model(texts)
 
-        import manglish_nlp.text_generation as tg
+        import malaysian_manglish_nlp.text_generation as tg
         old_model = tg._cached_model
         tg._cached_model = model
 
@@ -407,7 +407,7 @@ class TestIntegration:
         texts = ["aku makan nasi lemak setiap hari"] * 50
         model = build_ngram_model(texts)
 
-        import manglish_nlp.text_generation as tg
+        import malaysian_manglish_nlp.text_generation as tg
         old_model = tg._cached_model
         tg._cached_model = model
 
@@ -421,7 +421,7 @@ class TestIntegration:
     def test_reset_model_clears_cache(self):
         """reset_model() clears the cached model."""
         load_default_model()  # Ensure loaded
-        import manglish_nlp.text_generation as tg
+        import malaysian_manglish_nlp.text_generation as tg
         assert tg._cached_model is not None
         reset_model()
         assert tg._cached_model is None

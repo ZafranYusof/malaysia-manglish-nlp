@@ -329,7 +329,7 @@ async function cmdCheckApi() {
     const config = vscode.workspace.getConfiguration("manglish");
     const url = config.get<string>("serverUrl") || "http://localhost:8000";
     vscode.window.showErrorMessage(
-      `Manglish NLP API unreachable at ${url}. Start the server: python -m manglish_nlp.api`
+      `Manglish NLP API unreachable at ${url}. Start the server: python -m malaysian_manglish_nlp.api`
     );
   }
 }

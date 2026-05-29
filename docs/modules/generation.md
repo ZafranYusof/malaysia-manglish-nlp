@@ -9,11 +9,11 @@
 Generation modules produce or transform text: translation between languages, summarisation of long documents, controlled text generation, and question answering. All require the `[ml]` extra for transformer-backed models.
 
 ```bash
-pip install manglish-nlp[ml]
+pip install malaysian-manglish-nlp[ml]
 ```
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 ```
 
 !!! warning "ML Dependency Required"
@@ -24,7 +24,7 @@ import manglish_nlp as mnlp
 ## Quick Start
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # Translate Manglish → English
 mnlp.translate("Weh best gila movie tu bro", target="en")
@@ -49,7 +49,7 @@ mnlp.qa("Bila UMP ditubuhkan?", context="UMP ditubuhkan pada tahun 2002 di Gamba
 Translate between Bahasa Melayu, English, and Manglish. Supports entity preservation and register-aware output.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 # BM → English
 mnlp.translate("Aku nak pergi makan nasi lemak", target="en")
@@ -104,7 +104,7 @@ mnlp.translate("Filem itu sangat bagus", target="manglish")
 Summarise Malaysian text while preserving key information. Supports extractive (select key sentences) and abstractive (generate new summary) methods.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 article = """
 Kerajaan Malaysia hari ini mengumumkan pakej rangsangan ekonomi bernilai
@@ -157,7 +157,7 @@ mnlp.summarize(article)
 Generate Malaysian text with controllable style, format, and creativity level.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 mnlp.generate("Tulis review restoran nasi lemak", max_length=100)
 # "Nasi lemak kat kedai ni memang power. Sambal dia pedas just nice,
@@ -200,7 +200,7 @@ mnlp.generate("Tulis review restoran nasi lemak", max_length=100)
 Question answering over Malaysian text. Supports extractive QA (find answer span in context), open-domain QA (no context), and conversational sessions with pronoun resolution.
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 context = """
 Universiti Malaysia Pahang (UMP) ditubuhkan pada tahun 2002.

@@ -1,4 +1,4 @@
-"""Tests for manglish_nlp.parallel - Parallel processing pipeline.
+"""Tests for malaysian_manglish_nlp.parallel - Parallel processing pipeline.
 
 Tests cover:
     - ParallelPipeline initialization
@@ -20,7 +20,7 @@ import pytest
 # Ensure the project root is importable
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from manglish_nlp.parallel import ParallelPipeline
+from malaysian_manglish_nlp.parallel import ParallelPipeline
 
 
 # ---------------------------------------------------------------------------
@@ -146,7 +146,7 @@ class TestSentimentBatch:
 
     def test_sentiment_batch_matches_sequential(self):
         """Parallel results must match sequential results."""
-        from manglish_nlp.sentiment import analyze_sentiment
+        from malaysian_manglish_nlp.sentiment import analyze_sentiment
 
         pipe = ParallelPipeline(n_workers=2, use_threads=True)
         texts = SHORT_TEXTS
@@ -182,7 +182,7 @@ class TestNERBatch:
 
     def test_ner_batch_matches_sequential(self):
         """Parallel NER results must match sequential."""
-        from manglish_nlp.ner import ner_tag
+        from malaysian_manglish_nlp.ner import ner_tag
 
         pipe = ParallelPipeline(n_workers=2, use_threads=True)
         texts = SHORT_TEXTS

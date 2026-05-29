@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, '.')
-from manglish_nlp import normalize
+from malaysian_manglish_nlp import normalize
 
 NORM_DATA = [
     ("nk pgi mkn", "nak pergi makan"),

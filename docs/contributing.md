@@ -1,6 +1,6 @@
 ﻿# Contributing
 
-Thanks for wanting to contribute to `manglish-nlp`. This guide covers everything you need to know.
+Thanks for wanting to contribute to `malaysian-manglish-nlp`. This guide covers everything you need to know.
 
 ---
 
@@ -15,8 +15,8 @@ Thanks for wanting to contribute to `manglish-nlp`. This guide covers everything
 ### Clone and install
 
 ```bash
-git clone https://github.com/yourusername/manglish-nlp.git
-cd manglish-nlp
+git clone https://github.com/yourusername/malaysian-manglish-nlp.git
+cd malaysian-manglish-nlp
 
 # Create virtual environment
 python -m venv .venv
@@ -34,7 +34,7 @@ pytest
 
 # Run linters
 ruff check .
-mypy manglish_nlp/
+mypy malaysian_manglish_nlp/
 
 # Check formatting
 ruff format --check .
@@ -101,7 +101,7 @@ Step-by-step guide to adding a new NLP module.
 ### 1. Create the module file
 
 ```
-manglish_nlp/
+malaysian_manglish_nlp/
 ├── your_module.py          # Main implementation
 ├── tests/
 │   └── test_your_module.py # Tests
@@ -114,13 +114,13 @@ manglish_nlp/
 Every module must expose at minimum one callable function:
 
 ```python
-# manglish_nlp/your_module.py
+# malaysian_manglish_nlp/your_module.py
 from __future__ import annotations
 
 import logging
 from typing import Any
 
-from manglish_nlp.exceptions import InputError, ModelError
+from malaysian_manglish_nlp.exceptions import InputError, ModelError
 
 logger = logging.getLogger(__name__)
 
@@ -156,8 +156,8 @@ def _run_model(text: str, **kwargs: Any) -> dict[str, Any]:
 ### 3. Register in `__init__.py`
 
 ```python
-# manglish_nlp/__init__.py
-from manglish_nlp.your_module import your_function
+# malaysian_manglish_nlp/__init__.py
+from malaysian_manglish_nlp.your_module import your_function
 
 __all__ = [
     # ... existing exports
@@ -170,8 +170,8 @@ __all__ = [
 ```python
 # tests/test_your_module.py
 import pytest
-from manglish_nlp import your_function
-from manglish_nlp.exceptions import InputError
+from malaysian_manglish_nlp import your_function
+from malaysian_manglish_nlp.exceptions import InputError
 
 
 class TestYourFunction:
@@ -199,7 +199,7 @@ class TestYourFunction:
 
 ```python
 # benchmarks/bench_your_module.py
-from manglish_nlp import your_function
+from malaysian_manglish_nlp import your_function
 from benchmarks.utils import timed_run
 
 def benchmark():
@@ -250,7 +250,7 @@ pytest
 pytest tests/test_sentiment.py -v
 
 # With coverage
-pytest --cov=manglish_nlp --cov-report=term-missing
+pytest --cov=malaysian_manglish_nlp --cov-report=term-missing
 
 # Parallel (faster for large suites)
 pytest -n auto
@@ -261,7 +261,7 @@ pytest -n auto
 We aim for **90%+ line coverage** on all public modules. Check current coverage:
 
 ```bash
-pytest --cov=manglish_nlp --cov-report=html
+pytest --cov=malaysian_manglish_nlp --cov-report=html
 # Open htmlcov/index.html
 ```
 
@@ -272,7 +272,7 @@ pytest --cov=manglish_nlp --cov-report=html
 ### Before you submit
 
 1. **Run full test suite**  -  `pytest` must pass
-2. **Run linters**  -  `ruff check .` and `mypy manglish_nlp/` must be clean
+2. **Run linters**  -  `ruff check .` and `mypy malaysian_manglish_nlp/` must be clean
 3. **Format code**  -  `ruff format .`
 4. **Update docs**  -  If you changed public API
 5. **Add changelog entry**  -  Describe your change in `docs/changelog.md` under `[Unreleased]`
@@ -319,7 +319,7 @@ Open a GitHub issue with:
 ## Bug Report
 
 **Module**: `sentiment` / `ner` / etc.
-**Version**: `manglish-nlp==3.0.0`
+**Version**: `malaysian-manglish-nlp==3.0.0`
 **Python**: 3.11.7
 **OS**: Windows 11 / Ubuntu 22.04 / macOS 14
 
@@ -334,7 +334,7 @@ Open a GitHub issue with:
 ### Reproduction
 
 ```python
-from manglish_nlp import sentiment
+from malaysian_manglish_nlp import sentiment
 sentiment("this caused the bug")
 # Error: ...
 ```
@@ -368,7 +368,7 @@ Open a GitHub issue with:
 ### Proposed API
 
 ```python
-from manglish_nlp import new_thing
+from malaysian_manglish_nlp import new_thing
 result = new_thing("input text")
 # expected output
 ```

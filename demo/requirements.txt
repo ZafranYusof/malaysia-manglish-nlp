@@ -1,2 +1,2 @@
 gradio>=4.0
-manglish-nlp>=3.0.0
+malaysian-manglish-nlp>=3.0.0

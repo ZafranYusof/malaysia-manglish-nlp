@@ -34,11 +34,11 @@ jobs:
       - name: Run with coverage (Python 3.12 only)
         if: matrix.python-version == '3.12'
         run: |
-          python -m pytest tests/ --cov=manglish_nlp --cov-report=xml -q
+          python -m pytest tests/ --cov=malaysian_manglish_nlp --cov-report=xml -q
 
       - name: Import check
         run: |
-          python -c "import manglish_nlp; print(f'manglish-nlp loaded: {len(manglish_nlp.__all__)} modules')"
+          python -c "import malaysian_manglish_nlp; print(f'malaysian-manglish-nlp loaded: {len(malaysian_manglish_nlp.__all__)} modules')"
 
   lint:
     runs-on: ubuntu-latest
@@ -48,4 +48,4 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install ruff
-      - run: ruff check manglish_nlp/ --select E,F --ignore E501,E402
+      - run: ruff check malaysian_manglish_nlp/ --select E,F --ignore E501,E402

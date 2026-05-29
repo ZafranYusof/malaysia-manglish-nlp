@@ -15,7 +15,7 @@ Standard language detectors (like langdetect or fastText) classify Manglish as "
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 result = mnlp.detect_language("Eh jom la we go makan, I lapar gila already")
 print(result)
@@ -83,7 +83,7 @@ print(result)
 For detailed analysis of where language switches happen, use the code-switching module:
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 result = mnlp.code_switching.detect("I nak pergi kedai sebab I lapar gila")
 print(result)

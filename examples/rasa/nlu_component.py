@@ -1,15 +1,15 @@
 """
-Custom Rasa NLU components wrapping manglish-nlp.
+Custom Rasa NLU components wrapping malaysian-manglish-nlp.
 
 Components:
-- ManglishNLPFeaturizer: Featurises text using manglish-nlp embeddings
-- ManglishNERExtractor: Extracts entities using manglish-nlp NER
+- ManglishNLPFeaturizer: Featurises text using malaysian-manglish-nlp embeddings
+- ManglishNERExtractor: Extracts entities using malaysian-manglish-nlp NER
 
 Add to config.yml pipeline:
     - name: "nlu_component.ManglishNLPFeaturizer"
     - name: "nlu_component.ManglishNERExtractor"
 
-Requires: pip install manglish-nlp
+Requires: pip install malaysian-manglish-nlp
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ from rasa.shared.nlu.constants import (
     ENTITY_ATTRIBUTE_END,
 )
 
-import manglish_nlp
+import malaysian_manglish_nlp
 
 logger = logging.getLogger(__name__)
 
@@ -46,11 +46,11 @@ logger = logging.getLogger(__name__)
 )
 class ManglishNLPFeaturizer(Featurizer, GraphComponent):
     """
-    Featurizer that uses manglish-nlp to normalise text and generate
+    Featurizer that uses malaysian-manglish-nlp to normalise text and generate
     character-level features suitable for DIET classifier.
 
-    In production, you could load manglish-nlp word embeddings
-    (manglish_nlp.word_embeddings) for dense vector features.
+    In production, you could load malaysian-manglish-nlp word embeddings
+    (malaysian_manglish_nlp.word_embeddings) for dense vector features.
     """
 
     @staticmethod
@@ -81,7 +81,7 @@ class ManglishNLPFeaturizer(Featurizer, GraphComponent):
         return cls(config)
 
     def train(self, training_data: TrainingData) -> Resource:
-        """No training needed — uses manglish-nlp directly."""
+        """No training needed — uses malaysian-manglish-nlp directly."""
         for example in training_data.training_examples:
             self._featurise(example)
         return self._resource
@@ -97,31 +97,31 @@ class ManglishNLPFeaturizer(Featurizer, GraphComponent):
         return messages
 
     def _featurise(self, message: Message) -> None:
-        """Apply manglish-nlp processing and store metadata."""
+        """Apply malaysian-manglish-nlp processing and store metadata."""
         text = message.get(TEXT)
         if not text:
             return
 
         # Normalise shortforms for better downstream matching
         if self.normalise:
-            normalised = manglish_nlp.normalize(text)
+            normalised = malaysian_manglish_nlp.normalize(text)
             message.set("manglish_normalised", normalised, output_property=True)
 
         # Language detection
         if self.detect_language:
-            lang = manglish_nlp.detect_language(text)
+            lang = malaysian_manglish_nlp.detect_language(text)
             message.set("manglish_language", lang, output_property=True)
 
         # Sentiment (useful for downstream policies)
         if self.add_sentiment:
-            sent = manglish_nlp.sentiment(text)
+            sent = malaysian_manglish_nlp.sentiment(text)
             message.set("manglish_sentiment", sent, output_property=True)
 
         # Intent features
         intent_features = {
-            "is_question": manglish_nlp.is_question(text),
-            "is_complaint": manglish_nlp.is_complaint(text),
-            "is_request": manglish_nlp.is_request(text),
+            "is_question": malaysian_manglish_nlp.is_question(text),
+            "is_complaint": malaysian_manglish_nlp.is_complaint(text),
+            "is_request": malaysian_manglish_nlp.is_request(text),
         }
         message.set("manglish_intent_features", intent_features, output_property=True)
 
@@ -131,7 +131,7 @@ class ManglishNLPFeaturizer(Featurizer, GraphComponent):
 )
 class ManglishNERExtractor(EntityExtractorMixin, GraphComponent):
     """
-    Entity extractor using manglish-nlp NER.
+    Entity extractor using malaysian-manglish-nlp NER.
 
     Recognises 9 entity types:
     PERSON, LOCATION, ORGANIZATION, MONEY, DATE, TIME,
@@ -168,7 +168,7 @@ class ManglishNERExtractor(EntityExtractorMixin, GraphComponent):
         return cls(config)
 
     def train(self, training_data: TrainingData) -> Resource:
-        """No training — delegates to manglish-nlp."""
+        """No training — delegates to malaysian-manglish-nlp."""
         return self._resource
 
     def process_training_data(self, training_data: TrainingData) -> TrainingData:
@@ -189,9 +189,9 @@ class ManglishNERExtractor(EntityExtractorMixin, GraphComponent):
 
         # Optionally normalise first for better NER
         if self.normalise_first:
-            text = manglish_nlp.normalize(text)
+            text = malaysian_manglish_nlp.normalize(text)
 
-        entities_raw = manglish_nlp.ner_tag(text)
+        entities_raw = malaysian_manglish_nlp.ner_tag(text)
 
         rasa_entities = []
         for ent in entities_raw:

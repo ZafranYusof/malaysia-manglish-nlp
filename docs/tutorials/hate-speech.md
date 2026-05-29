@@ -13,7 +13,7 @@ Content moderation for social media platforms, forum management, brand safety, a
 ## Load module
 
 ```python
-import manglish_nlp as mnlp
+import malaysian_manglish_nlp as mnlp
 
 result = mnlp.detect_hate_speech("Text to check here")
 print(result)
@@ -92,7 +92,7 @@ mnlp.is_hate("some text")
 
 ## Leetspeak and evasion detection
 
-Malaysians sometimes use leetspeak or spelling tricks to evade filters. manglish-nlp detects common patterns:
+Malaysians sometimes use leetspeak or spelling tricks to evade filters. malaysian-manglish-nlp detects common patterns:
 
 ```python
 # Number substitution

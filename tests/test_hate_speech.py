@@ -1,7 +1,7 @@
-"""Tests for manglish_nlp.hate_speech module."""
+"""Tests for malaysian_manglish_nlp.hate_speech module."""
 
 import pytest
-from manglish_nlp.hate_speech import (
+from malaysian_manglish_nlp.hate_speech import (
     detect_hate_speech,
     detect_batch,
     is_hate_speech,
