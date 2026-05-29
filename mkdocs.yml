@@ -7,6 +7,7 @@ repo_name: ZafranYusof/manglish-nlp
 
 theme:
   name: material
+  logo: assets/logo.svg
   palette:
     - scheme: slate
       primary: teal
@@ -15,7 +16,7 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
     - scheme: default
-      primary: teal
+      primary: indigo
       accent: cyan
       toggle:
         icon: material/brightness-7
@@ -49,8 +50,6 @@ extra_css:
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  - git-revision-date-localized:
-      timezone: Asia/Kuala_Lumpur
 
 markdown_extensions:
   - admonition
@@ -104,18 +103,38 @@ copyright: >
 
 nav:
   - Home: index.md
-  - Getting Started: getting-started.md
+  - Getting Started:
+    - Installation: getting-started.md
+    - Running on Windows: running-on-windows.md
+    - Pretrained Models: pretrained-models.md
+    - Datasets: datasets.md
+    - Contributing: contributing.md
+    - Changelog: changelog.md
+  - API: api-reference.md
   - Modules:
-      - Overview: modules/index.md
-      - Text Processing: modules/text-processing.md
-      - Analysis: modules/analysis.md
-      - Extraction: modules/extraction.md
-      - Advanced: modules/advanced.md
-      - Generation: modules/generation.md
-      - Data & Embeddings: modules/data.md
-      - Tools & Utilities: modules/tools.md
-      - Integrations: modules/integrations.md
-  - API Reference: api-reference.md
+    - Overview: modules/index.md
+    - Text Processing: modules/text-processing.md
+    - Analysis: modules/analysis.md
+    - Extraction: modules/extraction.md
+    - Advanced: modules/advanced.md
+    - Generation: modules/generation.md
+    - Data & Embeddings: modules/data.md
+    - Tools & Utilities: modules/tools.md
+    - Integrations: modules/integrations.md
+  - Tutorials:
+    - Overview: tutorials/index.md
+    - Sentiment Analysis: tutorials/sentiment.md
+    - Named Entity Recognition: tutorials/ner.md
+    - Translation: tutorials/translation.md
+    - Normalization: tutorials/normalization.md
+    - Language Detection: tutorials/language-detection.md
+    - Embeddings: tutorials/embeddings.md
+    - Summarization: tutorials/summarization.md
+    - Question Answering: tutorials/qa.md
+    - Emotion Detection: tutorials/emotion.md
+    - Hate Speech: tutorials/hate-speech.md
+    - Code-Switching: tutorials/code-switching.md
+    - Pipeline: tutorials/pipeline.md
+    - REST API: tutorials/rest-api.md
   - Benchmarks: benchmarks.md
-  - Contributing: contributing.md
-  - Changelog: changelog.md
+  - Acknowledgement: acknowledgement.md
