@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/manglish-nlp.svg)](https://pypi.org/project/manglish-nlp/)
 [![Tests](https://img.shields.io/github/actions/workflow/status/ZafranYusof/manglish-nlp/test.yml?label=tests)](https://github.com/ZafranYusof/manglish-nlp/actions)
-[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://manglish-nlp.readthedocs.io)
+[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://manglish-nlp.readthedocs.io/en/latest/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
