@@ -131,7 +131,7 @@ print(lang)
 |---------|-------------|--------|
 | Core dependencies | None | TensorFlow/PyTorch required |
 | Import time | <0.5s | 10-30s |
-| Manglish-first | ✅ Built for informal MY text | Formal BM focus |
+| Manglish-first | Built for informal MY text | Formal BM focus |
 | Modules | 51 | ~40 |
 | Throughput | 23k+ texts/sec | Varies (GPU recommended) |
 | Python support | 3.8-3.12 | 3.8+ |
