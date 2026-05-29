@@ -7,7 +7,6 @@ repo_name: ZafranYusof/manglish-nlp
 
 theme:
   name: material
-  logo: assets/logo.svg
   palette:
     - scheme: slate
       primary: teal
