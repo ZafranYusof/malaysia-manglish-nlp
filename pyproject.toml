@@ -7,7 +7,7 @@ name = "manglish-nlp"
 version = "3.0.0"
 description = "Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core"
 readme = "README.md"
-license = "MIT"
+license = {text = "MIT"}
 requires-python = ">=3.8"
 authors = [
     {name = "Zafran"}
@@ -17,7 +17,6 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -30,10 +29,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/zafran/manglish-nlp"
-Documentation = "https://github.com/zafran/manglish-nlp#readme"
-Issues = "https://github.com/zafran/manglish-nlp/issues"
-Changelog = "https://github.com/zafran/manglish-nlp/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/ZafranYusof/manglish-nlp"
+Documentation = "https://manglish-nlp.readthedocs.io"
+Repository = "https://github.com/ZafranYusof/manglish-nlp"
+Issues = "https://github.com/ZafranYusof/manglish-nlp/issues"
+Changelog = "https://github.com/ZafranYusof/manglish-nlp/blob/main/CHANGELOG.md"
 
 [project.scripts]
 manglish = "manglish_nlp.__main__:main"
@@ -58,7 +58,7 @@ all = [
 include = ["manglish_nlp*"]
 
 [tool.setuptools.package-data]
-manglish_nlp = ["resources/*.json", "resources/*.model"]
+manglish_nlp = ["resources/*.json", "resources/*.txt", "resources/*.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

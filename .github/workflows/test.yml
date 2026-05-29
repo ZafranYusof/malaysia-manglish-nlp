@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
 
     steps:
       - uses: actions/checkout@v4
@@ -29,6 +29,23 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m pytest tests/ -q --tb=short
-        env:
-          RUN_HEAVY_TESTS: ""
+          python -m pytest tests/ -q --tb=short -x
+
+      - name: Run with coverage (Python 3.12 only)
+        if: matrix.python-version == '3.12'
+        run: |
+          python -m pytest tests/ --cov=manglish_nlp --cov-report=xml -q
+
+      - name: Import check
+        run: |
+          python -c "import manglish_nlp; print(f'manglish-nlp loaded: {len(manglish_nlp.__all__)} modules')"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install ruff
+      - run: ruff check manglish_nlp/ --select E,F --ignore E501,E402

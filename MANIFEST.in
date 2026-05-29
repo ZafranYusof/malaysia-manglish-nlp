@@ -2,6 +2,18 @@ include README.md
 include LICENSE
 include pyproject.toml
 
-recursive-include manglish_nlp/resources *
-recursive-include datasets *
-recursive-include benchmarks *
+# Include lightweight resources only (JSON configs, dictionaries)
+recursive-include manglish_nlp/resources *.json *.txt *.md
+
+# Exclude large model files (downloaded on demand)
+global-exclude *.model
+global-exclude *.npy
+global-exclude *.pt
+global-exclude *.bin
+global-exclude site/*
+
+# Include datasets metadata only
+include datasets/README.md
+
+# Include benchmarks metadata only
+include benchmarks/README.md
