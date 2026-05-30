@@ -123,6 +123,6 @@ If you use these models in your research:
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2025},
-  url    = {https://github.com/ZafranYusof/malaysian-manglish-nlp}
+  url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```

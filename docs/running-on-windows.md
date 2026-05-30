@@ -144,6 +144,6 @@ python -c "import malaysian_manglish_nlp; print(malaysian_manglish_nlp.__version
 
 If you hit a Windows-specific bug:
 
-1. Check the [GitHub Issues](https://github.com/ZafranYusof/malaysian-manglish-nlp/issues)
+1. Check the [GitHub Issues](https://github.com/ZafranYusof/malaysia-manglish-nlp/issues)
 2. Include your Python version, Windows version, and full traceback
 3. Run `python -m malaysian_manglish_nlp.debug` to collect system info

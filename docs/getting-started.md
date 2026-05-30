@@ -33,7 +33,7 @@ Get up and running with malaysian-manglish-nlp in under 5 minutes.
 === "From source"
 
     ```bash
-    git clone https://github.com/ZafranYusof/malaysian-manglish-nlp.git
+    git clone https://github.com/ZafranYusof/malaysia-manglish-nlp.git
     cd malaysian-manglish-nlp
     pip install -e .
     ```
@@ -352,4 +352,4 @@ export MANGLISH_NLP_BATCH_SIZE=256
 </div>
 
 !!! tip "Need help?"
-    Open an issue on [GitHub](https://github.com/ZafranYusof/malaysian-manglish-nlp/issues) or start a discussion.
+    Open an issue on [GitHub](https://github.com/ZafranYusof/malaysia-manglish-nlp/issues) or start a discussion.

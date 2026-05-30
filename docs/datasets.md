@@ -171,7 +171,7 @@ If you use these datasets in your research, please cite:
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2025},
-  url    = {https://github.com/ZafranYusof/malaysian-manglish-nlp}
+  url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```
 
@@ -179,4 +179,4 @@ If you use these datasets in your research, please cite:
 
 ## License
 
-All datasets are released under the [MIT License](https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/LICENSE), the same as malaysian-manglish-nlp itself. Social media text was anonymised where possible before annotation.
+All datasets are released under the [MIT License](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE), the same as malaysian-manglish-nlp itself. Social media text was anonymised where possible before annotation.

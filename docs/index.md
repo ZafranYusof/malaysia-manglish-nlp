@@ -4,9 +4,9 @@
 
 [![PyPI version](https://badge.fury.io/py/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
-[![License: MIT](https://img.shields.io/github/license/ZafranYusof/malaysian-manglish-nlp.svg?color=blue)](https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/github/license/ZafranYusof/malaysian-manglish-nlp.svg?color=blue)](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)
 [![Documentation](https://readthedocs.org/projects/malaysian-manglish-nlp/badge/?version=latest)](https://malaysian-manglish-nlp.readthedocs.io/)
-[![GitHub stars](https://img.shields.io/github/stars/ZafranYusof/malaysian-manglish-nlp)](https://github.com/ZafranYusof/malaysian-manglish-nlp/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/ZafranYusof/malaysian-manglish-nlp)](https://github.com/ZafranYusof/malaysia-manglish-nlp/stargazers)
 
 </div>
 
@@ -42,7 +42,7 @@ pip install malaysian-manglish-nlp[all]            # Everything
 Install from master branch:
 
 ```bash
-pip install git+https://github.com/ZafranYusof/malaysian-manglish-nlp.git
+pip install git+https://github.com/ZafranYusof/malaysia-manglish-nlp.git
 ```
 
 ## Pretrained Models
@@ -124,10 +124,10 @@ Heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Z
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2025},
-  url    = {https://github.com/ZafranYusof/malaysian-manglish-nlp}
+  url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```
 
 ## License
 
-[MIT License](https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/LICENSE)  -  free for commercial and non-commercial use.
+[MIT License](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)  -  free for commercial and non-commercial use.
