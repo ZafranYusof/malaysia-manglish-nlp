@@ -5,7 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![License: MIT](https://img.shields.io/github/license/ZafranYusof/malaysian-manglish-nlp.svg?color=blue)](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)
-[![Documentation](https://readthedocs.org/projects/malaysian-manglish-nlp/badge/?version=latest)](https://malaysian-manglish-nlp.readthedocs.io/)
+[![Documentation](https://readthedocs.org/projects/manglish-nlp/badge/?version=latest)](https://manglish-nlp.readthedocs.io/en/latest/)
 [![GitHub stars](https://img.shields.io/github/stars/ZafranYusof/malaysian-manglish-nlp)](https://github.com/ZafranYusof/malaysia-manglish-nlp/stargazers)
 
 </div>
@@ -18,7 +18,7 @@ It provides 51 modules covering sentiment analysis, named entity recognition, tr
 
 ## Documentation
 
-Proper documentation is available at [https://malaysian-manglish-nlp.readthedocs.io/](https://malaysian-manglish-nlp.readthedocs.io/)
+Proper documentation is available at [https://manglish-nlp.readthedocs.io/en/latest/](https://manglish-nlp.readthedocs.io/en/latest/)
 
 ## Installing from PyPI
 

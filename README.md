@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
-[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://malaysian-manglish-nlp.readthedocs.io)
+[![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://manglish-nlp.readthedocs.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
@@ -213,7 +213,7 @@ RUN_HEAVY_TESTS=1 python -m pytest tests/test_word_embeddings.py -v
 
 ## Documentation
 
-Full documentation available at [malaysian-manglish-nlp.readthedocs.io](https://malaysian-manglish-nlp.readthedocs.io)
+Full documentation available at [manglish-nlp.readthedocs.io](https://manglish-nlp.readthedocs.io)
 
 Includes:
 - Module reference for all 51 modules
@@ -233,7 +233,7 @@ Contributions welcome! Areas where help is needed:
 4. **Documentation** — More usage examples and tutorials
 
 ```bash
-git clone https://github.com/ZafranYusof/malaysian-manglish-nlp.git
+git clone https://github.com/ZafranYusof/malaysia-manglish-nlp.git
 cd malaysian-manglish-nlp
 pip install -e ".[all]"
 python -m pytest tests/ -q
@@ -252,7 +252,7 @@ If you use malaysian-manglish-nlp in your research, please cite:
   author = {Zafran},
   title = {malaysian-manglish-nlp: Full NLP toolkit for Malaysian Manglish},
   year = {2026},
-  url = {https://github.com/ZafranYusof/malaysian-manglish-nlp},
+  url = {https://github.com/ZafranYusof/malaysia-manglish-nlp},
   version = {3.0.0}
 }
 ```

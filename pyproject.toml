@@ -29,11 +29,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ZafranYusof/malaysian-manglish-nlp"
-Documentation = "https://malaysian-manglish-nlp.readthedocs.io"
-Repository = "https://github.com/ZafranYusof/malaysian-manglish-nlp"
-Issues = "https://github.com/ZafranYusof/malaysian-manglish-nlp/issues"
-Changelog = "https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/ZafranYusof/malaysia-manglish-nlp"
+Documentation = "https://manglish-nlp.readthedocs.io"
+Repository = "https://github.com/ZafranYusof/malaysia-manglish-nlp"
+Issues = "https://github.com/ZafranYusof/malaysia-manglish-nlp/issues"
+Changelog = "https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/CHANGELOG.md"
 
 [project.scripts]
 manglish = "malaysian_manglish_nlp.__main__:main"

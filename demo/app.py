@@ -786,7 +786,7 @@ with gr.Blocks(
     <div class="footer-links">
         <p>
             <a href="https://github.com/zafra/malaysian-manglish-nlp" target="_blank">GitHub</a> |
-            <a href="https://malaysian-manglish-nlp.readthedocs.io" target="_blank">Docs</a> |
+            <a href="https://manglish-nlp.readthedocs.io" target="_blank">Docs</a> |
             <a href="https://pypi.org/project/malaysian-manglish-nlp/" target="_blank">PyPI</a>
         </p>
         <p>Powered by <strong>malaysian-manglish-nlp</strong> v""" + malaysian_manglish_nlp.__version__ + """ — Built with ❤️ for Malaysia</p>

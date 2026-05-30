@@ -1,8 +1,8 @@
 site_name: malaysian-manglish-nlp
 site_description: The complete NLP toolkit for Malaysian Manglish — sentiment, NER, translation, and 48 more modules.
-site_url: https://malaysian-manglish-nlp.readthedocs.io/en/latest/
+site_url: https://manglish-nlp.readthedocs.io/en/latest/
 site_author: Zafran Yusof
-repo_url: https://github.com/ZafranYusof/malaysian-manglish-nlp
+repo_url: https://github.com/ZafranYusof/malaysia-manglish-nlp
 repo_name: ZafranYusof/malaysian-manglish-nlp
 
 theme:
@@ -80,7 +80,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/ZafranYusof/malaysian-manglish-nlp
+      link: https://github.com/ZafranYusof/malaysia-manglish-nlp
       name: GitHub Repository
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/malaysian-manglish-nlp/
@@ -89,7 +89,7 @@ extra:
 
 copyright: >
   Copyright &copy; 2026 Zafran Yusof —
-  <a href="https://github.com/ZafranYusof/malaysian-manglish-nlp/blob/main/LICENSE">MIT License</a>
+  <a href="https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE">MIT License</a>
 
 nav:
   - Home: index.md
