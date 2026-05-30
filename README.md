@@ -52,7 +52,7 @@ print(lang)
 # {'language': 'manglish', 'confidence': 0.87}
 ```
 
-## Features (51 Modules)
+## Features
 
 ### Text Processing
 - **normalize** — Expand shortforms (638+ mappings: nk→nak, mcm→macam, sbb→sebab)
