@@ -59,9 +59,9 @@ print(lang)
 
 | | Link |
 |---|---|
-| 🤗 Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
-| 🤗 Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 7,884 labeled Manglish examples |
-| 🤗 Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 7,884 labeled Manglish examples |
+| Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
 
 ## Features
 
