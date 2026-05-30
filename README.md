@@ -3,6 +3,9 @@
 [![PyPI version](https://img.shields.io/pypi/v/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Docs](https://img.shields.io/badge/docs-ReadTheDocs-blue.svg)](https://manglish-nlp.readthedocs.io)
+[![HuggingFace](https://img.shields.io/badge/🤗-Models-yellow)](https://huggingface.co/vexccz/manglish-nlp-sentiment)
+[![Dataset](https://img.shields.io/badge/🤗-Dataset-yellow)](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
+[![Demo](https://img.shields.io/badge/🤗-Space-yellow)](https://huggingface.co/spaces/vexccz/manglish-nlp-demo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
@@ -51,6 +54,14 @@ lang = detect_language("Eh jom makan, I'm hungry gila")
 print(lang)
 # {'language': 'manglish', 'confidence': 0.87}
 ```
+
+## HuggingFace
+
+| | Link |
+|---|---|
+| 🤗 Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
+| 🤗 Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 7,884 labeled Manglish examples |
+| 🤗 Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
 
 ## Features
 
