@@ -39,7 +39,7 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-__version__ = "2.0.0"
+__version__ = "3.1.0"
 __author__ = "Zafran"
 __license__ = "MIT"
 

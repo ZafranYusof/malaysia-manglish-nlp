@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-05-30
+
+### Added
+- Retrained multi-task model on 7,884 examples (up from 561)
+- Auto-download model from HuggingFace on first use
+- Jawi (Rumi↔Jawi) transliteration module
+- Parallel processing pipeline
+- Memory optimization with lazy module loading
+
+### Changed
+- Sentiment accuracy improved significantly (78.9% → target 90%+)
+- Emotion detection: 8 classes with 71%+ accuracy
+- Intent classification: 87.9% accuracy
+- Training data expanded with augmentation (7,884 labeled examples)
+- Chrome extension and VS Code extension included
+
+### Fixed
+- Model path resolution for fine-tuned weights
+- Package name consistency across all configs and docs
+
 ## [3.0.0] - 2026-05-29
 
 ### Added

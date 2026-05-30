@@ -25,7 +25,7 @@ import os
 from pathlib import Path
 
 # Default model directory (relative to package root)
-_PACKAGE_DIR = Path(__file__).resolve().parent.parent.parent
+_PACKAGE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_MODEL_DIR = str(_PACKAGE_DIR / 'resources' / 'manglish_finetuned')
 
 # Label definitions (must match finetune.py)
@@ -42,6 +42,47 @@ def _check_torch() -> bool:
         return True
     except ImportError:
         return False
+
+
+def _download_model_from_hf(model_dir: str) -> bool:
+    """Download fine-tuned model from HuggingFace Hub.
+    
+    Args:
+        model_dir: Local directory to save model files.
+    
+    Returns:
+        True if download succeeded, False otherwise.
+    """
+    try:
+        from huggingface_hub import hf_hub_download
+    except ImportError:
+        print("[manglish_model] huggingface_hub not installed. Cannot auto-download.")
+        print("[manglish_model] Install: pip install huggingface_hub")
+        return False
+    
+    repo_id = "vexccz/manglish-nlp-sentiment"
+    files = ["model.pt", "config.json", "tokenizer.json", "tokenizer_config.json"]
+    
+    os.makedirs(model_dir, exist_ok=True)
+    print(f"[manglish_model] Downloading model from HuggingFace ({repo_id})...")
+    
+    for fname in files:
+        dest = os.path.join(model_dir, fname)
+        if os.path.exists(dest):
+            continue
+        try:
+            print(f"  Downloading {fname}...")
+            hf_path = hf_hub_download(repo_id=repo_id, filename=fname)
+            # Copy to model_dir
+            import shutil
+            shutil.copy2(hf_path, dest)
+            print(f"  Done: {fname}")
+        except Exception as e:
+            print(f"  Failed to download {fname}: {e}")
+            return False
+    
+    print("[manglish_model] Model downloaded successfully.")
+    return True
 
 
 def load_model(model_dir: Optional[str] = None) -> Any:
@@ -73,11 +114,17 @@ def load_model(model_dir: Optional[str] = None) -> Any:
     config_path = os.path.join(model_dir, 'config.json')
     
     if not os.path.exists(model_path):
-        raise FileNotFoundError(
-            f"Model weights not found at: {model_path}\n"
-            f"Train first: python -m malaysian_manglish_nlp.transformers.finetune\n"
-            f"Or use demo_predict() for rule-based fallback."
-        )
+        # Try auto-download from HuggingFace
+        if _download_model_from_hf(model_dir):
+            pass  # Download succeeded, continue loading
+        else:
+            raise FileNotFoundError(
+                f"Model weights not found at: {model_path}\n"
+                f"Auto-download failed. Options:\n"
+                f"  1. Install huggingface_hub: pip install huggingface_hub\n"
+                f"  2. Train locally: python -m malaysian_manglish_nlp.transformers.finetune\n"
+                f"  3. Use demo_predict() for rule-based fallback."
+            )
     
     # Load config
     with open(config_path, 'r', encoding='utf-8') as f:

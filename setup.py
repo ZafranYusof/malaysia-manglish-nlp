@@ -32,13 +32,13 @@ ext_modules = [
 
 setup(
     name='malaysian-manglish-nlp',
-    version='3.0.0',
+    version='3.1.0',
     author='Zafran',
     author_email='zafran@example.com',
     description='Natural Language Processing toolkit for Malaysian Manglish',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/ZafranYusof/malaysian-manglish-nlp',
+    url='https://github.com/ZafranYusof/malaysia-manglish-nlp',
     packages=find_packages(),
     package_data={
         'malaysian_manglish_nlp': ['resources/*.json'],
