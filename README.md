@@ -116,9 +116,32 @@ print(lang)
 - **langchain_tool** — LangChain tool wrappers
 - **CLI** — Command-line interface with subcommands
 
+## Fine-Tuned Model
+
+A DistilBERT multi-task model fine-tuned on **7,884 labeled Manglish examples** for sentiment, emotion, and intent classification.
+
+```python
+from malaysian_manglish_nlp.transformers.manglish_model import load_model, predict
+
+model = load_model()  # Auto-downloads from HuggingFace on first use
+result = predict("gila best servis ni")
+# {'sentiment': {'label': 'positive', 'confidence': 0.96},
+#  'emotion':    {'label': 'happy',    'confidence': 0.85},
+#  'intent':     {'label': 'opinion',  'confidence': 1.00}}
+```
+
+| Task | Accuracy | Classes |
+|------|----------|----------|
+| Sentiment | 88.5% | positive, negative, neutral |
+| Emotion | 83.6% | happy, sad, angry, fear, surprise, disgust, love, neutral |
+| Intent | 94.5% | question, statement, request, complaint, greeting, opinion |
+| **Average** | **88.9%** | — |
+
+Model: [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) on HuggingFace. Requires `pip install malaysian-manglish-nlp[transformers]`.
+
 ## Performance
 
-- **23,000+ texts/sec** sentiment analysis throughput
+- **23,000+ texts/sec** sentiment analysis throughput (rule-based)
 - **<0.5s** import time for core modules
 - **Zero dependencies** for core text processing
 - LRU caching on heavy operations (stemmer, normalize, sentiment, language detection)
@@ -253,6 +276,6 @@ If you use malaysian-manglish-nlp in your research, please cite:
   title = {malaysian-manglish-nlp: Full NLP toolkit for Malaysian Manglish},
   year = {2026},
   url = {https://github.com/ZafranYusof/malaysia-manglish-nlp},
-  version = {3.0.0}
+  version = {3.1.0}
 }
 ```
