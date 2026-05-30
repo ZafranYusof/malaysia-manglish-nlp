@@ -8,7 +8,7 @@
 [![Demo](https://img.shields.io/badge/🤗-Space-yellow)](https://huggingface.co/spaces/vexccz/manglish-nlp-demo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
+**Full NLP toolkit for Malaysian Manglish - 51 modules, zero dependencies for core.**
 
 Built for real-world Malaysian text: social media, news, chat messages, code-switched Malay-English content.
 
