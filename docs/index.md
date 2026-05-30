@@ -4,17 +4,28 @@
 
 [![PyPI version](https://badge.fury.io/py/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
 [![Python versions](https://img.shields.io/pypi/pyversions/malaysian-manglish-nlp.svg)](https://pypi.org/project/malaysian-manglish-nlp/)
-[![License: MIT](https://img.shields.io/github/license/ZafranYusof/malaysian-manglish-nlp.svg?color=blue)](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/github/license/ZafranYusof/malaysia-manglish-nlp.svg?color=blue)](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)
 [![Documentation](https://readthedocs.org/projects/manglish-nlp/badge/?version=latest)](https://manglish-nlp.readthedocs.io/en/latest/)
-[![GitHub stars](https://img.shields.io/github/stars/ZafranYusof/malaysian-manglish-nlp)](https://github.com/ZafranYusof/malaysia-manglish-nlp/stargazers)
+[![HuggingFace Model](https://img.shields.io/badge/%F0%9F%A4%97-Model-yellow)](https://huggingface.co/vexccz/manglish-nlp-sentiment)
+[![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97-Dataset-yellow)](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
+[![HuggingFace Space](https://img.shields.io/badge/%F0%9F%A4%97-Space-yellow)](https://huggingface.co/spaces/vexccz/manglish-nlp-demo)
+[![GitHub stars](https://img.shields.io/github/stars/ZafranYusof/malaysia-manglish-nlp)](https://github.com/ZafranYusof/malaysia-manglish-nlp/stargazers)
 
 </div>
 
 ---
 
-**malaysian-manglish-nlp** is a comprehensive Natural-Language-Processing toolkit for Malaysian Manglish  -  the code-switching mix of Malay, English, and local slang spoken by millions of Malaysians online.
+**malaysian-manglish-nlp** is a comprehensive Natural-Language-Processing toolkit for Malaysian Manglish - the code-switching mix of Malay, English, and local slang spoken by millions of Malaysians online.
 
 It provides 51 modules covering sentiment analysis, named entity recognition, translation, normalisation, text generation, graph analysis, and more. Zero external dependencies for core modules.
+
+## HuggingFace
+
+| | Link |
+|---|---|
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) - DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) - 7,884 labeled Manglish examples |
+| Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) - Gradio interactive demo (7 tabs) |
 
 ## Documentation
 
@@ -53,16 +64,16 @@ malaysian-manglish-nlp ships with pretrained Malaysian models. See [Pretrained M
 |-------|------|---------|
 | `manglish-word2vec` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
 | `manglish-fasttext` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
-| `manglish-finetuned` | Sentiment Classifier | DistilBERT multilingual, 89.1% accuracy |
+| `manglish-finetuned` | Multi-Task Classifier | DistilBERT, sentiment 88.5% / emotion 83.6% / intent 94.5% (7,884 examples) |
 
 ## Datasets
 
 Training data is bundled with the package. See [Datasets](datasets.md).
 
-- **Sentiment**: 1,139 labeled examples (positive / negative / neutral)
-- **Normalisation**: 259 slang ? standard pairs
-- **NER**: 2,250 annotated sentences (PER, ORG, LOC, MISC)
-- **Translation**: 600+ EN?MY parallel pairs
+- **Multi-task**: 7,884 labeled examples (sentiment + emotion + intent) - [HuggingFace](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
+- **Normalisation**: 638+ slang to standard mappings
+- **NER**: 2,250+ annotated sentences (11 entity types)
+- **Translation**: 1,000+ BM-EN word pairs
 
 ## Features
 
@@ -99,6 +110,14 @@ entities = malaysian_manglish_nlp.ner.extract("Najib Razak mengumumkan dasar bah
 # Translation
 translated = malaysian_manglish_nlp.translate("Apa khabar hari ini?", source="ms", target="en")
 # "How are you today?"
+
+# Fine-tuned model (requires [transformers] extra)
+from malaysian_manglish_nlp.transformers.manglish_model import load_model, predict
+model = load_model()  # Auto-downloads from HuggingFace
+result = predict("gila best servis ni")
+# {'sentiment': {'label': 'positive', 'confidence': 0.96},
+#  'emotion':    {'label': 'happy',    'confidence': 0.85},
+#  'intent':     {'label': 'opinion',  'confidence': 1.00}}
 ```
 
 ## Running on Windows
@@ -120,14 +139,15 @@ Heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Z
 ## Citation
 
 ```bibtex
-@software{malaysian_manglish_nlp_2025,
+@software{malaysian_manglish_nlp_2026,
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
-  year   = {2025},
+  year   = {2026},
+  version = {3.1.0},
   url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```
 
 ## License
 
-[MIT License](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE)  -  free for commercial and non-commercial use.
+[MIT License](https://github.com/ZafranYusof/malaysia-manglish-nlp/blob/main/LICENSE) - free for commercial and non-commercial use.
