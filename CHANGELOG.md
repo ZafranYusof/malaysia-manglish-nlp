@@ -15,10 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Memory optimization with lazy module loading
 
 ### Changed
-- Sentiment accuracy improved significantly (78.9% → target 90%+)
-- Emotion detection: 8 classes with 71%+ accuracy
-- Intent classification: 87.9% accuracy
-- Training data expanded with augmentation (7,884 labeled examples)
+- Sentiment accuracy: 88.5% (from 69% with 561 examples)
+- Emotion detection: 83.6% (8 classes, 3 sentiment + 8 emotion + 6 intent multi-task)
+- Intent classification: 94.5%
+- Average validation accuracy: 88.9% (7,884 training examples, 1,577 validation)
 - Chrome extension and VS Code extension included
 
 ### Fixed
