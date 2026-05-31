@@ -6,13 +6,14 @@ All datasets are available on [HuggingFace: vexccz/manglish-nlp-dataset](https:/
 
 ---
 
-## Multi-Task Dataset (v3.1.0)
+## Multi-Task Dataset (v3.2.0)
 
-7,884 labeled examples with sentiment, emotion, and intent annotations.
+14,384 labeled examples with sentiment, emotion, and intent annotations.
 
 | File | Samples | Description |
 |------|---------|-------------|
-| `manglish_7884.jsonl` | 7,884 | Full dataset (original + augmented) |
+| `manglish_14384.jsonl` | 14,384 | Full dataset (original + augmented) |
+| `manglish_7884.jsonl` | 7,884 | Previous version (v3.1.0) |
 | `manglish_labeled.jsonl` | 561 | Original v1 manually labeled |
 | `manglish_labeled_v2.jsonl` | 578 | v2 rebalanced |
 | `manglish_full.jsonl` | 2,400+ | Combined all versions |
@@ -23,7 +24,7 @@ All datasets are available on [HuggingFace: vexccz/manglish-nlp-dataset](https:/
 
 **Emotion** (8 classes): `happy`, `sad`, `angry`, `fear`, `surprise`, `disgust`, `love`, `neutral`
 
-**Intent** (6 classes): `question`, `statement`, `request`, `complaint`, `greeting`, `opinion`
+**Intent** (8 classes): `question`, `statement`, `request`, `complaint`, `greeting`, `opinion`, `command`, `offer`
 
 ### Additional fields
 
@@ -62,7 +63,7 @@ All datasets are available on [HuggingFace: vexccz/manglish-nlp-dataset](https:/
 ```python
 from datasets import load_dataset
 
-ds = load_dataset("vexccz/manglish-nlp-dataset", data_files="manglish_7884.jsonl")
+ds = load_dataset("vexccz/manglish-nlp-dataset", data_files="manglish_14384.jsonl")
 print(ds["train"][0])
 ```
 
@@ -136,7 +137,7 @@ to_english("Saya nak pergi kedai")
 from malaysian_manglish_nlp.transformers.finetune import train
 
 results = train(
-    data_path="datasets/manglish_7884.jsonl",
+    data_path="datasets/manglish_14384.jsonl",
     output_dir="my_model/",
     epochs=5,
     batch_size=16,

@@ -23,8 +23,8 @@ It provides 51 modules covering sentiment analysis, named entity recognition, tr
 
 | | Link |
 |---|---|
-| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) - DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
-| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) - 7,884 labeled Manglish examples |
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) - XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) - 14,384 labeled Manglish examples |
 | Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) - Gradio interactive demo (7 tabs) |
 
 ## Documentation
@@ -64,13 +64,13 @@ malaysian-manglish-nlp ships with pretrained Malaysian models. See [Pretrained M
 |-------|------|---------|
 | `manglish-word2vec` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
 | `manglish-fasttext` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
-| `manglish-finetuned` | Multi-Task Classifier | DistilBERT, sentiment 88.5% / emotion 83.6% / intent 94.5% (7,884 examples) |
+| `manglish-finetuned` | Multi-Task Classifier | XLM-Roberta, sentiment 95.0% / emotion 90.3% / intent 97.5% (14,384 examples) |
 
 ## Datasets
 
 Training data is bundled with the package. See [Datasets](datasets.md).
 
-- **Multi-task**: 7,884 labeled examples (sentiment + emotion + intent) - [HuggingFace](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
+- **Multi-task**: 14,384 labeled examples (sentiment + emotion + intent) - [HuggingFace](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
 - **Normalisation**: 638+ slang to standard mappings
 - **NER**: 2,250+ annotated sentences (11 entity types)
 - **Translation**: 1,000+ BM-EN word pairs
@@ -143,7 +143,7 @@ Heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Z
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2026},
-  version = {3.1.0},
+  version = {3.2.0},
   url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```

@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-05-31
+
+### Added
+- XLM-Roberta base model (replacing distilbert-multilingual)
+- Focal loss for class imbalance handling
+- Uncertainty-weighted multi-task loss (Kendall et al. 2018)
+- Cosine annealing with warm restarts
+- Mixed precision training (FP16)
+- Gradient accumulation (effective batch size 32)
+- Early stopping with patience
+- Learning rate finder (optional)
+- Ensemble module with confidence-based fallback (< 60% uses rule-based)
+- Task-specific attention embeddings
+- Augmented dataset: 14,384 examples (from 7,884)
+
+### Changed
+- Sentiment accuracy: 95.0% (from 88.5%)
+- Emotion detection: 90.3% (from 83.6%)
+- Intent classification: 97.5% (from 94.5%)
+- Average accuracy: 94.3% (from 88.9%)
+- Model size: 1.1GB (XLM-Roberta base)
+- Raw text training (preserves Manglish slang patterns)
+- Better handling of minority emotion classes (love, disgust, surprise)
+
+### Fixed
+- WeightedRandomSampler index mismatch with Subset datasets
+- Memory issues during training (reduced max_length to 96)
+- FutureWarning for deprecated torch.cuda.amp APIs
+
 ## [3.1.0] - 2026-05-30
 
 ### Added

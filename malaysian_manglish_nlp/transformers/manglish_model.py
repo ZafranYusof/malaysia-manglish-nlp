@@ -2,6 +2,7 @@
 Load and run inference with the fine-tuned Manglish multi-task model.
 
 Provides sentiment, emotion, and intent predictions for Manglish text.
+Supports v1 (distilbert) and v2 (xlm-roberta) models.
 Falls back to rule-based prediction if model weights are not available.
 
 Usage:
@@ -26,12 +27,17 @@ from pathlib import Path
 
 # Default model directory (relative to package root)
 _PACKAGE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_MODEL_DIR = str(_PACKAGE_DIR / 'resources' / 'manglish_finetuned')
+DEFAULT_MODEL_DIR = str(_PACKAGE_DIR / 'resources' / 'manglish_finetuned_v2')
+DEFAULT_MODEL_DIR_V1 = str(_PACKAGE_DIR / 'resources' / 'manglish_finetuned')
 
 # Label definitions (must match finetune.py)
 SENTIMENT_LABELS = ['positive', 'negative', 'neutral']
 EMOTION_LABELS = ['happy', 'sad', 'angry', 'fear', 'surprise', 'disgust', 'love', 'neutral']
 INTENT_LABELS = ['question', 'statement', 'request', 'complaint', 'greeting', 'opinion']
+
+# Ensemble settings
+ENSEMBLE_ENABLED = True
+CONFIDENCE_THRESHOLD = 0.60
 
 
 def _check_torch() -> bool:
@@ -45,19 +51,11 @@ def _check_torch() -> bool:
 
 
 def _download_model_from_hf(model_dir: str) -> bool:
-    """Download fine-tuned model from HuggingFace Hub.
-    
-    Args:
-        model_dir: Local directory to save model files.
-    
-    Returns:
-        True if download succeeded, False otherwise.
-    """
+    """Download fine-tuned model from HuggingFace Hub."""
     try:
         from huggingface_hub import hf_hub_download
     except ImportError:
         print("[manglish_model] huggingface_hub not installed. Cannot auto-download.")
-        print("[manglish_model] Install: pip install huggingface_hub")
         return False
     
     repo_id = "vexccz/manglish-nlp-sentiment"
@@ -73,7 +71,6 @@ def _download_model_from_hf(model_dir: str) -> bool:
         try:
             print(f"  Downloading {fname}...")
             hf_path = hf_hub_download(repo_id=repo_id, filename=fname)
-            # Copy to model_dir
             import shutil
             shutil.copy2(hf_path, dest)
             print(f"  Done: {fname}")
@@ -81,23 +78,19 @@ def _download_model_from_hf(model_dir: str) -> bool:
             print(f"  Failed to download {fname}: {e}")
             return False
     
-    print("[manglish_model] Model downloaded successfully.")
     return True
 
 
 def load_model(model_dir: Optional[str] = None) -> Any:
     """Load the fine-tuned multi-task model for inference.
     
+    Supports both v1 (distilbert) and v2 (xlm-roberta) architectures.
+    
     Args:
         model_dir: Path to saved model directory.
-            Default: resources/manglish_finetuned/
     
     Returns:
-        dict: Model bundle with 'model', 'tokenizer', 'config', 'device'.
-    
-    Raises:
-        ImportError: If torch/transformers not installed.
-        FileNotFoundError: If model weights not found.
+        dict: Model bundle with 'model', 'tokenizer', 'config', 'device', 'version'.
     """
     if not _check_torch():
         raise ImportError(
@@ -107,22 +100,28 @@ def load_model(model_dir: Optional[str] = None) -> Any:
     
     import torch
     from transformers import AutoTokenizer
-    from malaysian_manglish_nlp.transformers.finetune import ManglishMultiTaskModel
     
-    model_dir = model_dir or DEFAULT_MODEL_DIR
+    # Try v2 first, then v1
+    if model_dir is None:
+        if os.path.exists(os.path.join(DEFAULT_MODEL_DIR, 'model.pt')):
+            model_dir = DEFAULT_MODEL_DIR
+        elif os.path.exists(os.path.join(DEFAULT_MODEL_DIR_V1, 'model.pt')):
+            model_dir = DEFAULT_MODEL_DIR_V1
+        else:
+            model_dir = DEFAULT_MODEL_DIR
+    
     model_path = os.path.join(model_dir, 'model.pt')
     config_path = os.path.join(model_dir, 'config.json')
     
     if not os.path.exists(model_path):
-        # Try auto-download from HuggingFace
         if _download_model_from_hf(model_dir):
-            pass  # Download succeeded, continue loading
+            pass
         else:
             raise FileNotFoundError(
                 f"Model weights not found at: {model_path}\n"
-                f"Auto-download failed. Options:\n"
-                f"  1. Install huggingface_hub: pip install huggingface_hub\n"
-                f"  2. Train locally: python -m malaysian_manglish_nlp.transformers.finetune\n"
+                f"Options:\n"
+                f"  1. pip install huggingface_hub\n"
+                f"  2. Train: python -m malaysian_manglish_nlp.transformers.finetune_v2\n"
                 f"  3. Use demo_predict() for rule-based fallback."
             )
     
@@ -130,17 +129,24 @@ def load_model(model_dir: Optional[str] = None) -> Any:
     with open(config_path, 'r', encoding='utf-8') as f:
         config = json.load(f)
     
-    # Load model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    version = config.get('version', 'v1')
     encoder_name = config.get('model_name', 'distilbert-base-multilingual-cased')
     
-    model = ManglishMultiTaskModel(encoder_name)
+    # Load appropriate model class
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
+    if version == 'v2':
+        from malaysian_manglish_nlp.transformers.finetune_v2 import ManglishMultiTaskModelV2
+        model = ManglishMultiTaskModelV2(encoder_name)
+    else:
+        from malaysian_manglish_nlp.transformers.finetune import ManglishMultiTaskModel
+        model = ManglishMultiTaskModel(encoder_name)
+    
     state_dict = torch.load(model_path, map_location=device, weights_only=True)
     model.load_state_dict(state_dict)
     model.to(device)
     model.eval()
     
-    # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
     
     return {
@@ -148,12 +154,12 @@ def load_model(model_dir: Optional[str] = None) -> Any:
         'tokenizer': tokenizer,
         'config': config,
         'device': device,
+        'version': version,
     }
 
 
-# Module-level cache for loaded model
+# Module-level cache
 _cached_model = None
-
 
 def _get_model(model_dir: Optional[str] = None) -> Any:
     """Get or load cached model."""
@@ -163,20 +169,17 @@ def _get_model(model_dir: Optional[str] = None) -> Any:
     return _cached_model
 
 
-def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
+def predict(text: str, model_dir: Optional[str] = None,
+            use_ensemble: bool = True) -> Dict[str, Any]:
     """Predict sentiment, emotion, and intent for a single text.
     
     Args:
         text: Input Manglish text.
         model_dir: Optional model directory override.
+        use_ensemble: If True, applies ensemble with rule-based fallback.
     
     Returns:
         dict: Predictions with confidence scores.
-            {
-                'sentiment': {'label': str, 'confidence': float},
-                'emotion': {'label': str, 'confidence': float},
-                'intent': {'label': str, 'confidence': float},
-            }
     """
     import torch
     import torch.nn.functional as F
@@ -186,9 +189,12 @@ def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
     tokenizer = bundle['tokenizer']
     device = bundle['device']
     
-    # Tokenize
+    # Tokenize (use raw text - minimal preprocessing)
+    import re
+    clean_text = re.sub(r'\s+', ' ', text.strip())
+    
     encoding = tokenizer(
-        text,
+        clean_text,
         max_length=128,
         padding='max_length',
         truncation=True,
@@ -198,13 +204,10 @@ def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
     input_ids = encoding['input_ids'].to(device)
     attention_mask = encoding['attention_mask'].to(device)
     
-    # Predict
     with torch.no_grad():
         logits = model(input_ids, attention_mask)
     
-    # Convert logits to predictions with confidence
     results = {}
-    
     label_lists = {
         'sentiment': SENTIMENT_LABELS,
         'emotion': EMOTION_LABELS,
@@ -221,22 +224,23 @@ def predict(text: str, model_dir: Optional[str] = None) -> Dict[str, Any]:
             'confidence': round(confidence, 4),
         }
     
+    # Apply ensemble if enabled
+    if use_ensemble and ENSEMBLE_ENABLED:
+        try:
+            from malaysian_manglish_nlp.transformers.ensemble import ensemble_predict
+            results = ensemble_predict(text, results, threshold=CONFIDENCE_THRESHOLD)
+        except ImportError:
+            pass
+    
     return results
 
 
-def predict_batch(texts: List[str], model_dir: Optional[str] = None, batch_size: int = 32) -> List[Dict[str, Any]]:
-    """Batch prediction for multiple texts.
-    
-    Args:
-        texts: Input texts.
-        model_dir: Optional model directory override.
-        batch_size: Batch size for inference.
-    
-    Returns:
-        list[dict]: List of prediction dicts (same format as predict()).
-    """
+def predict_batch(texts: List[str], model_dir: Optional[str] = None,
+                  batch_size: int = 32, use_ensemble: bool = True) -> List[Dict[str, Any]]:
+    """Batch prediction for multiple texts."""
     import torch
     import torch.nn.functional as F
+    import re
     
     bundle = _get_model(model_dir)
     model = bundle['model']
@@ -244,16 +248,14 @@ def predict_batch(texts: List[str], model_dir: Optional[str] = None, batch_size:
     device = bundle['device']
     
     all_results = []
-    
     label_lists = {
         'sentiment': SENTIMENT_LABELS,
         'emotion': EMOTION_LABELS,
         'intent': INTENT_LABELS,
     }
     
-    # Process in batches
     for i in range(0, len(texts), batch_size):
-        batch_texts = texts[i:i + batch_size]
+        batch_texts = [re.sub(r'\s+', ' ', t.strip()) for t in texts[i:i + batch_size]]
         
         encoding = tokenizer(
             batch_texts,
@@ -269,7 +271,6 @@ def predict_batch(texts: List[str], model_dir: Optional[str] = None, batch_size:
         with torch.no_grad():
             logits = model(input_ids, attention_mask)
         
-        # Process each sample in batch
         for j in range(len(batch_texts)):
             result = {}
             for task, labels in label_lists.items():
@@ -282,21 +283,19 @@ def predict_batch(texts: List[str], model_dir: Optional[str] = None, batch_size:
                 }
             all_results.append(result)
     
+    # Apply ensemble if enabled
+    if use_ensemble and ENSEMBLE_ENABLED:
+        try:
+            from malaysian_manglish_nlp.transformers.ensemble import ensemble_predict_batch
+            all_results = ensemble_predict_batch(texts, all_results, threshold=CONFIDENCE_THRESHOLD)
+        except ImportError:
+            pass
+    
     return all_results
 
 
 def demo_predict(text: str) -> Dict[str, Any]:
-    """Rule-based fallback prediction when model weights are not available.
-    
-    Uses existing malaysian_manglish_nlp sentiment and emotion modules for a
-    best-effort prediction without requiring fine-tuned weights.
-    
-    Args:
-        text: Input Manglish text.
-    
-    Returns:
-        dict: Predictions (same format as predict(), but rule-based).
-    """
+    """Rule-based fallback prediction when model weights are not available."""
     result = {
         'sentiment': {'label': 'neutral', 'confidence': 0.5},
         'emotion': {'label': 'neutral', 'confidence': 0.5},
@@ -304,7 +303,6 @@ def demo_predict(text: str) -> Dict[str, Any]:
         '_fallback': True,
     }
     
-    # Try using existing sentiment module
     try:
         from malaysian_manglish_nlp.sentiment import analyze as sentiment_analyze
         sent_result = sentiment_analyze(text)
@@ -313,10 +311,9 @@ def demo_predict(text: str) -> Dict[str, Any]:
             score = sent_result.get('score', sent_result.get('confidence', 0.5))
             if label in SENTIMENT_LABELS:
                 result['sentiment'] = {'label': label, 'confidence': round(float(score), 4)}
-    except: # Fallback: simple keyword-based sentiment
+    except:
         result['sentiment'] = _keyword_sentiment(text)
     
-    # Try using existing emotion module
     try:
         from malaysian_manglish_nlp.emotion import detect as emotion_detect
         emo_result = emotion_detect(text)
@@ -325,10 +322,9 @@ def demo_predict(text: str) -> Dict[str, Any]:
             score = emo_result.get('score', emo_result.get('confidence', 0.5))
             if label in EMOTION_LABELS:
                 result['emotion'] = {'label': label, 'confidence': round(float(score), 4)}
-    except: # Fallback: simple keyword-based emotion
+    except:
         result['emotion'] = _keyword_emotion(text)
     
-    # Intent detection (rule-based)
     result['intent'] = _keyword_intent(text)
     
     return result
@@ -394,45 +390,35 @@ def _keyword_intent(text: str) -> Dict[str, Any]:
     """Simple rule-based intent detection."""
     text_lower = text.strip().lower()
     
-    # Question markers
     question_markers = ['?', 'apa', 'kenapa', 'macam mana', 'bila', 'siapa',
                         'mana', 'berapa', 'what', 'why', 'how', 'when', 'where',
                         'who', 'which', 'ke?', 'tak?', 'kan?']
     
-    # Greeting markers
     greeting_markers = ['hi', 'hello', 'hey', 'assalamualaikum', 'salam',
                         'morning', 'evening', 'weh', 'yo', 'sup']
     
-    # Request markers
     request_markers = ['tolong', 'please', 'boleh', 'can you', 'help',
                        'minta', 'nak', 'want', 'need', 'perlukan']
     
-    # Complaint markers
     complaint_markers = ['complaint', 'aduan', 'teruk', 'tak puas',
                          'disappointed', 'kecewa', 'unacceptable', 'worst']
     
-    # Check question first (highest priority)
     if text_lower.endswith('?') or any(m in text_lower for m in question_markers[:10]):
         return {'label': 'question', 'confidence': 0.75}
     
-    # Check greetings (short messages)
     words = text_lower.split()
     if len(words) <= 3 and any(m in text_lower for m in greeting_markers):
         return {'label': 'greeting', 'confidence': 0.8}
     
-    # Check requests
     if any(m in text_lower for m in request_markers):
         return {'label': 'request', 'confidence': 0.7}
     
-    # Check complaints
     if any(m in text_lower for m in complaint_markers):
         return {'label': 'complaint', 'confidence': 0.65}
     
-    # Check opinion markers
     opinion_markers = ['i think', 'aku rasa', 'pada aku', 'in my opinion',
                        'honestly', 'tbh', 'imo', 'personally']
     if any(m in text_lower for m in opinion_markers):
         return {'label': 'opinion', 'confidence': 0.65}
     
-    # Default: statement
     return {'label': 'statement', 'confidence': 0.5}

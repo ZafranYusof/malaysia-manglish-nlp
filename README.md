@@ -8,7 +8,7 @@
 [![Demo](https://img.shields.io/badge/🤗-Space-yellow)](https://huggingface.co/spaces/vexccz/manglish-nlp-demo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Full NLP toolkit for Malaysian Manglish - 51 modules, zero dependencies for core.**
+**Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
 
 Built for real-world Malaysian text: social media, news, chat messages, code-switched Malay-English content.
 
@@ -59,9 +59,9 @@ print(lang)
 
 | | Link |
 |---|---|
-| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — DistilBERT multi-task (sentiment 88.5%, emotion 83.6%, intent 94.5%) |
-| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 7,884 labeled Manglish examples |
-| Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
+| 🤗 Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
+| 🤗 Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 14,384 labeled Manglish examples |
+| 🤗 Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
 
 ## Features
 
@@ -129,7 +129,7 @@ print(lang)
 
 ## Fine-Tuned Model
 
-A DistilBERT multi-task model fine-tuned on **7,884 labeled Manglish examples** for sentiment, emotion, and intent classification.
+An XLM-Roberta multi-task model fine-tuned on **14,384 labeled Manglish examples** for sentiment, emotion, and intent classification.
 
 ```python
 from malaysian_manglish_nlp.transformers.manglish_model import load_model, predict
@@ -143,10 +143,10 @@ result = predict("gila best servis ni")
 
 | Task | Accuracy | Classes |
 |------|----------|----------|
-| Sentiment | 88.5% | positive, negative, neutral |
-| Emotion | 83.6% | happy, sad, angry, fear, surprise, disgust, love, neutral |
-| Intent | 94.5% | question, statement, request, complaint, greeting, opinion |
-| **Average** | **88.9%** | — |
+| Sentiment | 95.0% | positive, negative, neutral |
+| Emotion | 90.3% | happy, sad, angry, fear, surprise, disgust, love, neutral |
+| Intent | 97.5% | question, statement, request, complaint, greeting, opinion, command, offer |
+| **Average** | **94.3%** | — |
 
 Model: [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) on HuggingFace. Requires `pip install malaysian-manglish-nlp[transformers]`.
 
@@ -287,6 +287,6 @@ If you use malaysian-manglish-nlp in your research, please cite:
   title = {malaysian-manglish-nlp: Full NLP toolkit for Malaysian Manglish},
   year = {2026},
   url = {https://github.com/ZafranYusof/malaysia-manglish-nlp},
-  version = {3.1.0}
+  version = {3.2.0}
 }
 ```

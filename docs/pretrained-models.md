@@ -29,16 +29,16 @@ ft.most_similar("best")
 
 ---
 
-## Fine-tuned Multi-Task Model (v3.1.0)
+## Fine-tuned Multi-Task Model (v3.2.0)
 
-A DistilBERT model fine-tuned on **7,884 labeled Manglish examples** for multi-task classification.
+An XLM-Roberta model fine-tuned on **14,384 labeled Manglish examples** for multi-task classification.
 
 | Task | Accuracy | Classes |
 |------|----------|----------|
-| Sentiment | 88.5% | positive, negative, neutral |
-| Emotion | 83.6% | happy, sad, angry, fear, surprise, disgust, love, neutral |
-| Intent | 94.5% | question, statement, request, complaint, greeting, opinion |
-| **Average** | **88.9%** | |
+| Sentiment | 95.0% | positive, negative, neutral |
+| Emotion | 90.3% | happy, sad, angry, fear, surprise, disgust, love, neutral |
+| Intent | 97.5% | question, statement, request, complaint, greeting, opinion, command, offer |
+| **Average** | **94.3%** | |
 
 ### Usage
 
@@ -60,13 +60,14 @@ results = predict_batch(["best gila", "teruk la", "ok je"])
 
 ### Model details
 
-- **Base**: `distilbert-base-multilingual-cased`
+- **Base**: `xlm-roberta-base`
 - **Architecture**: Shared encoder + 3 task-specific heads (256 hidden units each)
-- **Fine-tuned on**: 6,307 train / 1,577 validation (from 7,884 total)
-- **Training**: 5 epochs, lr=2e-5 (encoder) / 2e-4 (heads), batch_size=16
-- **Optimizer**: AdamW with linear warmup scheduler
-- **Hardware**: NVIDIA RTX 2070 8GB VRAM
-- **Model size**: ~541MB (PyTorch state dict)
+- **Fine-tuned on**: 11,507 train / 2,877 validation (from 14,384 total)
+- **Training**: 5 epochs, lr=2e-5 (encoder) / 2e-4 (heads), batch_size=16, gradient accumulation (effective batch 32)
+- **Optimizer**: AdamW with cosine annealing and warm restarts
+- **Regularization**: Focal loss for class imbalance, uncertainty-weighted multi-task loss, early stopping
+- **Hardware**: NVIDIA RTX 2070 8GB VRAM, mixed precision (FP16)
+- **Model size**: ~1.1GB (PyTorch state dict)
 
 ### Training history
 
@@ -77,6 +78,8 @@ results = predict_batch(["best gila", "teruk la", "ok je"])
 | 3 | 0.462 | 0.441 | 86.1% | 78.2% | 92.1% | 85.5% |
 | 4 | 0.316 | 0.390 | 87.4% | 82.8% | 94.4% | 88.2% |
 | **5** | **0.243** | **0.375** | **88.5%** | **83.6%** | **94.5%** | **88.9%** |
+
+> **v3.2.0** (XLM-Roberta, 14,384 examples): Sentiment 95.0%, Emotion 90.3%, Intent 97.5%, Avg 94.3%
 
 ### Download from HuggingFace
 
@@ -111,19 +114,21 @@ emotion = detect_emotion("sedih doh tak dapat tiket")
 
 ### Comparison with previous model
 
-| | v3.0.0 (561 examples) | v3.1.0 (7,884 examples) |
-|---|---|---|
-| Sentiment | 69% | **88.5%** |
-| Emotion | 63% | **83.6%** |
-| Intent | 69% | **94.5%** |
-| Average | 67% | **88.9%** |
-| Tasks | Single (sentiment) | Multi-task (3 tasks) |
+| | v3.0.0 (561 examples) | v3.1.0 (7,884 examples) | v3.2.0 (14,384 examples) |
+|---|---|---|---|
+| Sentiment | 69% | 88.5% | **95.0%** |
+| Emotion | 63% | 83.6% | **90.3%** |
+| Intent | 69% | 94.5% | **97.5%** |
+| Average | 67% | 88.9% | **94.3%** |
+| Base model | DistilBERT | DistilBERT | XLM-Roberta |
+| Tasks | Single (sentiment) | Multi-task (3 tasks) | Multi-task (3 tasks) |
 
 ### Comparison with other models
 
 | Model | Accuracy | Notes |
 |-------|---------|-------|
-| `manglish-finetuned` v3.1.0 | **88.9%** | Multi-task, best for Manglish |
+| `manglish-finetuned` v3.2.0 | **94.3%** | XLM-Roberta multi-task, best for Manglish |
+| `manglish-finetuned` v3.1.0 | 88.9% | DistilBERT multi-task |
 | Mesolitica NanoT5 (tiny) | 86.1% | Malay-only base |
 | huseinzol05 sentiment | 84.7% | Broader Malay coverage |
 | DistilBERT multilingual (zero-shot) | 62.3% | No fine-tuning |
@@ -137,7 +142,7 @@ Models are stored locally or downloaded from HuggingFace:
 ```
 ~/.agents/skills/manglish-nlp/malaysian_manglish_nlp/resources/
 ├── manglish_finetuned/
-│   ├── model.pt          # 541MB
+│   ├── model.pt          # 1.1GB
 │   ├── config.json
 │   ├── tokenizer.json
 │   └── tokenizer_config.json
@@ -155,7 +160,7 @@ Models are stored locally or downloaded from HuggingFace:
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2026},
-  version = {3.1.0},
+  version = {3.2.0},
   url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```
