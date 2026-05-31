@@ -59,9 +59,9 @@ print(lang)
 
 | | Link |
 |---|---|
-| 🤗 Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
-| 🤗 Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 14,384 labeled Manglish examples |
-| 🤗 Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 14,384 labeled Manglish examples |
+| Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
 
 ## Features
 
