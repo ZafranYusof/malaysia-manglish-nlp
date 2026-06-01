@@ -1,6 +1,8 @@
 """Malaysian dialect detection and normalization.
 
-Supports: Standard BM, Kelantanese, Terengganu, Negeri Sembilan, Kedah, Sarawak.
+Supports all 13 Malaysian states + 3 federal territories:
+Standard BM, Kelantanese, Terengganu, Negeri Sembilan, Kedah, Sabah, Sarawak,
+Penang, Perak, Johor, Pahang, Melaka, Perlis.
 """
 
 from __future__ import annotations
@@ -117,6 +119,162 @@ _DIALECTS = {
             'kelaka': 'lawak',
         },
     },
+    'penang': {
+        'markers': {
+            'lu', 'gua', 'lu orang', 'gua orang', 'cun', 'kasi',
+            'tau', 'macam mana', 'mana', 'apa hal', 'buat apa',
+            'hokkien', 'char koay teow', 'laksa penang', 'rojak',
+            'lorong', 'kopitiam', 'mamak', 'teh tarik',
+            'siam', 'sini mau', 'macam tu', 'macam ni',
+            'boleh tahan', 'tak payah', 'tak mau', 'sudah',
+            'jangan buat', 'kasi habis', 'kasi cepat',
+            'chup', 'choy', 'aiyah', 'aiyoh', 'walao',
+        },
+        'patterns': [
+            r'\b(lu|gua)\b',
+            r'\b(aiyah|aiyoh|walao|choy)\b',
+        ],
+        'normalize': {
+            'lu': 'kamu', 'gua': 'saya', 'cun': 'cantik',
+            'kasi': 'beri', 'tak mau': 'tak nak',
+            'aiyah': 'alamak', 'aiyoh': 'alamak', 'walao': 'alamak',
+            'chup': 'tunggu', 'choy': 'bodoh',
+        },
+    },
+    'perak': {
+        'markers': {
+            'kome', 'mike', 'meghang', 'meghoyak', 'meke',
+            'meghi', 'mege', 'mase', 'meghaso',
+            'pekena', 'kena', 'meghacun', 'meghejek',
+            'meghepek', 'meghelik', 'meghelap', 'meghoyan',
+            'taiping', 'ipoh', 'kuala kangsar', 'manjung',
+            'batu gajah', 'teluk intan', 'bagan datuk',
+            'meghagam', 'meghamun', 'meghajok', 'meghaso',
+            'megey', 'megheleh', 'meghelat',
+            'orang perak', 'loghat perak',
+        },
+        'patterns': [
+            r'\bmegh\w+',  # megh- prefix (meghang, meghe, meghi, mege)
+            r'\bmeke\b',
+            r'\bmase\b',
+        ],
+        'normalize': {
+            'kome': 'kamu', 'mike': 'kamu', 'meghang': 'makan',
+            'meghoyak': 'cakap', 'meke': 'makan',
+            'meghi': 'mari', 'mege': 'pergi', 'mase': 'mana',
+            'meghaso': 'rasa', 'meghacun': 'racun',
+            'meghejek': 'ejek', 'meghepek': 'empal',
+            'meghelik': 'elik', 'meghelap': 'gelap',
+            'meghoyan': 'gila', 'meghagam': 'racun',
+            'meghamun': 'hamun', 'meghajok': 'hajok',
+            'megey': 'pergi', 'megheleh': 'leceh',
+            'meghelat': 'lat',
+        },
+    },
+    'johor': {
+        'markers': {
+            'kite orang', 'kite', 'die orang', 'die',
+            'saye', 'awak', 'bende', 'ghase',
+            'nak kabo', 'kabo', 'gheh', 'gheti',
+            'gheghak', 'gheti', 'kame',
+            'makan angin', 'jalan-jalan',
+            'muo', 'seghab', 'seghabut',
+            'tanye', 'bawak', 'tido',
+            'johor bahru', 'jb', 'masai', 'skudai',
+        },
+        'patterns': [
+            r'\b(gh|ghe)\w+',  # gh- prefix (ghase, gheti, gheghak)
+            r'\w+e\b',  # final -e (Riau-Johor influence: saye, kite, bende)
+        ],
+        'normalize': {
+            'kite': 'kita', 'die': 'dia', 'saye': 'saya',
+            'bende': 'benda', 'ghase': 'rasa', 'kabo': 'beritahu',
+            'gheh': 'tak', 'gheti': 'retak', 'gheghak': 'gerak',
+            'kame': 'kami', 'tanye': 'tanya', 'tido': 'tidur',
+            'muo': 'muara', 'seghab': 'serabut',
+            'seghabut': 'serabut',
+        },
+    },
+    'pahang': {
+        'markers': {
+            'koi', 'awok', 'aok', 'kamu',
+            'ghase', 'kabo', 'meghe', 'meghi',
+            'makan angin', 'geli', 'gheti',
+            'mangge', 'magge', 'nange',
+            'kua', 'kuale', 'kuantan', 'pekan',
+            'temerloh', 'raub', 'bentong', 'lipis',
+            'patin', 'tempoyak', 'gulai',
+            'gheti', 'kaghau', 'naghi',
+        },
+        'patterns': [
+            r'\b(gh)\w+',  # gh- prefix (similar to Johor but different words)
+            r'\bmangg?e\b',  # mangge/magge pattern
+        ],
+        'normalize': {
+            'koi': 'saya', 'awok': 'kamu', 'aok': 'kamu',
+            'ghase': 'rasa', 'kabo': 'beritahu',
+            'meghe': 'pergi', 'meghi': 'mari',
+            'mangge': 'makan', 'magge': 'makan',
+            'nange': 'mana', 'kua': 'keluar',
+            'kuale': 'kuala', 'kaghau': 'kacau',
+            'naghi': 'negeri', 'gheti': 'retak',
+        },
+    },
+    'melaka': {
+        'markers': {
+            'nyonya', 'baba', 'peranakan', 'kristang',
+            'cincalok', 'belacan melaka', 'asam pedas melaka',
+            'melaka', 'bandar hilir', 'jongker', 'jonker',
+            'portugis', 'geragau', 'kampung portugis',
+            'taming sari', 'menara taming', 'keris',
+            'debus', 'kuda kepang', 'dondang sayang',
+            'panglima awang', 'hang tuah', 'hang Jebat',
+            'sambal belacan', 'cencalok', 'budu',
+            'tempoyak', 'asam pedas', 'gulai lemak',
+            'saye', 'kite', 'die', 'bende',
+            'ghase', 'kabo', 'gheh',
+        },
+        'patterns': [
+            r'\b(nyonya|baba|peranakan|kristang|debus|kuda kepang|dondang)\b',
+            r'\b(hang tuah|hang jebat|panglima awang|taming sari)\b',
+            r'\b(cincalok|cencalok|geragau)\b',
+        ],
+        'normalize': {
+            'saye': 'saya', 'kite': 'kita', 'die': 'dia',
+            'bende': 'benda', 'ghase': 'rasa', 'kabo': 'beritahu',
+            'gheh': 'tak',
+        },
+    },
+    'perlis': {
+        'markers': {
+            'peliaq', 'kemaih', 'ketegaq', 'harumanis',
+            'kangar', 'arau', 'padang besar', 'chuping',
+            'gua kelam', 'tasik melati', 'wang kelian',
+            'perlis', 'orang perlis',
+            'pulut harumanis', 'mangga harumanis',
+            'tebu', 'padi', 'jelapang',
+            'peliaq', 'pikiaq', 'habaq', 'loqlaq',
+            'cemuih', 'pulon', 'ghasa', 'dok',
+            'hang', 'depa', 'awat', 'pasai', 'mai',
+            'hampa', 'satgi', 'toksah', 'takdak',
+        },
+        'patterns': [
+            r'\b(peliaq|kemaih|ketegaq|harumanis)\b',
+            r'\b(kangar|arau|padang besar|chuping|wang kelian)\b',
+            r'\b(gua kelam|tasik melati)\b',
+        ],
+        'normalize': {
+            'peliaq': 'pelik', 'kemaih': 'kemas',
+            'ketegaq': 'degil', 'harumanis': 'mangga harumanis',
+            'hang': 'kamu', 'depa': 'mereka', 'awat': 'kenapa',
+            'pasai': 'pasal', 'mai': 'mari', 'pi': 'pergi',
+            'hampa': 'kamu semua', 'satgi': 'nanti',
+            'toksah': 'tak payah', 'takdak': 'takde',
+            'pikiaq': 'fikir', 'habaq': 'beritahu',
+            'loqlaq': 'lawak', 'cemuih': 'jijik',
+            'pulon': 'pula', 'ghasa': 'rasa',
+        },
+    },
 }
 
 
@@ -144,17 +302,24 @@ def detect_dialect(text: str) -> Dict[str, Any]:
     lower = text.lower()
     words = set(re.findall(r'[a-zA-Z]+', lower))
     
+    # Precompute marker uniqueness (how many dialects share each marker)
+    marker_counts: Dict[str, int] = {}
+    for data in _DIALECTS.values():
+        for m in data['markers']:
+            marker_counts[m] = marker_counts.get(m, 0) + 1
+    
     scores = {}
     markers_found = {}
     
     for dialect, data in _DIALECTS.items():
         matched = words & data['markers']
-        score = len(matched)
+        # Weight: unique markers score higher (1/num_dialects_sharing)
+        score = sum(1.0 / max(marker_counts.get(m, 1), 1) * 2.0 for m in matched)
         
-        # Pattern matching
+        # Pattern matching (bonus)
         for pattern in data.get('patterns', []):
             matches = re.findall(pattern, lower)
-            score += len(matches) * 0.3
+            score += len(matches) * 0.5
         
         scores[dialect] = score
         if matched:
@@ -163,7 +328,7 @@ def detect_dialect(text: str) -> Dict[str, Any]:
     # Determine result
     max_score = max(scores.values()) if scores else 0
     
-    if max_score < 1:
+    if max_score < 0.5:
         return {
             'dialect': 'standard',
             'confidence': 1.0,
@@ -173,7 +338,7 @@ def detect_dialect(text: str) -> Dict[str, Any]:
     
     best_dialect = max(scores, key=scores.get)
     total_words = len(words) if words else 1
-    confidence = min(0.95, max_score / max(total_words * 0.3, 1))
+    confidence = min(0.95, max_score / max(total_words * 0.2, 1))
     
     return {
         'dialect': best_dialect,
@@ -259,3 +424,59 @@ def available_dialects() -> List[str]:
         list[str]: Available dialect names.
     """
     return list(_DIALECTS.keys())
+
+# Dialect metadata for display/documentation
+_DIALECT_INFO = {
+    'kelantan': {'state': 'Kelantan', 'region': 'Pantai Timur', 'family': 'Malay'},
+    'terengganu': {'state': 'Terengganu', 'region': 'Pantai Timur', 'family': 'Malay'},
+    'pahang': {'state': 'Pahang', 'region': 'Pantai Timur', 'family': 'Malay'},
+    'negeri_sembilan': {'state': 'Negeri Sembilan', 'region': 'Pantai Barat', 'family': 'Minangkabau'},
+    'kedah': {'state': 'Kedah', 'region': 'Utara', 'family': 'Malay'},
+    'perlis': {'state': 'Perlis', 'region': 'Utara', 'family': 'Malay'},
+    'penang': {'state': 'Pulau Pinang', 'region': 'Utara', 'family': 'Malay/Hokkien'},
+    'perak': {'state': 'Perak', 'region': 'Utara', 'family': 'Malay'},
+    'johor': {'state': 'Johor', 'region': 'Selatan', 'family': 'Riau-Johor'},
+    'melaka': {'state': 'Melaka', 'region': 'Selatan', 'family': 'Riau-Melaka'},
+    'sabah': {'state': 'Sabah', 'region': 'Borneo', 'family': 'Sabah Malay'},
+    'sarawak': {'state': 'Sarawak', 'region': 'Borneo', 'family': 'Sarawak Malay'},
+}
+
+def get_dialect_metadata(dialect: str = None) -> Dict[str, Any]:
+    """Get dialect metadata.
+    
+    Args:
+        dialect: Specific dialect name, or None for all.
+    
+    Returns:
+        dict: Dialect metadata (state, region, language family).
+    
+    Example:
+        >>> get_dialect_metadata('kelantan')
+        {'state': 'Kelantan', 'region': 'Pantai Timur', 'family': 'Malay'}
+    """
+    if dialect:
+        return _DIALECT_INFO.get(dialect, {'error': f'Unknown dialect: {dialect}'})
+    return dict(_DIALECT_INFO)
+
+def get_dialects_by_region(region: str) -> List[str]:
+    """Get dialects belonging to a region.
+    
+    Args:
+        region: Region name (Utara, Pantai Timur, Pantai Barat, Selatan, Borneo).
+    
+    Returns:
+        list[str]: Dialect names in that region.
+    
+    Example:
+        >>> get_dialects_by_region('Utara')
+        ['kedah', 'perlis', 'penang', 'perak']
+    """
+    return [d for d, info in _DIALECT_INFO.items() if info['region'] == region]
+
+def get_all_regions() -> List[str]:
+    """Get all available regions.
+    
+    Returns:
+        list[str]: Region names.
+    """
+    return list(set(info['region'] for info in _DIALECT_INFO.values()))

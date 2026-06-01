@@ -65,7 +65,10 @@ from malaysian_manglish_nlp.normalizer import (
 )
 from malaysian_manglish_nlp.emotion import detect_emotion, detect_emotions_batch, emotion_summary
 from malaysian_manglish_nlp.profanity import detect_profanity, censor, is_safe
-from malaysian_manglish_nlp.dialect import detect_dialect, normalize_dialect, available_dialects
+from malaysian_manglish_nlp.dialect import (
+    detect_dialect, normalize_dialect, available_dialects,
+    get_dialect_metadata, get_dialects_by_region, get_all_regions,
+)
 from malaysian_manglish_nlp.sarcasm import detect_sarcasm
 from malaysian_manglish_nlp.contextual_spelling import correct_contextual
 from malaysian_manglish_nlp.dependency import parse_dependencies, extract_svo, get_verb_frame
