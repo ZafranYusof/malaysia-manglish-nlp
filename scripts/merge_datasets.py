@@ -1,40 +1,32 @@
 """
-Merge ALL Manglish NLP datasets into one clean dataset with train/test split.
+Merge auto-labeled real Malaysian texts with existing augmented dataset.
 
-Sources merged:
-  - manglish_labeled.jsonl (v1 original)
-  - manglish_labeled_v2.jsonl (v2 original)
-  - manglish_labeled_v3.jsonl (augmented)
-  - manglish_auto_labeled.jsonl (auto-labeled from scraped data)
+Combines:
+  - datasets/real_malaysian_labeled.jsonl (auto-labeled from label_data.py)
+  - datasets/manglish_augmented.jsonl (existing augmented training data)
 
 Features:
-  - Text deduplication (exact + near-duplicate via normalized text)
-  - Label conflict resolution (human > auto > augmented priority)
-  - Stratified 80/20 train/test split
-  - Comprehensive statistics output
+  - Exact + near-duplicate deduplication
+  - Preserves all label fields from both sources
+  - Outputs merged dataset for retraining
 
 Usage:
     python scripts/merge_datasets.py
-    python scripts/merge_datasets.py --output datasets/manglish_full.jsonl
-    python scripts/merge_datasets.py --test-ratio 0.15 --seed 123
+    python scripts/merge_datasets.py --output datasets/custom_merged.jsonl
 """
 
 import json
 import re
-import random
 import argparse
 from pathlib import Path
-from collections import Counter, defaultdict
+from collections import Counter
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DATASETS_DIR = PROJECT_ROOT / "datasets"
 
 
-# ---------------------------------------------------------------------------
-# I/O
-# ---------------------------------------------------------------------------
-
 def load_jsonl(filepath: Path) -> list[dict]:
+    """Load JSONL file. Returns empty list if file doesn't exist."""
     data = []
     if not filepath.exists():
         return data
@@ -47,21 +39,18 @@ def load_jsonl(filepath: Path) -> list[dict]:
 
 
 def save_jsonl(data: list[dict], filepath: Path):
+    """Save data to JSONL file."""
     filepath.parent.mkdir(parents=True, exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         for item in data:
             f.write(json.dumps(item, ensure_ascii=False) + "\n")
 
 
-# ---------------------------------------------------------------------------
-# Deduplication
-# ---------------------------------------------------------------------------
-
-def normalize_for_dedup(text: str) -> str:
+def normalize_text(text: str) -> str:
     """Normalize text for near-duplicate detection."""
     t = text.lower().strip()
     # Remove emojis
-    emoji_pattern = re.compile(
+    emoji_re = re.compile(
         "["
         "\U0001F600-\U0001F64F"
         "\U0001F300-\U0001F5FF"
@@ -73,38 +62,29 @@ def normalize_for_dedup(text: str) -> str:
         "\U0001FA00-\U0001FA6F"
         "\U0001FA70-\U0001FAFF"
         "]+", flags=re.UNICODE)
-    t = emoji_pattern.sub("", t)
+    t = emoji_re.sub("", t)
     # Normalize whitespace
     t = re.sub(r"\s+", " ", t).strip()
-    # Remove common particles for dedup comparison
-    particles = {"lah", "la", "wei", "weh", "eh", "kan", "ni", "tu", "bro", "dude"}
+    # Remove filler particles for comparison
+    particles = {"lah", "la", "wei", "weh", "eh", "kan", "ni", "tu", "bro", "dude", "ar", "lor"}
     words = [w for w in t.split() if w not in particles]
     return " ".join(words)
 
 
 def deduplicate(items: list[dict]) -> tuple[list[dict], int]:
-    """Deduplicate by exact text + normalized near-duplicate.
+    """Deduplicate by exact text match + normalized near-duplicate.
 
-    Priority for keeping: human > auto_high_confidence > augmented > needs_review
+    Priority: human-labeled (no auto_labeled flag) > auto-labeled.
+    Returns (unique_items, duplicate_count).
     """
-    # Priority order (lower = higher priority = keep)
-    PRIORITY = {
-        "human": 0,
-        None: 0,  # Original data has no label_source
-        "auto_high_confidence": 1,
-        "augmented": 2,
-        "needs_review": 3,
-    }
+    # Sort: human/original first, then auto-labeled
+    def priority(item):
+        return 1 if item.get("auto_labeled") else 0
 
-    def get_priority(item):
-        source = item.get("label_source")
-        return PRIORITY.get(source, 2)
-
-    # Sort by priority first (keep higher priority items)
-    items_sorted = sorted(items, key=get_priority)
+    items_sorted = sorted(items, key=priority)
 
     seen_exact = set()
-    seen_normalized = {}
+    seen_norm = {}
     unique = []
     dupes = 0
 
@@ -114,234 +94,131 @@ def deduplicate(items: list[dict]) -> tuple[list[dict], int]:
             dupes += 1
             continue
 
-        # Exact dedup
+        # Exact match
         if text in seen_exact:
             dupes += 1
             continue
 
-        # Near-duplicate via normalized text
-        norm = normalize_for_dedup(text)
-        if norm in seen_normalized:
-            # Keep the higher priority one (already sorted, so first seen wins)
+        # Near-duplicate
+        norm = normalize_text(text)
+        if norm in seen_norm:
             dupes += 1
             continue
 
         seen_exact.add(text)
-        seen_normalized[norm] = len(unique)
+        seen_norm[norm] = True
         unique.append(item)
 
     return unique, dupes
 
 
-# ---------------------------------------------------------------------------
-# Label conflict resolution
-# ---------------------------------------------------------------------------
+def merge_datasets(
+    real_labeled_path: Path,
+    augmented_path: Path,
+) -> tuple[list[dict], dict]:
+    """Merge two datasets, deduplicate, return result + stats."""
+    stats = {}
 
-def resolve_conflicts(items: list[dict]) -> list[dict]:
-    """Resolve label conflicts when same text has different labels.
+    # Load
+    real_data = load_jsonl(real_labeled_path)
+    aug_data = load_jsonl(augmented_path)
 
-    Priority: human > auto_high_confidence > augmented
-    For augmented data with flipped labels (negation flip), trust the augmentation.
-    """
-    text_map = defaultdict(list)
-    for item in items:
-        text = item.get("text", "").strip()
-        text_map[text].append(item)
+    stats["real_labeled"] = len(real_data)
+    stats["augmented"] = len(aug_data)
+    stats["total_loaded"] = len(real_data) + len(aug_data)
 
-    resolved = []
-    conflicts = 0
+    print(f"  real_malaysian_labeled.jsonl:  {len(real_data)} examples")
+    print(f"  manglish_augmented.jsonl:      {len(aug_data)} examples")
+    print(f"  Total loaded:                  {stats['total_loaded']}")
 
-    for text, group in text_map.items():
-        if len(group) == 1:
-            resolved.append(group[0])
-            continue
+    # Combine
+    combined = real_data + aug_data
 
-        conflicts += 1
-        # Sort by priority and keep best
-        PRIORITY = {"human": 0, None: 0, "auto_high_confidence": 1, "augmented": 2}
-        group.sort(key=lambda x: PRIORITY.get(x.get("label_source"), 2))
-        best = group[0].copy()
-        best["conflict_resolved"] = True
-        best["conflict_count"] = len(group)
-        resolved.append(best)
+    # Deduplicate
+    unique, dupes = deduplicate(combined)
+    stats["duplicates_removed"] = dupes
+    stats["final_count"] = len(unique)
 
-    return resolved
+    print(f"\n  Duplicates removed: {dupes}")
+    print(f"  Final count:        {len(unique)}")
 
+    return unique, stats
 
-# ---------------------------------------------------------------------------
-# Stratified train/test split
-# ---------------------------------------------------------------------------
-
-def stratified_split(items: list[dict], test_ratio: float = 0.2, seed: int = 42) -> tuple[list[dict], list[dict]]:
-    """Stratified split by sentiment (primary) and topic (secondary).
-
-    Ensures proportional representation of labels in both splits.
-    """
-    random.seed(seed)
-
-    # Group by (sentiment, topic) strata
-    strata = defaultdict(list)
-    for item in items:
-        sentiment = item.get("sentiment", "neutral")
-        topic = item.get("topic", "daily_life")
-        strata[(sentiment, topic)].append(item)
-
-    train = []
-    test = []
-
-    for key, group in strata.items():
-        random.shuffle(group)
-        n_test = max(1, int(len(group) * test_ratio))
-        test.extend(group[:n_test])
-        train.extend(group[n_test:])
-
-    # Shuffle final sets
-    random.shuffle(train)
-    random.shuffle(test)
-
-    return train, test
-
-
-# ---------------------------------------------------------------------------
-# Statistics
-# ---------------------------------------------------------------------------
-
-def print_stats(data: list[dict], label: str = ""):
-    """Print comprehensive dataset statistics."""
-    prefix = f" ({label})" if label else ""
-    print(f"\n{'=' * 60}")
-    print(f"DATASET STATISTICS{prefix}")
-    print(f"{'=' * 60}")
-    print(f"\nTotal examples: {len(data)}")
-
-    # Label distributions
-    for field in ["sentiment", "emotion", "intent", "topic", "dialect", "language"]:
-        values = [item.get(field) for item in data if item.get(field)]
-        if values:
-            counter = Counter(values)
-            print(f"\n{field.upper()} ({len(values)} labeled):")
-            for lbl, count in counter.most_common():
-                pct = count / len(values) * 100
-                bar = "#" * int(pct / 2)
-                print(f"  {lbl:20s} {count:5d} ({pct:5.1f}%) {bar}")
-
-    # Source breakdown
-    sources = Counter()
-    for item in data:
-        src = item.get("label_source", "original")
-        sources[src] += 1
-    print(f"\nSOURCE BREAKDOWN:")
-    for src, count in sources.most_common():
-        print(f"  {src:25s} {count:5d}")
-
-    # Code-switch stats
-    cs_count = sum(1 for item in data if item.get("is_code_switch"))
-    print(f"\nCode-switched: {cs_count} ({cs_count/max(len(data),1)*100:.1f}%)")
-
-    # Text length stats
-    lengths = [len(item.get("text", "")) for item in data]
-    if lengths:
-        print(f"\nTEXT LENGTH:")
-        print(f"  Min: {min(lengths)}")
-        print(f"  Max: {max(lengths)}")
-        print(f"  Avg: {sum(lengths)//len(lengths)}")
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Merge ALL Manglish NLP datasets into one clean dataset"
+        description="Merge auto-labeled real data with augmented dataset"
     )
-    parser.add_argument("--output", type=str,
-                        default=str(DATASETS_DIR / "manglish_full.jsonl"),
-                        help="Output path for merged dataset")
-    parser.add_argument("--test-ratio", type=float, default=0.2,
-                        help="Test set ratio (default: 0.2)")
-    parser.add_argument("--seed", type=int, default=42,
-                        help="Random seed for split")
+    parser.add_argument(
+        "--real", type=str,
+        default=str(DATASETS_DIR / "real_malaysian_labeled.jsonl"),
+        help="Auto-labeled real data (default: datasets/real_malaysian_labeled.jsonl)",
+    )
+    parser.add_argument(
+        "--augmented", type=str,
+        default=str(DATASETS_DIR / "manglish_augmented.jsonl"),
+        help="Augmented dataset (default: datasets/manglish_augmented.jsonl)",
+    )
+    parser.add_argument(
+        "--output", type=str,
+        default=str(DATASETS_DIR / "manglish_merged.jsonl"),
+        help="Output merged dataset (default: datasets/manglish_merged.jsonl)",
+    )
     args = parser.parse_args()
 
+    real_path = Path(args.real)
+    aug_path = Path(args.augmented)
     output_path = Path(args.output)
-    train_path = output_path.with_name(output_path.stem + "_train" + output_path.suffix)
-    test_path = output_path.with_name(output_path.stem + "_test" + output_path.suffix)
 
-    # Define all input sources with priority
-    sources = {
-        "v1 (original)": DATASETS_DIR / "manglish_labeled.jsonl",
-        "v2 (original)": DATASETS_DIR / "manglish_labeled_v2.jsonl",
-        "v3 (augmented)": DATASETS_DIR / "manglish_labeled_v3.jsonl",
-        "auto-labeled": DATASETS_DIR / "manglish_auto_labeled.jsonl",
-    }
+    # Check inputs exist
+    missing = []
+    if not real_path.exists():
+        missing.append(str(real_path))
+    if not aug_path.exists():
+        missing.append(str(aug_path))
 
-    all_data = []
-    source_counts = {}
-
-    print("Loading datasets...")
-    for name, path in sources.items():
-        data = load_jsonl(path)
-        if data:
-            source_counts[name] = len(data)
-            print(f"  {name:25s} {len(data):5d} examples from {path.name}")
-            all_data.extend(data)
-        else:
-            print(f"  {name:25s} (not found or empty: {path.name})")
-
-    if not all_data:
-        print("\nERROR: No data found in any source!")
+    if missing:
+        print("ERROR: Missing input files:")
+        for m in missing:
+            print(f"  {m}")
+        print("\nRun label_data.py first to generate real_malaysian_labeled.jsonl")
         return
 
-    print(f"\nTotal loaded: {len(all_data)} examples")
+    print("Merging datasets...")
+    print()
 
-    # Step 1: Resolve conflicts
-    print("\nResolving label conflicts...")
-    resolved = resolve_conflicts(all_data)
-    print(f"  After conflict resolution: {len(resolved)} (resolved {len(all_data) - len(resolved)} conflicts)")
+    merged, stats = merge_datasets(real_path, aug_path)
 
-    # Step 2: Deduplicate
-    print("\nDeduplicating...")
-    unique, dupes = deduplicate(resolved)
-    print(f"  After dedup: {len(unique)} (removed {dupes} duplicates)")
+    # Save
+    save_jsonl(merged, output_path)
 
-    # Step 3: Filter out very short texts
-    before_filter = len(unique)
-    unique = [item for item in unique if len(item.get("text", "")) >= 5]
-    print(f"  After length filter: {len(unique)} (removed {before_filter - len(unique)} short texts)")
+    # Final summary
+    print(f"\n{'=' * 50}")
+    print("MERGE COMPLETE")
+    print(f"{'=' * 50}")
+    print(f"  Real labeled:     {stats['real_labeled']}")
+    print(f"  Augmented:        {stats['augmented']}")
+    print(f"  Duplicates:       -{stats['duplicates_removed']}")
+    print(f"  Final count:      {stats['final_count']}")
+    print(f"  Output:           {output_path}")
 
-    # Step 4: Stratified train/test split
-    print(f"\nSplitting (test_ratio={args.test_ratio}, seed={args.seed})...")
-    train, test = stratified_split(unique, test_ratio=args.test_ratio, seed=args.seed)
-    print(f"  Train: {len(train)}")
-    print(f"  Test:  {len(test)}")
+    # Label distribution summary
+    if merged:
+        print(f"\n{'-' * 50}")
+        print("SENTIMENT DISTRIBUTION")
+        print(f"{'-' * 50}")
+        sentiments = [it.get("sentiment", "unknown") for it in merged]
+        for label, count in Counter(sentiments).most_common():
+            pct = count / len(sentiments) * 100
+            bar = "#" * int(pct / 2)
+            print(f"  {label:15s} {count:5d} ({pct:5.1f}%) {bar}")
 
-    # Step 5: Save
-    save_jsonl(unique, output_path)
-    save_jsonl(train, train_path)
-    save_jsonl(test, test_path)
-
-    print(f"\nOutput files:")
-    print(f"  Full:  {output_path}")
-    print(f"  Train: {train_path}")
-    print(f"  Test:  {test_path}")
-
-    # Print stats
-    print_stats(unique, "MERGED FULL")
-    print_stats(train, "TRAIN")
-    print_stats(test, "TEST")
-
-    # Verify split quality
-    print(f"\n{'=' * 60}")
-    print("SPLIT QUALITY CHECK")
-    print(f"{'=' * 60}")
-    train_sent = Counter(item.get("sentiment") for item in train)
-    test_sent = Counter(item.get("sentiment") for item in test)
-    print(f"\nSentiment distribution comparison:")
-    for label in ["positive", "negative", "neutral"]:
-        tr_pct = train_sent.get(label, 0) / max(len(train), 1) * 100
-        te_pct = test_sent.get(label, 0) / max(len(test), 1) * 100
-        print(f"  {label:12s}  train: {tr_pct:5.1f}%  test: {te_pct:5.1f}%")
+        # Source breakdown
+        auto_count = sum(1 for it in merged if it.get("auto_labeled"))
+        human_count = len(merged) - auto_count
+        print(f"\nSOURCE:")
+        print(f"  Human/augmented:  {human_count}")
+        print(f"  Auto-labeled:     {auto_count}")
 
     print("\nDone!")
 
