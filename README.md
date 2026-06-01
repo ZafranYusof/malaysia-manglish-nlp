@@ -8,7 +8,7 @@
 [![Demo](https://img.shields.io/badge/🤗-Space-yellow)](https://huggingface.co/spaces/vexccz/manglish-nlp-demo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Full NLP toolkit for Malaysian Manglish — 54 modules, zero dependencies for core.**
+**Full NLP toolkit for Malaysian Manglish — 51 modules, zero dependencies for core.**
 
 Built for real-world Malaysian text: social media, news, chat messages, code-switched Malay-English content.
 
@@ -53,38 +53,15 @@ print(entities)
 lang = detect_language("Eh jom makan, I'm hungry gila")
 print(lang)
 # {'language': 'manglish', 'confidence': 0.87}
-
-# Aspect-based sentiment (v3.3.0)
-result = malaysian_manglish_nlp.analyze_aspect_sentiment("makanan sedap tapi service teruk", domain="restaurant")
-# {'aspects': [{'aspect': 'food', 'sentiment': 'positive', ...}, {'aspect': 'service', 'sentiment': 'negative', ...}], ...}
-
-# Multi-label emotion (v3.3.0)
-result = malaysian_manglish_nlp.detect_multi_emotion("sedih tapi grateful dapat jumpa family")
-# {'emotions': [{'emotion': 'happy', 'confidence': 0.6}, {'emotion': 'sad', 'confidence': 0.4}], 'dominant': 'happy', 'is_multi': True}
-
-# Feedback loop (v3.3.0)
-from malaysian_manglish_nlp.feedback import submit_correction
-submit_correction("text here", "sentiment", "positive", "negative")
-
-# WebSocket streaming (v3.3.0)
-import asyncio, websockets, json
-async def stream():
-    async with websockets.connect("ws://localhost:8000/ws/analyze") as ws:
-        await ws.send(json.dumps({"text": "best gila movie ni", "modules": ["sentiment", "emotion"]}))
-        async for msg in ws:
-            data = json.loads(msg)
-            if data.get("type") == "complete": break
-            print(data)
-asyncio.run(stream())
 ```
 
 ## HuggingFace
 
 | | Link |
 |---|---|
-| 🤗 Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — XLM-Roberta multi-task (sentiment 98.0%, emotion 96.5%, intent 99.3%) |
-| 🤗 Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 28,263 labeled Manglish examples |
-| 🤗 Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) — XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) — 14,384 labeled Manglish examples |
+| Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) — Gradio interactive demo (7 tabs) |
 
 ## Features
 
@@ -152,7 +129,7 @@ asyncio.run(stream())
 
 ## Fine-Tuned Model
 
-An XLM-Roberta multi-task model fine-tuned on **28,263 labeled Manglish examples** for sentiment, emotion, and intent classification.
+An XLM-Roberta multi-task model fine-tuned on **14,384 labeled Manglish examples** for sentiment, emotion, and intent classification.
 
 ```python
 from malaysian_manglish_nlp.transformers.manglish_model import load_model, predict
@@ -166,10 +143,10 @@ result = predict("gila best servis ni")
 
 | Task | Accuracy | Classes |
 |------|----------|----------|
-| Sentiment | 98.0% | positive, negative, neutral |
-| Emotion | 96.5% | happy, sad, angry, fear, surprise, disgust, love, neutral |
-| Intent | 99.3% | question, statement, request, complaint, greeting, opinion, command, offer |
-| **Average** | **97.9%** | — |
+| Sentiment | 95.0% | positive, negative, neutral |
+| Emotion | 90.3% | happy, sad, angry, fear, surprise, disgust, love, neutral |
+| Intent | 97.5% | question, statement, request, complaint, greeting, opinion, command, offer |
+| **Average** | **94.3%** | — |
 
 Model: [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) on HuggingFace. Requires `pip install malaysian-manglish-nlp[transformers]`.
 
@@ -189,7 +166,7 @@ Model: [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nl
 | Core dependencies | None | TensorFlow/PyTorch required |
 | Import time | <0.5s | 10-30s |
 | Manglish-first | Built for informal MY text | Formal BM focus |
-| Modules | 54 | ~40 |
+| Modules | 51 | ~40 |
 | Throughput | 23k+ texts/sec | Varies (GPU recommended) |
 | Python support | 3.8-3.12 | 3.8+ |
 | Aspect sentiment | ✅ | ❌ |
@@ -249,15 +226,6 @@ Endpoints:
 - `POST /pos` — POS tags
 - `POST /summarize` — Summarize text
 - `POST /batch` — Batch process multiple texts
-- `POST /batch/async` — Async batch with job tracking
-- `GET /batch/status/{id}` — Check async batch progress
-- `DELETE /batch/cancel/{id}` — Cancel async batch job
-- `POST /aspect-sentiment` — Aspect-based sentiment analysis
-- `POST /multi-emotion` — Multi-label emotion detection
-- `POST /feedback` — Submit user correction
-- `GET /feedback/stats` — Feedback statistics
-- `GET /active-learning/uncertain` — Uncertain samples for active learning
-- `WS /ws/analyze` — WebSocket streaming analysis
 - `GET /health` — Health check
 - `GET /modules` — List available modules
 
@@ -282,7 +250,7 @@ RUN_HEAVY_TESTS=1 python -m pytest tests/test_word_embeddings.py -v
 Full documentation available at [manglish-nlp.readthedocs.io](https://manglish-nlp.readthedocs.io)
 
 Includes:
-- Module reference for all 54 modules
+- Module reference for all 51 modules
 - API documentation with examples
 - Performance benchmarks
 - Comparison with Malaya
@@ -319,6 +287,6 @@ If you use malaysian-manglish-nlp in your research, please cite:
   title = {malaysian-manglish-nlp: Full NLP toolkit for Malaysian Manglish},
   year = {2026},
   url = {https://github.com/ZafranYusof/malaysia-manglish-nlp},
-  version = {3.3.0}
+  version = {3.2.0}
 }
 ```
