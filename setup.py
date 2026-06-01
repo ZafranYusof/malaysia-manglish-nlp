@@ -32,7 +32,7 @@ ext_modules = [
 
 setup(
     name='malaysian-manglish-nlp',
-    version='3.1.0',
+    version='3.3.0',
     author='Zafran',
     author_email='zafran@example.com',
     description='Natural Language Processing toolkit for Malaysian Manglish',

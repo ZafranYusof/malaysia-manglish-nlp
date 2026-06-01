@@ -226,6 +226,114 @@ mnlp.sarcasm("Wah bagus la tu, memang pandai")
 
 ---
 
+## `analyze_aspect_sentiment` (v3.3.0)
+
+Per-aspect sentiment analysis with domain-specific aspect extraction. Detects sentiment for individual aspects (food, service, price, etc.) within a single text, including conflict detection when different aspects have opposing sentiments.
+
+**Supported domains:** `restaurant`, `product`, `app`, `general`
+
+```python
+import malaysian_manglish_nlp as mnlp
+
+mnlp.analyze_aspect_sentiment("makanan sedap tapi service teruk", domain="restaurant")
+# {'aspects': [
+#   {'aspect': 'food', 'sentiment': 'positive', 'confidence': 0.94},
+#   {'aspect': 'service', 'sentiment': 'negative', 'confidence': 0.89}
+#  ],
+#  'conflict': True,
+#  'overall': 'mixed'}
+
+mnlp.analyze_aspect_sentiment("harga mahal tapi quality memang tip top", domain="product")
+# {'aspects': [
+#   {'aspect': 'price', 'sentiment': 'negative', 'confidence': 0.87},
+#   {'aspect': 'quality', 'sentiment': 'positive', 'confidence': 0.93}
+#  ],
+#  'conflict': True,
+#  'overall': 'mixed'}
+```
+
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text or list of texts |
+| `domain` | `str` | `"general"` | Domain for aspect extraction: `"restaurant"`, `"product"`, `"app"`, `"general"` |
+| `conflict_detect` | `bool` | `True` | Detect conflicting sentiments across aspects |
+
+!!! example "Batch Processing"
+    ```python
+    mnlp.aspect_sentiment_batch([
+        "nasi lemak sedap, air manis",
+        "app crash selalu, bugs berlambak"
+    ], domain="restaurant")
+    ```
+
+!!! tip "Get Aspect Categories"
+    ```python
+    mnlp.get_aspect_categories()
+    # {'restaurant': ['food', 'service', 'price', 'ambience', 'waiting_time'],
+    #  'product': ['quality', 'price', 'design', 'durability'],
+    #  'app': ['performance', 'ui', 'features', 'stability'],
+    #  'general': ['overall']}
+    ```
+
+---
+
+## `detect_multi_emotion` (v3.3.0)
+
+Detect multiple emotions simultaneously with confidence scores. Unlike the single-label `emotion` module, this captures complex emotional states like bittersweet feelings.
+
+**Supported co-occurrence patterns:** bittersweet, anxious, nostalgic, conflicted, overwhelmed, relieved, proud, excited, melancholic, grateful
+
+```python
+import malaysian_manglish_nlp as mnlp
+
+mnlp.detect_multi_emotion("sedih tapi grateful dapat jumpa family")
+# {'emotions': [
+#   {'emotion': 'happy', 'confidence': 0.62},
+#   {'emotion': 'sad', 'confidence': 0.38}
+#  ],
+#  'dominant': 'happy',
+#  'is_multi': True,
+#  'co_occurrence': 'bittersweet'}
+
+mnlp.detect_multi_emotion("takut gila tapi excited jugak nak start kerja baru")
+# {'emotions': [
+#   {'emotion': 'fear', 'confidence': 0.55},
+#   {'emotion': 'anticipation', 'confidence': 0.45}
+#  ],
+#  'dominant': 'fear',
+#  'is_multi': True,
+#  'co_occurrence': 'anxious'}
+```
+
+#### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `text` | `str \| list[str]` | *required* | Input text or list of texts |
+| `threshold` | `float` | `0.3` | Minimum confidence to include an emotion |
+| `max_emotions` | `int` | `3` | Maximum emotions to return |
+
+!!! example "Batch Processing"
+    ```python
+    mnlp.detect_multi_emotion_batch([
+        "happy tapi rindu kampung",
+        "marah tapi faham situasi"
+    ])
+    ```
+
+!!! tip "Get Co-occurrence Patterns"
+    ```python
+    mnlp.get_co_occurrence_patterns()
+    # {'bittersweet': ['happy', 'sad'],
+    #  'anxious': ['fear', 'anticipation'],
+    #  'nostalgic': ['happy', 'sad', 'love'],
+    #  ...}
+    ```
+
+---
+
 ## Combining Analysis Modules
 
 ```python
@@ -247,3 +355,4 @@ if sarcasm['is_sarcastic']:
 - [Text Processing](text-processing.md)  -  clean text before analysis for better accuracy
 - [Advanced](advanced.md)  -  hate speech, stance detection, code-switching analysis
 - [Calibration](tools.md#calibration)  -  calibrate confidence scores for production thresholds
+- [Feedback Loop](feedback.md)  -  submit corrections to improve model accuracy

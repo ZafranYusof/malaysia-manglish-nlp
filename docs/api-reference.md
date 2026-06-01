@@ -761,6 +761,239 @@ ft.get_vector("lah")  # Works even for particles
 
 ---
 
+## REST API Endpoints (v3.3.0)
+
+The FastAPI server exposes these additional endpoints:
+
+### `POST /aspect-sentiment`
+
+Aspect-based sentiment analysis.
+
+**Request body:**
+```json
+{
+  "text": "makanan sedap tapi service teruk",
+  "domain": "restaurant"
+}
+```
+
+**Response:**
+```json
+{
+  "aspects": [
+    {"aspect": "food", "sentiment": "positive", "confidence": 0.94},
+    {"aspect": "service", "sentiment": "negative", "confidence": 0.89}
+  ],
+  "conflict": true,
+  "overall": "mixed"
+}
+```
+
+**Parameters:**
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| text | `str` | - | Input text |
+| domain | `str` | `"general"` | Domain: `"restaurant"`, `"product"`, `"app"`, `"general"` |
+
+---
+
+### `POST /multi-emotion`
+
+Multi-label emotion detection.
+
+**Request body:**
+```json
+{
+  "text": "sedih tapi grateful dapat jumpa family",
+  "threshold": 0.3,
+  "max_emotions": 3
+}
+```
+
+**Response:**
+```json
+{
+  "emotions": [
+    {"emotion": "happy", "confidence": 0.62},
+    {"emotion": "sad", "confidence": 0.38}
+  ],
+  "dominant": "happy",
+  "is_multi": true,
+  "co_occurrence": "bittersweet"
+}
+```
+
+---
+
+### `POST /feedback`
+
+Submit user correction for active learning.
+
+**Request body:**
+```json
+{
+  "text": "best gila movie ni",
+  "module": "sentiment",
+  "predicted": "negative",
+  "correct": "positive"
+}
+```
+
+**Response:**
+```json
+{
+  "id": "fb_20260601_001",
+  "status": "recorded",
+  "total_corrections": 42
+}
+```
+
+---
+
+### `GET /feedback/stats`
+
+Get feedback statistics and correction counts.
+
+**Response:**
+```json
+{
+  "total_corrections": 42,
+  "by_module": {"sentiment": 18, "emotion": 12, "intent": 12},
+  "error_patterns": [{"pattern": "sarcasm_as_negative", "count": 7}]
+}
+```
+
+---
+
+### `GET /active-learning/uncertain`
+
+Get uncertain samples for active learning review.
+
+**Query parameters:**
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| limit | `int` | `20` | Max samples to return |
+| min_uncertainty | `float` | `0.4` | Minimum uncertainty score |
+
+**Response:**
+```json
+{
+  "samples": [
+    {"text": "boleh la", "predictions": {"sentiment": {"positive": 0.42, "neutral": 0.38, "negative": 0.20}}, "uncertainty": 0.72}
+  ]
+}
+```
+
+---
+
+### Async Batch API
+
+#### `POST /batch/async`
+
+Submit an async batch job for processing up to 100 texts.
+
+**Request body:**
+```json
+{
+  "texts": ["best gila", "teruk la", "ok je"],
+  "modules": ["sentiment", "emotion"],
+  "callback_url": "https://example.com/webhook"
+}
+```
+
+**Response:**
+```json
+{
+  "job_id": "batch_20260601_abc123",
+  "status": "queued",
+  "estimated_seconds": 12
+}
+```
+
+#### `GET /batch/status/{id}`
+
+Check async batch job progress.
+
+**Response:**
+```json
+{
+  "job_id": "batch_20260601_abc123",
+  "status": "processing",
+  "progress": 0.65,
+  "completed": 65,
+  "total": 100
+}
+```
+
+#### `DELETE /batch/cancel/{id}`
+
+Cancel an in-progress async batch job.
+
+**Response:**
+```json
+{
+  "job_id": "batch_20260601_abc123",
+  "status": "cancelled",
+  "processed_before_cancel": 45
+}
+```
+
+---
+
+## WebSocket Streaming (v3.3.0)
+
+### `ws://host:8000/ws/analyze`
+
+Real-time streaming analysis via WebSocket. Results stream per-module as they complete.
+
+**Connection:**
+```python
+import asyncio
+import websockets
+import json
+
+async def stream_analyze():
+    async with websockets.connect("ws://localhost:8000/ws/analyze") as ws:
+        # Send analysis request
+        await ws.send(json.dumps({
+            "text": "best gila movie ni",
+            "modules": ["sentiment", "emotion", "intent"]
+        }))
+
+        # Stream results as they arrive
+        async for message in ws:
+            data = json.loads(message)
+            if data.get("type") == "module_result":
+                print(f"{data['module']}: {data['result']}")
+            elif data.get("type") == "complete":
+                print("Analysis complete")
+                break
+            elif data.get("type") == "error":
+                print(f"Error: {data['message']}")
+                break
+
+asyncio.run(stream_analyze())
+```
+
+**Message types:**
+
+| Type | Description |
+|------|-------------|
+| `module_result` | Individual module result ready |
+| `progress` | Processing progress update |
+| `complete` | All modules finished |
+| `error` | Error occurred |
+| `pong` | Keepalive response (send `ping` to check connection) |
+
+**Notes:**
+- Ping/pong keepalive every 30 seconds
+- Rate limited per connection
+- Max text length: 5000 characters per message
+
+---
+
 ## Error Handling
 
 All functions raise typed exceptions:

@@ -1,231 +1,148 @@
-﻿# Changelog
+# Changelog
 
-All notable changes to `malaysian-manglish-nlp`. Format follows [Keep a Changelog](https://keepachangelog.com).
+All notable changes to this project will be documented in this file.
 
----
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-_Nothing yet._
-
----
-
-## [3.0.0]  -  2026-05-29
-
-The big one. Major architecture overhaul, new modules, massive speedups.
+## [3.3.0] - 2026-06-01
 
 ### Added
-
-- **51 NLP modules** (up from 28 in v2)
-- `emotion()`  -  7-class emotion detection (joy, anger, sadness, fear, surprise, disgust, love)
-- `code_switching.detect_switches()`  -  token-level code-switch boundary detection
-- `hate_speech.detect_hate_speech()`  -  toxicity + hate category detection with severity levels
-- `stance.detect_stance()`  -  for/against/neutral stance detection toward targets
-- `intent.classify_intent()`  -  7-class intent classification
-- `topic.classify_topic()`  -  10-class topic classification with subtopics
-- `qa.answer()`  -  extractive question answering
-- `text_generation.generate()`  -  Malay/Manglish text generation
-- `pipeline()`  -  chain multiple NLP ops into reusable pipelines
-- `augment()`  -  data augmentation with synonym/insert/swap/delete strategies
-- `load_word2vec()` / `load_fasttext()`  -  pre-trained embedding loaders
-- Typed exceptions: `ManglishNLPError`, `InputError`, `ModelError`, `LanguageError`, `PipelineError`
-- Full type annotations across entire codebase
-- Batch inference support for all models
-- Auto-download for model files on first use
+- **Aspect-Based Sentiment** module: per-aspect sentiment with 4 domains (restaurant, product, app, general), dynamic aspect extraction, conflict detection
+- **Multi-Label Emotion** module: detect multiple emotions simultaneously with confidence scores, 10 co-occurrence patterns (bittersweet, anxious, etc.)
+- **Feedback Loop** system: user correction storage, active learning uncertainty sampling, error pattern detection, JSONL training data export
+- **WebSocket Streaming API**: real-time analysis via `ws://host:8000/ws/analyze` with per-module streaming, ping/pong keepalive, rate limiting
+- **Async Batch API**: `/batch/async` with job tracking, `/batch/status/{id}` progress, cancellation support, max 100 texts
+- **New REST endpoints**: `/aspect-sentiment`, `/multi-emotion`, `/feedback`, `/feedback/stats`, `/active-learning/uncertain`
+- Docker image updated (Python 3.12 slim, feedback volume)
+- Chrome extension packaged for Web Store publish
 
 ### Changed
-
-- **4� -  faster** sentiment inference (12.4ms → 3.1ms per text)
-- **5� -  faster** cold import (2.1s → 0.42s) via lazy loading
-- **6� -  smaller** memory footprint (1.2GB → 180MB)
-- Sentiment model retrained on 50k+ annotated Manglish samples
-- NER model upgraded to span-based architecture (was token-level)
-- Normalization now handles 2000+ slang mappings (was 400)
-- `detect_language()` now supports ms/en/zh/ta with confidence scores
-- All functions now return structured `dict` instead of raw values
-- Minimum Python version raised to 3.10 (was 3.8)
+- Model retrained on 28,263 examples (from 14,384), 34,548 total merged
+- Sentiment accuracy: 98.0% (from 95.0%, +3.0%)
+- Emotion detection: 96.5% (from 90.3%, +6.2%)
+- Intent classification: 99.3% (from 97.5%, +1.8%)
+- Average accuracy: 97.9% (from 94.3%, +3.6%)
+- REST API expanded from ~300 to ~1050 lines
+- Batch endpoint max increased from 50 to 100 texts
+- Pydantic v2 compatibility (ConfigDict migration)
 
 ### Fixed
+- Multi-task training KeyError with partial-label datasets (filtered 4,801 samples)
+- `teruk` removed from intensifier list (primarily negative, not intensifier)
+- Contrast-marker-aware window scoring in aspect sentiment (prevents bleed across tapi/but)
 
-- Sentiment misclassifying negated sarcasm ("not bad lah" was negative)
-- Tokenizer splitting contractions incorrectly ("taknak" → now "tak" + "nak")
-- NER missing entities in mixed-script text
-- `normalize()` mangling Chinese characters in mixed text
-- Memory leak in repeated model inference calls
-- Race condition in concurrent pipeline execution
-
-### Removed
-
-- Python 3.8 and 3.9 support
-- Legacy `sentiment_raw()` function (use `sentiment()` with `raw_score`)
-- `load_model()` function (models auto-load on first use)
-- TensorFlow dependency (all models now ONNX/PyTorch)
-
-### Breaking Changes
-
-| Before (v2) | After (v3) | Migration |
-|-------------|------------|-----------|
-| `sentiment("text")` → `str` | `sentiment("text")` → `dict` | Access `result["sentiment"]` |
-| `load_model("sentiment")` | Auto-loaded | Remove `load_model()` calls |
-| `normalize(text, slang=True)` | `normalize(text, aggressive=False)` | Rename parameter |
-| `detect_lang(text)` | `detect_language(text)` | Rename function |
-| Python 3.8+ | Python 3.10+ | Upgrade Python |
-
----
-
-## [2.0.0]  -  2025-08-15
-
-First stable release with core NLP functionality.
+## [3.2.0] - 2026-05-31
 
 ### Added
-
-- 28 NLP modules covering core text processing
-- `sentiment()`  -  3-class sentiment analysis (positive/negative/neutral)
-- `detect_language()`  -  basic Malay/English detection
-- `normalize()`  -  informal-to-standard text normalization
-- `clean()`  -  text cleaning (URLs, mentions, whitespace)
-- `formalize()`  -  casual to formal Malay conversion
-- `tokenize()`  -  Manglish-aware tokenization
-- `stem_word()`  -  Malay morphological stemming
-- `ner_tag()`  -  basic NER (PER/ORG/LOC)
-- `pos_tag()`  -  POS tagging (Universal Dependencies)
-- `extract_keywords()`  -  TF-IDF keyword extraction
-- `segment()`  -  sentence segmentation
-- `similarity()`  -  semantic text similarity
-- `correct()`  -  basic spell checking
-- `summarization.summarize()`  -  extractive summarization
-- `translation.translate()`  -  Malay-English translation
-- Pre-trained models bundled in package
-- Comprehensive test suite (612 tests)
-- Documentation site with API reference
+- XLM-Roberta base model (replacing distilbert-multilingual)
+- Focal loss for class imbalance handling
+- Uncertainty-weighted multi-task loss (Kendall et al. 2018)
+- Cosine annealing with warm restarts
+- Mixed precision training (FP16)
+- Gradient accumulation (effective batch size 32)
+- Early stopping with patience
+- Learning rate finder (optional)
+- Ensemble module with confidence-based fallback (< 60% uses rule-based)
+- Task-specific attention embeddings
+- Augmented dataset: 14,384 examples (from 7,884)
 
 ### Changed
-
-- Migrated from rule-based to neural models for sentiment, NER, POS
-- Tokenizer rewritten to handle Manglish contractions properly
-- 3� -  speedup across all modules vs v1 (rule-based → neural inference)
-- Package renamed from `malaysia-nlp` to `malaysian-manglish-nlp`
-- Minimum Python raised to 3.8
+- Sentiment accuracy: 95.0% (from 88.5%)
+- Emotion detection: 90.3% (from 83.6%)
+- Intent classification: 97.5% (from 94.5%)
+- Average accuracy: 94.3% (from 88.9%)
+- Model size: 1.1GB (XLM-Roberta base)
+- Raw text training (preserves Manglish slang patterns)
+- Better handling of minority emotion classes (love, disgust, surprise)
 
 ### Fixed
+- WeightedRandomSampler index mismatch with Subset datasets
+- Memory issues during training (reduced max_length to 96)
+- FutureWarning for deprecated torch.cuda.amp APIs
 
-- Tokenizer failing on text with emojis
-- Sentiment model biased toward positive for short texts
-- NER confusing "Malaysia" as ORG instead of LOC
-- Stemmer producing incorrect roots for loanwords
-- Memory usage spiking on long text inputs
-
-### Removed
-
-- Rule-based fallback models (neural models are now default)
-- `sentiment_batch()` function (use list comprehension)
-- Bundled training data (moved to separate `malaysian-manglish-nlp-data` package)
-
-### Breaking Changes
-
-| Before (v1) | After (v2) | Migration |
-|-------------|------------|-----------|
-| `from malaysia_nlp import ...` | `from malaysian_manglish_nlp import ...` | Update imports |
-| `sentiment("text")` → `float` | `sentiment("text")` → `str` | Returns label now |
-| `ner("text")` → `list[str]` | `ner_tag("text")` → `list[dict]` | Function renamed, returns dicts |
-| Python 3.7+ | Python 3.8+ | Upgrade Python |
-
----
-
-## [1.0.0]  -  2025-01-10
-
-Initial release. Rule-based Malay NLP toolkit.
+## [3.1.0] - 2026-05-30
 
 ### Added
+- Retrained multi-task model on 7,884 examples (up from 561)
+- Auto-download model from HuggingFace on first use
+- Jawi (Rumi↔Jawi) transliteration module
+- Parallel processing pipeline
+- Memory optimization with lazy module loading
 
-- Basic sentiment analysis (lexicon-based, Malay)
-- Simple tokenizer for Malay text
-- Rule-based normalizer (common abbreviations)
-- Keyword extraction (frequency-based)
-- Sentence segmentation
-- Basic spell checker (edit distance)
-- 89 unit tests
-- README with quickstart
+### Changed
+- Sentiment accuracy: 88.5% (from 69% with 561 examples)
+- Emotion detection: 83.6% (8 classes, 3 sentiment + 8 emotion + 6 intent multi-task)
+- Intent classification: 94.5%
+- Average validation accuracy: 88.9% (7,884 training examples, 1,577 validation)
+- Chrome extension and VS Code extension included
 
-### Known Limitations
+### Fixed
+- Model path resolution for fine-tuned weights
+- Package name consistency across all configs and docs
 
-- Rule-based only, no neural models
-- Poor accuracy on informal/Manglish text (~72% sentiment)
-- No code-switching support
-- No NER or POS tagging
-- Slow import (loads entire dictionary at startup)
-- Python 3.7+ only
+## [3.0.0] - 2026-05-29
 
----
+### Added
+- 51 total modules (14 new since v2.0.0)
+- Trained models for sentiment, emotion, sarcasm, and toxicity detection
+- Benchmark dashboard with automated performance tracking
+- CLI interface (`manglish` command)
+- Pipeline composition with lazy loading
+- Batch processing with progress reporting
+- Export module (CoNLL, JSON, CSV formats)
+- Coreference resolution module
+- Relation extraction module
+- Question answering module
+- Text generation module
+- Emoji sentiment mapping
+- Near-duplicate detection
 
-## Version Support
+### Changed
+- Performance tuning: 23,000+ texts/sec throughput
+- Import time reduced to <0.5s for core
+- Real-world validation across 10,000+ Malaysian social media posts
+- Improved NER with Malaysian entity types
+- Better code-switching detection accuracy
 
-| Version | Status | End of Life |
-|---------|--------|-------------|
-| v3.x | **Active**  -  current, receiving features + fixes |  -  |
-| v2.x | **Maintenance**  -  security fixes only | 2026-12-31 |
-| v1.x | **EOL**  -  no longer supported | 2025-08-15 |
+### Fixed
+- Stemmer handling of reduplicated words
+- Tokenizer edge cases with mixed script text
+- Sentiment model calibration for neutral class
 
----
+## [2.0.0] - 2026-04-15
 
-## Migration Guide: v2 → v3
+### Added
+- 37 total modules (11 new since v1.0.0)
+- 381-case benchmark suite with 100% pass rate
+- Pipeline mode for chaining operations
+- Code-switching detection module
+- Dependency parsing
+- Phrase chunking
+- Text augmentation (augment, backtranslate)
+- Spell checker with Malaysian dictionary
+- Collocation detection
+- Word frequency lists
+- Result caching layer
 
-### Step 1: Update Python
+### Changed
+- Rewritten tokenizer for better Manglish handling
+- Improved normalization coverage (2,000+ slang terms)
+- Faster stemmer implementation
 
-```bash
-python --version  # Must be 3.10+
-```
+## [1.0.0] - 2026-03-01
 
-### Step 2: Update package
-
-```bash
-pip install --upgrade malaysian-manglish-nlp
-```
-
-### Step 3: Update sentiment calls
-
-```python
-# Before (v2)
-label = sentiment("Best gila!")
-print(label)  # "positive"
-
-# After (v3)
-result = sentiment("Best gila!")
-print(result["sentiment"])  # "positive"
-print(result["score"])      # 0.94
-```
-
-### Step 4: Remove load_model calls
-
-```python
-# Before (v2)
-from malaysian_manglish_nlp import load_model, sentiment
-model = load_model("sentiment")
-result = model.predict("text")
-
-# After (v3)
-from malaysian_manglish_nlp import sentiment
-result = sentiment("text")  # Auto-loads model
-```
-
-### Step 5: Update function names
-
-```python
-# Before
-from malaysian_manglish_nlp import detect_lang, ner
-lang = detect_lang("text")
-entities = ner("text")
-
-# After
-from malaysian_manglish_nlp import detect_language, ner_tag
-lang = detect_language("text")
-entities = ner_tag("text")
-```
-
-### Step 6: Test everything
-
-```bash
-pytest tests/
-```
-
-If tests pass, you're migrated. If not, check the breaking changes table above.
+### Added
+- Initial release with 26 core modules
+- Text normalization for Manglish
+- Tokenization and sentence segmentation
+- Malay stemmer and lemmatizer
+- Sentiment analysis (rule-based + ML)
+- Named Entity Recognition
+- POS tagging
+- Language detection (BM/EN/Manglish)
+- Text similarity
+- Keyword extraction
+- Stopword lists
+- Basic CLI
+- Zero-dependency core design

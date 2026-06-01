@@ -39,7 +39,7 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-__version__ = "3.1.0"
+__version__ = "3.3.0"
 __author__ = "Zafran"
 __license__ = "MIT"
 
@@ -109,6 +109,15 @@ from malaysian_manglish_nlp.ocr_normalize import (
     normalize_ocr, fix_common_errors, detect_ocr_artifacts,
     reconstruct_words, fix_malay_ocr,
 )
+
+# New NLP modules (v3.4.0)
+from malaysian_manglish_nlp.aspect_sentiment import (
+    analyze_aspect_sentiment, aspect_sentiment_batch, get_aspect_categories,
+)
+from malaysian_manglish_nlp.multi_emotion import (
+    detect_multi_emotion, detect_multi_emotion_batch, get_co_occurrence_patterns,
+)
+from malaysian_manglish_nlp import feedback
 
 # Submodules (import as namespace)
 from malaysian_manglish_nlp import similarity
@@ -214,6 +223,12 @@ __all__ = [
     # OCR normalization
     'normalize_ocr', 'fix_common_errors', 'detect_ocr_artifacts',
     'reconstruct_words', 'fix_malay_ocr',
+    # Aspect-based sentiment
+    'analyze_aspect_sentiment', 'aspect_sentiment_batch', 'get_aspect_categories',
+    # Multi-label emotion
+    'detect_multi_emotion', 'detect_multi_emotion_batch', 'get_co_occurrence_patterns',
+    # Feedback loop
+    'feedback',
     # Text generation
     'text_generation', 'text_generate', 'autocomplete', 'build_ngram_model',
     'load_default_model', 'generate_sentence', 'text_perplexity',

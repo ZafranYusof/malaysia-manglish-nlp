@@ -29,16 +29,16 @@ ft.most_similar("best")
 
 ---
 
-## Fine-tuned Multi-Task Model (v3.2.0)
+## Fine-tuned Multi-Task Model (v3.3.0)
 
-An XLM-Roberta model fine-tuned on **14,384 labeled Manglish examples** for multi-task classification.
+An XLM-Roberta model fine-tuned on **28,263 labeled Manglish examples** for multi-task classification.
 
 | Task | Accuracy | Classes |
 |------|----------|----------|
-| Sentiment | 95.0% | positive, negative, neutral |
-| Emotion | 90.3% | happy, sad, angry, fear, surprise, disgust, love, neutral |
-| Intent | 97.5% | question, statement, request, complaint, greeting, opinion, command, offer |
-| **Average** | **94.3%** | |
+| Sentiment | 98.0% | positive, negative, neutral |
+| Emotion | 96.5% | happy, sad, angry, fear, surprise, disgust, love, neutral |
+| Intent | 99.3% | question, statement, request, complaint, greeting, opinion, command, offer |
+| **Average** | **97.9%** | |
 
 ### Usage
 
@@ -62,7 +62,7 @@ results = predict_batch(["best gila", "teruk la", "ok je"])
 
 - **Base**: `xlm-roberta-base`
 - **Architecture**: Shared encoder + 3 task-specific heads (256 hidden units each)
-- **Fine-tuned on**: 11,507 train / 2,877 validation (from 14,384 total)
+- **Fine-tuned on**: 22,610 train / 5,653 validation (from 28,263 total)
 - **Training**: 5 epochs, lr=2e-5 (encoder) / 2e-4 (heads), batch_size=16, gradient accumulation (effective batch 32)
 - **Optimizer**: AdamW with cosine annealing and warm restarts
 - **Regularization**: Focal loss for class imbalance, uncertainty-weighted multi-task loss, early stopping
@@ -80,6 +80,10 @@ results = predict_batch(["best gila", "teruk la", "ok je"])
 | **5** | **0.243** | **0.375** | **88.5%** | **83.6%** | **94.5%** | **88.9%** |
 
 > **v3.2.0** (XLM-Roberta, 14,384 examples): Sentiment 95.0%, Emotion 90.3%, Intent 97.5%, Avg 94.3%
+>
+> **v3.3.0** (XLM-Roberta, 28,263 examples): Sentiment 98.0%, Emotion 96.5%, Intent 99.3%, Avg 97.9%
+
+**v3.3.0 retraining notes:** Filtered 4,801 partial-label samples that caused multi-task training KeyError. Contrast-marker-aware window scoring added for aspect sentiment. Pydantic v2 ConfigDict migration applied.
 
 ### Download from HuggingFace
 
@@ -114,20 +118,21 @@ emotion = detect_emotion("sedih doh tak dapat tiket")
 
 ### Comparison with previous model
 
-| | v3.0.0 (561 examples) | v3.1.0 (7,884 examples) | v3.2.0 (14,384 examples) |
-|---|---|---|---|
-| Sentiment | 69% | 88.5% | **95.0%** |
-| Emotion | 63% | 83.6% | **90.3%** |
-| Intent | 69% | 94.5% | **97.5%** |
-| Average | 67% | 88.9% | **94.3%** |
-| Base model | DistilBERT | DistilBERT | XLM-Roberta |
-| Tasks | Single (sentiment) | Multi-task (3 tasks) | Multi-task (3 tasks) |
+| | v3.0.0 (561 examples) | v3.1.0 (7,884 examples) | v3.2.0 (14,384 examples) | v3.3.0 (28,263 examples) |
+|---|---|---|---|---|
+| Sentiment | 69% | 88.5% | 95.0% | **98.0%** |
+| Emotion | 63% | 83.6% | 90.3% | **96.5%** |
+| Intent | 69% | 94.5% | 97.5% | **99.3%** |
+| Average | 67% | 88.9% | 94.3% | **97.9%** |
+| Base model | DistilBERT | DistilBERT | XLM-Roberta | XLM-Roberta |
+| Tasks | Single (sentiment) | Multi-task (3 tasks) | Multi-task (3 tasks) | Multi-task (3 tasks) |
 
 ### Comparison with other models
 
 | Model | Accuracy | Notes |
 |-------|---------|-------|
-| `manglish-finetuned` v3.2.0 | **94.3%** | XLM-Roberta multi-task, best for Manglish |
+| `manglish-finetuned` v3.3.0 | **97.9%** | XLM-Roberta multi-task, best for Manglish |
+| `manglish-finetuned` v3.2.0 | 94.3% | XLM-Roberta multi-task |
 | `manglish-finetuned` v3.1.0 | 88.9% | DistilBERT multi-task |
 | Mesolitica NanoT5 (tiny) | 86.1% | Malay-only base |
 | huseinzol05 sentiment | 84.7% | Broader Malay coverage |
@@ -160,7 +165,7 @@ Models are stored locally or downloaded from HuggingFace:
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2026},
-  version = {3.2.0},
+  version = {3.3.0},
   url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```

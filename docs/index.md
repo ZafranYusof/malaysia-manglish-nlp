@@ -17,14 +17,14 @@
 
 **malaysian-manglish-nlp** is a comprehensive Natural-Language-Processing toolkit for Malaysian Manglish - the code-switching mix of Malay, English, and local slang spoken by millions of Malaysians online.
 
-It provides 51 modules covering sentiment analysis, named entity recognition, translation, normalisation, text generation, graph analysis, and more. Zero external dependencies for core modules.
+It provides 54 modules covering sentiment analysis, named entity recognition, translation, normalisation, text generation, graph analysis, and more. Zero external dependencies for core modules.
 
 ## HuggingFace
 
 | | Link |
 |---|---|
-| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) - XLM-Roberta multi-task (sentiment 95.0%, emotion 90.3%, intent 97.5%) |
-| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) - 14,384 labeled Manglish examples |
+| Model | [vexccz/manglish-nlp-sentiment](https://huggingface.co/vexccz/manglish-nlp-sentiment) - XLM-Roberta multi-task (sentiment 98.0%, emotion 96.5%, intent 99.3%) |
+| Dataset | [vexccz/manglish-nlp-dataset](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset) - 28,263 labeled Manglish examples |
 | Demo | [vexccz/manglish-nlp-demo](https://huggingface.co/spaces/vexccz/manglish-nlp-demo) - Gradio interactive demo (7 tabs) |
 
 ## Documentation
@@ -64,30 +64,31 @@ malaysian-manglish-nlp ships with pretrained Malaysian models. See [Pretrained M
 |-------|------|---------|
 | `manglish-word2vec` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
 | `manglish-fasttext` | Word Embedding | 100-dim, 518 vocab, trained on 50k+ tweets |
-| `manglish-finetuned` | Multi-Task Classifier | XLM-Roberta, sentiment 95.0% / emotion 90.3% / intent 97.5% (14,384 examples) |
+| `manglish-finetuned` v3.2.0 | Multi-Task Classifier | XLM-Roberta, sentiment 95.0% / emotion 90.3% / intent 97.5% (14,384 examples) |
+| `manglish-finetuned` v3.3.0 | Multi-Task Classifier | XLM-Roberta, sentiment 98.0% / emotion 96.5% / intent 99.3% (28,263 examples) |
 
 ## Datasets
 
 Training data is bundled with the package. See [Datasets](datasets.md).
 
-- **Multi-task**: 14,384 labeled examples (sentiment + emotion + intent) - [HuggingFace](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
+- **Multi-task**: 28,263 labeled examples (sentiment + emotion + intent) - [HuggingFace](https://huggingface.co/datasets/vexccz/manglish-nlp-dataset)
 - **Normalisation**: 638+ slang to standard mappings
 - **NER**: 2,250+ annotated sentences (11 entity types)
 - **Translation**: 1,000+ BM-EN word pairs
 
 ## Features
 
-51 modules across 8 categories:
+54 modules across 8 categories:
 
 | Category | Modules | Examples |
 |----------|---------|---------|
 | Text Processing | 9 | `normalize`, `tokenize`, `sentence_split` |
-| Analysis | 7 | `sentiment`, `emotion`, `subjectivity` |
+| Analysis | 10 | `sentiment`, `emotion`, `aspect_sentiment`, `multi_emotion` |
 | Extraction | 7 | `ner`, `keyword`, `entity_linking` |
 | Advanced | 7 | `FinetunedSentimentClassifier`, `fewshot`, `llm` |
 | Generation | 6 | `translate`, `paraphrase`, `augment` |
 | Data & Embeddings | 5 | `word2vec`, `fasttext`, `load_sentiment` |
-| Tools & Utilities | 6 | `pipeline`, `batch`, `benchmark` |
+| Tools & Utilities | 7 | `pipeline`, `batch`, `benchmark`, `feedback` |
 | Integrations | 4 | `to_spacy`, `to_huggingface`, `api_server` |
 
 ## Quick Start
@@ -118,6 +119,18 @@ result = predict("gila best servis ni")
 # {'sentiment': {'label': 'positive', 'confidence': 0.96},
 #  'emotion':    {'label': 'happy',    'confidence': 0.85},
 #  'intent':     {'label': 'opinion',  'confidence': 1.00}}
+
+# Aspect-based sentiment (v3.3.0)
+result = malaysian_manglish_nlp.analyze_aspect_sentiment("makanan sedap tapi service teruk", domain="restaurant")
+# {'aspects': [{'aspect': 'food', 'sentiment': 'positive', ...}, {'aspect': 'service', 'sentiment': 'negative', ...}], ...}
+
+# Multi-label emotion (v3.3.0)
+result = malaysian_manglish_nlp.detect_multi_emotion("sedih tapi grateful dapat jumpa family")
+# {'emotions': [{'emotion': 'happy', 'confidence': 0.6}, {'emotion': 'sad', 'confidence': 0.4}], 'dominant': 'happy', 'is_multi': True}
+
+# Feedback loop (v3.3.0)
+from malaysian_manglish_nlp.feedback import submit_correction
+submit_correction("text here", "sentiment", "positive", "negative")
 ```
 
 ## Running on Windows
@@ -143,7 +156,7 @@ Heavily inspired by [Malaya](https://github.com/huseinzol05/Malaya) by Hussein Z
   title  = {malaysian-manglish-nlp: A Comprehensive NLP Toolkit for Malaysian Manglish},
   author = {Yusof, Zafran},
   year   = {2026},
-  version = {3.2.0},
+  version = {3.3.0},
   url    = {https://github.com/ZafranYusof/malaysia-manglish-nlp}
 }
 ```

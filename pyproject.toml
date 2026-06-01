@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "malaysian-manglish-nlp"
-version = "3.2.0"
+version = "3.3.0"
 description = "Full NLP toolkit for Malaysian Manglish - 51 modules, zero dependencies for core"
 readme = "README.md"
 license = {text = "MIT"}

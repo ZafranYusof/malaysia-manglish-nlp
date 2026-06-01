@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-06-01
+
+### Added
+- **Aspect-Based Sentiment** module: per-aspect sentiment with 4 domains (restaurant, product, app, general), dynamic aspect extraction, conflict detection
+- **Multi-Label Emotion** module: detect multiple emotions simultaneously with confidence scores, 10 co-occurrence patterns (bittersweet, anxious, etc.)
+- **Feedback Loop** system: user correction storage, active learning uncertainty sampling, error pattern detection, JSONL training data export
+- **WebSocket Streaming API**: real-time analysis via `ws://host:8000/ws/analyze` with per-module streaming, ping/pong keepalive, rate limiting
+- **Async Batch API**: `/batch/async` with job tracking, `/batch/status/{id}` progress, cancellation support, max 100 texts
+- **New REST endpoints**: `/aspect-sentiment`, `/multi-emotion`, `/feedback`, `/feedback/stats`, `/active-learning/uncertain`
+- Docker image updated (Python 3.12 slim, feedback volume)
+- Chrome extension packaged for Web Store publish
+
+### Changed
+- Model retrained on 28,263 examples (from 14,384), 34,548 total merged
+- Sentiment accuracy: 98.0% (from 95.0%, +3.0%)
+- Emotion detection: 96.5% (from 90.3%, +6.2%)
+- Intent classification: 99.3% (from 97.5%, +1.8%)
+- Average accuracy: 97.9% (from 94.3%, +3.6%)
+- REST API expanded from ~300 to ~1050 lines
+- Batch endpoint max increased from 50 to 100 texts
+- Pydantic v2 compatibility (ConfigDict migration)
+
+### Fixed
+- Multi-task training KeyError with partial-label datasets (filtered 4,801 samples)
+- `teruk` removed from intensifier list (primarily negative, not intensifier)
+- Contrast-marker-aware window scoring in aspect sentiment (prevents bleed across tapi/but)
+
 ## [3.2.0] - 2026-05-31
 
 ### Added
